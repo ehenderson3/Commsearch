@@ -40,7 +40,6 @@ Setup maven:
 * M2=$M2_HOME/bin
 
 **RUN VIA BROWSERSTACK**
-## cd IdeaProjects/CommSearchUITests/ ##
 ** mvn clean test -Dhost=browserstack**
 
 **RUN TESTS VIA LOCAL CHROME**
