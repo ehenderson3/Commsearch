@@ -1,11 +1,11 @@
-# README #
-# Technology #
-## Dependencies ##
-## Java JDK 8+ (tested with 1.8.0_102)
-Selenium 2.53.0
-unit 1.4.1 
-Maven 3+ (tested with 3.3.9)
- ##
+#README #
+##Technology##
+### Dependencies ### 
+### Java JDK 8+ (tested with 1.8.0_102) ###
+### Selenium 2.53.0 ###
+### junit 1.4.1 ### 
+### Maven 3.3.9 ###
+
 
 The automation framework chosen for this project is a Page Object frame work which is an efficient automation strategy with reusability and maintenance as its core objectives.  The Page Object framework has 5 major components the Base Object, the Page object, Test object, the BaseTest and Configuration.
 
