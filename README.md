@@ -1,6 +1,6 @@
 README 
-Technology
-Dependencies
+## Technology ##
+## Dependencies ##
 
 
 * java JDK 8+ (tested with 1.8.0_102)
