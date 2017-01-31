@@ -28,8 +28,9 @@ The configuration file contains the environment information such as what browser
 
 ### How do I get set up? ###
 
-Install Maven 3.3.9
-Install the most Resent version of java
+1. * Install Maven 3.3.9
+1. * Install the most Resent version of java.
+ 
 
 Setup maven:
 
