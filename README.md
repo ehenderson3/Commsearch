@@ -28,8 +28,8 @@ The configuration file contains the environment information such as what browser
 
 ### How do I get set up? ###
 
-1. * Install Maven 3.3.9
-1. * Install the most Resent version of java.
+1. Install Maven 3.3.9
+1. Install the most Resent version of java.
  
 
 Setup maven:
@@ -41,10 +41,10 @@ Setup maven:
 
 **RUN VIA BROWSERSTACK**
 * cd IdeaProjects/CommSearchUITests/
-* mvn clean test -Dhost=browserstack
+** mvn clean test -Dhost=browserstack**
 
 **RUN TESTS VIA LOCAL CHROME**
-* mvn clean test -Dbrowser=chrome
+**mvn clean test -Dbrowser=chrome**
 
 ### Who do I talk to? ###
 
