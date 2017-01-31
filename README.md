@@ -1,12 +1,11 @@
 README 
 Technology
 Dependencies
+
+
 * java JDK 8+ (tested with 1.8.0_102)
-
 * Selenium 2.53.0
-
-* junit 1.4.1 
-
+* junit 1.4.1
 * Maven 3.3.9
 
 
