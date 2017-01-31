@@ -18,18 +18,23 @@ The configuration file contains the environment information such as what browser
 
 ### How do I get set up? ###
 
-* Summary of set up
-* Configuration
-* Dependencies
-* Database configuration
-* How to run tests
-* Deployment instructions
+Install Maven 3.3.9
+Install the most Resent version of java
 
-### Contribution guidelines ###
+Setup maven:
 
-* Writing tests
-* Code review
-* Other guidelines
+cd /usr/local/apache-maven/apache-maven-3.3.9/
+M2_HOME=/usr/local/apache-maven/apache-maven-3.3.9/
+export PATH=$M2:$PATH
+M2=$M2_HOME/bin
+
+RUN VIA BROWSERSTACK
+cd IdeaProjects/CommSearchUITests/
+mvn clean test -Dhost=browserstack
+
+RUN TESTS VIA LOCAL CHROME
+mvn clean test -Dbrowser=chrome
+
 
 ### Who do I talk to? ###
 
