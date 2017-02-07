@@ -5,15 +5,22 @@ package CommPageObjects;
         import org.openqa.selenium.By;
         import org.openqa.selenium.WebDriver;
         import org.openqa.selenium.WebElement;
+        import org.openqa.selenium.interactions.Actions;
         import org.openqa.selenium.support.ui.ExpectedCondition;
         import org.openqa.selenium.support.ui.ExpectedConditions;
+        import org.openqa.selenium.support.ui.Select;
         import org.openqa.selenium.support.ui.WebDriverWait;
-        import org.openqa.selenium.TimeoutException;
         import CommTests.Config;
 
+        import java.util.ArrayList;
+        import java.util.Arrays;
+        import java.util.Collections;
+        import java.util.List;
+
+        import static org.junit.Assert.assertTrue;
 
 
-public class BasePage implements Config{
+public class BasePage implements Config {
 
     private WebDriver driver;
 
@@ -24,23 +31,57 @@ public class BasePage implements Config{
     public void visit(String url) {
         if (url.contains("http")) {
             driver.get(url);
-        }else{
-          driver.get(baseUrl +url);
+        } else {
+            driver.get(baseUrl + url);
         }
-
-
     }
 
     public WebElement find(By locator) {
         return driver.findElement(locator);
     }
 
-    public WebElement find(By locators,int i) {
+    public WebElement find(By locators, int i) {
         return driver.findElements(locators).get(i);
+    }
+
+    public String getFieldText(By locator) {
+        WebElement TxtBoxContent = driver.findElement(locator);
+        String s = new String();
+        s = TxtBoxContent.getAttribute("value");
+        return s;
+
+    }
+
+    public void clear(By locator) {
+        driver.findElement(locator).clear();
+
+    }
+
+
+
+    public String getText(By locator)
+    {
+        WebElement TxtBoxContent = driver.findElement(locator);
+        String s = new String();
+        s =  TxtBoxContent.getText();
+        return s;
     }
 
     public void click(By locator) {
         find(locator).click();
+    }
+
+    public void hover(By locator, int i){
+        Actions action = new Actions(driver);
+        WebElement we = driver.findElements(locator).get(i);
+        action.moveToElement(we).click().build().perform();
+    }
+
+
+    public void hover(By locator){
+        Actions action = new Actions(driver);
+        WebElement we = driver.findElement(locator);
+        action.moveToElement(we).click().build().perform();
     }
 
 
@@ -63,6 +104,13 @@ public class BasePage implements Config{
         return true;
     }
 
+    public void switchToFrame(int i){
+        driver.switchTo().frame(i);
+    }
+
+    public void switchBackToDefaultContent(){
+        driver.switchTo().defaultContent();
+    }
 
 
     public void DealWithTheAlert()
@@ -99,6 +147,97 @@ public class BasePage implements Config{
         WebDriverWait wait = new WebDriverWait(driver,timeout);
         wait.until(condition);
     }
+
+    public void selectFromDropdown(By location, String option)
+    {
+        WebElement dropDownListBox = driver.findElement(location);
+        Select clickThis = new Select(dropDownListBox);
+        clickThis.selectByVisibleText(option);
+    }
+
+    public void sortValidationAscending(By listLocator){
+        ArrayList<String> obtainedList = new ArrayList<String>();
+        List<WebElement> elementList= driver.findElements(listLocator);
+        for(WebElement we:elementList){
+            obtainedList.add(we.getText());
+        }
+        ArrayList<String> sortedList = new ArrayList<String>();
+        for(String s:obtainedList){
+            sortedList.add(s);
+        }
+        Collections.sort(sortedList);
+        assertTrue(sortedList.equals(obtainedList));
+    }
+
+    public void sortValidationDescending(By listLocator){
+        ArrayList<String> obtainedList = new ArrayList<String>();
+        obtainedList.removeAll(Arrays.asList("", null));
+        List<WebElement> elementList= driver.findElements(listLocator);
+        for(WebElement we:elementList){
+            obtainedList.add(we.getText());
+        }
+        ArrayList<String> sortedList = new ArrayList<String>();
+        sortedList.removeAll(Arrays.asList("", null));
+        for(String s:obtainedList){
+            sortedList.add(s);
+        }
+        Collections.reverse(sortedList);
+        assertTrue(sortedList.equals(obtainedList));
+    }
+
+    public void checkForAscend(By sortControl){
+        //Check if the sorting is by ascending by checking if the arrow is 'up'; if not click on it to sort by ascending
+        String arrow_direction = driver.findElement(sortControl).getAttribute("class");
+        if(!arrow_direction.contains("down"))
+            driver.findElement(sortControl).click();
+    }
+
+    public void checkForDescend(By sortControl){
+        //Check if the sorting is by ascending by checking if the arrow is 'up'; if not click on it to sort by ascending
+        String arrow_direction = driver.findElement(sortControl).getAttribute("class");
+        if(!arrow_direction.contains("up"))
+            driver.findElement(sortControl).click();
+    }
+
+
+
+    //Declare Variables
+    public void sortAramma(By element, By listOfItems, By PathList){
+        int eleCount;
+        List<WebElement> elements;
+        List<String> customerNameA = new ArrayList();
+        List<String> customerNameB = new ArrayList();
+
+
+        // Check for our Customer elements and count them.... replace xxx with your xpath
+        assertTrue(isDisplayed(element));
+        elements = driver.findElements(listOfItems);
+
+        eleCount = elements.size();
+        System.out.println("Element count: " + eleCount);
+
+        for(int i = 2; i < eleCount; i++){
+            //Capture the customer name values
+            //replace xxx with your xpath & replace the value increments for each element in xpath with + i +
+
+            customerNameA.add(driver.findElement(PathList).getText());
+            System.out.println(driver.findElement(PathList).getText());
+            customerNameB.add(driver.findElement(PathList).getText());
+
+        }
+        Collections.sort(customerNameA);
+
+        for (int i=0;i<customerNameA.size();i++) {
+            System.out.println("Customer Name from input: " + customerNameB.get(i)  +  "--Customer Name from sorted input: " + customerNameA.get(i));
+            if (!(customerNameA.get(i).equals(customerNameB.get(i)))) {
+                System.out.println("Customer Names not sorted: " + i);
+                break;
+
+            }
+        }
+    }
+
+
 
 }
 
