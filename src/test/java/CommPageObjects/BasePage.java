@@ -17,6 +17,7 @@ package CommPageObjects;
         import java.util.Collections;
         import java.util.List;
 
+        import static org.junit.Assert.assertEquals;
         import static org.junit.Assert.assertTrue;
 
 
@@ -58,6 +59,20 @@ public class BasePage implements Config {
     }
 
 
+    public List<WebElement> finds(By locators) {
+
+        List<WebElement> yourList = driver.findElements(locators);
+        if(yourList != null || !yourList.isEmpty()){
+            System.out.println(yourList.size());
+            for (WebElement webElement : yourList) {
+                System.out.println(webElement.getAttribute("id"));
+            }
+        }else{
+            //empty list actions
+        }
+        return driver.findElements(locators);
+    }
+
 
     public String getText(By locator)
     {
@@ -69,6 +84,10 @@ public class BasePage implements Config {
 
     public void click(By locator) {
         find(locator).click();
+    }
+
+    public void click(By locators, int i) {
+        finds(locators).get(i).click();
     }
 
     public void hover(By locator, int i){
@@ -92,6 +111,11 @@ public class BasePage implements Config {
     public Boolean isDisplayed(By locator) {
         return find(locator).isDisplayed();
     }
+    public Boolean isDisplayedArray(By locators, int i) {
+        return finds(locators).get(i).isDisplayed();
+    }
+
+
 
     //Will check to see if an element is not present Instead of returning exception this will return false
     public Boolean isDisplayed(By locator, Integer timeout) {
@@ -103,6 +127,19 @@ public class BasePage implements Config {
         }
         return true;
     }
+
+    public Boolean isDisplayedAndClickable(By locator, Integer timeout) {
+        try {
+            WebDriverWait wait = new WebDriverWait(driver, timeout);
+            wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+            wait.until(ExpectedConditions.elementToBeClickable(locator));
+
+        } catch (org.openqa.selenium.TimeoutException exception) {
+            return false;
+        }
+        return true;
+    }
+
 
     public void switchToFrame(int i){
         driver.switchTo().frame(i);
@@ -154,6 +191,52 @@ public class BasePage implements Config {
         Select clickThis = new Select(dropDownListBox);
         clickThis.selectByVisibleText(option);
     }
+
+    public void sortAttributeValidationAscending(By listLocator, String attributeType){
+        ArrayList<String> obtainedList = new ArrayList<String>();
+        List<WebElement> elementList= driver.findElements(listLocator);
+        for(WebElement we:elementList){
+            obtainedList.add(we.getAttribute(attributeType));
+        }
+        ArrayList<String> sortedList = new ArrayList<String>();
+        for(String s:obtainedList){
+            sortedList.add(s);
+        }
+        Collections.sort(sortedList);
+        assertEquals(sortedList,(obtainedList));
+    }
+
+    public void sortAttributeByColorValidationAscending(By listLocator, String attributeType){
+        ArrayList<String> obtainedList = new ArrayList<String>();
+        List<WebElement> elementList= driver.findElements(listLocator);
+        for(WebElement we:elementList){
+            obtainedList.add(we.getAttribute(attributeType));
+        }
+        ArrayList<String> sortedList = new ArrayList<String>();
+        for(String s:obtainedList){
+            sortedList.add(s);
+        }
+        //Collections.sort(sortedList);
+        assertEquals(sortedList,(obtainedList));
+    }
+
+    public void sortAttributeValidationDescending(By listLocator, String attributeType){
+        ArrayList<String> obtainedList = new ArrayList<String>();
+        obtainedList.removeAll(Arrays.asList("", null));
+        List<WebElement> elementList= driver.findElements(listLocator);
+        for(WebElement we:elementList){
+            obtainedList.add(we.getAttribute(attributeType));
+        }
+        ArrayList<String> sortedList = new ArrayList<String>();
+        sortedList.removeAll(Arrays.asList("", null));
+        for(String s:obtainedList){
+            sortedList.add(s);
+        }
+        Collections.reverse(sortedList);
+        assertEquals(sortedList,(obtainedList));
+    }
+
+
 
     public void sortValidationAscending(By listLocator){
         ArrayList<String> obtainedList = new ArrayList<String>();

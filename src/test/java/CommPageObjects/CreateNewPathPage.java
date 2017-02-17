@@ -46,8 +46,17 @@ public class CreateNewPathPage extends BasePage {
         type("asdfasfd",filterField);
         filterEntryField = getFieldText(filterField);
         assertEquals(filterEntryField,"asdfasfd");
+    }
 
-
+    public void attemptToCreateProject(String projectName, String defaultLicensee){
+        String filterEntryField;
+        click(commHome);
+        assertTrue("can't find the Create button",
+        isDisplayed(createButton));
+        type(projectName, newProjectField);
+        type(defaultLicensee, defaultLic);
+        click(pathRadioButton);
+        click(createButton);
     }
 
     public void createProjectPathErrorChecking(String projectName, String defaultLicensee){
