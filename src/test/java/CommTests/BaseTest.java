@@ -34,12 +34,12 @@ public class BaseTest implements Config{
                 driver = new RemoteWebDriver(new URL(browserStackUrl), capabilities);
             } else if (host.equals("localhost")) {
                 if (browser.equals("firefox")) {
-                    System.setProperty("webdriver.gecko.driver",
-                            System.getProperty("user.dir") + "/vendor/geckodriver");
+                    System.setProperty("webdriver.wires.driver",
+                            System.getProperty("user.dir") + "/vendor/wires.exe");
                     driver = new FirefoxDriver();
                 } else if (browser.equals("chrome")) {
                     System.setProperty("webdriver.chrome.driver",
-                            System.getProperty("user.dir") + "/vendor/chromedriver");
+                            System.getProperty("user.dir") + "/vendor/chromedriver.exe");
                     driver = new ChromeDriver();
                 }
             }

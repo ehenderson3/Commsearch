@@ -1,4 +1,14 @@
-# README #
+README 
+## Technology ##
+## Dependencies ##
+
+
+* java JDK 8+ (tested with 1.8.0_102)
+* Selenium 2.53.0
+* junit 1.4.1
+* Maven 3.3.9
+
+
 
 The automation framework chosen for this project is a Page Object frame work which is an efficient automation strategy with reusability and maintenance as its core objectives.  The Page Object framework has 5 major components the Base Object, the Page object, Test object, the BaseTest and Configuration.
 
@@ -18,23 +28,22 @@ The configuration file contains the environment information such as what browser
 
 ### How do I get set up? ###
 
-Install Maven 3.3.9
-Install the most Resent version of java
+1. Install Maven 3.3.9
+1. Install the most Resent version of java.
+ 
 
 Setup maven:
 
-cd /usr/local/apache-maven/apache-maven-3.3.9/
-M2_HOME=/usr/local/apache-maven/apache-maven-3.3.9/
-export PATH=$M2:$PATH
-M2=$M2_HOME/bin
+* cd /usr/local/apache-maven/apache-maven-3.3.9/
+* M2_HOME=/usr/local/apache-maven/apache-maven-3.3.9/
+* export PATH=$M2:$PATH
+* M2=$M2_HOME/bin
 
-RUN VIA BROWSERSTACK
-cd IdeaProjects/CommSearchUITests/
-mvn clean test -Dhost=browserstack
+**RUN VIA BROWSERSTACK**
+** mvn clean test -Dhost=browserstack**
 
-RUN TESTS VIA LOCAL CHROME
-mvn clean test -Dbrowser=chrome
-
+**RUN TESTS VIA LOCAL CHROME**
+**mvn clean test -Dbrowser=chrome**
 
 ### Who do I talk to? ###
 

@@ -1,6 +1,6 @@
-CommPageObjects/BasePage.class
-CommPageObjects/CreateNewPath.class
-CommTests/BaseTest$1.class
-CommTests/Config.class
-CommTests/TestLoginLego.class
-CommTests/BaseTest.class
+CommTests\TestLoginLego.class
+CommTests\Config.class
+CommPageObjects\CreateNewPath.class
+CommPageObjects\BasePage.class
+CommTests\BaseTest$1.class
+CommTests\BaseTest.class
