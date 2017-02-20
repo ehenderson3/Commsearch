@@ -5,6 +5,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 public class CreateNewPathPage extends BasePage {
@@ -20,6 +21,8 @@ public class CreateNewPathPage extends BasePage {
     By projectTitleName = By.xpath("//*[@class=\"project-summary-overview\"]/p[1]/span[2]");
     By totalPathAmount = By.xpath("//*[@class=\"project-summary-overview\"]/p[3]/span[2]");
     By licenseeName = By.xpath("//*[@class=\"project-summary-overview\"]/p[2]/span[2]");
+    By errorMessage = By.className("error-message");
+    By returnHome = By.id("header-homeLink");
 
 
 
@@ -59,6 +62,30 @@ public class CreateNewPathPage extends BasePage {
         click(createButton);
     }
 
+    public void attemptToCreateDupProject(String projectName, String defaultLicensee){
+        String dupMessageText;
+        click(commHome);
+        assertTrue("can't find the Create button", isDisplayed(createButton));
+        type(projectName, newProjectField);
+        type(defaultLicensee, defaultLic);
+        click(pathRadioButton);
+        click(createButton);
+        if(isDisplayed(filterField,10)){
+            click(returnHome);
+            click(commHome);
+            assertTrue("can't find the Create button", isDisplayed(createButton));
+            type(projectName, newProjectField);
+            type(defaultLicensee, defaultLic);
+            click(pathRadioButton);
+        }
+        isDisplayed(errorMessage);
+        dupMessageText = getText(errorMessage);
+        assertEquals(dupMessageText,"That project name already exists.");
+        //That project name already exists.
+    }
+
+
+
     public void createProjectPathErrorChecking(String projectName, String defaultLicensee){
         click(commHome);
         assertTrue("can't find the Create button",
@@ -71,6 +98,10 @@ public class CreateNewPathPage extends BasePage {
 
     public Boolean projectNameRequired() {
         return isDisplayed(projectRequired);
+    }
+
+    public String projectFieldError(){
+        return getText(errorMessage);
     }
 
     public Boolean alertMessagePresent(){
