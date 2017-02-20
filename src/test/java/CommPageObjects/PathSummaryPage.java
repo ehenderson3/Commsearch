@@ -46,13 +46,17 @@ public class PathSummaryPage extends BasePage {
 
     By paths = By.className("pull-left");
     By listNumPaths = By.xpath("//*[contains(@class, 'pull-left')]");
-    By listNumBands = By.xpath("//*[contains(@class, 'pull-right')]");
+    By listNumBands = By.xpath("//*[contains(@class, 'path-band-value pull-right')]");
+    By listNamePaths = By.className("path-name-value");
+
     By allPathsNotSelected = By.xpath("//*[contains(@class, 'path-info-td td-border-transparent')]");
 
     By SortNum = By.id("project-summary-sort-index");
     By SortBand = By.id("project-summary-sort-band");
+    By SortPath = By.id("project-summary-sort-pathname");
+
     //TODO Nemo to add locator -- Changed but not verified
-    By siteLocationIcon = By.className("display-flex");
+    By siteLocationIcon = By.id("site-tooltip-trigger-path-0-site-2");
 
     By actionArrow = By.cssSelector(".fa.fa-caret-down");
     By deleteOptionForPath1 = By.id("path-menu-delete-0");
@@ -63,8 +67,8 @@ public class PathSummaryPage extends BasePage {
     By deleteButton = By.id("delete-paths-modal-delete-apply");
     By deleteConfirmation = By.cssSelector(".ReactModal__Content.ReactModal__Content--after-open");
     //By deleteConfirmationTitle = By.cssSelector(".display-flex.justify-content-center");
-    By deleteConfirmationTitle = By.xpath("//*[@id=\"project-summary-modal-delete-paths\"]/div/h3/span[1]");
-    By deleteConfirmationSubText = By.className("confirmation-decoration");
+    By deleteConfirmationTitle = By.id("delete-paths-modal-success-heading");
+    By deleteConfirmationSubText = By.id("delete-paths-modal-success-message");
 
     By headerLOSInactive = By.xpath("//*[@id='project-summary-sort-los' and @class='inactive']");
     By headerAvailabilityInactive = By.xpath("//*[@id='project-summary-sort-avail' and @class='inactive']");
@@ -74,13 +78,16 @@ public class PathSummaryPage extends BasePage {
     By headerValidationActive = By.xpath("//*[@id='project-summary-sort-valid' and @class='active direction-down']");
     By headerLOSValues = By.xpath("//*[@class ='path-los-value' and contains(@style,'background:')]");
     By headerLOSValues1 = By.className("path-los-value");
+    By headerAvailabilityValues = By.className("path-avail-value");
+    By headerValidValues = By.className("path-valid-value");
 
+//headerAvailabilityValues
 
     By hamburgerDropDownInactive = By.xpath("//*[@id='project-summary-menu-toggle' and @class='pointer pull-right']");
     By hamburgerDropDownActive = By.xpath("//*[@id='project-summary-menu-toggle' and @class='pointer pull-right active']");
     By hamburgerDeletePaths = By.id("project-settings-delete-paths-modal-trigger");
     By deletePathPopupTitle0 = By.xpath("//*[@class,'uppercase') and contains(text(), 'Delete Path')]");
-    By deletePathPopupTitle = By.id("delete-paths-modal-details");
+    By deletePathPopupTitle = By.className("project-summary-modal");
     By deletePathPopupSubTitle= By.tagName("p");
     By deleteModal = By.cssSelector(".ReactModal__Content.ReactModal__Content--after-open");
     //https://www.screencast.com/t/BLDu9LlDZTF
@@ -108,6 +115,8 @@ public class PathSummaryPage extends BasePage {
     By siteLocationIcon1 = By.id("ssite-tooltip-trigger-path");
     By hoverSite = By.cssSelector(".__react_component_tooltip.place-bottom.type-light.project-summary-tooltip");
     By warnFresnelZoneRadius = By.className("error-message");
+    //TODO need locator for TOTAL PATHS count #
+    By totalPathsCount = By.xpath("//*[@id=\"app\"]/div/div/div/div/div/div[1]/div[1]/p[3]/span[2]");
 
 
     public PathSummaryPage(WebDriver driver){
@@ -238,6 +247,13 @@ public class PathSummaryPage extends BasePage {
         assertEquals(a, "MUST BE BETWEEN 0.01 AND 1000");
 
         clear(kFactorField);
+        type("0",kFactorField);
+        click(saveButton);
+        a = getText(warnFresnelZoneRadius);
+        assertEquals(a, "MUST BE BETWEEN 0.01 AND 1000");
+
+
+        clear(kFactorField);
         type("1000",kFactorField);
         click(saveButton);
 
@@ -350,6 +366,7 @@ public class PathSummaryPage extends BasePage {
         isDisplayed(groundElevation,10);
         groundElevationHeading = getText(groundElevation);
         assertTrue(groundElevationHeading.contains("(m)"));
+        //TODO// assertTrue(minimumClearance.contains("(m)"));
     }
 
     public void viewDefaultSettings(){
@@ -405,8 +422,6 @@ public class PathSummaryPage extends BasePage {
 
 
     public void highlightPathAndSelectDeleteFromHamburger(){
-        //String a;
-
         assertTrue("There are no paths present Pleases adjust your preconditions to include the setting up of PATH test data",isDisplayed(allPathsNew,10));
         click(allPathsNew,1);
         click(allPathsNew,2);
@@ -433,6 +448,10 @@ public class PathSummaryPage extends BasePage {
         List<WebElement> b;
         b = finds(allPaths);
         assertEquals("Path was not removed", b.size() ,4);
+        String c;
+        c = getText(totalPathsCount);
+        //COM 102
+        assertEquals("TOTAL PATHS do not match actual number of paths", c, "4");
     }
 
 
@@ -444,10 +463,10 @@ public class PathSummaryPage extends BasePage {
         sortAttributeByColorValidationAscending(headerLOSValues1, "style");
         click(headerValidationInactive);
         assertTrue("LOS is still sorted, may need more of a wait here", isDisplayed(headerLOSInactive,3));
-        sortAttributeByColorValidationAscending(headerAvailabilityInactive, "style");
+        sortAttributeByColorValidationAscending(headerAvailabilityValues, "style");
         click(headerValidationActive);
         assertTrue("Valid is still sorted, may need more of a wait here",isDisplayed(headerAvailabilityInactive,3));
-        sortAttributeByColorValidationAscending(headerValidationInactive, "style");
+        sortAttributeByColorValidationAscending(headerValidValues, "style");
 
     }
 
@@ -469,14 +488,17 @@ public class PathSummaryPage extends BasePage {
         assertTrue("Delete option did not appear for path 1", isDisplayed(deleteOptionForPath1,3));
         click(deleteOptionForPath1);
         assertTrue("Delete pop up did not appear", isDisplayed(deletePopup,3));
-        String DeletePopupTitle = getText(deletePopUpTitle);
-        //TODO assertEquals(DeletePopupTitle, "MOD");
+        String deletePathPopupTitleq = getText(deletePathPopupTitle);
+        assertEquals(deletePathPopupTitleq, "X\n" +
+                "DELETE PATH\n" +
+                "Are you sure you want to delete the selected Path from this projet?\n" +
+                "Path\n" +
+                "1 First Path\n" +
+                "n/a\n" +
+                "unique\n" +
+                "X\n" +
+                "DELETE PATH");
 
-        String DeletePopupSubtext = getText(deletePopUpSubText);
-        //TODO assertEquals(DeletePopupSubtext, "aaa");
-
-        String DeletePopupsSelectedPathforDeletion = getText(deleteCandidate);
-        //TODO assertEquals(DeletePopupsSelectedPathforDeletion, "1 First Path");
 
         assertTrue("Delete button is not present", isDisplayed(deleteButton,3));
         click(deleteButton);
@@ -485,11 +507,11 @@ public class PathSummaryPage extends BasePage {
         assertTrue("deleteConfirmationTitle not present", isDisplayed(deleteConfirmationTitle,30));
 
         String DeleteConfirmationTitle = getText(deleteConfirmationTitle);
-        //TODO assertEquals(DeleteConfirmationTitle, "aaa");
+        assertEquals(DeleteConfirmationTitle, "Delete Path Confirmation");
 
         assertTrue("deleteConfirmationSubText not present", isDisplayed(deleteConfirmationSubText,30));
         String DeleteConfirmationSubtext = getText(deleteConfirmationSubText);
-        //TODO assertEquals(DeleteConfirmationSubtext, "aaa");
+        assertEquals(DeleteConfirmationSubtext, "You have successfully deleted 1 path.");
     }
 
     public  void checkPathNumForAscend(){
@@ -502,9 +524,14 @@ public class PathSummaryPage extends BasePage {
         sortValidationAscending(listNumBands);
     }
 
+    public void checkPathNameForAcend() {
+        checkForAscend(SortPath);
+        sortValidationAscending(listNamePaths);
+    }
+
     public  void checkPathNumForDescend(){
-        checkForAscend(SortNum);
-        sortValidationAscending(listNumPaths);
+        checkForDescend(SortNum);
+        sortValidationDescending(listNumPaths);
     }
 
     public void checkBandForDescend() {
@@ -512,11 +539,18 @@ public class PathSummaryPage extends BasePage {
         sortValidationDescending(listNumBands);
     }
 
+
+    public void checkPathNameForDescend() {
+        checkForDescend(SortPath);
+        sortValidationDescending(listNamePaths);
+    }
+
+
     public String defaultFilterValue() {
-        String  a;
+        String  band;
         isDisplayed(filterSelection);
-        a = getFieldText(filterSelection);
-        return  a;
+        band = getFieldText(filterSelection);
+        return  band;
     }
 
     public void hoverPassiveRepeaterValSiteInfo(){
@@ -527,11 +561,37 @@ public class PathSummaryPage extends BasePage {
         assertTrue("Can't Find Site Lat",isDisplayed(passiveRepeaterHoverLatitudeField,3));
         assertTrue("Can't Find Site Long",isDisplayed(passiveRepeaterHoverLongitudeField,3));
         assertTrue("Can't Find Site Ant",isDisplayed(passiveRepeaterHoverAntennaField,3));
+
     }
 
     public void hoverSiteLocationValSiteInfo(){
         isDisplayed(siteLocationIcon,2);
         hover(siteLocationIcon);
+       //TODO// 2/18 locators for site hover https://www.screencast.com/t/Xm2xznLn0C
+    }
+
+    public void valSiteLocationToggleOn(){
+        String a;
+        assertTrue("Hamburger menu is not present", isDisplayed(hamburgerDropDownInactive,10));
+        click(hamburgerDropDownInactive);
+        assertTrue("Settings menu option is not present", isDisplayed(hamburgerSettings,10));
+        click(hamburgerSettings);
+        assertTrue("Project Panel is not present", isDisplayed(projectSettingsPanel,10));
+        assertTrue("Project US Unit is not present", isDisplayed(uSUnit,10));
+        assertTrue("Project Site is not present", isDisplayedAndClickable(showSiteLocationCheckBox,10));
+        click(showSiteLocationCheckBox);
+        isDisplayed(saveButton,10);
+        click(saveButton);
+        assertTrue(isDisplayed(siteHeader,20));
+        a = getText(siteHeader);
+        assertEquals(a, "#\n" +
+                "Path\n" +
+                "Band\n" +
+                "Site Call Sign Antenna Radio Bandwidth # Freq\n" +
+                "LOS\n" +
+                "Avail\n" +
+                "Valid");
+        isDisplayed(siteLocationIcon,30);
     }
 
     public void filter(String dropDown, String location){

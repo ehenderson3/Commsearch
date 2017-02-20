@@ -2,6 +2,7 @@ package CommTests;
 
 import CommPageObjects.PathSummaryPage;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -17,7 +18,8 @@ public class PathSummaryTest extends BaseTest {
     public void Setup() {
         pathSummary = new PathSummaryPage(driver);
     }
-
+    @Rule
+    public RetryTest.Retry retry = new RetryTest.Retry(10);
     //    Given that user is logged in with appropriate permission,
     //    When a cursor hovers over the "P" (passive repeater) icon in the PATH column,
     //    Then the site name, lat #; long #, and antenna # will be displayed in a pop up
@@ -30,18 +32,14 @@ public class PathSummaryTest extends BaseTest {
         assertTrue(pathSummary.projectName());
         pathSummary.hoverPassiveRepeaterValSiteInfo();
     }
-   //NOT DEMO'd
     //    Given that user is logged in with appropriate permission,
     //    When a cursor hovers over the Site Location icon icon in the SITE column,
     //    Then the site name, lat #; long #, and ground elevation will be displayed in a pop up
     @Test
     public void hoverSiteLocationValSiteInfo() {
-        //TODO//createPath.createBrandNewProjectPath("Best Project Ever", "This is the Default");
-        //TODO//Add validation for values once data is no longer static currently only fields are validated
         assertTrue(pathSummary.landedOnPathSummaryPage());
         assertTrue(pathSummary.projectName());
-        //TODO The site location locator needs an ID added, sent request to Nemo
-        //TODO The setting that controls this option is defaulting in the reverse Mark has defect
+        pathSummary.valSiteLocationToggleOn();
         pathSummary.hoverSiteLocationValSiteInfo();
     }
 
@@ -93,6 +91,9 @@ public class PathSummaryTest extends BaseTest {
         pathSummary.filter("Max Power","no results");
 
     }
+    // COM 102
+    // Project Filter - The Filter box gives the User the ability to limit the project via 1 filter parameters. Filter Box input defaults to Band - User types in desired characters and clicks search button to limit displayed Paths.
+
     // COM 125
     // Given the user wants to search by an unassigned value,
     //  When searching by the following values,
@@ -134,8 +135,21 @@ public class PathSummaryTest extends BaseTest {
 
         }
 
+        /* COM 102
+        The function of this module is to give users a summary of their current projects with the following functionality:
+        Project Summary:
+        PROJECT: Project Name is captured on "Create New Project" Module.
+        TOTAL PATHS: Will display the real-time number of Paths that are a part of the current project
 
 
+         */
+        @Test
+        public void valsummaryOfProject() {
+            assertTrue(pathSummary.landedOnPathSummaryPage());
+            assertTrue(pathSummary.projectName());
+
+
+        }
 
     //TODO//Need to have locator created for  LOS, Avail or Valid!!
     // Given the user wants to sort by LOS, Avail or Valid columns,
@@ -171,6 +185,8 @@ public class PathSummaryTest extends BaseTest {
         Then the following action can be taken:
         Split Project; Delete Paths; Quick Check; Bulk Edits; Interference Analysis
         //TODO//    Split Project; Delete Paths; Quick Check; Bulk Edits; Interference Analysis
+
+        //2/18 Added support for new locators
     */
     @Test
     public void valDeletePaths() {
@@ -220,10 +236,14 @@ public class PathSummaryTest extends BaseTest {
         assertTrue(pathSummary.projectName());
         pathSummary.checkPathNumForAscend();
         pathSummary.checkPathNumForDescend();
-        //TODO//Need to have locator created for Band!!//pathSummary.checkBandForAcend();
-        //TODO//Need to have locator created for Band!!//pathSummary.checkBandForDescend();
-        //TODO//Need to have locator created for Path Name!! pathSummary.checkPathNameForDescend();
-        //TODO//Need to have locator created for Path Name!! pathSummary.checkPathNameForAcend();
+        //TODO//Need to have locator created for Band!!//
+        pathSummary.checkBandForAcend();
+        //TODO//Need to have locator created for Band!!//
+        pathSummary.checkBandForDescend();
+        //TODO//Need to have locator created for Path Name!!
+        pathSummary.checkPathNameForDescend();
+        //TODO//Need to have locator created for Path Name!!
+        pathSummary.checkPathNameForAcend();
     }
 
 
@@ -262,7 +282,17 @@ public class PathSummaryTest extends BaseTest {
 
 
     }
-    /*COM 106
+
+
+    /*
+        COM 102
+        Project Menu - The project menu will give Users additional tools for managing their Project:
+        -Split Project //TODO
+        -Delete Paths
+        -Settings
+        -Reporting//TODO
+
+       COM 106
         Settings: Settings allows the user to manage basic settings & controls for the Project (Default setting are controlled in the User Settings) - Project Settings will have defaults set up in the Global setting for the application - *Individual User defaults is a potential option
         User clicks on Menu to Access Settings Button - User clicks on Settings to slide open the Settings Widget - No Acceptance Criteria
         Settings Displays:
@@ -319,7 +349,23 @@ public class PathSummaryTest extends BaseTest {
         assertTrue(pathSummary.projectName());
         pathSummary.viewDefaultSettings();
     }
-    /*COM 107
+    /*
+        COM 102
+        Path Summary Header - (Sortable by Path #, Path Name, LOS, Avail & Valid) Displays the following fields to the Users (Note: In settings user can Hide/Unhide Location details Lat, Long & GE.)
+        Path #
+        Path Name
+        Band
+        Site
+        Call Sign
+        Antenna
+        Radio
+        Bandwidth
+        Freq
+        LOS
+        AVAIL
+        VALID
+
+        COM 107
         Given a user wants to display Site Location Details in the Project Summary,
         When the "Show Site Location Details" checkbox is unchecked (default),
         Then the columns Latitude, Longitude and Ground Elevation columns will NOT be displayed,
@@ -361,7 +407,7 @@ public class PathSummaryTest extends BaseTest {
         Validation: value must be a number which is greater than 0
         and no greater than 1000. Only two decimal places are allowed.
      */
-
+//TODO Update this val messages to 100000
     @Test
     public void valKFactorField() {
         assertTrue(pathSummary.landedOnPathSummaryPage());

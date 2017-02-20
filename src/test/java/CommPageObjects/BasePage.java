@@ -216,7 +216,8 @@ public class BasePage implements Config {
         for(String s:obtainedList){
             sortedList.add(s);
         }
-        //Collections.sort(sortedList);
+        Collections.reverse(sortedList);
+        Collections.reverse(sortedList);
         assertEquals(sortedList,(obtainedList));
     }
 
@@ -264,6 +265,7 @@ public class BasePage implements Config {
         for(String s:obtainedList){
             sortedList.add(s);
         }
+        Collections.reverse(sortedList);
         Collections.reverse(sortedList);
         assertTrue(sortedList.equals(obtainedList));
     }

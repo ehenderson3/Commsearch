@@ -2,6 +2,9 @@ package CommTests;
 
 import org.junit.Rule;
 import org.junit.rules.ExternalResource;
+import org.junit.rules.TestRule;
+import org.junit.runner.Description;
+import org.junit.runners.model.Statement;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -14,7 +17,7 @@ import java.net.URL;
 /**
  * Base class for the tests.
  */
-public class BaseTest implements Config{
+public class BaseTest implements Config {
 
     protected WebDriver driver;
 
@@ -52,6 +55,5 @@ public class BaseTest implements Config{
 
         }
     };
-
 
 }

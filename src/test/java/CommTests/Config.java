@@ -1,14 +1,12 @@
 package CommTests;
 
-/**
- * Created by commsearch on 1/26/17.
- */
+
 public interface Config {
 
     final String baseUrl            = System.getProperty("baseUrl", "https://comsearch.dev.surgeforward.com/#/");
-    final String browser            = System.getProperty("browser", "Firefox");
+    final String browser            = System.getProperty("browser", "chrome");
     final String host               = System.getProperty("host","localhost");// or browserstack
-    final String browserVersion     = System.getProperty("browserVersion","50");
+    final String browserVersion     = System.getProperty("browserVersion","55");
     final String platform           = System.getProperty("platform","Windows");
     final String os_version         = System.getProperty("os_version","10");
 
