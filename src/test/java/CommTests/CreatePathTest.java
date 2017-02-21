@@ -21,7 +21,7 @@ public class CreatePathTest extends BaseTest {
     int randomNumber = rndNum.nextInt(100000);
 
     @Rule
-    public RetryTest.Retry retry = new RetryTest.Retry(10);
+    public RetryTest.Retry retry = new RetryTest.Retry(3);
 
     @Test
     public void Test_projectFieldFailure () {
@@ -60,7 +60,6 @@ public class CreatePathTest extends BaseTest {
         "Given the the max number of characters is 40,
         When the project name is >40,
         Then an error message will indicate that the 'Project name is too long'."
-
          */
     @Test
     public void maxProjectNameTest() {

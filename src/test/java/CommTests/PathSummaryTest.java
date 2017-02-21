@@ -19,11 +19,15 @@ public class PathSummaryTest extends BaseTest {
         pathSummary = new PathSummaryPage(driver);
     }
     @Rule
-    public RetryTest.Retry retry = new RetryTest.Retry(10);
-    //    Given that user is logged in with appropriate permission,
-    //    When a cursor hovers over the "P" (passive repeater) icon in the PATH column,
-    //    Then the site name, lat #; long #, and antenna # will be displayed in a pop up
-    //    And this can include multiple sites and/or multiple antennas at any site.
+    public RetryTest.Retry retry = new RetryTest.Retry(3);
+
+    /**
+     * Given that user is logged in with appropriate permission,
+     * When a cursor hovers over the "P" (passive repeater) icon in the PATH column,
+     * Then the site name, lat #; long #, and antenna # will be displayed in a pop up
+     * And this can include multiple sites and/or multiple antennas at any site.
+     */
+
     @Test
     public void hoverPassiveRepeaterValSiteInfo() {
         //TODO//createPath.createBrandNewProjectPath("Best Project Ever", "This is the Default");
@@ -177,8 +181,18 @@ public class PathSummaryTest extends BaseTest {
         // pathSummary.deselectAll();
         // pathSummary.clickDeselectAllButton();
         pathSummary.clickDeselectAllButton();
-
+        /*108
+        "Given that a user wants to select an individual Path,
+         When user clicks in the blue box on the left-hand side of a path,
+         Then it will be highlighted."
+         "Given that a user wants to deselect an individual Path,
+         When user clicks on a currently selected path (in the orange-highlighted left-hand side),
+         Then it will be deselected."
+         */
+        pathSummary.highlightSinglePathDeselectAndValidate();
         }
+
+
     /*
         Given that user wants to take additional actions with Paths,
         When paths are selected/highlighted,
@@ -279,8 +293,6 @@ public class PathSummaryTest extends BaseTest {
          assertTrue(pathSummary.landedOnPathSummaryPage());
          assertTrue(pathSummary.projectName());
          pathSummary.highlightPathAndSelectDeleteFromHamburger();
-
-
     }
 
 

@@ -16,7 +16,7 @@ import static org.junit.Assert.assertTrue;
 
 public class PathSummaryPage extends BasePage {
 
-    By projectTitle = By.xpath("//span[text()='Project ']");
+    By projectTitle = By.className("project-summary-overview");
     By projectTitleName = By.xpath("//*[@class=\"project-summary-overview\"]/p[1]/span[2]");
     By totalPathAmount = By.xpath("//*[@class=\"project-summary-overview\"]/p[3]/span[2]");
     By licenseeName = By.xpath("//*[@class=\"project-summary-overview\"]/p[2]/span[2]");
@@ -38,7 +38,7 @@ public class PathSummaryPage extends BasePage {
 
     By allPaths = By.xpath("//*[contains(@id, 'project-summary-path-row')]");
     By allPathsNew = By.className("path-name-value");
-    By pathsSelectedByArray =  By.xpath("//*[@class='path-info-td td-border-transparent selected']");
+    By pathsSelectedByArray = By.xpath("//*[@class='path-info-td td-border-transparent selected']");
 
     By selectAllButton = By.cssSelector(".heading-font.btn.btn-md.btn-skinny.bg-white.btn-border.margin-left-1");
     By deselectAllButton = By.cssSelector(".heading-font.btn.btn-md.btn-skinny.bg-white.btn-border.margin-left-1");
@@ -88,13 +88,13 @@ public class PathSummaryPage extends BasePage {
     By hamburgerDeletePaths = By.id("project-settings-delete-paths-modal-trigger");
     By deletePathPopupTitle0 = By.xpath("//*[@class,'uppercase') and contains(text(), 'Delete Path')]");
     By deletePathPopupTitle = By.className("project-summary-modal");
-    By deletePathPopupSubTitle= By.tagName("p");
+    By deletePathPopupSubTitle = By.tagName("p");
     By deleteModal = By.cssSelector(".ReactModal__Content.ReactModal__Content--after-open");
     //https://www.screencast.com/t/BLDu9LlDZTF
     By pathsToBeDeletedFromModal = By.xpath("//*[contains(@class,'delete-paths-modal-path')]");
     By deletePathsButton = By.id("delete-paths-modal-delete-apply");
     By deleteConfirmationNew = By.cssSelector(".display-flex.justify-content-center");
-    By deleteConfirmationPathPopupSubTitle= By.xpath("//*[contains(@tag, 'span') and contains(@class, 'display-flex justify-content-center')]");
+    By deleteConfirmationPathPopupSubTitle = By.xpath("//*[contains(@tag, 'span') and contains(@class, 'display-flex justify-content-center')]");
     By deselectPathForDeletion = By.xpath("//*[contains(@id,'delete-paths-modal-remove-path')]");
 
     By hamburgerSettings = By.id("project-summary-settings-trigger");
@@ -119,95 +119,95 @@ public class PathSummaryPage extends BasePage {
     By totalPathsCount = By.xpath("//*[@id=\"app\"]/div/div/div/div/div/div[1]/div[1]/p[3]/span[2]");
 
 
-    public PathSummaryPage(WebDriver driver){
+    public PathSummaryPage(WebDriver driver) {
         super(driver);
 
-    visit("project-summary/1234");
-        assertTrue(driver.findElement(projectTitle).isDisplayed());
+        visit("project-summary/1234");
+        assertTrue(isDisplayed(projectTitle,3));
     }
 
-    public void valKDefaultAvailabilityTargetSetting(){
+    public void valKDefaultAvailabilityTargetSetting() {
         String a;
 
         String defaultTargetAvailability;
 
-        assertTrue("Hamburger menu is not present", isDisplayed(hamburgerDropDownInactive,10));
+        assertTrue("Hamburger menu is not present", isDisplayed(hamburgerDropDownInactive, 10));
         click(hamburgerDropDownInactive);
-        assertTrue("Settings menu option is not present", isDisplayed(hamburgerSettings,10));
+        assertTrue("Settings menu option is not present", isDisplayed(hamburgerSettings, 10));
         click(hamburgerSettings);
-        assertTrue("Project Panel is not present", isDisplayed(projectSettingsPanel,10));
-        assertTrue("Project Target Availability (%) is not present", isDisplayed(targetAvailability,10));
+        assertTrue("Project Panel is not present", isDisplayed(projectSettingsPanel, 10));
+        assertTrue("Project Target Availability (%) is not present", isDisplayed(targetAvailability, 10));
         defaultTargetAvailability = getFieldText(targetAvailability);
-        assertEquals("The Target Avail default val is not correct",defaultTargetAvailability,"99.99");
+        assertEquals("The Target Avail default val is not correct", defaultTargetAvailability, "99.995");
 
         clear(targetAvailability);
-        type("w",targetAvailability);
+        type("w", targetAvailability);
         click(saveButton);
         a = getText(warnFresnelZoneRadius);
         assertEquals(a, "ONLY NUMERICAL VALUES ALLOWED");
 
         clear(targetAvailability);
-        type("1001",targetAvailability);
+        type("1001", targetAvailability);
         click(saveButton);
         a = getText(warnFresnelZoneRadius);
         assertEquals(a, "MUST BE BETWEEN 50 AND 100");
 
         clear(targetAvailability);
-        type("-1001",targetAvailability);
+        type("-1001", targetAvailability);
         click(saveButton);
         a = getText(warnFresnelZoneRadius);
         assertEquals(a, "MUST BE BETWEEN 50 AND 100");
 
         clear(targetAvailability);
-        type("100",targetAvailability);
+        type("100", targetAvailability);
         click(saveButton);
 
         click(hamburgerDropDownInactive);
-        assertTrue("Settings menu option is not present", isDisplayed(hamburgerSettings,10));
+        assertTrue("Settings menu option is not present", isDisplayed(hamburgerSettings, 10));
         click(hamburgerSettings);
-        assertTrue("Project Panel is not present", isDisplayed(projectSettingsPanel,10));
-        assertTrue("Project Target Availability (%) is not present", isDisplayed(targetAvailability,10));
+        assertTrue("Project Panel is not present", isDisplayed(projectSettingsPanel, 10));
+        assertTrue("Project Target Availability (%) is not present", isDisplayed(targetAvailability, 10));
         defaultTargetAvailability = getFieldText(targetAvailability);
-        assertEquals("The Target Avail default val is not correct",defaultTargetAvailability,"100");
+        assertEquals("The Target Avail default val is not correct", defaultTargetAvailability, "100");
     }
 
-    public void valKMinClearanceSetting(){
+    public void valKMinClearanceSetting() {
         String a;
         String defaultMinimumClearance;
 
-        assertTrue("Hamburger menu is not present", isDisplayed(hamburgerDropDownInactive,10));
+        assertTrue("Hamburger menu is not present", isDisplayed(hamburgerDropDownInactive, 10));
         click(hamburgerDropDownInactive);
-        assertTrue("Settings menu option is not present", isDisplayed(hamburgerSettings,10));
+        assertTrue("Settings menu option is not present", isDisplayed(hamburgerSettings, 10));
         click(hamburgerSettings);
         defaultMinimumClearance = getFieldText(minClearence);
-        assertEquals("The defaultMinimumClearance default val is not correct",defaultMinimumClearance, "65.61");
+        assertEquals("The defaultMinimumClearance default val is not correct", defaultMinimumClearance, "65.61");
 
         clear(minClearence);
-        type(".1",minClearence);
+        type(".1", minClearence);
         click(saveButton);
         a = getText(warnFresnelZoneRadius);
         assertEquals(a, "ONLY NUMERICAL VALUES ALLOWED");
 
         clear(minClearence);
-        type("w",minClearence);
+        type("w", minClearence);
         click(saveButton);
         a = getText(warnFresnelZoneRadius);
         assertEquals(a, "ONLY NUMERICAL VALUES ALLOWED");
 
         clear(minClearence);
-        type("1001",minClearence);
+        type("1001", minClearence);
         click(saveButton);
         a = getText(warnFresnelZoneRadius);
         assertEquals(a, "MUST BE BETWEEN -1000 AND 1000");
 
         clear(minClearence);
-        type("-1001",minClearence);
+        type("-1001", minClearence);
         click(saveButton);
         a = getText(warnFresnelZoneRadius);
         assertEquals(a, "MUST BE BETWEEN -1000 AND 1000");
 
         clear(minClearence);
-        type("1000",minClearence);
+        type("1000", minClearence);
         click(saveButton);
 
     }
@@ -219,103 +219,101 @@ public class PathSummaryPage extends BasePage {
         String a;
 
 
-        assertTrue("Hamburger menu is not present", isDisplayed(hamburgerDropDownInactive,10));
+        assertTrue("Hamburger menu is not present", isDisplayed(hamburgerDropDownInactive, 10));
         click(hamburgerDropDownInactive);
-        assertTrue("Settings menu option is not present", isDisplayed(hamburgerSettings,10));
+        assertTrue("Settings menu option is not present", isDisplayed(hamburgerSettings, 10));
         click(hamburgerSettings);
-        assertTrue("Project Panel is not present", isDisplayed(projectSettingsPanel,10));
-        assertTrue("Project K Factor field is not present", isDisplayed(kFactorField,10));
+        assertTrue("Project Panel is not present", isDisplayed(projectSettingsPanel, 10));
+        assertTrue("Project K Factor field is not present", isDisplayed(kFactorField, 10));
         defaultKFactor = getFieldText(kFactorField);
-        assertEquals("The defaultKFactor default val is not correct",defaultKFactor,"1");
+        assertEquals("The defaultKFactor default val is not correct", defaultKFactor, "1");
 
         clear(kFactorField);
-        type(".1",kFactorField);
+        type(".1", kFactorField);
         click(saveButton);
         a = getText(warnFresnelZoneRadius);
         assertEquals(a, "ONLY NUMERICAL VALUES ALLOWED");
 
         clear(kFactorField);
-        type("w",kFactorField);
+        type("w", kFactorField);
         click(saveButton);
         a = getText(warnFresnelZoneRadius);
         assertEquals(a, "ONLY NUMERICAL VALUES ALLOWED");
 
         clear(kFactorField);
-        type("1001",kFactorField);
+        type("1001", kFactorField);
         click(saveButton);
         a = getText(warnFresnelZoneRadius);
         assertEquals(a, "MUST BE BETWEEN 0.01 AND 1000");
 
         clear(kFactorField);
-        type("0",kFactorField);
+        type("0", kFactorField);
         click(saveButton);
         a = getText(warnFresnelZoneRadius);
         assertEquals(a, "MUST BE BETWEEN 0.01 AND 1000");
 
 
         clear(kFactorField);
-        type("1000",kFactorField);
+        type("1000", kFactorField);
         click(saveButton);
-
 
 
     }
 
-    public void valFresnelZoneRadius(){
+    public void valFresnelZoneRadius() {
 
         String defaultLic;
         String defaultFresnelZoneRadius;
         String a;
-        assertTrue("Hamburger menu is not present", isDisplayed(hamburgerDropDownInactive,10));
+        assertTrue("Hamburger menu is not present", isDisplayed(hamburgerDropDownInactive, 10));
         click(hamburgerDropDownInactive);
-        assertTrue("Settings menu option is not present", isDisplayed(hamburgerSettings,10));
+        assertTrue("Settings menu option is not present", isDisplayed(hamburgerSettings, 10));
         click(hamburgerSettings);
-        assertTrue("Project Panel is not present", isDisplayed(projectSettingsPanel,10));
-        assertTrue("Project Fresnel Zone Radius (%) is not present", isDisplayed(fresnelZoneRadiusPercentField,10));
+        assertTrue("Project Panel is not present", isDisplayed(projectSettingsPanel, 10));
+        assertTrue("Project Fresnel Zone Radius (%) is not present", isDisplayed(fresnelZoneRadiusPercentField, 10));
         defaultLic = getFieldText(defaultLicenseeField);
         defaultFresnelZoneRadius = getFieldText(fresnelZoneRadiusPercentField);
-        assertEquals("The defaultLic default val is not correct",defaultLic,"Licensee Inc");
-        assertEquals("The defaultFresnelZoneRadius default val is not correct",defaultFresnelZoneRadius,"60");
+        assertEquals("The defaultLic default val is not correct", defaultLic, "Licensee Inc");
+        assertEquals("The defaultFresnelZoneRadius default val is not correct", defaultFresnelZoneRadius, "60");
         clear(fresnelZoneRadiusPercentField);
-        type(".1",fresnelZoneRadiusPercentField);
+        type(".1", fresnelZoneRadiusPercentField);
         click(saveButton);
         a = getText(warnFresnelZoneRadius);
         assertEquals(a, "ONLY NUMERICAL VALUES ALLOWED");
 
         clear(fresnelZoneRadiusPercentField);
-        type("w",fresnelZoneRadiusPercentField);
+        type("w", fresnelZoneRadiusPercentField);
         click(saveButton);
         a = getText(warnFresnelZoneRadius);
         assertEquals(a, "ONLY NUMERICAL VALUES ALLOWED");
 
         clear(fresnelZoneRadiusPercentField);
-        type("1001",fresnelZoneRadiusPercentField);
+        type("1001", fresnelZoneRadiusPercentField);
         click(saveButton);
         a = getText(warnFresnelZoneRadius);
         assertEquals(a, "MUST BE BETWEEN 0 AND 1000");
 
         clear(fresnelZoneRadiusPercentField);
-        type("1000",fresnelZoneRadiusPercentField);
+        type("1000", fresnelZoneRadiusPercentField);
         click(saveButton);
 
 
     }
 
 
-
-    public void valSiteLocationToggle(){
+    public void valSiteLocationToggle() {
         String a;
-        assertTrue("Hamburger menu is not present", isDisplayed(hamburgerDropDownInactive,10));
+        assertTrue("Hamburger menu is not present", isDisplayed(hamburgerDropDownInactive, 10));
         click(hamburgerDropDownInactive);
-        assertTrue("Settings menu option is not present", isDisplayed(hamburgerSettings,10));
+        assertTrue("Settings menu option is not present", isDisplayed(hamburgerSettings, 10));
         click(hamburgerSettings);
-        assertTrue("Project Panel is not present", isDisplayed(projectSettingsPanel,10));
-        assertTrue("Project US Unit is not present", isDisplayed(uSUnit,10));
-        assertTrue("Project Site is not present", isDisplayedAndClickable(showSiteLocationCheckBox,10));
+        assertTrue("Project Panel is not present", isDisplayed(projectSettingsPanel, 10));
+        assertTrue("Project US Unit is not present", isDisplayed(uSUnit, 10));
+        assertTrue("Project Site is not present", isDisplayedAndClickable(showSiteLocationCheckBox, 10));
         click(showSiteLocationCheckBox);
-        isDisplayed(saveButton,10);
+        isDisplayed(saveButton, 10);
         click(saveButton);
-        assertTrue(isDisplayed(siteHeader,20));
+        assertTrue(isDisplayed(siteHeader, 20));
         a = getText(siteHeader);
         assertEquals(a, "#\n" +
                 "Path\n" +
@@ -324,20 +322,20 @@ public class PathSummaryPage extends BasePage {
                 "LOS\n" +
                 "Avail\n" +
                 "Valid");
-        isDisplayed(siteLocationIcon,30);
-       // hover(siteLocationIcon);
+        isDisplayed(siteLocationIcon, 30);
+        // hover(siteLocationIcon);
         hoverSiteLocationValSiteInfo();
-        assertTrue("Hamburger menu is not present", isDisplayed(hamburgerDropDownInactive,10));
+        assertTrue("Hamburger menu is not present", isDisplayed(hamburgerDropDownInactive, 10));
         click(hamburgerDropDownInactive);
-        assertTrue("Settings menu option is not present", isDisplayed(hamburgerSettings,10));
+        assertTrue("Settings menu option is not present", isDisplayed(hamburgerSettings, 10));
         click(hamburgerSettings);
-        assertTrue("Project Panel is not present", isDisplayed(projectSettingsPanel,10));
-        assertTrue("Project US Unit is not present", isDisplayed(uSUnit,10));
-        assertTrue("Project Site is not present", isDisplayedAndClickable(showSiteLocationCheckBox,10));
+        assertTrue("Project Panel is not present", isDisplayed(projectSettingsPanel, 10));
+        assertTrue("Project US Unit is not present", isDisplayed(uSUnit, 10));
+        assertTrue("Project Site is not present", isDisplayedAndClickable(showSiteLocationCheckBox, 10));
         click(showSiteLocationCheckBox);
-        isDisplayed(saveButton,10);
+        isDisplayed(saveButton, 10);
         click(saveButton);
-        assertTrue(isDisplayed(siteHeader,20));
+        assertTrue(isDisplayed(siteHeader, 20));
         a = getText(siteHeader);
         assertEquals(a, "#\n" +
                 "Path\n" +
@@ -351,25 +349,25 @@ public class PathSummaryPage extends BasePage {
                 "Valid");
     }
 
-    public void changeUnitsFromUsToSi(){
+    public void changeUnitsFromUsToSi() {
         String groundElevationHeading;
-        assertTrue("Hamburger menu is not present", isDisplayed(hamburgerDropDownInactive,10));
+        assertTrue("Hamburger menu is not present", isDisplayed(hamburgerDropDownInactive, 10));
         click(hamburgerDropDownInactive);
-        assertTrue("Settings menu option is not present", isDisplayed(hamburgerSettings,10));
+        assertTrue("Settings menu option is not present", isDisplayed(hamburgerSettings, 10));
         click(hamburgerSettings);
-        assertTrue("Project Panel is not present", isDisplayed(projectSettingsPanel,10));
-        assertTrue("Project US Unit is not present", waitForIsDisplayed(saveButton,30));
-        click(sIUnit,1);
-        isDisplayed(fieldChange,10);
-        isDisplayed(saveButton,10);
+        assertTrue("Project Panel is not present", isDisplayed(projectSettingsPanel, 10));
+        assertTrue("Project US Unit is not present", waitForIsDisplayed(saveButton, 30));
+        click(sIUnit, 1);
+        isDisplayed(fieldChange, 10);
+        isDisplayed(saveButton, 10);
         click(saveButton);
-        isDisplayed(groundElevation,10);
+        isDisplayed(groundElevation, 10);
         groundElevationHeading = getText(groundElevation);
         assertTrue(groundElevationHeading.contains("(m)"));
         //TODO// assertTrue(minimumClearance.contains("(m)"));
     }
 
-    public void viewDefaultSettings(){
+    public void viewDefaultSettings() {
 
         String defaultLic;
         String defaultFresnelZoneRadius;
@@ -377,18 +375,18 @@ public class PathSummaryPage extends BasePage {
         String defaultMinimumClearance;
         String defaultTargetAvailability;
 
-        assertTrue("Hamburger menu is not present", isDisplayed(hamburgerDropDownInactive,10));
+        assertTrue("Hamburger menu is not present", isDisplayed(hamburgerDropDownInactive, 10));
         click(hamburgerDropDownInactive);
-        assertTrue("Settings menu option is not present", isDisplayed(hamburgerSettings,10));
+        assertTrue("Settings menu option is not present", isDisplayed(hamburgerSettings, 10));
         click(hamburgerSettings);
-        assertTrue("Project Panel is not present", isDisplayed(projectSettingsPanel,10));
-        assertTrue("Project US Unit is not present", isDisplayed(uSUnit,10));
-        assertTrue("Project SI unit is not present", isDisplayed(sIUnit,10));
-        assertTrue("Project Default Licensee is not present", isDisplayed(defaultLicenseeField,10));
-        assertTrue("Project Panel is not present", isDisplayed(showSiteLocationCheckBox,10));
-        assertTrue("Project Fresnel Zone Radius (%) is not present", isDisplayed(fresnelZoneRadiusPercentField,10));
-        assertTrue("Project K Factor field is not present", isDisplayed(kFactorField,10));
-        assertTrue("Project Target Availability (%) is not present", isDisplayed(targetAvailability,10));
+        assertTrue("Project Panel is not present", isDisplayed(projectSettingsPanel, 10));
+        assertTrue("Project US Unit is not present", isDisplayed(uSUnit, 10));
+        assertTrue("Project SI unit is not present", isDisplayed(sIUnit, 10));
+        assertTrue("Project Default Licensee is not present", isDisplayed(defaultLicenseeField, 10));
+        assertTrue("Project Panel is not present", isDisplayed(showSiteLocationCheckBox, 10));
+        assertTrue("Project Fresnel Zone Radius (%) is not present", isDisplayed(fresnelZoneRadiusPercentField, 10));
+        assertTrue("Project K Factor field is not present", isDisplayed(kFactorField, 10));
+        assertTrue("Project Target Availability (%) is not present", isDisplayed(targetAvailability, 10));
 
         defaultLic = getFieldText(defaultLicenseeField);
         defaultFresnelZoneRadius = getFieldText(fresnelZoneRadiusPercentField);
@@ -396,30 +394,38 @@ public class PathSummaryPage extends BasePage {
         defaultMinimumClearance = getFieldText(minClearence);
         defaultTargetAvailability = getFieldText(targetAvailability);
 
-        assertEquals("The defaultLic default val is not correct",defaultLic,"Licensee Inc");
-        assertEquals("The defaultFresnelZoneRadius default val is not correct",defaultFresnelZoneRadius,"60");
-        assertEquals("The defaultKFactor default val is not correct",defaultKFactor,"1");
-        assertEquals("The defaultMinimumClearance default val is not correct",defaultMinimumClearance, "65.61");
-        assertEquals("The Target Avail default val is not correct",defaultTargetAvailability,"99.99");
+        assertEquals("The defaultLic default val is not correct", defaultLic, "Licensee Inc");
+        assertEquals("The defaultFresnelZoneRadius default val is not correct", defaultFresnelZoneRadius, "60");
+        assertEquals("The defaultKFactor default val is not correct", defaultKFactor, "1");
+        assertEquals("The defaultMinimumClearance default val is not correct", defaultMinimumClearance, "65.61");
+        assertEquals("The Target Avail default val is not correct", defaultTargetAvailability, "99.995");
     }
 
 
-    public void selectAndViewSettingsFromHamburgerMenu(){
-        assertTrue("Hamburger menu is not present", isDisplayed(hamburgerDropDownInactive,10));
+    public void selectAndViewSettingsFromHamburgerMenu() {
+        assertTrue("Hamburger menu is not present", isDisplayed(hamburgerDropDownInactive, 10));
         click(hamburgerDropDownInactive);
-        assertTrue("Settings menu option is not present", isDisplayed(hamburgerSettings,10));
+        assertTrue("Settings menu option is not present", isDisplayed(hamburgerSettings, 10));
         click(hamburgerSettings);
-        assertTrue("Project Panel is not present", isDisplayed(projectSettingsPanel,10));
-        assertTrue("Project US Unit is not present", isDisplayed(uSUnit,10));
-        assertTrue("Project SI unit is not present", isDisplayed(sIUnit,10));
-        assertTrue("Project Default Licensee is not present", isDisplayed(defaultLicenseeField,10));
-        assertTrue("Project Panel is not present", isDisplayed(showSiteLocationCheckBox,10));
-        assertTrue("Project Fresnel Zone Radius (%) is not present", isDisplayed(fresnelZoneRadiusPercentField,10));
-        assertTrue("Project K Factor field is not present", isDisplayed(kFactorField,10));
-        assertTrue("Project Target Availability (%) is not present", isDisplayed(targetAvailability,10));
+        assertTrue("Project Panel is not present", isDisplayed(projectSettingsPanel, 10));
+        assertTrue("Project US Unit is not present", isDisplayed(uSUnit, 10));
+        assertTrue("Project SI unit is not present", isDisplayed(sIUnit, 10));
+        assertTrue("Project Default Licensee is not present", isDisplayed(defaultLicenseeField, 10));
+        assertTrue("Project Panel is not present", isDisplayed(showSiteLocationCheckBox, 10));
+        assertTrue("Project Fresnel Zone Radius (%) is not present", isDisplayed(fresnelZoneRadiusPercentField, 10));
+        assertTrue("Project K Factor field is not present", isDisplayed(kFactorField, 10));
+        assertTrue("Project Target Availability (%) is not present", isDisplayed(targetAvailability, 10));
     }
 
-
+    public void highlightSinglePathDeselectAndValidate() {
+        assertTrue("There are no paths present Pleases adjust your preconditions to include the setting up of PATH test data", isDisplayed(allPathsNew, 10));
+        click(allPathsNew, 1);
+        click(allPathsNew, 2);
+        assertTrue("The path is not selected",isDisplayedArray(pathsSelectedByArray, 0));
+        click(allPathsNew, 1);
+        click(allPathsNew, 2);
+        assertTrue("The path is not selected",isDisplayedArray(allPathsNotSelected, 0));
+    }
 
     public void highlightPathAndSelectDeleteFromHamburger(){
         assertTrue("There are no paths present Pleases adjust your preconditions to include the setting up of PATH test data",isDisplayed(allPathsNew,10));
@@ -491,7 +497,7 @@ public class PathSummaryPage extends BasePage {
         String deletePathPopupTitleq = getText(deletePathPopupTitle);
         assertEquals(deletePathPopupTitleq, "X\n" +
                 "DELETE PATH\n" +
-                "Are you sure you want to delete the selected Path from this projet?\n" +
+                "Are you sure you want to delete the selected Path from this project?\n" +
                 "Path\n" +
                 "1 First Path\n" +
                 "n/a\n" +
