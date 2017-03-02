@@ -30,6 +30,7 @@ public class CreateNewPathPage extends BasePage {
     By projectTitile = By.tagName("span");
 
     public CreateNewPathPage(WebDriver driver){
+        //Used by class constructors to invoke constructors of its parent class.
         super(driver);
 
     visit("/");
@@ -81,10 +82,7 @@ public class CreateNewPathPage extends BasePage {
         isDisplayed(errorMessage);
         dupMessageText = getText(errorMessage);
         assertEquals(dupMessageText,"That project name already exists.");
-        //That project name already exists.
     }
-
-
 
     public void createProjectPathErrorChecking(String projectName, String defaultLicensee){
         click(commHome);
