@@ -16,7 +16,9 @@ package CommPageObjects;
         import java.util.Arrays;
         import java.util.Collections;
         import java.util.List;
+        import java.util.concurrent.TimeUnit;
 
+        import static java.lang.Thread.*;
         import static org.junit.Assert.assertEquals;
         import static org.junit.Assert.assertTrue;
 
@@ -36,6 +38,8 @@ public class BasePage implements Config {
             driver.get(baseUrl + url);
         }
     }
+
+
 
     public WebElement find(By locator) {
         return driver.findElement(locator);
@@ -82,6 +86,14 @@ public class BasePage implements Config {
         return s;
     }
 
+    public String getTextPlural(By locator,int i)
+    {
+        WebElement TxtBoxContent = driver.findElements(locator).get(i);
+        String s = new String();
+        s =  TxtBoxContent.getText();
+        return s;
+    }
+
     public void click(By locator) {
         find(locator).click();
     }
@@ -115,7 +127,9 @@ public class BasePage implements Config {
         return finds(locators).get(i).isDisplayed();
     }
 
-
+    public void slowDown(int i) {
+        driver.manage().timeouts().implicitlyWait(i, TimeUnit.SECONDS);
+    }
 
     //Will check to see if an element is not present Instead of returning exception this will return false
     public Boolean isDisplayed(By locator, Integer timeout) {
@@ -147,6 +161,10 @@ public class BasePage implements Config {
 
     public void switchBackToDefaultContent(){
         driver.switchTo().defaultContent();
+    }
+
+    public void Maximize() {
+        driver.manage().window().maximize();
     }
 
 

@@ -27,26 +27,27 @@ public class CreatePathTest extends BaseTest {
     public void Test_projectFieldFailure () {
         createPath.createProjectPathErrorChecking("", "This is the Default");
         assertTrue(createPath.projectNameRequired());
+
     }
 
-    /* COM 124
+        /* COM 124
         When the Default Licensee is NOT existing already,
         Then a project can still be created."
         "Given a project name has previously been created and saved,
-    */
+        */
     @Test
     public void createProjectWithoutDefaultFieldPopulated () {
         createPath.createProjectPathErrorChecking("Project Field" +randomNumber+ "iAutomation Data", "");
         assertTrue(createPath.landedOnPathSummaryPage());
     }
 
-    /*COM 117
+        /*COM 117
         "Given a user wants to name a project,
         When the name is unique,
         AND has <41 characters,
         AND all characters are in the acceptable character set,
         Then it will save successfully."
-     */
+         */
 
     @Test
     public void createNewProject() {
@@ -78,6 +79,17 @@ public class CreatePathTest extends BaseTest {
         assertEquals("Project name contains invalid characters.",createPath.projectFieldError());
     }
 
+    /*
+    COM-198
+    Create New Project: Error format is different when "/" character is used.
+     */
+
+    @Test
+    public void valProject_ValidChar() {
+        createPath.attemptToCreateProject("a-zA-Z0-9s_-"+ randomNumber, "This is the Default");
+        assertTrue(createPath.landedOnPathSummaryPage());
+    }
+
         /*COM 124
         "Given that a user wants to create a new manual project,
         When New Project button is clicked,
@@ -92,7 +104,7 @@ public class CreatePathTest extends BaseTest {
         */
     @Test
     public void duplicateProjectName() {
-        createPath.attemptToCreateDupProject("Test Duplicate Project 6", "This is the Default");
+        createPath.attemptToCreateDupProject("Test Duplicate Project 8", "This is the Default");
         //assertTrue(createPath.projectNameTooLongError());
     }
         /*COM 124
@@ -113,7 +125,7 @@ public class CreatePathTest extends BaseTest {
         createPath.createBrandNewProjectPath(randomProjectName, "This is the Default");
         assertTrue(createPath.landedOnPathSummaryPage());
         assertTrue(createPath.projectName());
-        assertEquals("Licensee name is incorrect","acme", createPath.licenseeName());
+       // assertEquals("Licensee name is incorrect","acme", createPath.licenseeName());
         assertEquals("Project name is incorrect", randomProjectName, createPath.projectNameText());
         assertEquals("Paths amt incorrect", "0", createPath.pathAmounts());
     }
