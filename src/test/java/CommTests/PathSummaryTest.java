@@ -15,8 +15,11 @@ public class PathSummaryTest extends BaseTest {
     private PathSummaryPage pathSummary;
 
     @Before
+
+
     public void Setup() {
         pathSummary = new PathSummaryPage(driver);
+
     }
     @Rule
     public RetryTest.Retry retry = new RetryTest.Retry(3);
@@ -56,39 +59,69 @@ public class PathSummaryTest extends BaseTest {
         assertTrue(pathSummary.projectName());
         assertEquals("Band is not the default dropdown input", "band", pathSummary.defaultFilterValue());
     }
-    //COM 125
-    //    Given a user wants to filter a project via one output field,
-    //    When a filter field is selected,
-    //    AND search parameters are typed in the search field,
-    //    AND the magnifying glass is clicked,
-    //    Then relevant results will come up as a result.
+    // COM 102
+    // Project Filter - The Filter box gives the User the ability
+    // to limit the project via 1 filter parameters.
+    // Filter Box input defaults to Band - User types in desired
+    // characters and clicks search button to limit displayed Paths.
 
-    //  Given the user types something for which there are no search results,
-    //  When results come back,
-    //  Then there is is an appropriate result or message about no search results
+    /*COM 125
+    Given a user wants to filter a project via one output field,
+    When a filter field is selected,
+    AND search parameters are typed in the search field,
+    AND the magnifying glass is clicked,
+    Then relevant results will come up as a result.
+
+    Given the user types something for which there are no search results,
+    When results come back,
+    Then there is is an appropriate result or message about no search results
+
+    Given a user is flitering via the Filter text entry box,
+    When a dropdown item is selected that doesn't allow for filtering by unassigned,
+    Then the "Show all Paths with
+    No Assigned _____" checkbox will not be displayed.
+    */
+
+
+
     @Test
     public void valFilterResultSet() {
         assertTrue(pathSummary.landedOnPathSummaryPage());
         assertTrue(pathSummary.projectName());
         pathSummary.filter("Band", "23.0");
-        pathSummary.validateBandFilteredResult("Second Path");
+        pathSummary.showAllPathsWithNoAssignedFrequencyBandsPresent();
+        assertEquals(pathSummary.showAllCheckBoxText(),"Show all Paths with No Assigned Frequency Bands");
+        pathSummary.validateBandFilteredResult("Second Path adding extra for testing length");
         pathSummary.filter("Path Name","First Path");
-        pathSummary.validatePathNameFilteredResult("First Path");
+        pathSummary.validatePathNameFilteredResult("First Path adding extra to test name length");
         pathSummary.filter("Licensee","Licensee Inc");
-        pathSummary.validateLicenseeFilteredResult("Second Path", "Third Path", "Fourth Path", "Fifth Path");
+        pathSummary.showAllPathsWithNoAssignedFrequencyBandsPresent();
+        assertEquals(pathSummary.showAllCheckBoxText(),"Show all Paths with No Assigned Licensee");
+        pathSummary.validateLicenseeFilteredResult("Second Path adding extra for testing length", "Third Path", "Fourth Path", "Fifth Path");
         pathSummary.filter("Site Name", "unique");
-        pathSummary.validateSiteNameFilteredResult("First Path");
+        pathSummary.validateSiteNameFilteredResult("First Path adding extra to test name length");
         pathSummary.filter("ASR", "345");
+        pathSummary.showAllPathsWithNoAssignedFrequencyBandsPresent();
+        assertEquals(pathSummary.showAllCheckBoxText(),"Show all Paths with No Assigned ASR");
         pathSummary.validateASRFilteredResult("Fourth Path");
         pathSummary.filter("Call Sign","3");
-        pathSummary.validateCallSignFilteredResult("Second Path", "Third Path", "Fourth Path");
+        pathSummary.showAllPathsWithNoAssignedFrequencyBandsPresent();
+        assertEquals(pathSummary.showAllCheckBoxText(),"Show all Paths with No Assigned Call Sign");
+        pathSummary.validateCallSignFilteredResult("Second Path adding extra for testing length", "Third Path", "Fourth Path");
         pathSummary.filter("Antenna Code","F500ANT");
-        pathSummary.validateAntennaCodeFilteredResult("Second Path", "Third Path", "Fifth Path");
+        pathSummary.showAllPathsWithNoAssignedFrequencyBandsPresent();
+        assertEquals(pathSummary.showAllCheckBoxText(),"Show all Paths with No Assigned Antenna");
+        pathSummary.validateAntennaCodeFilteredResult("Second Path adding extra for testing length", "Third Path", "Fifth Path");
         pathSummary.filter("Antenna Model","Doo");
+        pathSummary.showAllPathsWithNoAssignedFrequencyBandsPresent();
+        assertEquals(pathSummary.showAllCheckBoxText(),"Show all Paths with No Assigned Antenna");
         pathSummary.validateAntennaModelFilteredResult("Fifth Path");
         pathSummary.filter("Radio Code", "unique");
+        pathSummary.showAllPathsWithNoAssignedRadio();
+        assertEquals(pathSummary.showAllCheckBoxText(),"Show all Paths with No Assigned Radio");
         pathSummary.validateRadioCodeFilteredResult("Fourth Path");
         pathSummary.filter("Radio Bandwidth", "999");
+        pathSummary.showAllPathsWithNoAssignedRadio();
         pathSummary.validateRadioBandwidthFilteredResult("Fifth Path");
         pathSummary.filter("Max Power","9990");
         pathSummary.validateMaxPowerFilteredResult("Fifth Path");
@@ -115,52 +148,33 @@ public class PathSummaryTest extends BaseTest {
             assertTrue(pathSummary.landedOnPathSummaryPage());
             assertTrue(pathSummary.projectName());
             pathSummary.filter("Band", "");
-            pathSummary.validateBlankFilteredResult("First Path", "Second Path", "Third Path", "Fourth Path", "Fifth Path");
+            pathSummary.validateBlankFilteredResult("First Path adding extra to test name length", "Second Path adding extra for testing length", "Third Path", "Fourth Path", "Fifth Path");
             pathSummary.filter("Path Name", "");
-            pathSummary.validateBlankFilteredResult("First Path", "Second Path", "Third Path", "Fourth Path", "Fifth Path");
+            pathSummary.validateBlankFilteredResult("First Path adding extra to test name length", "Second Path adding extra for testing length", "Third Path", "Fourth Path", "Fifth Path");
             pathSummary.filter("Licensee", "");
-            pathSummary.validateBlankFilteredResult("First Path", "Second Path", "Third Path", "Fourth Path", "Fifth Path");
+            pathSummary.validateBlankFilteredResult("First Path adding extra to test name length", "Second Path adding extra for testing length", "Third Path", "Fourth Path", "Fifth Path");
             pathSummary.filter("Site Name", "");
-            pathSummary.validateBlankFilteredResult("First Path", "Second Path", "Third Path", "Fourth Path", "Fifth Path");
+            pathSummary.validateBlankFilteredResult("First Path adding extra to test name length", "Second Path adding extra for testing length", "Third Path", "Fourth Path", "Fifth Path");
             pathSummary.filter("ASR", "");
-            pathSummary.validateBlankFilteredResult("First Path", "Second Path", "Third Path", "Fourth Path", "Fifth Path");
+            pathSummary.validateBlankFilteredResult("First Path adding extra to test name length", "Second Path adding extra for testing length", "Third Path", "Fourth Path", "Fifth Path");
             pathSummary.filter("Call Sign", "");
-            pathSummary.validateBlankFilteredResult("First Path", "Second Path", "Third Path", "Fourth Path", "Fifth Path");
+            pathSummary.validateBlankFilteredResult("First Path adding extra to test name length", "Second Path adding extra for testing length", "Third Path", "Fourth Path", "Fifth Path");
             pathSummary.filter("Antenna Code", "");
-            pathSummary.validateBlankFilteredResult("First Path", "Second Path", "Third Path", "Fourth Path", "Fifth Path");
+            pathSummary.validateBlankFilteredResult("First Path adding extra to test name length", "Second Path adding extra for testing length", "Third Path", "Fourth Path", "Fifth Path");
             pathSummary.filter("Antenna Model", "");
-            pathSummary.validateBlankFilteredResult("First Path", "Second Path", "Third Path", "Fourth Path", "Fifth Path");
+            pathSummary.validateBlankFilteredResult("First Path adding extra to test name length", "Second Path adding extra for testing length", "Third Path", "Fourth Path", "Fifth Path");
             pathSummary.filter("Radio Code", "");
-            pathSummary.validateBlankFilteredResult("First Path", "Second Path", "Third Path", "Fourth Path", "Fifth Path");
+            pathSummary.validateBlankFilteredResult("First Path adding extra to test name length", "Second Path adding extra for testing length", "Third Path", "Fourth Path", "Fifth Path");
             pathSummary.filter("Radio Bandwidth", "");
-            pathSummary.validateBlankFilteredResult("First Path", "Second Path", "Third Path", "Fourth Path", "Fifth Path");
+            pathSummary.validateBlankFilteredResult("First Path adding extra to test name length", "Second Path adding extra for testing length", "Third Path", "Fourth Path", "Fifth Path");
             pathSummary.filter("Max Power", "");
-            pathSummary.validateBlankFilteredResult("First Path", "Second Path", "Third Path", "Fourth Path", "Fifth Path");
-
-        }
-
-        /* COM 102
-        The function of this module is to give users a summary of their current projects with the following functionality:
-        Project Summary:
-        PROJECT: Project Name is captured on "Create New Project" Module.
-        TOTAL PATHS: Will display the real-time number of Paths that are a part of the current project
-
-
-         */
-        @Test
-        public void valsummaryOfProject() {
-            assertTrue(pathSummary.landedOnPathSummaryPage());
-            assertTrue(pathSummary.projectName());
-
-
+            pathSummary.validateBlankFilteredResult("First Path adding extra to test name length", "Second Path adding extra for testing length", "Third Path", "Fourth Path", "Fifth Path");
         }
 
     //TODO//Need to have locator created for  LOS, Avail or Valid!!
     // Given the user wants to sort by LOS, Avail or Valid columns,
     // When user clicks on one of these sortable column headers: LOS, Avail, Valid,
     // Then the table will sort only in descending order (Red - Orange - Grey - Green) even when clicking multiple times.
-
-
 
     //COM 108
     // Given the user wants to select all paths displayed in the Project Summary table,
@@ -192,8 +206,7 @@ public class PathSummaryTest extends BaseTest {
         pathSummary.highlightSinglePathDeselectAndValidate();
         }
 
-
-    /*
+        /*
         Given that user wants to take additional actions with Paths,
         When paths are selected/highlighted,
         Then the following action can be taken:
@@ -207,14 +220,13 @@ public class PathSummaryTest extends BaseTest {
         assertTrue(pathSummary.landedOnPathSummaryPage());
         assertTrue(pathSummary.projectName());
         pathSummary.checkThatSelectButtonIsAvailable();
-        pathSummary.checkForDeleteCandidates("First Path", "Second Path", "Third Path");
+        pathSummary.checkForDeleteCandidates("First Path adding extra to test name length", "Second Path adding extra for testing length", "Third Path");
         pathSummary.deleteSinglePath();
-        pathSummary.checkForDeletedPath("First Path");
+        pathSummary.checkForDeletedPath("First Path adding extra to test name length");
         //pathSummary.valSplitProject("First Path");
         //pathSummary.valQuickCheck("First Path");
         //pathSummary.valBulkEdits("First Path");
         //pathSummary.valInterferenceAnalysis("First Path");
-
     }
 
     /*
@@ -250,17 +262,11 @@ public class PathSummaryTest extends BaseTest {
         assertTrue(pathSummary.projectName());
         pathSummary.checkPathNumForAscend();
         pathSummary.checkPathNumForDescend();
-        //TODO//Need to have locator created for Band!!//
         pathSummary.checkBandForAcend();
-        //TODO//Need to have locator created for Band!!//
         pathSummary.checkBandForDescend();
-        //TODO//Need to have locator created for Path Name!!
         pathSummary.checkPathNameForDescend();
-        //TODO//Need to have locator created for Path Name!!
         pathSummary.checkPathNameForAcend();
     }
-
-
 
     /*103
         Given the user wants to sort by LOS, Avail or Valid columns,
@@ -294,7 +300,6 @@ public class PathSummaryTest extends BaseTest {
          assertTrue(pathSummary.projectName());
          pathSummary.highlightPathAndSelectDeleteFromHamburger();
     }
-
 
     /*
         COM 102
@@ -343,7 +348,7 @@ public class PathSummaryTest extends BaseTest {
         pathSummary.changeUnitsFromUsToSi();
     }
 
-    /*COM 107
+    /*COM 107 & 116
         Given that a user opens Project Settings,
         When Project Settings opens,
         Then the default values are as follows:
@@ -386,6 +391,19 @@ public class PathSummaryTest extends BaseTest {
         When the checkbox is activated and saved,
         Then Site Location Details will be displayed via lat, Long and G.E. columns,
         and the hover tooltip which displays the site's info will NOT be displayed.
+
+        COM 109
+         "Given a user is viewing the Site columns,
+         When the Project Settings 'Show Site Location Details' box is checked,
+         Then the Lat, Long & G.E. columns will be displayed,
+         BUT When it is unchecked,
+         Then the Lat, Long & G.E. columns will NOT be displayed."
+
+         "Given a user is viewing the Site columns,
+         When the Project Settings 'Show Site Location Details' box is NOT checked,
+         Then the Site tooltip trigger will be displayed,
+         BUT When it is unchecked,
+         Then the Site tooltip trigger will NOT be displayed."
     */
     @Test
     public void valEffectsOfSiteSettingsCheckbox() {
@@ -460,6 +478,93 @@ public class PathSummaryTest extends BaseTest {
         pathSummary.valKDefaultAvailabilityTargetSetting();
     }
 
+    /*COM 109
+    Given a user is viewing Project Summary path rows,
+    When looking at the Blue Section,
+    Then the following items will be visible:
+    # column; Path; Band (Details); Path Menu caret; MOD/NEW icon; Passive Repeater tooltip trigge
+
+    Given that a user is viewing the blue section,
+    When the Path menu (caret) is open,
+    Then two buttons, 'delete' and 'copy', will be visible.
+
+    Given that a user is viewing the blue section,
+    When a path has a Passive Repeater,
+    Then the Passive Repeater tooltip trigger will be visiible.
+    AND will display the path's passive repeater information (site name, lat, long, antennas)
+
+    Given multiple antennas are assigned to a path,
+    When the cursor hovers over a Diversity Antenna tooltip trigger,
+    Then the Code, Model and Centerline of the antenna will be displayed.
+
+    "Given a user is viewing the Project Summary Radio column,
+    When both radios in a path are the same,
+    //TODO need a case for single radios
+    Then only a single radio will display in this section instead of two radios.
+    (e.g. see path 3 in /1234)"
+
+    "Given a user is viewing the Project Summary Radio column,
+    When a radio has adaptive modulation (simulated until APIs are complete),
+    Then the ACM icon will be displayed."
+
+    "Given the ACM icon is displayed,
+    When the cursor hovers over the icon,
+    Then it will display the radio's modulation settings. "
+
+    "Given a user is viewing Project Summary path rows,
+    When looking at the Pass/Fail section,
+    Then the following items will be visible:
+    LOS; Avail; Valid."
+
+    COM-100
+    Given that a new path is created,
+    When it is added to the Project Summary path list,
+    Then it will be assigned a path number one higher than the previous highest path number, based on the order of creation.
+     */
+
+
+
+
+    @Test
+    public void viewPathBlueSection() {
+        assertTrue(pathSummary.landedOnPathSummaryPage());
+        assertTrue(pathSummary.projectName());
+        pathSummary.viewPathBlueSection(0,"First Path adding extra to test name length","1","MOD","","Details");
+        pathSummary.viewSiteCallSignLatLongGeColumns2(0,"unique","56DR56","39 57 09.30 N","75 09 54.80 W","65.62");
+        pathSummary.viewSiteCallSignLatLongGeColumns2(1,"SNOW","54g34ge","39 57 09.30 N","75 09 54.80 W","65.62");
+        pathSummary.viewSiteCallSignLatLongGeColumns2(2,"SNOW","4f43","39 57 09.30 N","75 09 54.80 W","65.62");
+        pathSummary.viewAntennaRadioBandwidthFreq();
+        pathSummary.viewDiversityAntAmcPassFail();
+    }
+    /*
+    Given a user is viewing the Path list table,
+    When multiple paths have the same radio configuration,
+    Then the path only displays one radio.
+     */
+
+
+    @Test
+    public void valTwoPathsSameConfigOneRadio() {
+        assertTrue(pathSummary.landedOnPathSummaryPage());
+        assertTrue(pathSummary.projectName());
+        pathSummary.pathWithSameConfig_OneRadio();
+
+    }
+    /*
+    "Given a user is searching for a Site in the Quick Add section of Project Summary,
+    When the user begins typing a valid site name,
+    AND after the 1st character is typed,
+    Then the browser will (emulate) fetch for all sites which contain the input's value in their Site Name,
+    AND they will display beneath the input field."
+     */
+
+    @Test
+    public void valQuickAddSuggestedText() {
+        assertTrue(pathSummary.landedOnPathSummaryPage());
+        assertTrue(pathSummary.projectName());
+        pathSummary.quickAddSuggestedText();
+
+    }
 }
 
 
