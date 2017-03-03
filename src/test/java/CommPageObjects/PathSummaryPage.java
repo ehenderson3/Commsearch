@@ -1,13 +1,12 @@
 package CommPageObjects;
 
-import org.junit.Assert;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import java.util.List;
 
-import static java.lang.Thread.sleep;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
@@ -22,12 +21,12 @@ public class PathSummaryPage extends BasePage {
     By deleteConfirmationTitle1 = By.cssSelector(".display-flex.justify-content-center");
     By deleteConfirmationTitle = By.id("delete-paths-modal-success-heading");
     By deleteConfirmationSubText = By.id("delete-paths-modal-success-message");
-    By headerLOSInactive = By.xpath("//*[@id='project-summary-sort-los' and @class='inactive pointer']");
-    By headerAvailabilityInactive = By.xpath("//*[@id='project-summary-sort-avail' and @class='inactive pointer']");
-    By headerValidationInactive = By.xpath("//*[@id='project-summary-sort-valid' and @class='inactive pointer']");
-    By headerLOSActive = By.xpath("//*[@id='project-summary-sort-los' and @class='active direction-down pointer']");
-    By headerAvailabilityActive = By.xpath("//*[@id='project-summary-sort-avail' and @class='active direction-down pointer']");
-    By headerValidationActive = By.xpath("//*[@id='project-summary-sort-valid' and @class='active direction-down pointer']");
+    By headerLOSInactive = By.xpath("//*[@id='project-summary-sort-los' and @class='"+INACTIVE_POINTER+"']");
+    By headerAvailabilityInactive = By.xpath("//*[@id='project-summary-sort-avail' and @class='"+INACTIVE_POINTER+"']");
+    By headerValidationInactive = By.xpath("//*[@id='project-summary-sort-valid' and @class='"+INACTIVE_POINTER+"']");
+    By headerLOSActive = By.xpath("//*[@id='project-summary-sort-los' and @class='"+DOWN_POINTER+"']");
+    By headerAvailabilityActive = By.xpath("//*[@id='project-summary-sort-avail' and @class='"+DOWN_POINTER+"']");
+    By headerValidationActive = By.xpath("//*[@id='project-summary-sort-valid' and @class='"+DOWN_POINTER+"']");
     By headerLOSValues = By.xpath("//*[@class ='path-los-value' and contains(@style,'background:')]");
     By headerLOSValues1 = By.className("path-los-value");
     By headerAvailabilityValues = By.className("path-avail-value");
@@ -89,11 +88,11 @@ public class PathSummaryPage extends BasePage {
     By passiveRepeaterHoverLongitudeField = By.xpath("//*[text() = 'Longitude' and @class = 'uppercase']");
     By passiveRepeaterHoverAntennaField = By.xpath("//*[text() = 'Antennas' and @class = 'uppercase']");
     By bandValue = By.cssSelector(".pull-right");
-    By pathName1 = By.xpath("//*[@id=\"project-summary-path-row-0\"]/td[1]/div/div[1]/span[2]");
-    By pathName2 = By.xpath("//*[@id=\"project-summary-path-row-1\"]/td[1]/div/div[1]/span[2]");
-    By pathName3 = By.xpath("//*[@id=\"project-summary-path-row-2\"]/td[1]/div/div[1]/span[2]");
-    By pathName4 = By.xpath("//*[@id=\"project-summary-path-row-3\"]/td[1]/div/div[1]/span[2]");
-    By pathName5 = By.xpath("//*[@id=\"project-summary-path-row-4\"]/td[1]/div/div[1]/span[2]");
+    By pathName1 = By.xpath("//*[@id=\"" + PROJECT_ROW + "0\"]/td[1]/div/div[1]/span[2]");
+    By pathName2 = By.xpath("//*[@id=\"" + PROJECT_ROW + "1\"]/td[1]/div/div[1]/span[2]");
+    By pathName3 = By.xpath("//*[@id=\"" + PROJECT_ROW + "2\"]/td[1]/div/div[1]/span[2]");
+    By pathName4 = By.xpath("//*[@id=\"" + PROJECT_ROW + "3\"]/td[1]/div/div[1]/span[2]");
+    By pathName5 = By.xpath("//*[@id=\"" + PROJECT_ROW + "4\"]/td[1]/div/div[1]/span[2]");
     By allPaths = By.xpath("//*[contains(@id, 'project-summary-path-row')]");
     By allPathsNew = By.className("path-name-value");
     By pathsSelectedByArray = By.xpath("//*[@class='path-info-td td-border-transparent selected']");
@@ -115,7 +114,7 @@ public class PathSummaryPage extends BasePage {
     By pathModValue = By.cssSelector(".tooltip-trigger-decoration.show-decoration.acm-tooltip-decoration.uppercase");
     By pathDetailsIndex = By.cssSelector(".path-details-button.pointer");
     By pathSiteIndex = By.id("path-2-site-1-siteName");
-    By pathSiteIndex1 = By.xpath("//*[contains(@id, 'path-') and contains(@id, '-site-1-siteName')]");
+    By pathSiteIndex1 = By.xpath(""+PATH_VAL+" '-site-1-siteName')]");
     By pathSiteIndex2 = By.xpath("//*[contains(@id, 'path-') and contains(@id, '-site-2-siteName')]");
     By pathBandValueIndex1 = By.xpath("//*[contains(@id, 'path-') and contains(@id, '-site-1-bandwidth')]");
     By pathBandValueIndex2 = By.xpath("//*[contains(@id, 'path-') and contains(@id, '-site-2-bandwidth')]");
@@ -244,7 +243,6 @@ public class PathSummaryPage extends BasePage {
         assertTrue("path Long Value is not present",isDisplayed(pathLongitudeValueIndex2,8));
         assertTrue("path GE Value is not present",isDisplayed(pathGroundElevationValueIndex2,8));
 
-
         rowOneSite = getTextPlural(pathSiteIndex1,rowIndex);
         rowOneCallsign = getTextPlural(pathCallsignValueIndex1,rowIndex);
         rowOneLatitude = getTextPlural(pathLatitudeValueIndex1,rowIndex);
@@ -271,7 +269,6 @@ public class PathSummaryPage extends BasePage {
         assertTrue("path Lat Value is not present",isDisplayed(pathLatitudeValueIndex2,8));
         assertTrue("path Long Value is not present",isDisplayed(pathLongitudeValueIndex2,8));
         assertTrue("path GE Value is not present",isDisplayed(pathGroundElevationValueIndex2,8));
-
 
         rowOneSite = getTextPlural(pathSiteIndex2,rowIndex);
         rowOneCallsign = getTextPlural(pathCallsignValueIndex2,rowIndex);
