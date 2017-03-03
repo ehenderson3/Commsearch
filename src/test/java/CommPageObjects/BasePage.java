@@ -18,7 +18,6 @@ package CommPageObjects;
         import java.util.List;
         import java.util.concurrent.TimeUnit;
 
-        import static java.lang.Thread.*;
         import static org.junit.Assert.assertEquals;
         import static org.junit.Assert.assertTrue;
 
@@ -154,6 +153,16 @@ public class BasePage implements Config {
         return true;
     }
 
+
+    public Boolean waitUntilNotPresent(By locator, Integer timeout) {
+        try {
+            WebDriverWait wait = new WebDriverWait(driver, timeout);
+            wait.until(ExpectedConditions.invisibilityOfElementLocated(locator));
+        } catch (org.openqa.selenium.TimeoutException exception) {
+            return false;
+        }
+        return true;
+    }
 
     public void switchToFrame(int i){
         driver.switchTo().frame(i);
@@ -340,8 +349,12 @@ public class BasePage implements Config {
         }
     }
 
+    public static final String INACTIVE_POINTER ="inactive pointer";
+    public static final String DOWN_POINTER ="active direction-down pointer";
+    public static final String PROJECT_ROW ="project-summary-path-row-";
+    public static final String PATH_VAL ="//*[contains(@id, 'path-') and contains(@id,";
 
-
+//*[contains(@id, 'path-') and contains(@id,
 }
 
 
