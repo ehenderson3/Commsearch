@@ -1,17 +1,14 @@
 package CommTests;
 
-import CommPageObjects.CreateNewPathPage;
 import CommPageObjects.PathSummaryPage;
 import CommPageObjects.QuickAddPage;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
-import org.openqa.selenium.WebDriver;
 
 import java.util.Random;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
 /**
  * Created by ehend on 2/25/2017.
@@ -31,7 +28,7 @@ public class QuickAddTest extends BaseTest {
     int randomNumber = rndNum.nextInt(100000);
 
     @Rule
-    public RetryTest.Retry retry = new RetryTest.Retry(3);
+    public RetryTest.Retry retry = new RetryTest.Retry(1);
 
     /*COM-100
     Given that a user wants to add a new path to a project,
@@ -74,6 +71,26 @@ public class QuickAddTest extends BaseTest {
      Given that the information from the Quick Add form is displayed in the Project Summary Path list,
      When a Path is saved,
      Then the entries from all fields display accurately in the Project Summary Path list.
+
+     COM-146
+     Given a user is searching for a Site in the Quick Add section of Project Summary,
+     When the user begins typing a valid site name,
+     AND after the 1st character is typed,
+     Then the browser will (emulate) fetch for all sites which contain the input's value in their Site Name,
+     AND they will display beneath the input field.
+
+     COM-146
+     Given the browser is displaying all fetched site names,
+     When the user hovers on a site name,
+     Then additional site information will display on the side
+
+     COM-146
+     Given a site option is displayed,
+     When user clicks on a site to select it,
+     Then the corresponding fields (Lat, Long, Elev) will auto-populate with the Site's information,
+     AND the Site field will auto-populate with the completed value that the user started to type,
+     AND the ASR/Call Sign field will be auto populated with the site's Call Sign if one is present.
+
      */
     @Test
     public void quickAddSiteNameSuggest() {
@@ -205,6 +222,12 @@ public class QuickAddTest extends BaseTest {
         quickAdd.callSignErrorChecking("888888888", "888888888", "ASR must be 7 numbers long.", "ASR must be 7 numbers long.");
         quickAdd.callSignErrorChecking("55555", "55555", "ASR must be 7 numbers long.", "ASR must be 7 numbers long.");
         quickAdd.quickAddPath("ban", "940 MHz", "Best Path", "10 26 47.70 N", "45 27 07.20 W", "78.74", "V43Sf");
+        quickAdd.slowDown(5);
+
+        quickAdd.quickAddPathGeneral2("ASR field Autofill", "4.0 GHz", "ASR-Call","", "","4", "KA95314");
+        quickAdd.quickAddPathGeneral2("ASR field Autofill", "4.0 GHz", "ASR-Call","", "","4", "KA95347");
+        quickAdd.quickAddPathGeneral2("ASR field Autofill", "4.0 GHz", "ASR-Call","", "","4", "KAH72");
+        quickAdd.quickAddPathGeneral2("ASR field Autofill", "4.0 GHz", "ASR-Call","", "","4", "KAC87");
 
     }
 
@@ -265,11 +288,11 @@ public class QuickAddTest extends BaseTest {
         quickAdd.quickAddPathGeneral1("Path name without Lat and longitude", "4.0 GHz", "SITE1", "35 30 4.683", "-110 9 35.684", "98", "");
         pathSummary.viewSiteCallSignLatLongGeColumns1(6, "SITE1", "", "35 30 04.68 N", "110 09 35.68 W", "98");
 //TODO//// FIXME: 3/2/2017 Ithink it fails because it is off screen
-//        quickAdd.quickAddPathGeneral1("Path name without Lat and longitude", "4.0 GHz", "SITE1", "35.5013009N", "110.1599121W", "98", "");
-//        pathSummary.viewSiteCallSignLatLongGeColumns1(7, "SITE1", "", "35 30 04.68 N", "110 09 35.68 W", "98");
+        quickAdd.quickAddPathGeneral1("Path name without Lat and longitude", "4.0 GHz", "SITE1", "35.5013009N", "110.1599121W", "98", "");
+        pathSummary.viewSiteCallSignLatLongGeColumns1(7, "SITE1", "", "35 30 04.68 N", "110 09 35.68 W", "98");
 
-//        quickAdd.quickAddPathGeneral1("Path name without Lat and longitude", "4.0 GHz", "SITE1", "35.5013009", "-110.1599121", "98", "");
-//        pathSummary.viewSiteCallSignLatLongGeColumns1(8, "SITE1", "", "35 30 04.68 N", "110 09 35.68 W", "98");
+        quickAdd.quickAddPathGeneral1("Path name without Lat and longitude", "4.0 GHz", "SITE1", "35.5013009", "-110.1599121", "98", "");
+        pathSummary.viewSiteCallSignLatLongGeColumns1(8, "SITE1", "", "35 30 04.68 N", "110 09 35.68 W", "98");
 
     }
 
@@ -301,7 +324,14 @@ public class QuickAddTest extends BaseTest {
     @Test
     public void quickAddLatOrLongNotPerferredWillNotConvert() {
         //GPS: dd:mm:ss.ss[N,S] dd:mm:ss.ss[W,E]	35:30:4.683N 110:9:35.684W
-        quickAdd.quickAddPathGeneral1("Path name without Lat and longitude", "4.0 GHz", "SITE1", "35:30:4.683N", "110:9:35.684W", "98", "Td5G43s");
+        String invalidFormat1;
+        String invalidFormat2;
+        quickAdd.quickAddPathGeneral1("Path name without Lat and longitude", "4.0 GHz", "SITE1", "35:30:4.683N", "110:9:35.684W", "98", "");
+        invalidFormat1 = quickAdd.projectFieldError(0);
+        invalidFormat2 = quickAdd.projectFieldError(1);
+        assertEquals(invalidFormat1,"Invalid latitude format");
+        assertEquals(invalidFormat2,"Invalid longitude format");
+
 
 
     }
@@ -320,5 +350,81 @@ public class QuickAddTest extends BaseTest {
             pathSummary.viewSiteCallSignLatLongGeColumns1(5, "Apple", "Td5G43s", "45 26 47.70 N", "4 07 12.00 W", "230");
 
     }
+    /*COM-148
+    "Given a user wants to find an existing ASR/Call Sign,
+    When user types in a value,
+    AND on input blur,
+    Then the app will determine it is ASR or Call Sign and emulate hitting the corresponding API."
 
+    COM-148
+    "Given that the app has hit the corresponding API,
+    When an ASR auto populates in Quick Add,
+    Then the ASR / Call Sign field will show the ASR."
+
+    COM-148
+    "Given that the app has hit the corresponding API,
+    When a Call Sign auto populates in Quick Add,
+    Then the ASR / Call Sign field will show the Call Sign."
+
+    COM-148
+    "Given a user wants to find an existing ASR/Call Sign,
+    When user tries to assign an ASR or Call Sign which is not in the DB,
+    Then a graceful error message will be displayed."
+
+    COM-148
+    "Given the elevation can only have one decimal point,
+    When there are >1 decimal points (for both US and SI types),
+    Then the value will be rounded up."
+
+    COM-148
+    "Given that all required Quick Add fields have been filled out,
+    When a valid form is submitted,
+    Then the UI will create the path (through API),
+    AND add the path to the project with the API's response,
+    AND close the Quick Add tool."
+
+    COM-147
+    Given a user is searching for an ASR or Call Sign in the Quick Add section of Project Summary,
+    When the user has completed typing a valid ASR or Call Sign,
+    AND after the input field is blurred,
+    Then the app will determine if value is call sign or ASR,
+    AND emulate hitting the corresponding API.
+    IF there is an exact match found,
+    Then the app will populate the site's fields with the corresponding data.
+
+    147
+    Given a user is searching for an ASR or Call Sign in the Quick Add section of Project Summary,
+    When the user types AN INVALID ASR or Call Sign,
+    AND after the input field is blurred,
+    Then an error messsage will come up indicating that an ASR or Call Sign which is not found in the DB can't be assigned
+     */
+
+    @Test
+    public void quickAddASRSuggest() {
+        String FCCError1;
+
+        //GPS: dd:mm:ss.ss[N,S] dd:mm:ss.ss[W,E]	35:30:4.683N 110:9:35.684W
+        quickAdd.quickAddPathGeneral2("ASR field Autofill", "4.0 GHz", "ASR-Call","", "","55", "KA3982");
+        pathSummary.viewSiteCallSignLatLongGeColumns1(5, "ASR-Call", "KA3982", "32 47 16.4 N", "96 47 59 W", "55");
+
+        quickAdd.quickAddPathGeneral2("ASR field Autofill", "4.0 GHz", "ASR-Call","", "","99", "KBM40");
+        pathSummary.viewSiteCallSignLatLongGeColumns1(6, "ASR-Call", "KBM40", "38 37 28.9 N", "90 11 16.7 W", "99");
+
+        quickAdd.quickAddPathGeneral2("ASR field Autofill", "4.0 GHz", "ASR-Call","", "","1.2", "KBM93");
+        pathSummary.viewSiteCallSignLatLongGeColumns1(7, "ASR-Call", "KBM93", "44 27 31 N", "85 42 02 W", "1.2");
+
+        quickAdd.quickAddPathGeneral2("ASR field Autofill", "4.0 GHz", "ASR-Call","", "","8", "KA44228");
+        pathSummary.viewSiteCallSignLatLongGeColumns1(8, "ASR-Call", "KA44228", "40 39 33 N", "112 12 08 W", "8");
+
+        quickAdd.quickAddPathGeneral2("ASR field Autofill", "4.0 GHz", "ASR-Call","", "","4", "KA44228");
+        pathSummary.viewSiteCallSignLatLongGeColumns1(9, "ASR-Call", "KA44228", "40 39 33 N", "112 12 08 W", "4");
+
+        quickAdd.quickAddPathGeneral2("ASR field Autofill", "4.0 GHz", "ASR-Call","", "","4", "NoFound");
+        quickAdd.slowDown(2);
+        FCCError1 = quickAdd.projectFieldError(1);
+
+        assertEquals(FCCError1,"No FCC record of this Call Sign.");
+
+
+    }
 }
