@@ -1,6 +1,5 @@
 package CommPageObjects;
 
-import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -12,7 +11,7 @@ public class CreateNewPathPage extends BasePage {
     By commHome = By.id("home-newProjectModalOpen");
     By createButton = By.id("newProjectForm-submit");
     By newProjectField = By.id("newProjectForm-projectName");
-    By defaultLic = By.id("newProjectForm-defaultLicensee");
+    By defaultLic = By.id("newProjectForm-defaultCompany");
     By pathRadioButton = By.className("styled-radio");
     By projectRequired = By.className("error-message");
     By filterField = By.id("project-summary-filter-input");
@@ -29,11 +28,10 @@ public class CreateNewPathPage extends BasePage {
     By projectTitile = By.tagName("span");
 
     public CreateNewPathPage(WebDriver driver){
-        //Used by class constructors to invoke constructors of its parent class.
+    //Used by class constructors to invoke constructors of its parent class.
         super(driver);
 
-    visit("/");
-        Assert.assertTrue(driver.findElement(commHome).isDisplayed());
+    visit("");
     }
 
     public void createBrandNewProjectPath(String projectName, String defaultLicensee){
@@ -46,13 +44,11 @@ public class CreateNewPathPage extends BasePage {
         click(pathRadioButton);
         click(createButton);
         waitForIsDisplayed(filterField,10);
-        type("asdfasfd",filterField);
-        filterEntryField = getFieldText(filterField);
-        assertEquals(filterEntryField,"asdfasfd");
     }
 
+
+
     public void attemptToCreateProject(String projectName, String defaultLicensee){
-        String filterEntryField;
         click(commHome);
         assertTrue("can't find the Create button",
         isDisplayed(createButton));

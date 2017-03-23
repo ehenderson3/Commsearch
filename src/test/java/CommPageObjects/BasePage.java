@@ -1,25 +1,24 @@
 package CommPageObjects;
 
 
-        import org.openqa.selenium.Alert;
-        import org.openqa.selenium.By;
-        import org.openqa.selenium.WebDriver;
-        import org.openqa.selenium.WebElement;
-        import org.openqa.selenium.interactions.Actions;
-        import org.openqa.selenium.support.ui.ExpectedCondition;
-        import org.openqa.selenium.support.ui.ExpectedConditions;
-        import org.openqa.selenium.support.ui.Select;
-        import org.openqa.selenium.support.ui.WebDriverWait;
         import CommTests.Config;
+import org.openqa.selenium.Alert;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
-        import java.util.ArrayList;
-        import java.util.Arrays;
-        import java.util.Collections;
-        import java.util.List;
-        import java.util.concurrent.TimeUnit;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
-        import static org.junit.Assert.assertEquals;
-        import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 
 public class BasePage implements Config {
@@ -115,6 +114,8 @@ public class BasePage implements Config {
     }
 
 
+
+
     public void type(String inputText, By locator) {
         find(locator).sendKeys(inputText);
     }
@@ -126,9 +127,10 @@ public class BasePage implements Config {
         return finds(locators).get(i).isDisplayed();
     }
 
-    public void slowDown(int i) {
-        driver.manage().timeouts().implicitlyWait(i, TimeUnit.SECONDS);
-    }
+
+
+
+
 
     //Will check to see if an element is not present Instead of returning exception this will return false
     public Boolean isDisplayed(By locator, Integer timeout) {

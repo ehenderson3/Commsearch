@@ -1,14 +1,19 @@
 package CommTests;
 
-import static org.junit.Assert.*;
-
 import CommPageObjects.CreateNewPathPage;
-
 import org.junit.Before;
+import org.junit.FixMethodOrder;
 import org.junit.Rule;
 import org.junit.Test;
+import org.junit.runners.MethodSorters;
 
 import java.util.Random;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
+
 
 public class CreatePathTest extends BaseTest {
     private CreateNewPathPage createPath;
@@ -21,7 +26,10 @@ public class CreatePathTest extends BaseTest {
     int randomNumber = rndNum.nextInt(100000);
 
     @Rule
-    public RetryTest.Retry retry = new RetryTest.Retry(3);
+    public RetryTest.Retry retry = new RetryTest.Retry(1);
+
+
+
 
     @Test
     public void Test_projectFieldFailure () {

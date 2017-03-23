@@ -24,6 +24,7 @@ public class QuickAddPage extends BasePage {
     By cancelButton = By.cssSelector(".btn.text-red.inverse-default");
     By quickAddButton = By.xpath("//span[@class='btn bg-green hover-inverse' and contains(text(), 'Quick Add')]");
 
+
     //Path DropDown Fields -- Does it contain a list that has options that can be selected
     By optionanBandDropDown = By.id("quick-add-path-band");
 
@@ -54,11 +55,41 @@ public class QuickAddPage extends BasePage {
 
     //Modal -- Does it pop up over current window
     By addNewPathSlideOutClosed = By.className("quick-add-container ");
+    By addNewPathSlideOutOpen = By.cssSelector(".quick-add-container.active");
 
+    By control = By.className("toSlowDown");
 
     public QuickAddPage(WebDriver driver) {
         super(driver);
-        visit("project-summary/1234");
+        visit("");
+    }
+
+    public void quickAddPathInvalidChar( ){
+        click(quickAddButton);
+
+        for (String value : array) {
+            String pathError;
+            String pathError1;
+
+            waitForIsDisplayed(pathName, 6);
+            type(value, siteField);
+            type(value, siteField2);
+            click(pathName);
+            pathError = projectFieldError(0);
+            pathError1 = projectFieldError(1);
+
+            assertEquals(pathError, "Site Name contains invalid characters.");
+            assertEquals(pathError1, "Site Name contains invalid characters.");
+
+            clear(siteField);
+            clear(siteField2);
+            click(pathName);
+
+            pathError = projectFieldError(0);
+            pathError1 = projectFieldError(1);
+            assertEquals(pathError, "Required");
+            assertEquals(pathError1, "Required");
+        }
     }
 
     public void quickAddPath(String sitePartialText, String BandDropDown, String PathNameText,String LatitudeText, String Longitude, String ElevationText,  String Asr){
@@ -70,7 +101,6 @@ public class QuickAddPage extends BasePage {
 
         waitForIsDisplayed(quickAddButton,6);
         isDisplayed(quickAddButton,6);
-        slowDown(20);
         click(quickAddButton);
         waitForIsDisplayed(pathName,6);
         type(PathNameText, pathName);
@@ -87,14 +117,14 @@ public class QuickAddPage extends BasePage {
         assertEquals(longs,Longitude);
         assertEquals(asr,Asr);
         isDisplayed(addPathButton,6);
-        type("App",siteField2);
+        type("New",siteField2);
         isDisplayed(option,6);
         click(option);
         click(pathName);
         click(siteField);
         isDisplayed(option,10);
         hover(option);
-        slowDown(10);
+
         click(pathName);
         click(siteField);
         isDisplayed(option,10);
@@ -129,41 +159,20 @@ public class QuickAddPage extends BasePage {
         assertEquals(asr,Asr);
 
         isDisplayed(addPathButton,6);
-        type("App",siteField2);
+        type("KOTA TX - Skyline",siteField2);
         isDisplayed(option,6);
-        click(option);
+        type("KA2124",callSign2);
+        isDisplayed(control,2);
+        click(elevation2);
+        isDisplayed(control,2);
+        click(callSign2);
+        type("152",elevation2);
         click(addPathButton,1);
         isDisplayed(addPathDetails,6);
         isDisplayed(quickAddButton,6);
     }
 
-    public void quickAddPathInvalidChar( ){
-        click(quickAddButton);
 
-        for (String value : array) {
-            String pathError;
-            String pathError1;
-
-            waitForIsDisplayed(pathName, 6);
-            type(value, siteField);
-            type(value, siteField2);
-            click(pathName);
-            pathError = projectFieldError(0);
-            pathError1 = projectFieldError(1);
-
-            assertEquals(pathError, "Site Name contains invalid characters.");
-            assertEquals(pathError1, "Site Name contains invalid characters.");
-
-            clear(siteField);
-            clear(siteField2);
-            click(pathName);
-
-            pathError = projectFieldError(0);
-            pathError1 = projectFieldError(1);
-            assertEquals(pathError, "Required");
-            assertEquals(pathError1, "Required");
-        }
-    }
 
 
     public void quickAddPathCallSignInvalidChar(){
@@ -211,9 +220,7 @@ public class QuickAddPage extends BasePage {
         assertTrue(waitForIsDisplayed(addNewPathSlideOutClosed,10));
         assertTrue(isDisplayedAndClickable(quickAddButton,10));
         isDisplayed(quickAddButton);
-        slowDown(10);
-
-        click(quickAddButton,0);
+         click(quickAddButton,0);
         waitForIsDisplayed(pathName, 6);
         type(invalidEntry1, element1);
         type(invalidEntry2, element2);
@@ -279,15 +286,13 @@ public class QuickAddPage extends BasePage {
         type(Asr,callSign);
         type(ElevationText,elevation);
         isDisplayed(addPathButton,6);
-        type("App",siteField2);
+        type("new",siteField2);
         isDisplayed(option,6);
 
         click(option);
         click(latitude);
         click(longitude);
         click(pathName);
-        slowDown(1);
-
         click(addPathButton,1);
         isDisplayed(addPathDetails,6);
         isDisplayed(quickAddButton,6);
@@ -296,11 +301,14 @@ public class QuickAddPage extends BasePage {
 
     public void quickAddPathGeneral2(String PathNameText,String BandDropDown,String sitePartialText,String LatitudeText, String Longitude, String ElevationText,  String Asr){
 
-        waitForIsDisplayed(quickAddButton,10);
-        isDisplayedAndClickable(quickAddButton,10);
-
+        assertTrue(isDisplayed(quickAddButton,20));
+        switchBackToDefaultContent();
+        assertTrue(waitUntilNotPresent(addNewPathSlideOutOpen,30));
+        isDisplayed(addNewPathSlideOutClosed,30);
+        isDisplayed(siteField,1);
         click(quickAddButton);
-        waitForIsDisplayed(pathName,6);
+        assertTrue(isDisplayed(addNewPathSlideOutOpen,30));
+        assertTrue(isDisplayed(pathName,6));
         type(PathNameText, pathName);
         selectFromDropdown(optionanBandDropDown, BandDropDown);
         type(sitePartialText,siteField);
@@ -310,22 +318,67 @@ public class QuickAddPage extends BasePage {
         type(Asr,callSign);
 
         isDisplayed(addPathButton,6);
-        type("App",siteField2);
-        isDisplayed(option,6);
+        type("KA2124",callSign2);
 
-        click(option);
+        click(elevation2);
+        isDisplayed(control,7);
+        type("23",elevation2);
+        isDisplayed(control,2);
+
+
         click(latitude);
         click(longitude);
         click(pathName);
-        waitUntilNotPresent(errorMessage,2);
-        clear(elevation);
+        isDisplayed(errorMessage,6);
+
         type(ElevationText,elevation);
+        isDisplayed(control,2);
+        click(pathName);
 
         click(addPathButton,1);
-        isDisplayed(addPathDetails,6);
-        isDisplayed(quickAddButton,6);
+        assertTrue(isDisplayed(addNewPathSlideOutClosed,15));
+        assertTrue(isDisplayed(addPathDetails,10));
+        assertTrue(isDisplayed(quickAddButton,10));
 
     }
+
+
+        public void quickAddPathGeneralError2(String PathNameText,String BandDropDown,String sitePartialText,String LatitudeText, String Longitude, String ElevationText,  String Asr) {
+
+            assertTrue(isDisplayed(quickAddButton, 20));
+            switchBackToDefaultContent();
+            assertTrue(waitUntilNotPresent(addNewPathSlideOutOpen, 30));
+            isDisplayed(addNewPathSlideOutClosed, 30);
+            isDisplayed(siteField, 1);
+            click(quickAddButton);
+            assertTrue(isDisplayed(addNewPathSlideOutOpen, 30));
+            assertTrue(isDisplayed(pathName, 6));
+            type(PathNameText, pathName);
+            selectFromDropdown(optionanBandDropDown, BandDropDown);
+            type(sitePartialText, siteField);
+            click(pathName);
+            type(LatitudeText, latitude);
+            type(Longitude, longitude);
+            type(Asr, callSign);
+
+            isDisplayed(addPathButton, 6);
+            type("new", siteField2);
+            isDisplayed(option, 6);
+
+            click(option);
+            click(latitude);
+            click(longitude);
+            click(pathName);
+            isDisplayed(errorMessage, 6);
+
+            type(ElevationText, elevation);
+            isDisplayed(control, 2);
+            click(pathName);
+
+            click(addPathButton, 1);
+        }
+
+
 
     public void siteSuggestValidation(String PathNameText,String BandDropDown,String sitePartialText, String Longitude, String ElevationText,  String Asr){
         quickAddPathSuggested(PathNameText,BandDropDown,sitePartialText, siteField, Longitude, ElevationText, Asr);
@@ -386,7 +439,7 @@ public class QuickAddPage extends BasePage {
         elev = getFieldText(elevation);
 
         isDisplayed(addPathButton,6);
-        type("App",siteField2);
+        type("new",siteField2);
         isDisplayed(option,6);
         click(option);
     }
