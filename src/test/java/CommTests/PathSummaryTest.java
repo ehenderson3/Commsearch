@@ -1,28 +1,42 @@
 package CommTests;
 
+import CommPageObjects.CreateNewPathPage;
 import CommPageObjects.PathSummaryPage;
+import CommPageObjects.QuickAddPage;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 
+import java.util.Random;
+
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+
+
 
 
 
 public class PathSummaryTest extends BaseTest {
 
     private PathSummaryPage pathSummary;
+    private CreateNewPathPage createPath;
+    private QuickAddPage quickAdd;
+
 
     @Before
 
 
     public void Setup() {
         pathSummary = new PathSummaryPage(driver);
+        createPath = new CreateNewPathPage(driver);
+        quickAdd = new QuickAddPage(driver);
 
     }
+    Random rndNum = new Random();
+    int randomNumber = rndNum.nextInt(100000);
+
+
     @Rule
-    public RetryTest.Retry retry = new RetryTest.Retry(3);
+    public RetryTest.Retry retry = new RetryTest.Retry(1);
 
     /**
      * Given that user is logged in with appropriate permission,
@@ -33,21 +47,22 @@ public class PathSummaryTest extends BaseTest {
 
     @Test
     public void hoverPassiveRepeaterValSiteInfo() {
-        //TODO//createPath.createBrandNewProjectPath("Best Project Ever", "This is the Default");
-        //TODO//Add validation for values once data is no longer static currently only fields are validated
-        assertTrue(pathSummary.landedOnPathSummaryPage());
-        assertTrue(pathSummary.projectName());
-        pathSummary.hoverPassiveRepeaterValSiteInfo();
+        createPath.createBrandNewProjectPath("Best Project Ever"+ randomNumber, "This is the Default");
+        quickAdd.quickAddPathGeneral2("Test Path 1", "4.0 GHz", "ASR-Call","", "","55", "KA3982");
+        quickAdd.quickAddPathGeneral2("Test Path 2", "4.0 GHz", "ASR-Call","", "","55", "KA2049");
+
+        //pathSummary.hoverPassiveRepeaterValSiteInfo();
     }
     //    Given that user is logged in with appropriate permission,
     //    When a cursor hovers over the Site Location icon icon in the SITE column,
     //    Then the site name, lat #; long #, and ground elevation will be displayed in a pop up
     @Test
     public void hoverSiteLocationValSiteInfo() {
-        assertTrue(pathSummary.landedOnPathSummaryPage());
-        assertTrue(pathSummary.projectName());
-        pathSummary.valSiteLocationToggleOn();
-        pathSummary.hoverSiteLocationValSiteInfo();
+        createPath.createBrandNewProjectPath("Best Project Ever"+ randomNumber, "This is the Default");
+        quickAdd.quickAddPathGeneral2("Test Path 1", "4.0 GHz", "ASR-Call","", "","55", "KA3982");
+        quickAdd.quickAddPathGeneral2("Test Path 2", "4.0 GHz", "ASR-Call","", "","55", "KA2049");
+        pathSummary.hoverSiteLocationValSiteInfo(0);
+        pathSummary.valSiteLocationToggle();
     }
 
    //    Given that user is viewing the Project Summary header,
@@ -55,8 +70,8 @@ public class PathSummaryTest extends BaseTest {
    //    Then Site Frequency Band will be the default dropdown input.
     @Test
     public void valDefaultFilterValue() {
-        assertTrue(pathSummary.landedOnPathSummaryPage());
-        assertTrue(pathSummary.projectName());
+        createPath.createBrandNewProjectPath("Best Project Ever"+ randomNumber, "This is the Default");
+        quickAdd.quickAddPathGeneral2("Test Path 1", "4.0 GHz", "ASR-Call","", "","55", "KA3982");
         assertEquals("Band is not the default dropdown input", "band", pathSummary.defaultFilterValue());
     }
     // COM 102
@@ -86,46 +101,67 @@ public class PathSummaryTest extends BaseTest {
 
     @Test
     public void valFilterResultSet() {
-        assertTrue(pathSummary.landedOnPathSummaryPage());
-        assertTrue(pathSummary.projectName());
+        createPath.createBrandNewProjectPath("Best Project Ever"+ randomNumber, "This is the Default");
+        quickAdd.quickAddPathGeneral2("Test Path 1", "23.0 GHz", "ASR-Call","", "","55", "KA3982");
+        pathSummary.hoverSiteLocationValSiteInfo(0);
+        quickAdd.quickAddPathGeneral2("Test Path 2", "4.0 GHz", "ASR-Call","", "","55", "KA2049");
+        pathSummary.hoverSiteLocationValSiteInfo(0);
+        quickAdd.quickAddPathGeneral2("Test Path 3", "4.0 GHz", "KOTA TX - Skyline","", "","55", "KA2124");
+        pathSummary.hoverSiteLocationValSiteInfo(0);
+        quickAdd.quickAddPathGeneral2("Test Path 4", "4.0 GHz", "KGO-TV","", "","55", "1000036");
+        pathSummary.hoverSiteLocationValSiteInfo(0);
+        quickAdd.quickAddPathGeneral2("Test Path 5", "4.0 GHz", "KGO-TV","", "","55", "1000036");
+
+
         pathSummary.filter("Band", "23.0");
         pathSummary.showAllPathsWithNoAssignedFrequencyBandsPresent();
         assertEquals(pathSummary.showAllCheckBoxText(),"Show all Paths with No Assigned Frequency Bands");
-        pathSummary.validateBandFilteredResult("Second Path adding extra for testing length");
-        pathSummary.filter("Path Name","First Path");
-        pathSummary.validatePathNameFilteredResult("First Path adding extra to test name length");
-        pathSummary.filter("Licensee","Licensee Inc");
+        pathSummary.validateBandFilteredResult("Test Path 1");
+        pathSummary.filter("Path Name","Test Path 3");
+        pathSummary.validatePathNameFilteredResult("Test Path 3");
+
+        //NO Hurry... in the process of moving off the static data...https://www.screencast.com/t/wweHelHOqd
+        pathSummary.filter("Company","WILL BE CHANGING!!!");
         pathSummary.showAllPathsWithNoAssignedFrequencyBandsPresent();
-        assertEquals(pathSummary.showAllCheckBoxText(),"Show all Paths with No Assigned Licensee");
-        pathSummary.validateLicenseeFilteredResult("Second Path adding extra for testing length", "Third Path", "Fourth Path", "Fifth Path");
-        pathSummary.filter("Site Name", "unique");
-        pathSummary.validateSiteNameFilteredResult("First Path adding extra to test name length");
-        pathSummary.filter("ASR", "345");
+//        assertEquals(pathSummary.showAllCheckBoxText(),"Show all Paths with No Assigned Licensee");
+//        pathSummary.validateLicenseeFilteredResult("Second Path adding extra for testing length", "Third Path", "Fourth Path", "Fifth Path");
+
+        pathSummary.filter("Site Name", "KOTA TX - Skyline");
+        pathSummary.validateSiteNameFilteredResult("Test Path 3");
+
+
+        pathSummary.filter("ASR", "1000036");
         pathSummary.showAllPathsWithNoAssignedFrequencyBandsPresent();
         assertEquals(pathSummary.showAllCheckBoxText(),"Show all Paths with No Assigned ASR");
-        pathSummary.validateASRFilteredResult("Fourth Path");
-        pathSummary.filter("Call Sign","3");
+        pathSummary.validateASRFilteredResult("Test Path 4");
+
+
+        pathSummary.filter("Call Sign","KA2049");
         pathSummary.showAllPathsWithNoAssignedFrequencyBandsPresent();
         assertEquals(pathSummary.showAllCheckBoxText(),"Show all Paths with No Assigned Call Sign");
-        pathSummary.validateCallSignFilteredResult("Second Path adding extra for testing length", "Third Path", "Fourth Path");
-        pathSummary.filter("Antenna Code","F500ANT");
+        pathSummary.validateCallSignFilteredResult("Test Path 2");
+
+
+        pathSummary.filter("Antenna Code","NOT READY");
         pathSummary.showAllPathsWithNoAssignedFrequencyBandsPresent();
         assertEquals(pathSummary.showAllCheckBoxText(),"Show all Paths with No Assigned Antenna");
         pathSummary.validateAntennaCodeFilteredResult("Second Path adding extra for testing length", "Third Path", "Fifth Path");
-        pathSummary.filter("Antenna Model","Doo");
+
+        pathSummary.filter("Antenna Model","NOT READY");
         pathSummary.showAllPathsWithNoAssignedFrequencyBandsPresent();
-        assertEquals(pathSummary.showAllCheckBoxText(),"Show all Paths with No Assigned Antenna");
-        pathSummary.validateAntennaModelFilteredResult("Fifth Path");
-        pathSummary.filter("Radio Code", "unique");
+//        assertEquals(pathSummary.showAllCheckBoxText(),"Show all Paths with No Assigned Antenna");
+//        pathSummary.validateAntennaModelFilteredResult("Fifth Path");
+
+        pathSummary.filter("Radio Code", "NOT READY");
         pathSummary.showAllPathsWithNoAssignedRadio();
-        assertEquals(pathSummary.showAllCheckBoxText(),"Show all Paths with No Assigned Radio");
-        pathSummary.validateRadioCodeFilteredResult("Fourth Path");
-        pathSummary.filter("Radio Bandwidth", "999");
+//        assertEquals(pathSummary.showAllCheckBoxText(),"Show all Paths with No Assigned Radio");
+//        pathSummary.validateRadioCodeFilteredResult("Fourth Path");
+        pathSummary.filter("Radio Bandwidth", "NOT READY");
         pathSummary.showAllPathsWithNoAssignedRadio();
-        pathSummary.validateRadioBandwidthFilteredResult("Fifth Path");
-        pathSummary.filter("Max Power","9990");
-        pathSummary.validateMaxPowerFilteredResult("Fifth Path");
-        pathSummary.filter("Max Power","no results");
+//        pathSummary.validateRadioBandwidthFilteredResult("Fifth Path");
+//        pathSummary.filter("Max Power","NOT READY");
+//        pathSummary.validateMaxPowerFilteredResult("Fifth Path");
+//        pathSummary.filter("Max Power","no results");
 
     }
     // COM 102
@@ -145,33 +181,34 @@ public class PathSummaryTest extends BaseTest {
     //  • Radio Model (BLANK)
         @Test
         public void valBlankFilterResultSet() {
-            assertTrue(pathSummary.landedOnPathSummaryPage());
-            assertTrue(pathSummary.projectName());
+
+            createPath.createBrandNewProjectPath("Best Project Ever"+ randomNumber, "This is the Default");
+            quickAdd.quickAddPathGeneral2("Test Path 1", "23.0 GHz", "ASR-Call","", "","55", "KA3982");
+            pathSummary.hoverSiteLocationValSiteInfo(0);
             pathSummary.filter("Band", "");
-            pathSummary.validateBlankFilteredResult("First Path adding extra to test name length", "Second Path adding extra for testing length", "Third Path", "Fourth Path", "Fifth Path");
+            pathSummary.validateBlankFilteredResult("Test Path 1");
             pathSummary.filter("Path Name", "");
-            pathSummary.validateBlankFilteredResult("First Path adding extra to test name length", "Second Path adding extra for testing length", "Third Path", "Fourth Path", "Fifth Path");
-            pathSummary.filter("Licensee", "");
-            pathSummary.validateBlankFilteredResult("First Path adding extra to test name length", "Second Path adding extra for testing length", "Third Path", "Fourth Path", "Fifth Path");
+            pathSummary.validateBlankFilteredResult("Test Path 1");
+            pathSummary.filter("Company", "");
+            pathSummary.validateBlankFilteredResult("Test Path 1");
             pathSummary.filter("Site Name", "");
-            pathSummary.validateBlankFilteredResult("First Path adding extra to test name length", "Second Path adding extra for testing length", "Third Path", "Fourth Path", "Fifth Path");
+            pathSummary.validateBlankFilteredResult("Test Path 1");
             pathSummary.filter("ASR", "");
-            pathSummary.validateBlankFilteredResult("First Path adding extra to test name length", "Second Path adding extra for testing length", "Third Path", "Fourth Path", "Fifth Path");
+            pathSummary.validateBlankFilteredResult("Test Path 1");
             pathSummary.filter("Call Sign", "");
-            pathSummary.validateBlankFilteredResult("First Path adding extra to test name length", "Second Path adding extra for testing length", "Third Path", "Fourth Path", "Fifth Path");
+            pathSummary.validateBlankFilteredResult("Test Path 1");
             pathSummary.filter("Antenna Code", "");
-            pathSummary.validateBlankFilteredResult("First Path adding extra to test name length", "Second Path adding extra for testing length", "Third Path", "Fourth Path", "Fifth Path");
+            pathSummary.validateBlankFilteredResult("Test Path 1");
             pathSummary.filter("Antenna Model", "");
-            pathSummary.validateBlankFilteredResult("First Path adding extra to test name length", "Second Path adding extra for testing length", "Third Path", "Fourth Path", "Fifth Path");
+            pathSummary.validateBlankFilteredResult("Test Path 1");
             pathSummary.filter("Radio Code", "");
-            pathSummary.validateBlankFilteredResult("First Path adding extra to test name length", "Second Path adding extra for testing length", "Third Path", "Fourth Path", "Fifth Path");
+            pathSummary.validateBlankFilteredResult("Test Path 1");
             pathSummary.filter("Radio Bandwidth", "");
-            pathSummary.validateBlankFilteredResult("First Path adding extra to test name length", "Second Path adding extra for testing length", "Third Path", "Fourth Path", "Fifth Path");
+            pathSummary.validateBlankFilteredResult("Test Path 1");
             pathSummary.filter("Max Power", "");
-            pathSummary.validateBlankFilteredResult("First Path adding extra to test name length", "Second Path adding extra for testing length", "Third Path", "Fourth Path", "Fifth Path");
+            pathSummary.validateBlankFilteredResult("Test Path 1");
         }
 
-    //TODO//Need to have locator created for  LOS, Avail or Valid!!
     // Given the user wants to sort by LOS, Avail or Valid columns,
     // When user clicks on one of these sortable column headers: LOS, Avail, Valid,
     // Then the table will sort only in descending order (Red - Orange - Grey - Green) even when clicking multiple times.
@@ -183,8 +220,16 @@ public class PathSummaryTest extends BaseTest {
     // AND Then the Select All button will change into a DESELECT ALL button.
     @Test
     public void valSelectAllPaths() {
-        assertTrue(pathSummary.landedOnPathSummaryPage());
-        assertTrue(pathSummary.projectName());
+        createPath.createBrandNewProjectPath("Best Project Ever"+ randomNumber, "This is the Default");
+        quickAdd.quickAddPathGeneral2("Test Path 1", "23.0 GHz", "ASR-Call","", "","55", "KA3982");
+        pathSummary.hoverSiteLocationValSiteInfo(0);
+        quickAdd.quickAddPathGeneral2("Test Path 2", "4.0 GHz", "ASR-Call","", "","55", "KA2049");
+        pathSummary.hoverSiteLocationValSiteInfo(0);
+        quickAdd.quickAddPathGeneral2("Test Path 3", "4.0 GHz", "KOTA TX - Skyline","", "","55", "KA2124");
+        pathSummary.hoverSiteLocationValSiteInfo(0);
+        quickAdd.quickAddPathGeneral2("Test Path 4", "4.0 GHz", "KGO-TV","", "","55", "1000036");
+        pathSummary.hoverSiteLocationValSiteInfo(0);
+        quickAdd.quickAddPathGeneral2("Test Path 5", "4.0 GHz", "KGO-TV","", "","55", "1000036");
         pathSummary.checkThatSelectButtonIsAvailable();
         pathSummary.clickSelectButton_CheckForDeselectButton();
         pathSummary.checkThatAllPathsAreSelected();
@@ -217,10 +262,18 @@ public class PathSummaryTest extends BaseTest {
     */
     @Test
     public void valDeletePaths() {
-        assertTrue(pathSummary.landedOnPathSummaryPage());
-        assertTrue(pathSummary.projectName());
+        createPath.createBrandNewProjectPath("Best Project Ever"+ randomNumber, "This is the Default");
+        quickAdd.quickAddPathGeneral2("Test Path 1", "23.0 GHz", "ASR-Call","", "","55", "KA3982");
+        pathSummary.hoverSiteLocationValSiteInfo(0);
+        quickAdd.quickAddPathGeneral2("Test Path 2", "4.0 GHz", "ASR-Call","", "","55", "KA2049");
+        pathSummary.hoverSiteLocationValSiteInfo(0);
+        quickAdd.quickAddPathGeneral2("Test Path 3", "4.0 GHz", "KOTA TX - Skyline","", "","55", "KA2124");
+        pathSummary.hoverSiteLocationValSiteInfo(0);
+        quickAdd.quickAddPathGeneral2("Test Path 4", "4.0 GHz", "KGO-TV","", "","55", "1000036");
+        pathSummary.hoverSiteLocationValSiteInfo(0);
+        quickAdd.quickAddPathGeneral2("Test Path 5", "4.0 GHz", "KGO-TV","", "","55", "1000036");
         pathSummary.checkThatSelectButtonIsAvailable();
-        pathSummary.checkForDeleteCandidates("First Path adding extra to test name length", "Second Path adding extra for testing length", "Third Path");
+        pathSummary.checkForDeleteCandidates("Test Path 1", "Test Path 2", "Test Path 3");
         pathSummary.deleteSinglePath();
         pathSummary.checkForDeletedPath("First Path adding extra to test name length");
         //pathSummary.valSplitProject("First Path");
@@ -246,8 +299,10 @@ public class PathSummaryTest extends BaseTest {
 
     @Test
     public void viewLOSAvailVal() {
-        assertTrue(pathSummary.landedOnPathSummaryPage());
-        assertTrue(pathSummary.projectName());
+        createPath.createBrandNewProjectPath("Best Project Ever"+ randomNumber, "This is the Default");
+        quickAdd.quickAddPathGeneral2("Test Path 1", "23.0 GHz", "ASR-Call","", "","55", "KA3982");
+        pathSummary.hoverSiteLocationValSiteInfo(0);
+        quickAdd.quickAddPathGeneral2("Test Path 2", "4.0 GHz", "ASR-Call","", "","55", "KA2049");
         pathSummary.validatePresenceOfLOSAvailVal();
 
     }
@@ -258,8 +313,16 @@ public class PathSummaryTest extends BaseTest {
     //  AND sorts in ascending order when user clicks again on header.
     @Test
     public void valSortingNumPathBand() {
-        assertTrue(pathSummary.landedOnPathSummaryPage());
-        assertTrue(pathSummary.projectName());
+        createPath.createBrandNewProjectPath("Best Project Ever"+ randomNumber, "This is the Default");
+        quickAdd.quickAddPathGeneral2("Test Path 1", "23.0 GHz", "ASR-Call","", "","55", "KA3982");
+        pathSummary.hoverSiteLocationValSiteInfo(0);
+        quickAdd.quickAddPathGeneral2("Test Path 2", "4.0 GHz", "ASR-Call","", "","55", "KA2049");
+        pathSummary.hoverSiteLocationValSiteInfo(0);
+        quickAdd.quickAddPathGeneral2("Test Path 3", "4.0 GHz", "KOTA TX - Skyline","", "","55", "KA2124");
+        pathSummary.hoverSiteLocationValSiteInfo(0);
+        quickAdd.quickAddPathGeneral2("Test Path 4", "4.0 GHz", "KGO-TV","", "","55", "1000036");
+        pathSummary.hoverSiteLocationValSiteInfo(0);
+        quickAdd.quickAddPathGeneral2("Test Path 5", "4.0 GHz", "KGO-TV","", "","55", "1000036");
         pathSummary.checkPathNumForAscend();
         pathSummary.checkPathNumForDescend();
         pathSummary.checkBandForAcend();
@@ -275,8 +338,16 @@ public class PathSummaryTest extends BaseTest {
      */
     @Test
     public void sortLOSAvailVal() {
-        assertTrue(pathSummary.landedOnPathSummaryPage());
-        assertTrue(pathSummary.projectName());
+        createPath.createBrandNewProjectPath("Best Project Ever"+ randomNumber, "This is the Default");
+        quickAdd.quickAddPathGeneral2("Test Path 1", "23.0 GHz", "ASR-Call","32 47 16.4 N", "96 47 59 W","55", "KA3982");
+        pathSummary.hoverSiteLocationValSiteInfo(0);
+        quickAdd.quickAddPathGeneral2("Test Path 2", "4.0 GHz", "ASR-Call","37 47 59.7 N", "122 23 58.8 W","55", "KA2049");
+        pathSummary.hoverSiteLocationValSiteInfo(0);
+        quickAdd.quickAddPathGeneral2("Test Path 3", "4.0 GHz", "KOTA TX - Skyline","44 04 07.4 N", "103 15 05 W","55", "KA2124");
+        pathSummary.hoverSiteLocationValSiteInfo(0);
+        quickAdd.quickAddPathGeneral2("Test Path 4", "4.0 GHz", "KGO-TV","37 41 47.6 N", "121 46 10.5 W","55", "1000036");
+        pathSummary.hoverSiteLocationValSiteInfo(0);
+        quickAdd.quickAddPathGeneral2("Test Path 5", "4.0 GHz", "KGO-TV","37 41 47.6 N", "121 46 10.5 W","55", "1000036");
         pathSummary.validateSortOfLOSAvailVal();
     }
 
@@ -296,8 +367,16 @@ public class PathSummaryTest extends BaseTest {
      */
      @Test
      public void deletePathFromHamburgerMenu() {
-         assertTrue(pathSummary.landedOnPathSummaryPage());
-         assertTrue(pathSummary.projectName());
+         createPath.createBrandNewProjectPath("Best Project Ever"+ randomNumber, "This is the Default");
+         quickAdd.quickAddPathGeneral2("Test Path 1", "23.0 GHz", "ASR-Call","32 47 16.4 N", "96 47 59 W","55", "KA3982");
+         pathSummary.hoverSiteLocationValSiteInfo(0);
+         quickAdd.quickAddPathGeneral2("Test Path 2", "4.0 GHz", "ASR-Call","37 47 59.7 N", "122 23 58.8 W","55", "KA2049");
+         pathSummary.hoverSiteLocationValSiteInfo(0);
+         quickAdd.quickAddPathGeneral2("Test Path 3", "4.0 GHz", "KOTA TX - Skyline","44 04 07.4 N", "103 15 05 W","55", "KA2124");
+         pathSummary.hoverSiteLocationValSiteInfo(0);
+         quickAdd.quickAddPathGeneral2("Test Path 4", "4.0 GHz", "KGO-TV","37 41 47.6 N", "121 46 10.5 W","55", "1000036");
+         pathSummary.hoverSiteLocationValSiteInfo(0);
+         quickAdd.quickAddPathGeneral2("Test Path 5", "4.0 GHz", "KGO-TV","37 41 47.6 N", "121 46 10.5 W","55", "1000036");
          pathSummary.highlightPathAndSelectDeleteFromHamburger();
     }
 
@@ -328,8 +407,8 @@ public class PathSummaryTest extends BaseTest {
     */
     @Test
     public void viewSettingsFromHamburgerMenu() {
-        assertTrue(pathSummary.landedOnPathSummaryPage());
-        assertTrue(pathSummary.projectName());
+        createPath.createBrandNewProjectPath("Best Project Ever"+ randomNumber, "This is the Default");
+        quickAdd.quickAddPathGeneral2("Test Path 1", "23.0 GHz", "ASR-Call","32 47 16.4 N", "96 47 59 W","55", "KA3982");
         pathSummary.selectAndViewSettingsFromHamburgerMenu();
     }
 
@@ -340,12 +419,51 @@ public class PathSummaryTest extends BaseTest {
         "Given a user wants to change the unit type to be displayed in a project,
         When s/he changes the value by clicking on a unit radio button and then clicking Save,
         Then the unit type will be changed in the project (feet to meters, meters to feet)."
+
+        COM-169
+        "Given that US Unit is selected,
+        When user views Minimum Clearance,
+        Then by default the Units will be measured in ""(ft)"""
+
+        COM-169
+        "Given that a US user wants to change the Unit in Settings,
+        When the SI button is clicked,
+        Then the Minimum Clearance units will change to ""(m)""."
+
+        COM-169
+        "Given the Unit is in meters,
+        When the units are changed from meters to feet,
+        The minimum clearance amount will convert accordingly (e.g. 1,000 m = 3,280.84 ft.)
+        AND When the units are changed from feet to meters,
+        The minimum clearance amount will convert accordingly (e.g. 3,280.84 ft. = 1,000 m.)"
+
+        COM-169
+        "Given the largest or smallest minimum clearance is required,
+        When minimum clearance min/max = -1000/1000 for meters and -3280.84/3280.84 for feet
+        Then they will be accepted in the project settings,
+        BUT when numbers outside of the acceptable limits are entered,
+        Then an error message will be displayed as follows: ""MUST BE BETWEEN -1,000 AND 1,000"" when meters are the selected unit,
+        OR ""MUST BE BETWEEN -3280.84 AND 3280.84"" when feet are the selected unit."
   */
     @Test
     public void changeUnitsSettingsAndVal() {
-        assertTrue(pathSummary.landedOnPathSummaryPage());
-        assertTrue(pathSummary.projectName());
-        pathSummary.changeUnitsFromUsToSi();
+        createPath.createBrandNewProjectPath("Best Project Ever"+ randomNumber, "This is the Default");
+        quickAdd.quickAddPathGeneral2("Test Path 1", "23.0 GHz", "ASR-Call","32 47 16.4 N", "96 47 59 W","55", "KA3982");
+        pathSummary.changeUnitsFromUsToSi("02","0.61");
+        pathSummary.changeUnitsFromUsToSi("03","0.91");
+        pathSummary.changeUnitsFromUsToSi("55","16.76");
+        pathSummary.changeUnitsFromUsToSi("90","27.43");
+        pathSummary.changeUnitsFromUsToSi("120","36.58");
+        pathSummary.changeUnitsFromUsToSi("1000","304.8");
+        pathSummary.changeUnitsFromUsToSi("-3280.84","-1000");
+        pathSummary.changeUnitsFromUsToSi("-02","-0.61");
+        pathSummary.changeUnitsFromUsToSi("-03","-0.91");
+        pathSummary.changeUnitsFromUsToSi("-55","-16.76");
+        pathSummary.changeUnitsFromUsToSi("-90","-27.43");
+        pathSummary.changeUnitsFromUsToSi("-120","-36.58");
+        pathSummary.changeUnitsFromUsToSi("-10000","-3048");
+        assertEquals("MUST BE BETWEEN -1,000 AND 1,000",quickAdd.projectFieldError(0));
+
     }
 
     /*COM 107 & 116
@@ -362,8 +480,8 @@ public class PathSummaryTest extends BaseTest {
 
     @Test
     public void viewDefaultSettingsFromProjectSetting() {
-        assertTrue(pathSummary.landedOnPathSummaryPage());
-        assertTrue(pathSummary.projectName());
+        createPath.createBrandNewProjectPath("Best Project Ever"+ randomNumber, "This is the Default");
+        quickAdd.quickAddPathGeneral2("Test Path 1", "23.0 GHz", "ASR-Call","32 47 16.4 N", "96 47 59 W","55", "KA3982");
         pathSummary.viewDefaultSettings();
     }
     /*
@@ -407,8 +525,8 @@ public class PathSummaryTest extends BaseTest {
     */
     @Test
     public void valEffectsOfSiteSettingsCheckbox() {
-        assertTrue(pathSummary.landedOnPathSummaryPage());
-        assertTrue(pathSummary.projectName());
+        createPath.createBrandNewProjectPath("Best Project Ever"+ randomNumber, "This is the Default");
+        quickAdd.quickAddPathGeneral2("Test Path 1", "23.0 GHz", "ASR-Call","32 47 16.4 N", "96 47 59 W","55", "KA3982");
         pathSummary.valSiteLocationToggle();
     }
     /*COM 107
@@ -425,8 +543,8 @@ public class PathSummaryTest extends BaseTest {
 
     @Test
     public void valFresnelZoneRadiusField() {
-        assertTrue(pathSummary.landedOnPathSummaryPage());
-        assertTrue(pathSummary.projectName());
+        createPath.createBrandNewProjectPath("Best Project Ever"+ randomNumber, "This is the Default");
+        quickAdd.quickAddPathGeneral2("Test Path 1", "23.0 GHz", "ASR-Call","32 47 16.4 N", "96 47 59 W","55", "KA3982");
         pathSummary.valFresnelZoneRadius();
     }
 
@@ -440,8 +558,8 @@ public class PathSummaryTest extends BaseTest {
 //TODO Update this val messages to 100000
     @Test
     public void valKFactorField() {
-        assertTrue(pathSummary.landedOnPathSummaryPage());
-        assertTrue(pathSummary.projectName());
+        createPath.createBrandNewProjectPath("Best Project Ever"+ randomNumber, "This is the Default");
+        quickAdd.quickAddPathGeneral2("Test Path 1", "23.0 GHz", "ASR-Call","32 47 16.4 N", "96 47 59 W","55", "KA3982");
         pathSummary.valKFactorSetting();
     }
 
@@ -456,8 +574,8 @@ public class PathSummaryTest extends BaseTest {
 
     @Test
     public void valKMinClearanceField() {
-        assertTrue(pathSummary.landedOnPathSummaryPage());
-        assertTrue(pathSummary.projectName());
+        createPath.createBrandNewProjectPath("Best Project Ever"+ randomNumber, "This is the Default");
+        quickAdd.quickAddPathGeneral2("Test Path 1", "23.0 GHz", "ASR-Call","32 47 16.4 N", "96 47 59 W","55", "KA3982");
         pathSummary.valKMinClearanceSetting();
     }
 
@@ -473,8 +591,8 @@ public class PathSummaryTest extends BaseTest {
 
     @Test
     public void valDefaultAvailabilityTarget() {
-        assertTrue(pathSummary.landedOnPathSummaryPage());
-        assertTrue(pathSummary.projectName());
+        createPath.createBrandNewProjectPath("Best Project Ever"+ randomNumber, "This is the Default");
+        quickAdd.quickAddPathGeneral2("Test Path 1", "23.0 GHz", "ASR-Call","32 47 16.4 N", "96 47 59 W","55", "KA3982");
         pathSummary.valKDefaultAvailabilityTargetSetting();
     }
 
@@ -527,27 +645,35 @@ public class PathSummaryTest extends BaseTest {
 
     @Test
     public void viewPathBlueSection() {
-        assertTrue(pathSummary.landedOnPathSummaryPage());
-        assertTrue(pathSummary.projectName());
-        pathSummary.viewPathBlueSection(0,"First Path adding extra to test name length","1","MOD","","Details");
-        pathSummary.viewSiteCallSignLatLongGeColumns2(0,"unique","56DR56","39 57 09.30 N","75 09 54.80 W","65.62");
-        pathSummary.viewSiteCallSignLatLongGeColumns2(1,"SNOW","54g34ge","39 57 09.30 N","75 09 54.80 W","65.62");
-        pathSummary.viewSiteCallSignLatLongGeColumns2(2,"SNOW","4f43","39 57 09.30 N","75 09 54.80 W","65.62");
-        pathSummary.viewAntennaRadioBandwidthFreq();
-        pathSummary.viewDiversityAntAmcPassFail();
+        createPath.createBrandNewProjectPath("Best Project Ever"+ randomNumber, "This is the Default");
+        pathSummary.valSiteLocationToggleOn();
+        quickAdd.quickAddPathGeneral2("Test Path 1", "23.0 GHz", "KDFW Studio","32 47 16.4 N", "96 47 59 W","55", "KA3982");
+        quickAdd.quickAddPathGeneral2("Test Path 2", "4.0 GHz", "ASR-Call","37 47 59.7 N", "122 23 58.8 W","55", "KA2049");
+        quickAdd.quickAddPathGeneral2("Test Path 3", "4.0 GHz", "KOTA TX - Skyline","44 04 07.4 N", "103 15 05 W","55", "KA2124");
+        pathSummary.viewPathBlueSection(0,"Test Path 1","1","MOD","","Details");
+        pathSummary.viewSiteCallSignLatLongGeColumns1(0,"KDFW Studio","KA3982","32 47 16.4 N","96 47 59 W","54.99");
+        pathSummary.viewSiteCallSignLatLongGeColumns1(1,"ASR-Call","KA2049","37 47 59.7 N","122 23 58.8 W","54.99");
+        pathSummary.viewSiteCallSignLatLongGeColumns1(2,"KOTA TX - Skyline","KA2124","44 4 7.4 N","103 15 5 W","54.99");
+        //pathSummary.viewAntennaRadioBandwidthFreq();TODO feature not ready
+        //pathSummary.viewDiversityAntAmcPassFail();TODO feature not ready
     }
     /*
     Given a user is viewing the Path list table,
     When multiple paths have the same radio configuration,
     Then the path only displays one radio.
      */
+//TODO antenna section is not complete at the moment will revisit once implemented
 
 
     @Test
     public void valTwoPathsSameConfigOneRadio() {
-        assertTrue(pathSummary.landedOnPathSummaryPage());
-        assertTrue(pathSummary.projectName());
-        pathSummary.pathWithSameConfig_OneRadio();
+//        createPath.createBrandNewProjectPath("Best Project Ever"+ randomNumber, "This is the Default");
+//        quickAdd.quickAddPathGeneral2("Test Path 1", "23.0 GHz", "ASR-Call","32 47 16.4 N", "96 47 59 W","55", "KA3982");
+//        pathSummary.hoverSiteLocationValSiteInfo(0);
+//        quickAdd.quickAddPathGeneral2("Test Path 2", "4.0 GHz", "ASR-Call","37 47 59.7 N", "122 23 58.8 W","55", "KA2049");
+//        pathSummary.hoverSiteLocationValSiteInfo(0);
+//        quickAdd.quickAddPathGeneral2("Test Path 3", "4.0 GHz", "KOTA TX - Skyline","44 04 07.4 N", "103 15 05 W","55", "KA2124");
+//        pathSummary.pathWithSameConfig_OneRadio();
 
     }
     /*
@@ -560,11 +686,18 @@ public class PathSummaryTest extends BaseTest {
 
     @Test
     public void valQuickAddSuggestedText() {
-        assertTrue(pathSummary.landedOnPathSummaryPage());
-        assertTrue(pathSummary.projectName());
+        createPath.createBrandNewProjectPath("Best Project Ever"+ randomNumber, "This is the Default");
+        quickAdd.quickAddPathGeneral2("Test Path 1", "23.0 GHz", "ASR-Call","32 47 16.4 N", "96 47 59 W","55", "KA3982");
+        pathSummary.hoverSiteLocationValSiteInfo(0);
+        quickAdd.quickAddPathGeneral2("Test Path 2", "4.0 GHz", "ASR-Call","37 47 59.7 N", "122 23 58.8 W","55", "KA2049");
+        pathSummary.hoverSiteLocationValSiteInfo(0);
+        quickAdd.quickAddPathGeneral2("Test Path 3", "4.0 GHz", "KOTA TX - Skyline","44 04 07.4 N", "103 15 05 W","55", "KA2124");
         pathSummary.quickAddSuggestedText();
 
     }
+
+
+
 }
 
 
