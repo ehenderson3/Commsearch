@@ -123,8 +123,8 @@ public class PathSummaryTest extends BaseTest {
         //NO Hurry... in the process of moving off the static data...https://www.screencast.com/t/wweHelHOqd
         pathSummary.filter("Company","WILL BE CHANGING!!!");
         pathSummary.showAllPathsWithNoAssignedFrequencyBandsPresent();
-//        assertEquals(pathSummary.showAllCheckBoxText(),"Show all Paths with No Assigned Licensee");
-//        pathSummary.validateLicenseeFilteredResult("Second Path adding extra for testing length", "Third Path", "Fourth Path", "Fifth Path");
+        //assertEquals(pathSummary.showAllCheckBoxText(),"Show all Paths with No Assigned Licensee");
+        //pathSummary.validateLicenseeFilteredResult("Second Path adding extra for testing length", "Third Path", "Fourth Path", "Fifth Path");
 
         pathSummary.filter("Site Name", "KOTA TX - Skyline");
         pathSummary.validateSiteNameFilteredResult("Test Path 3");
@@ -693,10 +693,7 @@ public class PathSummaryTest extends BaseTest {
         pathSummary.hoverSiteLocationValSiteInfo(0);
         quickAdd.quickAddPathGeneral2("Test Path 3", "4.0 GHz", "KOTA TX - Skyline","44 04 07.4 N", "103 15 05 W","55", "KA2124");
         pathSummary.quickAddSuggestedText();
-
     }
-
-
 
 }
 

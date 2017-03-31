@@ -98,19 +98,41 @@ public class QuickAddTest extends BaseTest {
      */
     @Test
     public void quickAddSiteNameSuggest() {
+        boolean siteExist;
+
+
         createPath.createBrandNewProjectPath("Best Project Ever"+ randomNumber, "This is the Default");
         pathSummary.valSiteLocationToggleOn();
+
+        siteExist = quickAdd.checkForExistingSite("Tonto Mtn");
+        if (siteExist == true)
+            quickAdd.cancelPathCreation();
+        else
+            quickAdd.quickAddPathDataSetup("TM SUPPORT DATA", "940 MHz", "Tonto Mtn", "34 37 42.1 N", "112 39 26.2 W", "1542.29", "KBY45");
+
+        siteExist = quickAdd.checkForExistingSite("SYNRAMS STATION");
+        if (siteExist == true)
+            quickAdd.cancelPathCreation();
+        else
+            quickAdd.quickAddPathDataSetup("TM SUPPORT DATA", "940 MHz", "SYNRAMS STATION", "40 34 10 N", "122 26 14 W", "250", "1208837");
+
+        siteExist = quickAdd.checkForExistingSite("CAMSLANT STATION");
+        if (siteExist == true)
+            quickAdd.cancelPathCreation();
+        else
+            quickAdd.quickAddPathDataSetup("CAM SUPPORT DATA", "940 MHz", "CAMSLANT STATION", "35 12 26.7 N", "78 3 21.2 W", "48.69", "1241006");
+
         quickAdd.quickAddPath("Ton", "940 MHz", "Best Path", "34 37 42.1 N", "112 39 26.2 W", "1542.29", "KBY45");
         pathSummary.viewSiteCallSignLatLongGeColumns1(0, "Tonto Mtn", "KBY45", "34 37 42.1 N", "112 39 26.2 W", "1542.29");
-        pathSummary.viewSiteCallSignLatLongGeColumns2(0, "Tonto Mtn", "", "42 46 39.8 N", "87 51 57.5 W", "200.89");
+        pathSummary.viewSiteCallSignLatLongGeColumns2(0, "Tonto Mtn", "KA20003", "40 44 54 N", "73 59 9 W", "0.98");
 
         quickAdd.quickAddPath("SYNRA", "940 MHz", "Best Path", "40 34 10 N", "122 26 14 W", "250", "1208837");
         pathSummary.viewSiteCallSignLatLongGeColumns1(1, "SYNRAMS STATION", "", "40 34 10 N", "122 26 14 W", "250");
-        pathSummary.viewSiteCallSignLatLongGeColumns2(0, "Tonto Mtn", "", "42 46 39.8 N", "87 51 57.5 W", "200.89");
+        pathSummary.viewSiteCallSignLatLongGeColumns2(0, "Tonto Mtn", "KA20003", "40 44 54 N", "73 59 9 W", "0.98");
 
         quickAdd.quickAddPath("CAM", "940 MHz", "Best Path", "35 12 26.7 N", "78 3 21.2 W", "48.69", "1241006");
         pathSummary.viewSiteCallSignLatLongGeColumns1(2, "CAMSLANT STATION", "", "35 12 26.7 N", "78 3 21.2 W", "48.69");
-        pathSummary.viewSiteCallSignLatLongGeColumns2(0, "Tonto Mtn", "", "42 46 39.8 N", "87 51 57.5 W", "200.89");
+        pathSummary.viewSiteCallSignLatLongGeColumns2(0, "Tonto Mtn", "KA20003", "40 44 54 N", "73 59 9 W", "0.98");
     }
     /*COM-100
     Given that a Path Name is optional,
@@ -128,16 +150,30 @@ public class QuickAddTest extends BaseTest {
     @Test
     public void quickAddProjectNoName() {
         String pathName;
+        boolean siteExist;
         createPath.createBrandNewProjectPath("Best Project Ever"+ randomNumber, "This is the Default");
         pathSummary.valSiteLocationToggleOn();
-        quickAdd.quickAddPath("New", "940 MHz", "", "42 46 39.8 N", "87 51 57.5 W", "200.89", "1234344");
-        pathSummary.viewSiteCallSignLatLongGeColumns1(0, "new york", "", "42 46 39.8 N", "87 51 57.5 W", "200.89");
-        pathSummary.viewSiteCallSignLatLongGeColumns2(0, "new york", "", "42 46 39.8 N", "87 51 57.5 W", "200.89");
+
+        siteExist = quickAdd.checkForExistingSite("New York");
+        if (siteExist == true)
+            quickAdd.cancelPathCreation();
+        else
+            quickAdd.quickAddPathDataSetup("NY SUPPORT DATA", "940 MHz", "New York", "40 44 54 N", "73 59 9 W", "0.98", "KA20003");
+
+        quickAdd.quickAddPath("New", "940 MHz", "", "40 44 54 N", "73 59 9 W", "0.98", "KA20003");
+        pathSummary.viewSiteCallSignLatLongGeColumns1(0, "New York", "KA20003", "40 44 54 N", "73 59 9 W", "0.98");
+        pathSummary.viewSiteCallSignLatLongGeColumns2(0, "New York", "KA20003", "40 44 54 N", "73 59 9 W", "0.98");
         pathName = pathSummary.projectNameSite1Site2Text(0);
-        assertEquals(pathName, "new york - new york");
+        assertEquals(pathName, "New York - New York");
+
+        siteExist = quickAdd.checkForExistingSite("CAMSLANT STATION");
+        if (siteExist == true)
+            quickAdd.cancelPathCreation();
+        else
+            quickAdd.quickAddPathDataSetup("CAM SUPPORT DATA", "940 MHz", "CAMSLANT STATION", "35 12 26.7 N", "78 3 21.2 W", "48.69", "1241006");
         quickAdd.quickAddPath("CAM", "940 MHz", "", "35 12 26.7 N", "78 3 21.2 W", "48.69", "1241006");
         pathName = pathSummary.projectNameSite1Site2Text(1);
-        assertEquals(pathName, "CAMSLANT STATION - new york");
+        assertEquals(pathName, "CAMSLANT STATION - New York");
 
     }
 
@@ -168,7 +204,7 @@ public class QuickAddTest extends BaseTest {
         String pathError;
         createPath.createBrandNewProjectPath("Best Project Ever"+ randomNumber, "This is the Default");
         pathSummary.valSiteLocationToggleOn();
-        quickAdd.quickAddPath("New", "940 MHz", "12345678912345678912345678912345678912345678", "42 46 39.8 N", "87 51 57.5 W", "200.89", "1234344");
+        quickAdd.quickAddPath("New", "940 MHz", "12345678912345678912345678912345678912345678", "40 44 54 N", "73 59 9 W", "0.98", "KA20003");
         pathError = quickAdd.projectFieldError(0);
         assertEquals(pathError, "Path Name cannot be longer than 43 characters.");
     }
@@ -181,9 +217,18 @@ public class QuickAddTest extends BaseTest {
 
     @Test
     public void quickAddNoBand() {
+        boolean siteExist;
         String pathError;
         createPath.createBrandNewProjectPath("Best Project Ever"+ randomNumber, "This is the Default");
         pathSummary.valSiteLocationToggleOn();
+
+
+        siteExist = quickAdd.checkForExistingSite("BLACKTAIL MTN");
+        if (siteExist == true)
+            quickAdd.cancelPathCreation();
+        else
+            quickAdd.quickAddPathDataSetup("BTM SUPPORT DATA", "940 MHz", "BLACKTAIL MTN", "48 0 47.8 N", "114 21 58.4 W", "2035.79", "KBM76");
+
         quickAdd.quickAddPathNoBand("BLACKTAIL MTN", "", "Path 6", "48 0 47.8 N", "114 21 58.4 W", "2035.79", "KBM76");
         pathSummary.viewSiteCallSignLatLongGeColumns1(0, "BLACKTAIL MTN", "KBM76", "48 0 47.8 N", "114 21 58.4 W", "2035.79");
 
@@ -239,7 +284,7 @@ public class QuickAddTest extends BaseTest {
         pathSummary.valSiteLocationToggleOn();
         quickAdd.callSignErrorChecking("888888888", "888888888", "ASR must be 7 numbers long.", "ASR must be 7 numbers long.");
         quickAdd.callSignErrorChecking("55555", "55555", "ASR must be 7 numbers long.", "ASR must be 7 numbers long.");
-        quickAdd.quickAddPath("New York", "940 MHz", "", "42 46 39.8 N", "87 51 57.5 W", "200.89", "1234344");
+        quickAdd.quickAddPath("New York", "940 MHz", "", "40 44 54 N", "73 59 9 W", "0.98", "KA20003");
         quickAdd.quickAddPathGeneral2("ASR field Autofill", "4.0 GHz", "ASR-Call","", "","4", "KA95314");
         quickAdd.quickAddPathGeneral2("ASR field Autofill", "4.0 GHz", "ASR-Call","", "","4", "KA95347");
         quickAdd.quickAddPathGeneral2("ASR field Autofill", "4.0 GHz", "ASR-Call","", "","4", "KAH72");
@@ -369,7 +414,7 @@ public class QuickAddTest extends BaseTest {
             quickAdd.quickAddPathGeneralNoSave("Elevation Autofill User Can Overwrite", "4.0 GHz", "new", "45 26 47.70 N", "4 7 12.00 W", "98", "Td5G43s");
             //quickAdd.updateElevation("230");
             quickAdd.savePath();
-            pathSummary.viewSiteCallSignLatLongGeColumns2(0, "new york", "", "42 46 39.8 N", "87 51 57.5 W", "200.89");
+            pathSummary.viewSiteCallSignLatLongGeColumns2(0, "New York", "KA20003", "40 44 54 N", "73 59 9 W", "0.98");
 
     }
     /*COM-148
@@ -445,7 +490,7 @@ public class QuickAddTest extends BaseTest {
         quickAdd.quickAddPathGeneralError2("ASR field Autofill", "4.0 GHz", "ASR-Call","", "","4", "NoFound");
         FCCError1 = quickAdd.projectFieldError(1);
 
-        assertEquals(FCCError1,"No FCC record of this Call Sign.");
+        assertEquals(FCCError1,"Call Sign 'NoFound' not found");
 
     }
 }

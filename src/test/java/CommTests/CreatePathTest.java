@@ -32,7 +32,7 @@ public class CreatePathTest extends BaseTest {
 
 
     @Test
-    public void Test_projectFieldFailure () {
+    public void projectNoNameFieldError () {
         createPath.createProjectPathErrorChecking("", "This is the Default");
         assertTrue(createPath.projectNameRequired());
 
