@@ -40,10 +40,12 @@ public class CreateNewPathPage extends BasePage {
         assertTrue("can't find the Create button",
         isDisplayed(createButton));
         type(projectName, newProjectField);
-        type(defaultLicensee, defaultLic);
         click(pathRadioButton);
+        isDisplayed(defaultLic,20);
+
         click(createButton);
         waitForIsDisplayed(filterField,10);
+        //type(defaultLicensee, defaultLic);
     }
 
 
@@ -53,8 +55,9 @@ public class CreateNewPathPage extends BasePage {
         assertTrue("can't find the Create button",
         isDisplayed(createButton));
         type(projectName, newProjectField);
-        type(defaultLicensee, defaultLic);
+        //type(defaultLicensee, defaultLic);
         click(pathRadioButton);
+        isDisplayed(defaultLic,20);
         click(createButton);
     }
 
@@ -84,9 +87,13 @@ public class CreateNewPathPage extends BasePage {
         assertTrue("can't find the Create button",
         isDisplayed(createButton));
         type(projectName,newProjectField);
-        type(defaultLicensee,defaultLic);
+
         click(pathRadioButton);
+        isDisplayed(defaultLic,20);
+
         click(createButton);
+
+        //type(defaultLicensee,defaultLic);
     }
 
     public Boolean projectNameRequired() {
