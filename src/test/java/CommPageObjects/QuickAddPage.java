@@ -101,6 +101,7 @@ public class QuickAddPage extends BasePage {
 
         waitForIsDisplayed(quickAddButton,6);
         isDisplayed(quickAddButton,6);
+        isDisplayed(control,4);
         click(quickAddButton);
         waitForIsDisplayed(pathName,6);
         type(PathNameText, pathName);
@@ -128,7 +129,8 @@ public class QuickAddPage extends BasePage {
         click(pathName);
         click(siteField);
         isDisplayed(option,10);
-        hover(option);
+        //hover(option);
+        click(option);
         click(addPathButton,1);
         isDisplayed(addPathDetails,6);
         isDisplayed(quickAddButton,6);
@@ -143,6 +145,7 @@ public class QuickAddPage extends BasePage {
 
         waitForIsDisplayed(quickAddButton,6);
         isDisplayed(quickAddButton,6);
+        isDisplayed(control,4);
         click(quickAddButton);
         waitForIsDisplayed(pathName,6);
         type(PathNameText, pathName);
@@ -270,6 +273,67 @@ public class QuickAddPage extends BasePage {
 
         click(pathName);
     }
+
+
+    public boolean checkForExistingSite(String sitePartialText){
+
+        waitForIsDisplayed(quickAddButton,10);
+        isDisplayedAndClickable(quickAddButton,10);
+        isDisplayed(quickAddButton,10);
+        isDisplayed(control,4);
+
+        click(quickAddButton,0);
+        waitForIsDisplayed(pathName,6);
+        type(sitePartialText,siteField);
+         return isDisplayed(option,6);
+
+    }
+
+    public void cancelPathCreation(){
+        isDisplayed(cancelButton,10);
+        click(cancelButton);
+    }
+
+    public void quickAddPathDataSetup(String PathNameText,String BandDropDown,String sitePartialText,String LatitudeText, String Longitude, String ElevationText,  String Asr){
+
+        isDisplayed(cancelButton,10);
+        click(cancelButton);
+
+
+        waitForIsDisplayed(quickAddButton,10);
+        isDisplayedAndClickable(quickAddButton,10);
+        isDisplayed(quickAddButton,10);
+        isDisplayed(control,4);
+
+        click(quickAddButton,0);
+        waitForIsDisplayed(pathName,6);
+        type(PathNameText, pathName);
+        selectFromDropdown(optionanBandDropDown, BandDropDown);
+        type(sitePartialText,siteField);
+        type(LatitudeText,latitude);
+        type(Longitude,longitude);
+        type(Asr,callSign);
+        type(ElevationText,elevation);
+        isDisplayed(addPathButton,6);
+        type(sitePartialText,siteField2);
+        type(LatitudeText,latitude2);
+        type(Longitude,longitude2);
+        type(Asr,callSign2);
+        type(ElevationText,elevation2);
+
+        //click(option);
+        click(latitude);
+        click(longitude);
+        click(pathName);
+        click(addPathButton,1);
+        isDisplayed(addPathDetails,6);
+        isDisplayed(quickAddButton,6);
+        isDisplayed(control,6);
+
+    }
+
+
+
     public void quickAddPathGeneral1(String PathNameText,String BandDropDown,String sitePartialText,String LatitudeText, String Longitude, String ElevationText,  String Asr){
 
         waitForIsDisplayed(quickAddButton,10);
@@ -303,11 +367,11 @@ public class QuickAddPage extends BasePage {
 
         assertTrue(isDisplayed(quickAddButton,20));
         switchBackToDefaultContent();
-        assertTrue(waitUntilNotPresent(addNewPathSlideOutOpen,30));
-        isDisplayed(addNewPathSlideOutClosed,30);
+        assertTrue(waitUntilNotPresent(addNewPathSlideOutOpen,15));
+        isDisplayed(addNewPathSlideOutClosed,15);
         isDisplayed(siteField,1);
         click(quickAddButton);
-        assertTrue(isDisplayed(addNewPathSlideOutOpen,30));
+        assertTrue(isDisplayed(addNewPathSlideOutOpen,15));
         assertTrue(isDisplayed(pathName,6));
         type(PathNameText, pathName);
         selectFromDropdown(optionanBandDropDown, BandDropDown);
@@ -317,11 +381,11 @@ public class QuickAddPage extends BasePage {
         type(Longitude,longitude);
         type(Asr,callSign);
 
-        isDisplayed(addPathButton,6);
+        isDisplayed(addPathButton,5);
         type("KA2124",callSign2);
 
         click(elevation2);
-        isDisplayed(control,7);
+        isDisplayed(control,6);
         type("23",elevation2);
         isDisplayed(control,2);
 

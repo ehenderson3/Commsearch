@@ -47,7 +47,7 @@ public class PathSummaryPage extends BasePage {
     By actionArrow = By.cssSelector(".fa.fa-caret-down");
     By deleteButton = By.id("delete-paths-modal-delete-apply");
     By deletePathsButton = By.id("delete-paths-modal-delete-apply");
-    By deselectPathForDeletion = By.xpath("//*[contains(@id,'delete-paths-modal-remove-path')]");
+    By deselectPathForDeletion = By.xpath("//*[contains(@id,'project-summary-modal-remove-path-2')]");
     By hamburgerSettings = By.id("project-summary-settings-trigger");
     By uSUnit = By.className("styled-radio");
     By sIUnit = By.className("styled-radio");
@@ -57,9 +57,7 @@ public class PathSummaryPage extends BasePage {
     By saveButton = By.id("project-summary-settings-submit");
     By pathsNoFreqCheckBox = By.id("project-summary-filter-checkbox");
     //TODO need locator that will see the text of Show all check box under the filter box
-//By pathsNoFreqCheckBoxText = By.xpath("//*[@id=\"app\"]/div/div/div/div/div/div[1]/div[2]/form/p[2]");
     By pathsNoFreqCheckBoxText = By.xpath("//*[@id=\"app\"]/div/div/div/div/div/div[1]/form/p[2]/label");
-    ////*[@id="app"]/div/div/div/div/div/div[1]/form/p[2]/label/text()
 
 
 //Drop down options
@@ -105,8 +103,8 @@ public class PathSummaryPage extends BasePage {
     //TODO need locator for TOTAL PATHS count #
     By totalPathsCount = By.xpath("//*[@id=\"app\"]/div/div/div/div/div/div[1]/div[1]/p[3]/span[2]");
     By minimumClearance = By.xpath("//*[@id=\"project-summary-settings\"]/form/ul/li[4]/div[3]/label");
+    By remainingDeletePaths = By.xpath("//*[contains(@id, 'project-summary-modal-path-')]");//project-summary-modal-path-
 
-    ////*[@id="project-summary-settings"]/form/ul/li[4]/div[3]/label
 
 //Path DropDown Fields -- Does it contain a list that has options that can be selected
     By filterSelection = By.id("project-summary-filter-select");
@@ -124,7 +122,7 @@ public class PathSummaryPage extends BasePage {
 
 
     By pathSiteIndex1 = By.xpath(""+PATH_VAL+" '-site-1-siteName')]");
-    By pathSiteIndex2 = By.xpath("//*[contains(@id, 'path-') and contains(@id, '-site-2-siteName')]");
+    By pathSiteIndex2 = By.xpath("//*[contains(@id, 'path-') and contains(@id, '-site-1-siteName')]");
     By pathBandValueIndex1 = By.xpath("//*[contains(@id, 'path-') and contains(@id, '-site-1-bandwidth')]");
     By pathBandValueIndex2 = By.xpath("//*[contains(@id, 'path-') and contains(@id, '-site-2-bandwidth')]");
     By pathCallsignValueIndex1 = By.xpath("//*[contains(@id, 'path-') and contains(@id, '-site-1-callsign')]");
@@ -550,9 +548,10 @@ public class PathSummaryPage extends BasePage {
         click(hamburgerSettings);
         assertTrue("Project Panel is not present", isDisplayed(projectSettingsPanel, 10));
         assertTrue("Project US Unit is not present", isDisplayed(uSUnit, 10));
-        assertTrue("Project Site is not present", isDisplayed(projectSettingsPanel, 10));
-        assertTrue("Project Site is not present", isDisplayed(showSiteLocationCheckBox, 30));
+        assertTrue("Project settings is not present", isDisplayed(projectSettingsPanel, 10));
+        assertTrue("Project Site Location is not present", isDisplayed(showSiteLocationCheckBox, 30));
         isDisplayed(saveButton, 10);
+        isDisplayed(control,2);
         click(showSiteLocationCheckBox);
 
         click(saveButton);
@@ -704,7 +703,7 @@ public class PathSummaryPage extends BasePage {
         assertTrue("Delete button is not present", isDisplayed(deselectPathForDeletion,10));
         click(deselectPathForDeletion);
         List<WebElement> a;
-        a = finds(deselectPathForDeletion);
+        a = finds(remainingDeletePaths);
         assertEquals("Path was not removed", a.size() ,1);
         click(deletePathsButton);
         assertTrue("Delete confirmation is not present", isDisplayed(deleteConfirmationNew,10));
@@ -855,6 +854,18 @@ public class PathSummaryPage extends BasePage {
                 "Valid");
         isDisplayed(siteLocationIcon,2);
     }
+
+    public int filterForTestData(String dropDown, String location){
+        String pathReturnTotal;
+        int a;
+        filter(dropDown,location);
+        pathReturnTotal = getText(totalPathsCount);
+        a = Integer.parseInt(pathReturnTotal.toString());
+        //assertEquals(pathReturnTotal ,"0");
+        //return getText(totalPathsCount);
+        return a;
+    }
+
 
     public void filter(String dropDown, String location){
         waitForIsDisplayed(filterSelection,10);
