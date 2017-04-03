@@ -8,11 +8,26 @@ import static org.junit.Assert.assertTrue;
 
 public class CreateNewPathPage extends BasePage {
 
+    //Buttons
+    By pathRadioButton = By.className("styled-radio");
+    By companyLookUp = By.id("newProjectForm-defaultCompanyLookup");
+    By companySearchButton = By.id("company-lookup-submit");
+
+    //Modal
+    By companyModal = By.id("company-lookup-modal");
     By commHome = By.id("home-newProjectModalOpen");
+
+    //Fields
+    By companyCodeField = By.id("company-lookup-company-code");
+    By companyNameField = By.id("company-lookup-company-name");
+    By defaultCompanyField = By.id("newProjectForm-defaultCompany");
+    By searchResultArray = By.cssSelector(".react-grid-Row.react-grid-Row--even");
+    By control = By.id("control");
+
+    By companyContactNameField = By.id("company-lookup-contact-name");
     By createButton = By.id("newProjectForm-submit");
     By newProjectField = By.id("newProjectForm-projectName");
     By defaultLic = By.id("newProjectForm-defaultCompany");
-    By pathRadioButton = By.className("styled-radio");
     By projectRequired = By.className("error-message");
     By filterField = By.id("project-summary-filter-input");
     By projectTitle = By.xpath("//span[text()='Project ']");
@@ -47,8 +62,36 @@ public class CreateNewPathPage extends BasePage {
         waitForIsDisplayed(filterField,10);
         //type(defaultLicensee, defaultLic);
     }
+    public void enterProjectForCompany(String projectName, String defaultLicensee){
+        click(commHome);
+        assertTrue("can't find the Create button",
+        isDisplayed(createButton));
+        type(projectName, newProjectField);
+        click(pathRadioButton);
+        isDisplayed(defaultLic,20);
+        isDisplayed(companyLookUp, 10);
+        click(companyLookUp);//id="newProjectForm-defaultCompanyLookup"
+    }
 
-
+    public void fillOutCompanyFilter(String coCodeText,String coNameText, String coContactText, Integer company) {
+        String a;
+        assertTrue("Can't find company modal",isDisplayed(companyModal,10));//id="company-lookup-modal"
+        assertTrue("Can't find Code Field",isDisplayed(companyCodeField,10));//id="company-lookup-company-code"
+        assertTrue("Can't find Name Field",isDisplayed(companyNameField,10));//id="company-lookup-company-name"
+        assertTrue("Can't find Name Field",isDisplayed(companyContactNameField));//id="company-lookup-contact-name"
+        type(coCodeText, companyCodeField);
+        type(coNameText, companyNameField);
+        type(coContactText, companyContactNameField);
+        assertTrue("Can't find Search Button",isDisplayed(companySearchButton));//id="company-lookup-contact-name"
+        click(companySearchButton);//id="company-lookup-submit"
+        isDisplayed(control,4);
+        isDisplayed(searchResultArray,10);//class="react-grid-Cell__value"
+        click(searchResultArray);
+        a = getFieldText(defaultCompanyField);//id="newProjectForm-defaultCompany"
+        assertEquals(a, "Verizon");
+        click(createButton);
+        isDisplayed(filterField, 10);
+    }
 
     public void attemptToCreateProject(String projectName, String defaultLicensee){
         click(commHome);

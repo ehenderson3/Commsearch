@@ -134,6 +134,104 @@ public class QuickAddTest extends BaseTest {
         pathSummary.viewSiteCallSignLatLongGeColumns1(2, "CAMSLANT STATION", "", "35 12 26.7 N", "78 3 21.2 W", "48.69");
         pathSummary.viewSiteCallSignLatLongGeColumns2(0, "Tonto Mtn", "KA20003", "40 44 54 N", "73 59 9 W", "0.98");
     }
+
+
+    /*COM-97
+* " Given a user is creating a new project,
+    When the Create New Project modal comes up,
+    AND the Project Name field is completed,
+    AND the Project Type field is clicked,
+    Then a Default Company field is displayed below the Project Type field."
+
+    "Given a user is entering a Default Company to a new project,
+    When an existing company is selected from the company lookup,
+    Then it will be added to the Project Summary Header after clicking the Create button."
+
+    TODO Not currently working
+    "Given a user is entering a Default Company to a new project,
+    When a company is entered that doesn't exist in the db,
+    Then a graceful error message will be displayed."
+
+    "Given a user wants to add a Company to a new project,
+    When s/he clicks on the Company lookup icon,
+    Then a modal will display the following fields: Company Code; Company Name; and Contact Name
+    AND the search results column headings will be as follows: Company Code; Company Name; Parent/Child; Contacts; and Status."
+
+    TODO Not enough test data currently
+    "Given a user clicks on company lookup icon,
+    When the modal is displayed,
+    Then search results will display 10 results,
+    AND the results will scroll vertically,
+    AND hovering over a company's Contacts icon in the results will display a popup with contact names.
+    AND user can select an item from the search results."
+* */
+    @Test
+
+    public void createNewProjectWithCompanyByCode() {
+        boolean siteExist;
+        createPath.enterProjectForCompany("Best Project Ever" +randomNumber+ "f", "This is the Default");
+        createPath.fillOutCompanyFilter("VZW111","", "",0);
+        pathSummary.valSiteLocationToggleOn();
+        siteExist = quickAdd.checkForExistingSite("New York");
+        if (siteExist == true)
+            quickAdd.cancelPathCreation();
+        else
+            quickAdd.quickAddPathDataSetup("NY SUPPORT DATA", "940 MHz", "New York", "40 44 54 N", "73 59 9 W", "0.98", "KA20003");
+
+        quickAdd.quickAddPath("New", "940 MHz", "", "40 44 54 N", "73 59 9 W", "0.98", "KA20003");
+        pathSummary.viewSiteCallSignLatLongGeColumns1(0, "New York", "KA20003", "40 44 54 N", "73 59 9 W", "0.98");
+        pathSummary.viewSiteCallSignLatLongGeColumns2(0, "New York", "KA20003", "40 44 54 N", "73 59 9 W", "0.98");
+
+
+    }
+
+    @Test
+    public void createNewProjectWithCompanyByName() {
+        boolean siteExist;
+        createPath.enterProjectForCompany("Best Project Ever" +randomNumber+ "f", "This is the Default");
+        createPath.fillOutCompanyFilter("","Verizon", "",0);
+        pathSummary.valSiteLocationToggleOn();
+        siteExist = quickAdd.checkForExistingSite("New York");
+        if (siteExist == true)
+            quickAdd.cancelPathCreation();
+        else
+            quickAdd.quickAddPathDataSetup("NY SUPPORT DATA", "940 MHz", "New York", "40 44 54 N", "73 59 9 W", "0.98", "KA20003");
+
+        quickAdd.quickAddPath("New", "940 MHz", "", "40 44 54 N", "73 59 9 W", "0.98", "KA20003");
+        pathSummary.viewSiteCallSignLatLongGeColumns1(0, "New York", "KA20003", "40 44 54 N", "73 59 9 W", "0.98");
+        pathSummary.viewSiteCallSignLatLongGeColumns2(0, "New York", "KA20003", "40 44 54 N", "73 59 9 W", "0.98");
+    }
+
+/*    @Test
+
+    public void createNewProjectWithCompanyByContact() {
+        boolean siteExist;
+
+        createPath.enterProjectForCompany("Company By Contact" +randomNumber+ "f", "This is the Default");
+        //TODO Can't search by contact name
+        createPath.fillOutCompanyFilter("","", "John Doe",0);
+        pathSummary.valSiteLocationToggleOn();
+        siteExist = quickAdd.checkForExistingSite("New York");
+        if (siteExist == true)
+            quickAdd.cancelPathCreation();
+        else
+            quickAdd.quickAddPathDataSetup("NY SUPPORT DATA", "940 MHz", "New York", "40 44 54 N", "73 59 9 W", "0.98", "KA20003");
+
+        quickAdd.quickAddPath("New", "940 MHz", "", "40 44 54 N", "73 59 9 W", "0.98", "KA20003");
+        pathSummary.viewSiteCallSignLatLongGeColumns1(0, "New York", "KA20003", "40 44 54 N", "73 59 9 W", "0.98");
+        pathSummary.viewSiteCallSignLatLongGeColumns2(0, "New York", "KA20003", "40 44 54 N", "73 59 9 W", "0.98");
+    }*/
+
+    @Test
+    public void createNewProjectNameDoesNoteExist() {
+        boolean siteExist;
+
+        createPath.enterProjectForCompany("Company By Contact" +randomNumber+ "f", "This is the Default");
+        createPath.fillOutCompanyFilter("","WWEEERWWER", "",0);
+        createPath.projectFieldError();
+
+    }
+
     /*COM-100
     Given that a Path Name is optional,
     When no path name is set,
@@ -324,7 +422,7 @@ public class QuickAddTest extends BaseTest {
         "35.5013009N", "110.1599121W"
         "35.5013009", "-110.1599121"
 
-    COM-237
+    COM-129
     DD MM SS.SS N/S or DDD MM SS.SS E/W
     DD MM SS.SSN/S or DDD MM SS.SSE/W
     DD MM SS.SS or DDD MM SS.SS
@@ -533,10 +631,10 @@ public class QuickAddTest extends BaseTest {
         createPath.createBrandNewProjectPath("Best Project Ever"+ randomNumber, "This is the Default");
         pathSummary.valSiteLocationToggleOn();
         //GPS: dd:mm:ss.ss[N,S] dd:mm:ss.ss[W,E]	35:30:4.683N 110:9:35.684W
-        quickAdd.quickAddPathGeneral2("quick Add ASR Suggest", "940 MHz", "KDFW Studio","32 47 16.4 N", "96 47 59 W","55", "KA3982");
+        quickAdd.quickAddPathGeneral2("quick Add ASR Suggest", "940 MHz", "KDFW Studio","32 47 16.4 N", "96 47 59 W","55.45", "KA3982");
 
         //TODO https://www.screencast.com/t/0KxLAQf6nfS[1:22] Nemo Burian [10:45 AM] I figured out how to omit the leading zero for validation so `12 2 3 N` will return `12 2 3 N` (edited)
-        pathSummary.viewSiteCallSignLatLongGeColumns1(0, "KDFW Studio", "KA3982", "32 47 16.4 N", "96 47 59 W", "54.99");
+        pathSummary.viewSiteCallSignLatLongGeColumns1(0, "KDFW Studio", "KA3982", "32 47 16.4 N", "96 47 59 W", "55.51");
 
         quickAdd.quickAddPathGeneral2("ASR field Autofill", "4.0 GHz", "Studio","", "90 11 16.7 W","", "KBM40");
         pathSummary.viewSiteCallSignLatLongGeColumns1(1, "Studio", "KBM40", "38 37 28.9 N", "90 11 16.7 W", "140.72");
