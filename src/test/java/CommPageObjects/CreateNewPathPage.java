@@ -86,11 +86,27 @@ public class CreateNewPathPage extends BasePage {
         click(companySearchButton);//id="company-lookup-submit"
         isDisplayed(control,4);
         isDisplayed(searchResultArray,10);//class="react-grid-Cell__value"
+        isDisplayed(control,4);
         click(searchResultArray);
         a = getFieldText(defaultCompanyField);//id="newProjectForm-defaultCompany"
         assertEquals(a, "Verizon");
         click(createButton);
         isDisplayed(filterField, 10);
+    }
+
+    public void fillOutCompanyFilterErrorChecking(String coCodeText,String coNameText, String coContactText, Integer company) {
+        String a;
+        assertTrue("Can't find company modal",isDisplayed(companyModal,10));//id="company-lookup-modal"
+        assertTrue("Can't find Code Field",isDisplayed(companyCodeField,10));//id="company-lookup-company-code"
+        assertTrue("Can't find Name Field",isDisplayed(companyNameField,10));//id="company-lookup-company-name"
+        assertTrue("Can't find Name Field",isDisplayed(companyContactNameField));//id="company-lookup-contact-name"
+        type(coCodeText, companyCodeField);
+        type(coNameText, companyNameField);
+        type(coContactText, companyContactNameField);
+        assertTrue("Can't find Search Button",isDisplayed(companySearchButton));//id="company-lookup-contact-name"
+        click(companySearchButton);//id="company-lookup-submit"
+        isDisplayed(control,4);
+        isDisplayed(searchResultArray,10);//class="react-grid-Cell__value"
     }
 
     public void attemptToCreateProject(String projectName, String defaultLicensee){
@@ -109,7 +125,7 @@ public class CreateNewPathPage extends BasePage {
         click(commHome);
         assertTrue("can't find the Create button", isDisplayed(createButton));
         type(projectName, newProjectField);
-        type(defaultLicensee, defaultLic);
+        //type(defaultLicensee, defaultLic);
         click(pathRadioButton);
         click(createButton);
         if(isDisplayed(filterField,10)){
