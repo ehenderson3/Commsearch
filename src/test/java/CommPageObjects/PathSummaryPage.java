@@ -230,6 +230,8 @@ public class PathSummaryPage extends BasePage {
         String rowOneLongitude;
         String rowOneGroundElevation;
 
+        isDisplayed(control,4);
+
         assertTrue("path Site Value is not present",isDisplayed(pathSiteIndex2,8));
         assertTrue("path Lat Value is not present",isDisplayed(pathLatitudeValueIndex2,8));
         assertTrue("path Long Value is not present",isDisplayed(pathLongitudeValueIndex2,8));
@@ -458,7 +460,7 @@ public class PathSummaryPage extends BasePage {
 
     public void valFresnelZoneRadius() {
 
-        String defaultLic;
+        String defaultCompany;
         String defaultFresnelZoneRadius;
         String a;
         assertTrue("Hamburger menu is not present", isDisplayed(hamburgerDropDownInactive, 10));
@@ -467,10 +469,9 @@ public class PathSummaryPage extends BasePage {
         click(hamburgerSettings);
         assertTrue("Project Panel is not present", isDisplayed(projectSettingsPanel, 10));
         assertTrue("Project Fresnel Zone Radius (%) is not present", isDisplayed(fresnelZoneRadiusPercentField, 10));
-        //TODO Enrique Henderson [10:08 AM]  currently should Default licensee display currently in settings?
-        //defaultLic = getFieldText(defaultLicenseeField);
+        defaultCompany = getFieldText(defaultLicenseeField);
         defaultFresnelZoneRadius = getFieldText(fresnelZoneRadiusPercentField);
-        //assertEquals("The defaultLic default val is not correct", defaultLic, "The Best Co");
+        assertEquals("The defaultLic default val is not correct", defaultCompany, "Verizon");
         assertEquals("The defaultFresnelZoneRadius default val is not correct", defaultFresnelZoneRadius, "60");
 
         clear(fresnelZoneRadiusPercentField);
@@ -589,26 +590,17 @@ public class PathSummaryPage extends BasePage {
         assertTrue("Project Panel is not present", isDisplayed(projectSettingsPanel, 10));
         assertTrue("Project US Unit is not present", isDisplayed(uSUnit, 10));
         assertTrue("Project SI unit is not present", isDisplayed(sIUnit, 10));
-        //TODO Enrique Henderson [10:08 AM]  currently should Default licensee display currently in settings?
-        //TODO Nemo Burian [10:09 AM]  nope! I misspelled it here and it wasn’t included in the global replace. I’ll fix it in this current ticket. Should have it done tomw morn by the latest.
-
-        //assertTrue("Project Default Licensee is not present", isDisplayed(defaultLicenseeField, 10));
+        assertTrue("Project Default Licensee is not present", isDisplayed(defaultLicenseeField, 10));
         assertTrue("Project Panel is not present", isDisplayed(showSiteLocationCheckBox, 10));
         assertTrue("Project Fresnel Zone Radius (%) is not present", isDisplayed(fresnelZoneRadiusPercentField, 10));
         assertTrue("Project K Factor field is not present", isDisplayed(kFactorField, 10));
         assertTrue("Project Target Availability (%) is not present", isDisplayed(targetAvailability, 10));
-
-        //TODO Enrique Henderson [10:08 AM]  currently should Default licensee display currently in settings?
-        //TODO Nemo Burian [10:09 AM]  nope! I misspelled it here and it wasn’t included in the global replace. I’ll fix it in this current ticket. Should have it done tomw morn by the latest.
-
-        //defaultLic = getFieldText(defaultLicenseeField);
+        defaultLic = getFieldText(defaultLicenseeField);
         defaultFresnelZoneRadius = getFieldText(fresnelZoneRadiusPercentField);
         defaultKFactor = getFieldText(kFactorField);
         defaultMinimumClearance = getFieldText(minClearence);
         defaultTargetAvailability = getFieldText(targetAvailability);
-
-        //TODO add back in once Default business is no longer static
-        //assertEquals("The defaultLic default val is not correct", defaultLic, "The Best Co");
+        assertEquals("The defaultLic default val is not correct", defaultLic, "Verizon");
         assertEquals("The defaultFresnelZoneRadius default val is not correct", defaultFresnelZoneRadius, "60");
         assertEquals("The defaultKFactor default val is not correct", defaultKFactor, "1");
         assertEquals("The defaultMinimumClearance default val is not correct", defaultMinimumClearance, "0");
@@ -624,9 +616,7 @@ public class PathSummaryPage extends BasePage {
         assertTrue("Project Panel is not present", isDisplayed(projectSettingsPanel, 10));
         assertTrue("Project US Unit is not present", isDisplayed(uSUnit, 10));
         assertTrue("Project SI unit is not present", isDisplayed(sIUnit, 10));
-        //TODO Enrique Henderson [10:08 AM]  currently should Default licensee display currently in settings?
-        //TODO Nemo Burian [10:09 AM]  nope! I misspelled it here and it wasn’t included in the global replace. I’ll fix it in this current ticket. Should have it done tomw morn by the latest.
-        //assertTrue("Project Default Licensee is not present", isDisplayed(defaultLicenseeField, 10));
+        assertTrue("Project Default Company is not present", isDisplayed(defaultLicenseeField, 10));
         assertTrue("Project Panel is not present", isDisplayed(showSiteLocationCheckBox, 10));
         assertTrue("Project Fresnel Zone Radius (%) is not present", isDisplayed(fresnelZoneRadiusPercentField, 10));
         assertTrue("Project K Factor field is not present", isDisplayed(kFactorField, 10));

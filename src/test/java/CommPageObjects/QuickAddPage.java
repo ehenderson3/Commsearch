@@ -149,9 +149,10 @@ public class QuickAddPage extends BasePage {
         click(quickAddButton);
         waitForIsDisplayed(pathName,6);
         type(PathNameText, pathName);
+        //selectFromDropdown(optionanBandDropDown, BandDropDown);
         type(sitePartialText,siteField);
         isDisplayed(option,6);
-        click(option);
+        hover(option);
         lat = getFieldText(latitude);
         longs = getFieldText(longitude);
         asr = getFieldText(callSign);
@@ -160,16 +161,20 @@ public class QuickAddPage extends BasePage {
         assertEquals(elev, ElevationText);
         assertEquals(longs,Longitude);
         assertEquals(asr,Asr);
-
         isDisplayed(addPathButton,6);
-        type("KOTA TX - Skyline",siteField2);
+        type("New",siteField2);
         isDisplayed(option,6);
-        type("KA2124",callSign2);
-        isDisplayed(control,2);
-        click(elevation2);
-        isDisplayed(control,2);
-        click(callSign2);
-        type("152",elevation2);
+        click(option);
+        click(pathName);
+        click(siteField);
+        isDisplayed(option,10);
+        hover(option);
+
+        click(pathName);
+        click(siteField);
+        isDisplayed(option,10);
+        //hover(option);
+        click(option);
         click(addPathButton,1);
         isDisplayed(addPathDetails,6);
         isDisplayed(quickAddButton,6);

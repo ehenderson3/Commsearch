@@ -113,7 +113,7 @@ public class CreatePathTest extends BaseTest {
         */
     @Test
     public void duplicateProjectName() {
-        createPath.attemptToCreateDupProject("Test Duplicate Project 8", "This is the Default");
+        createPath.attemptToCreateDupProject("Test Duplicate Project", "This is the Default");
         //assertTrue(createPath.projectNameTooLongError());
     }
         /*COM 124
