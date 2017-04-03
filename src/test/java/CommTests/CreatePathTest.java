@@ -62,6 +62,7 @@ public class CreatePathTest extends BaseTest {
         createPath.createBrandNewProjectPath("Best Project Ever" +randomNumber+ "f", "This is the Default");
     }
 
+
         /*COM 121
         "Given a user wants to name a project,
         When the name is NOT unique,

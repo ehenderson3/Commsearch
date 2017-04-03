@@ -468,7 +468,6 @@ public class PathSummaryPage extends BasePage {
         assertTrue("Project Panel is not present", isDisplayed(projectSettingsPanel, 10));
         assertTrue("Project Fresnel Zone Radius (%) is not present", isDisplayed(fresnelZoneRadiusPercentField, 10));
         //TODO Enrique Henderson [10:08 AM]  currently should Default licensee display currently in settings?
-        //TODO Nemo Burian [10:09 AM]  nope! I misspelled it here and it wasn’t included in the global replace. I’ll fix it in this current ticket. Should have it done tomw morn by the latest.
         //defaultLic = getFieldText(defaultLicenseeField);
         defaultFresnelZoneRadius = getFieldText(fresnelZoneRadiusPercentField);
         //assertEquals("The defaultLic default val is not correct", defaultLic, "The Best Co");
