@@ -510,8 +510,6 @@ public class QuickAddPage extends BasePage {
 
 
 
-
-
     public String projectFieldError(int i){
         return getTextPlural(errorMessage,i);
     }

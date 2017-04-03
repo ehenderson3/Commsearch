@@ -12,13 +12,10 @@ import static org.junit.Assert.assertTrue;
 
 public class PathSummaryPage extends BasePage {
 
-//Path Headings
+    //Path Headings
     By projectTitleName = By.xpath("//*[@class=\"project-summary-overview\"]/p[1]/span[2]");
     By projectTitle = By.className("project-summary-overview");
     By totalPathAmount = By.xpath("//*[@class=\"project-summary-overview\"]/p[3]/span[2]");
-    By deletePopUpTitle = By.className("uppercase");
-    By deletePopUpSubText = By.className("center-text");//Need more specific locator
-    By deleteConfirmationTitle1 = By.cssSelector(".display-flex.justify-content-center");
     By deleteConfirmationTitle = By.id("delete-paths-modal-success-heading");
     By deleteConfirmationSubText = By.id("delete-paths-modal-success-message");
     By headerLOSInactive = By.xpath("//*[@id='project-summary-sort-los' and @class='"+INACTIVE_POINTER+"']");
@@ -27,17 +24,13 @@ public class PathSummaryPage extends BasePage {
     By headerLOSActive = By.xpath("//*[@id='project-summary-sort-los' and @class='"+DOWN_POINTER+"']");
     By headerAvailabilityActive = By.xpath("//*[@id='project-summary-sort-avail' and @class='"+DOWN_POINTER+"']");
     By headerValidationActive = By.xpath("//*[@id='project-summary-sort-valid' and @class='"+DOWN_POINTER+"']");
-    By headerLOSValues = By.xpath("//*[@class ='path-los-value' and contains(@style,'background:')]");
     By headerLOSValues1 = By.className("path-los-value");
     By headerAvailabilityValues = By.className("path-avail-value");
     By headerValidValues = By.className("path-valid-value");
-    By deletePathPopupTitle0 = By.xpath("//*[@class,'uppercase') and contains(text(), 'Delete Path')]");
     By deletePathPopupTitle = By.className("project-summary-modal");
-    By deletePathPopupSubTitle = By.tagName("p");
-    By deleteConfirmationPathPopupSubTitle = By.xpath("//*[contains(@tag, 'span') and contains(@class, 'display-flex justify-content-center')]");
     By siteHeader = By.cssSelector(".bg-blue-dark.padding-half.heading-font");
 
-//Path Buttons
+    //Path Buttons
     By searchButton = By.id("project-summary-filter-apply");
     By selectAllButton = By.cssSelector(".heading-font.btn.btn-md.btn-skinny.bg-white.btn-border.margin-left-1");
     By deselectAllButton = By.cssSelector(".heading-font.btn.btn-md.btn-skinny.bg-white.btn-border.margin-left-1");
@@ -60,28 +53,28 @@ public class PathSummaryPage extends BasePage {
     By pathsNoFreqCheckBoxText = By.xpath("//*[@id=\"app\"]/div/div/div/div/div/div[1]/form/p[2]/label");
 
 
-//Drop down options
+    //Drop down options
     By deleteOptionForPath1 = By.id("path-menu-delete-0");
     By copyOption = By.xpath("//*[@id=\"path-menu-0\"]/li[2]");
     By deletePopup = By.cssSelector(".ReactModal__Content.ReactModal__Content--after-open");
     By hamburgerDeletePaths = By.id("project-settings-delete-paths-modal-trigger");
 
-//Path Entry Fields - Able to use the type method
+    //Path Entry Fields - Able to use the type method
     By targetAvailability = By.id("project-summary-settings-target-availability");
     By filterSelectionInput = By.id("project-summary-filter-input");
-    By defaultLicenseeField = By.id("project-summary-settings-default-licensee");
+    By defaultLicenseeField = By.id("project-summary-settings-default-company");
     By fresnelZoneRadiusPercentField = By.id("project-summary-settings-freznel-zone-radius");
     By kFactorField = By.id("project-summary-settings-k-factor");
     By minClearence = By.id("project-summary-settings-minimum-clearance");
     By fieldChange = By.xpath("//*[contains(@placeholder, 'Minimum Clearance (m)')]");
 
-//Path hovers -- Able to use the hover method
+    //Path hovers -- Able to use the hover method
     By passiveRepeaterIcon = By.xpath("//*[contains(@id, 'passive-repeater-tooltip-path')]");
     By siteLocationIcon = By.id("site-tooltip-trigger-path-0-site-2");
     By siteLocationIcon1 = By.id("site-tooltip-trigger-path");
     By hoverSite = By.cssSelector(".__react_component_tooltip.place-bottom.type-light.project-summary-tooltip");
 
-//Path Data Fields - Element is read only and can use getFieldText method
+    //Path Data Fields - Element is read only and can use getFieldText method
     By licenseeName = By.xpath("//*[@class=\"project-summary-overview\"]/p[2]/span[2]");
     By passiveRepeaterHoverSiteNameField = By.xpath("//*[text() = 'Site Name' and @class = 'uppercase']");
     By passiveRepeaterHoverLatitudeField = By.xpath("//*[text() = 'Latitude' and @class = 'uppercase']");
@@ -106,12 +99,12 @@ public class PathSummaryPage extends BasePage {
     By remainingDeletePaths = By.xpath("//*[contains(@id, 'project-summary-modal-path-')]");//project-summary-modal-path-
 
 
-//Path DropDown Fields -- Does it contain a list that has options that can be selected
+    //Path DropDown Fields -- Does it contain a list that has options that can be selected
     By filterSelection = By.id("project-summary-filter-select");
     By hamburgerDropDownInactive = By.xpath("//*[@id='project-summary-menu-toggle' and @class='pointer pull-right']");
     By hamburgerDropDownActive = By.xpath("//*[@id='project-summary-menu-toggle' and @class='pointer pull-right active']");
 
-//Index List -- Can you used an array to select item
+    //Index List -- Can you used an array to select item
     By pathNameIndexValue = By.className("path-name-value");
     By pathNumberIndexValue = By.cssSelector(".path-index-value");
     By pathModValue = By.cssSelector(".tooltip-trigger-decoration.show-decoration.acm-tooltip-decoration.uppercase");
@@ -168,28 +161,9 @@ public class PathSummaryPage extends BasePage {
     public PathSummaryPage(WebDriver driver) {
         super(driver);
         visit("/project-summary/395");
-        //assertTrue(isDisplayed(projectTitle,3));
     }
 
-    public void quickAddSuggestedText(){
-//        assertTrue(isDisplayed(quickAddButton,6));
-//        click(quickAddbutton);
-//        isDisplayed(addPathNameField);
-//        isDisplayed(addPathBandField);
-//        isDisplayed(addPathSiteField);
-//        isDisplayed(addPathASRField);
-//        isDisplayed(addPathLatitudeField);
-//        isDisplayed(addPathLongitudeField);
-//        isDisplayed(addPathElevationField);
-//        isDisplayed(addPathSiteField);
-    }
-
-
-
-
-
-//TODO antenna section is not complete at the moment will revisit once implemented
-
+    //TODO antenna section is not complete at the moment will revisit once implemented
     public void pathWithSameConfig_OneRadio(){
         String ant1;
         String ant2;
@@ -275,7 +249,6 @@ public class PathSummaryPage extends BasePage {
         assertEquals(rowOneGroundElevation, elev);
     }
 
-
     public void viewSiteCallSignLatLongGeColumns2(int rowIndex, String siteIndex, String callSign, String lat, String longi, String elev){
         String rowOneSite;
         String rowOneCallsign;
@@ -327,13 +300,10 @@ public class PathSummaryPage extends BasePage {
     public void viewDiversityAntAmcPassFail(){
         String rowOneDiversityAntenna;
         String rowOneAcm;
-
         assertTrue("path Diversity Tool is not present",isDisplayed(pathDiversityToolTipIndex2,8));
         assertTrue("path ACM is not present",isDisplayed(pathACMIndex1,8));
-
         rowOneDiversityAntenna = getTextPlural(pathDiversityToolTipIndex2,0);
         rowOneAcm = getTextPlural(pathACMIndex1,0);
-
         assertEquals(rowOneDiversityAntenna, "D");
         assertEquals(rowOneAcm, "ACM");
         validatePresenceOfLOSAvailVal();
@@ -501,7 +471,7 @@ public class PathSummaryPage extends BasePage {
         //TODO Nemo Burian [10:09 AM]  nope! I misspelled it here and it wasn’t included in the global replace. I’ll fix it in this current ticket. Should have it done tomw morn by the latest.
         //defaultLic = getFieldText(defaultLicenseeField);
         defaultFresnelZoneRadius = getFieldText(fresnelZoneRadiusPercentField);
-       // assertEquals("The defaultLic default val is not correct", defaultLic, "The Best Co");
+        //assertEquals("The defaultLic default val is not correct", defaultLic, "The Best Co");
         assertEquals("The defaultFresnelZoneRadius default val is not correct", defaultFresnelZoneRadius, "60");
 
         clear(fresnelZoneRadiusPercentField);
@@ -601,13 +571,7 @@ public class PathSummaryPage extends BasePage {
 
         postSiSwitchValue= getFieldText(minClearence);
         assertEquals("Min clearence did not change", postSiSwitchValue,valPostSiSwitch);
-
-
-        //click(saveButton);
-//      isDisplayed(groundElevation, 10);
         minimumClearanceLable = getText(minimumClearance);
-        //groundElevationHeading = getText(groundElevation);
-        //assertTrue(groundElevationHeading.contains("(m)"));
         assertTrue(minimumClearanceLable.contains("(m)"));
     }
 
@@ -635,12 +599,8 @@ public class PathSummaryPage extends BasePage {
         assertTrue("Project K Factor field is not present", isDisplayed(kFactorField, 10));
         assertTrue("Project Target Availability (%) is not present", isDisplayed(targetAvailability, 10));
 
-
-
         //TODO Enrique Henderson [10:08 AM]  currently should Default licensee display currently in settings?
         //TODO Nemo Burian [10:09 AM]  nope! I misspelled it here and it wasn’t included in the global replace. I’ll fix it in this current ticket. Should have it done tomw morn by the latest.
-
-
 
         //defaultLic = getFieldText(defaultLicenseeField);
         defaultFresnelZoneRadius = getFieldText(fresnelZoneRadiusPercentField);
