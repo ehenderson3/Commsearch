@@ -38,6 +38,31 @@ public class PathSummaryTest extends BaseTest {
     @Rule
     public RetryTest.Retry retry = new RetryTest.Retry(1);
 
+    /*
+    Given a user wants to copy a path in the Project Summary table,
+    When the caret in the ""#"" column is clicked,
+    Then it will reveal a Copy button."
+
+    "Given the caret in the ""#"" column is clicked,
+     When the Copy button is clicked,
+     Then the path wherein the Copy button is clicked will be copied and pasted at the bottom of the path list."
+
+    * */
+
+    @Test
+    public void copyPath() {
+        createPath.createBrandNewProjectPath("Best Project Ever"+ randomNumber, "This is the Default");
+        pathSummary.valSiteLocationToggleOn();
+        quickAdd.quickAddPathGeneral2("Test Path 1", "23.0 GHz", "ASR-Call","32 47 16.4 N", "96 47 59 W","55", "KA3982");
+        pathSummary.viewSiteCallSignLatLongGeColumns1(0,"KDFW Studio","KA3982","32 47 16.4 N","96 47 59 W","54.99");
+        pathSummary.selectCopyFromPath();
+        pathSummary.viewSiteCallSignLatLongGeColumns1(0,"KDFW Studio","KA3982","32 47 16.4 N","96 47 59 W","54.99");
+        pathSummary.viewSiteCallSignLatLongGeColumns1(1,"KOTA TX - Skyline","KA2124","44 4 7.4 N","103 15 5 W","23");
+        pathSummary.viewSiteCallSignLatLongGeColumns2(0,"KDFW Studio","KA2124","44 4 7.4 N","103 15 5 W","23");
+
+    }
+
+
     /**
      * Given that user is logged in with appropriate permission,
      * When a cursor hovers over the "P" (passive repeater) icon in the PATH column,

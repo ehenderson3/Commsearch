@@ -163,6 +163,13 @@ public class PathSummaryPage extends BasePage {
         visit("/project-summary/395");
     }
 
+
+    public void selectCopyFromPath() {
+        click(actionArrow);
+        isDisplayed(deleteOptionForPath1,10);
+        isDisplayed(copyOption,3);
+        click(copyOption);
+    }
     //TODO antenna section is not complete at the moment will revisit once implemented
     public void pathWithSameConfig_OneRadio(){
         String ant1;
