@@ -1,5 +1,10 @@
-C:\AutomationFrameWorks\comsearch-ui-tests\src\test\java\CommTests\TestLoginLego.java
-C:\AutomationFrameWorks\comsearch-ui-tests\src\test\java\CommPageObjects\BasePage.java
-C:\AutomationFrameWorks\comsearch-ui-tests\src\test\java\CommTests\BaseTest.java
-C:\AutomationFrameWorks\comsearch-ui-tests\src\test\java\CommTests\Config.java
-C:\AutomationFrameWorks\comsearch-ui-tests\src\test\java\CommPageObjects\CreateNewPath.java
+/Users/svelazquez/Projects/surge/comSearch/workspace/comsearch-ui-tests/src/test/java/CommTests/RetryTest.java
+/Users/svelazquez/Projects/surge/comSearch/workspace/comsearch-ui-tests/src/test/java/CommPageObjects/CreateNewPathPage.java
+/Users/svelazquez/Projects/surge/comSearch/workspace/comsearch-ui-tests/src/test/java/CommPageObjects/PathSummaryPage.java
+/Users/svelazquez/Projects/surge/comSearch/workspace/comsearch-ui-tests/src/test/java/CommTests/CreatePathTest.java
+/Users/svelazquez/Projects/surge/comSearch/workspace/comsearch-ui-tests/src/test/java/CommTests/Config.java
+/Users/svelazquez/Projects/surge/comSearch/workspace/comsearch-ui-tests/src/test/java/CommTests/BaseTest.java
+/Users/svelazquez/Projects/surge/comSearch/workspace/comsearch-ui-tests/src/test/java/CommPageObjects/QuickAddPage.java
+/Users/svelazquez/Projects/surge/comSearch/workspace/comsearch-ui-tests/src/test/java/CommTests/PathSummaryTest.java
+/Users/svelazquez/Projects/surge/comSearch/workspace/comsearch-ui-tests/src/test/java/CommPageObjects/BasePage.java
+/Users/svelazquez/Projects/surge/comSearch/workspace/comsearch-ui-tests/src/test/java/CommTests/QuickAddTest.java
