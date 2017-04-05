@@ -16,8 +16,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+        import java.util.concurrent.TimeUnit;
 
-import static org.junit.Assert.assertEquals;
+        import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 
@@ -38,10 +39,19 @@ public class BasePage implements Config {
     }
 
 
+    public void slowDown(int i){
+        try {
+            TimeUnit.SECONDS.sleep(i);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
 
     public WebElement find(By locator) {
         return driver.findElement(locator);
     }
+
 
     public WebElement find(By locators, int i) {
         return driver.findElements(locators).get(i);
@@ -59,6 +69,7 @@ public class BasePage implements Config {
         driver.findElement(locator).clear();
 
     }
+
 
 
     public List<WebElement> finds(By locators) {
@@ -84,6 +95,7 @@ public class BasePage implements Config {
         return s;
     }
 
+
     public String getTextPlural(By locator,int i)
     {
         WebElement TxtBoxContent = driver.findElements(locator).get(i);
@@ -92,9 +104,11 @@ public class BasePage implements Config {
         return s;
     }
 
+
     public void click(By locator) {
         find(locator).click();
     }
+
 
     public void click(By locators, int i) {
         finds(locators).get(i).click();
@@ -105,6 +119,7 @@ public class BasePage implements Config {
         WebElement we = driver.findElements(locator).get(i);
         action.moveToElement(we).click().build().perform();
     }
+
 
 
     public void hover(By locator){

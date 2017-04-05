@@ -51,16 +51,15 @@ public class CreateNewPathPage extends BasePage {
 
     public void createBrandNewProjectPath(String projectName, String defaultLicensee){
         String filterEntryField;
+        isDisplayed(commHome,10);
         click(commHome);
         assertTrue("can't find the Create button",
         isDisplayed(createButton));
         type(projectName, newProjectField);
         click(pathRadioButton);
         isDisplayed(defaultLic,20);
-
         click(createButton);
-        waitForIsDisplayed(filterField,10);
-        //type(defaultLicensee, defaultLic);
+        isDisplayed(filterField,10);
     }
     public void enterProjectForCompany(String projectName, String defaultLicensee){
         click(commHome);
@@ -70,25 +69,25 @@ public class CreateNewPathPage extends BasePage {
         click(pathRadioButton);
         isDisplayed(defaultLic,20);
         isDisplayed(companyLookUp, 10);
-        click(companyLookUp);//id="newProjectForm-defaultCompanyLookup"
+        click(companyLookUp);
     }
 
     public void fillOutCompanyFilter(String coCodeText,String coNameText, String coContactText, Integer company) {
         String a;
-        assertTrue("Can't find company modal",isDisplayed(companyModal,10));//id="company-lookup-modal"
-        assertTrue("Can't find Code Field",isDisplayed(companyCodeField,10));//id="company-lookup-company-code"
-        assertTrue("Can't find Name Field",isDisplayed(companyNameField,10));//id="company-lookup-company-name"
-        assertTrue("Can't find Name Field",isDisplayed(companyContactNameField));//id="company-lookup-contact-name"
+        assertTrue("Can't find company modal",isDisplayed(companyModal,10));
+        assertTrue("Can't find Code Field",isDisplayed(companyCodeField,10));
+        assertTrue("Can't find Name Field",isDisplayed(companyNameField,10));
+        assertTrue("Can't find Name Field",isDisplayed(companyContactNameField));
         type(coCodeText, companyCodeField);
         type(coNameText, companyNameField);
         type(coContactText, companyContactNameField);
-        assertTrue("Can't find Search Button",isDisplayed(companySearchButton));//id="company-lookup-contact-name"
-        click(companySearchButton);//id="company-lookup-submit"
+        assertTrue("Can't find Search Button",isDisplayed(companySearchButton));
+        click(companySearchButton);
         isDisplayed(control,4);
-        isDisplayed(searchResultArray,10);//class="react-grid-Cell__value"
+        isDisplayed(searchResultArray,10);
         isDisplayed(control,4);
         click(searchResultArray);
-        a = getFieldText(defaultCompanyField);//id="newProjectForm-defaultCompany"
+        a = getFieldText(defaultCompanyField);
         assertEquals(a, "Verizon");
         click(createButton);
         isDisplayed(filterField, 10);
@@ -96,17 +95,17 @@ public class CreateNewPathPage extends BasePage {
 
     public void fillOutCompanyFilterErrorChecking(String coCodeText,String coNameText, String coContactText, Integer company) {
         String a;
-        assertTrue("Can't find company modal",isDisplayed(companyModal,10));//id="company-lookup-modal"
-        assertTrue("Can't find Code Field",isDisplayed(companyCodeField,10));//id="company-lookup-company-code"
-        assertTrue("Can't find Name Field",isDisplayed(companyNameField,10));//id="company-lookup-company-name"
-        assertTrue("Can't find Name Field",isDisplayed(companyContactNameField));//id="company-lookup-contact-name"
+        assertTrue("Can't find company modal",isDisplayed(companyModal,10));
+        assertTrue("Can't find Code Field",isDisplayed(companyCodeField,10));
+        assertTrue("Can't find Name Field",isDisplayed(companyNameField,10));
+        assertTrue("Can't find Name Field",isDisplayed(companyContactNameField));
         type(coCodeText, companyCodeField);
         type(coNameText, companyNameField);
         type(coContactText, companyContactNameField);
-        assertTrue("Can't find Search Button",isDisplayed(companySearchButton));//id="company-lookup-contact-name"
-        click(companySearchButton);//id="company-lookup-submit"
+        assertTrue("Can't find Search Button",isDisplayed(companySearchButton));
+        click(companySearchButton);
         isDisplayed(control,4);
-        isDisplayed(searchResultArray,10);//class="react-grid-Cell__value"
+        isDisplayed(searchResultArray,10);
     }
 
     public void attemptToCreateProject(String projectName, String defaultLicensee){
@@ -114,7 +113,6 @@ public class CreateNewPathPage extends BasePage {
         assertTrue("can't find the Create button",
         isDisplayed(createButton));
         type(projectName, newProjectField);
-        //type(defaultLicensee, defaultLic);
         click(pathRadioButton);
         isDisplayed(defaultLic,20);
         click(createButton);
@@ -125,7 +123,6 @@ public class CreateNewPathPage extends BasePage {
         click(commHome);
         assertTrue("can't find the Create button", isDisplayed(createButton));
         type(projectName, newProjectField);
-        //type(defaultLicensee, defaultLic);
         click(pathRadioButton);
         click(createButton);
         if(isDisplayed(filterField,10)){
@@ -146,13 +143,10 @@ public class CreateNewPathPage extends BasePage {
         assertTrue("can't find the Create button",
         isDisplayed(createButton));
         type(projectName,newProjectField);
-
         click(pathRadioButton);
         isDisplayed(defaultLic,20);
-
         click(createButton);
 
-        //type(defaultLicensee,defaultLic);
     }
 
     public Boolean projectNameRequired() {

@@ -105,20 +105,20 @@ public class QuickAddTest extends BaseTest {
         pathSummary.valSiteLocationToggleOn();
 
         siteExist = quickAdd.checkForExistingSite("Tonto Mtn");
-        if (siteExist == true)
-            quickAdd.cancelPathCreation();
+        if (siteExist == true){
+            quickAdd.cancelPathCreation();}
         else
             quickAdd.quickAddPathDataSetup("TM SUPPORT DATA", "940 MHz", "Tonto Mtn", "34 37 42.1 N", "112 39 26.2 W", "1542.29", "KBY45");
 
         siteExist = quickAdd.checkForExistingSite("SYNRAMS STATION");
-        if (siteExist == true)
-            quickAdd.cancelPathCreation();
+        if (siteExist == true){
+            quickAdd.cancelPathCreation();}
         else
             quickAdd.quickAddPathDataSetup("TM SUPPORT DATA", "940 MHz", "SYNRAMS STATION", "40 34 10 N", "122 26 14 W", "250", "1208837");
 
         siteExist = quickAdd.checkForExistingSite("CAMSLANT STATION");
-        if (siteExist == true)
-            quickAdd.cancelPathCreation();
+        if (siteExist == true){
+            quickAdd.cancelPathCreation();}
         else
             quickAdd.quickAddPathDataSetup("CAM SUPPORT DATA", "940 MHz", "CAMSLANT STATION", "35 12 26.7 N", "78 3 21.2 W", "48.69", "1241006");
 
@@ -173,9 +173,8 @@ public class QuickAddTest extends BaseTest {
         createPath.fillOutCompanyFilter("VZW111","", "",0);
         pathSummary.valSiteLocationToggleOn();
         siteExist = quickAdd.checkForExistingSite("New York");
-        if (siteExist == true)
-            quickAdd.cancelPathCreation();
-        else
+        if (siteExist == true){quickAdd.cancelPathCreation();
+        }else
             quickAdd.quickAddPathDataSetup("NY SUPPORT DATA", "940 MHz", "New York", "40 44 54 N", "73 59 9 W", "0.98", "KA20003");
 
         quickAdd.quickAddPath("New", "940 MHz", "", "40 44 54 N", "73 59 9 W", "0.98", "KA20003");
@@ -192,9 +191,8 @@ public class QuickAddTest extends BaseTest {
         createPath.fillOutCompanyFilter("","Verizon", "",0);
         pathSummary.valSiteLocationToggleOn();
         siteExist = quickAdd.checkForExistingSite("New York");
-        if (siteExist == true)
-            quickAdd.cancelPathCreation();
-        else
+        if (siteExist == true){quickAdd.cancelPathCreation();
+        }else
             quickAdd.quickAddPathDataSetup("NY SUPPORT DATA", "940 MHz", "New York", "40 44 54 N", "73 59 9 W", "0.98", "KA20003");
 
         quickAdd.quickAddPath("New", "940 MHz", "", "40 44 54 N", "73 59 9 W", "0.98", "KA20003");
@@ -202,8 +200,7 @@ public class QuickAddTest extends BaseTest {
         pathSummary.viewSiteCallSignLatLongGeColumns2(0, "New York", "KA20003", "40 44 54 N", "73 59 9 W", "0.98");
     }
 
-/*    @Test
-
+   /*@Test
     public void createNewProjectWithCompanyByContact() {
         boolean siteExist;
 
@@ -253,8 +250,8 @@ public class QuickAddTest extends BaseTest {
         pathSummary.valSiteLocationToggleOn();
 
         siteExist = quickAdd.checkForExistingSite("New York");
-        if (siteExist == true)
-            quickAdd.cancelPathCreation();
+        if (siteExist == true){
+            quickAdd.cancelPathCreation();}
         else
             quickAdd.quickAddPathDataSetup("NY SUPPORT DATA", "940 MHz", "New York", "40 44 54 N", "73 59 9 W", "0.98", "KA20003");
 
@@ -265,8 +262,8 @@ public class QuickAddTest extends BaseTest {
         assertEquals(pathName, "New York - New York");
 
         siteExist = quickAdd.checkForExistingSite("CAMSLANT STATION");
-        if (siteExist == true)
-            quickAdd.cancelPathCreation();
+        if (siteExist == true){
+            quickAdd.cancelPathCreation();}
         else
             quickAdd.quickAddPathDataSetup("CAM SUPPORT DATA", "940 MHz", "CAMSLANT STATION", "35 12 26.7 N", "78 3 21.2 W", "48.69", "1241006");
         quickAdd.quickAddPath("CAM", "940 MHz", "", "35 12 26.7 N", "78 3 21.2 W", "48.69", "1241006");
@@ -322,8 +319,8 @@ public class QuickAddTest extends BaseTest {
 
 
         siteExist = quickAdd.checkForExistingSite("BLACKTAIL MTN");
-        if (siteExist == true)
-            quickAdd.cancelPathCreation();
+        if (siteExist == true){
+            quickAdd.cancelPathCreation();}
         else
             quickAdd.quickAddPathDataSetup("BTM SUPPORT DATA", "940 MHz", "BLACKTAIL MTN", "48 0 47.8 N", "114 21 58.4 W", "2035.79", "KBM76");
 
@@ -633,7 +630,6 @@ public class QuickAddTest extends BaseTest {
         //GPS: dd:mm:ss.ss[N,S] dd:mm:ss.ss[W,E]	35:30:4.683N 110:9:35.684W
         quickAdd.quickAddPathGeneral2("quick Add ASR Suggest", "940 MHz", "KDFW Studio","32 47 16.4 N", "96 47 59 W","55.45", "KA3982");
 
-        //TODO https://www.screencast.com/t/0KxLAQf6nfS[1:22] Nemo Burian [10:45 AM] I figured out how to omit the leading zero for validation so `12 2 3 N` will return `12 2 3 N` (edited)
         pathSummary.viewSiteCallSignLatLongGeColumns1(0, "KDFW Studio", "KA3982", "32 47 16.4 N", "96 47 59 W", "55.51");
 
         quickAdd.quickAddPathGeneral2("ASR field Autofill", "4.0 GHz", "Studio","", "90 11 16.7 W","", "KBM40");
