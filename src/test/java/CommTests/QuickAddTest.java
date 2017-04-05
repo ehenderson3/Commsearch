@@ -107,32 +107,30 @@ public class QuickAddTest extends BaseTest {
         siteExist = quickAdd.checkForExistingSite("Tonto Mtn");
         if (siteExist == true){
             quickAdd.cancelPathCreation();}
-        else
+        else{
             quickAdd.quickAddPathDataSetup("TM SUPPORT DATA", "940 MHz", "Tonto Mtn", "34 37 42.1 N", "112 39 26.2 W", "1542.29", "KBY45");
-
-        siteExist = quickAdd.checkForExistingSite("SYNRAMS STATION");
+            siteExist = quickAdd.checkForExistingSite("SYNRAMS STATION");}
         if (siteExist == true){
             quickAdd.cancelPathCreation();}
-        else
+        else{
             quickAdd.quickAddPathDataSetup("TM SUPPORT DATA", "940 MHz", "SYNRAMS STATION", "40 34 10 N", "122 26 14 W", "250", "1208837");
-
-        siteExist = quickAdd.checkForExistingSite("CAMSLANT STATION");
+            siteExist = quickAdd.checkForExistingSite("CAMSLANT STATION");}
         if (siteExist == true){
             quickAdd.cancelPathCreation();}
-        else
+        else{
             quickAdd.quickAddPathDataSetup("CAM SUPPORT DATA", "940 MHz", "CAMSLANT STATION", "35 12 26.7 N", "78 3 21.2 W", "48.69", "1241006");
+            quickAdd.quickAddPath("Ton", "940 MHz", "Best Path", "34 37 42.1 N", "112 39 26.2 W", "1542.29", "KBY45");
+            pathSummary.viewSiteCallSignLatLongGeColumns1(0, "Tonto Mtn", "KBY45", "34 37 42.1 N", "112 39 26.2 W", "1542.29");
+            pathSummary.viewSiteCallSignLatLongGeColumns2(0, "Tonto Mtn", "KA20003", "40 44 54 N", "73 59 9 W", "0.98");
 
-        quickAdd.quickAddPath("Ton", "940 MHz", "Best Path", "34 37 42.1 N", "112 39 26.2 W", "1542.29", "KBY45");
-        pathSummary.viewSiteCallSignLatLongGeColumns1(0, "Tonto Mtn", "KBY45", "34 37 42.1 N", "112 39 26.2 W", "1542.29");
-        pathSummary.viewSiteCallSignLatLongGeColumns2(0, "Tonto Mtn", "KA20003", "40 44 54 N", "73 59 9 W", "0.98");
+            quickAdd.quickAddPath("SYNRA", "940 MHz", "Best Path", "40 34 10 N", "122 26 14 W", "250", "1208837");
+            pathSummary.viewSiteCallSignLatLongGeColumns1(1, "SYNRAMS STATION", "", "40 34 10 N", "122 26 14 W", "250");
+            pathSummary.viewSiteCallSignLatLongGeColumns2(0, "Tonto Mtn", "KA20003", "40 44 54 N", "73 59 9 W", "0.98");
 
-        quickAdd.quickAddPath("SYNRA", "940 MHz", "Best Path", "40 34 10 N", "122 26 14 W", "250", "1208837");
-        pathSummary.viewSiteCallSignLatLongGeColumns1(1, "SYNRAMS STATION", "", "40 34 10 N", "122 26 14 W", "250");
-        pathSummary.viewSiteCallSignLatLongGeColumns2(0, "Tonto Mtn", "KA20003", "40 44 54 N", "73 59 9 W", "0.98");
+            quickAdd.quickAddPath("CAM", "940 MHz", "Best Path", "35 12 26.7 N", "78 3 21.2 W", "48.69", "1241006");
+            pathSummary.viewSiteCallSignLatLongGeColumns1(2, "CAMSLANT STATION", "", "35 12 26.7 N", "78 3 21.2 W", "48.69");
+            pathSummary.viewSiteCallSignLatLongGeColumns2(0, "Tonto Mtn", "KA20003", "40 44 54 N", "73 59 9 W", "0.98");}
 
-        quickAdd.quickAddPath("CAM", "940 MHz", "Best Path", "35 12 26.7 N", "78 3 21.2 W", "48.69", "1241006");
-        pathSummary.viewSiteCallSignLatLongGeColumns1(2, "CAMSLANT STATION", "", "35 12 26.7 N", "78 3 21.2 W", "48.69");
-        pathSummary.viewSiteCallSignLatLongGeColumns2(0, "Tonto Mtn", "KA20003", "40 44 54 N", "73 59 9 W", "0.98");
     }
 
 
@@ -174,12 +172,14 @@ public class QuickAddTest extends BaseTest {
         pathSummary.valSiteLocationToggleOn();
         siteExist = quickAdd.checkForExistingSite("New York");
         if (siteExist == true){quickAdd.cancelPathCreation();
-        }else
+        } else {
             quickAdd.quickAddPathDataSetup("NY SUPPORT DATA", "940 MHz", "New York", "40 44 54 N", "73 59 9 W", "0.98", "KA20003");
+            quickAdd.quickAddPath("New", "940 MHz", "", "40 44 54 N", "73 59 9 W", "0.98", "KA20003");
+            pathSummary.viewSiteCallSignLatLongGeColumns1(0, "New York", "KA20003", "40 44 54 N", "73 59 9 W", "0.98");
+            pathSummary.viewSiteCallSignLatLongGeColumns2(0, "New York", "KA20003", "40 44 54 N", "73 59 9 W", "0.98");
+        }
 
-        quickAdd.quickAddPath("New", "940 MHz", "", "40 44 54 N", "73 59 9 W", "0.98", "KA20003");
-        pathSummary.viewSiteCallSignLatLongGeColumns1(0, "New York", "KA20003", "40 44 54 N", "73 59 9 W", "0.98");
-        pathSummary.viewSiteCallSignLatLongGeColumns2(0, "New York", "KA20003", "40 44 54 N", "73 59 9 W", "0.98");
+
 
 
     }
@@ -192,12 +192,12 @@ public class QuickAddTest extends BaseTest {
         pathSummary.valSiteLocationToggleOn();
         siteExist = quickAdd.checkForExistingSite("New York");
         if (siteExist == true){quickAdd.cancelPathCreation();
-        }else
+        }else {
             quickAdd.quickAddPathDataSetup("NY SUPPORT DATA", "940 MHz", "New York", "40 44 54 N", "73 59 9 W", "0.98", "KA20003");
-
-        quickAdd.quickAddPath("New", "940 MHz", "", "40 44 54 N", "73 59 9 W", "0.98", "KA20003");
-        pathSummary.viewSiteCallSignLatLongGeColumns1(0, "New York", "KA20003", "40 44 54 N", "73 59 9 W", "0.98");
-        pathSummary.viewSiteCallSignLatLongGeColumns2(0, "New York", "KA20003", "40 44 54 N", "73 59 9 W", "0.98");
+            quickAdd.quickAddPath("New", "940 MHz", "", "40 44 54 N", "73 59 9 W", "0.98", "KA20003");
+            pathSummary.viewSiteCallSignLatLongGeColumns1(0, "New York", "KA20003", "40 44 54 N", "73 59 9 W", "0.98");
+            pathSummary.viewSiteCallSignLatLongGeColumns2(0, "New York", "KA20003", "40 44 54 N", "73 59 9 W", "0.98");
+        }
     }
 
    /*@Test
@@ -222,7 +222,6 @@ public class QuickAddTest extends BaseTest {
     @Test
     public void createNewProjectNameDoesNoteExist() {
         boolean siteExist;
-
         createPath.enterProjectForCompany("Company By Contact" +randomNumber+ "f", "This is the Default");
         createPath.fillOutCompanyFilterErrorChecking("","WWEEERWWER", "",0);
         //createPath.projectFieldError();//TODO company not present warning not implemented yet.
@@ -252,14 +251,14 @@ public class QuickAddTest extends BaseTest {
         siteExist = quickAdd.checkForExistingSite("New York");
         if (siteExist == true){
             quickAdd.cancelPathCreation();}
-        else
+        else{
             quickAdd.quickAddPathDataSetup("NY SUPPORT DATA", "940 MHz", "New York", "40 44 54 N", "73 59 9 W", "0.98", "KA20003");
 
         quickAdd.quickAddPath("New", "940 MHz", "", "40 44 54 N", "73 59 9 W", "0.98", "KA20003");
         pathSummary.viewSiteCallSignLatLongGeColumns1(0, "New York", "KA20003", "40 44 54 N", "73 59 9 W", "0.98");
         pathSummary.viewSiteCallSignLatLongGeColumns2(0, "New York", "KA20003", "40 44 54 N", "73 59 9 W", "0.98");
         pathName = pathSummary.projectNameSite1Site2Text(0);
-        assertEquals(pathName, "New York - New York");
+        assertEquals(pathName, "New York - New York");}
 
         siteExist = quickAdd.checkForExistingSite("CAMSLANT STATION");
         if (siteExist == true){
@@ -288,11 +287,7 @@ public class QuickAddTest extends BaseTest {
     Given user wants a a path's band to be included in the path information,
     When a user selects a band in this optional dropdown,
     Then the band selection will be displayed in the path summary.
-
-
-
      */
-
 
     @Test
     public void quickAddProjectName43Char() {
@@ -321,11 +316,10 @@ public class QuickAddTest extends BaseTest {
         siteExist = quickAdd.checkForExistingSite("BLACKTAIL MTN");
         if (siteExist == true){
             quickAdd.cancelPathCreation();}
-        else
+        else{
             quickAdd.quickAddPathDataSetup("BTM SUPPORT DATA", "940 MHz", "BLACKTAIL MTN", "48 0 47.8 N", "114 21 58.4 W", "2035.79", "KBM76");
-
-        quickAdd.quickAddPathNoBand("BLACKTAIL MTN", "", "Path 6", "48 0 47.8 N", "114 21 58.4 W", "2035.79", "KBM76");
-        pathSummary.viewSiteCallSignLatLongGeColumns1(0, "BLACKTAIL MTN", "KBM76", "48 0 47.8 N", "114 21 58.4 W", "2035.79");
+            quickAdd.quickAddPathNoBand("BLACKTAIL MTN", "", "Path 6", "48 0 47.8 N", "114 21 58.4 W", "2035.79", "KBM76");
+            pathSummary.viewSiteCallSignLatLongGeColumns1(0, "BLACKTAIL MTN", "KBM76", "48 0 47.8 N", "114 21 58.4 W", "2035.79");}
 
     }
     /*COM-100

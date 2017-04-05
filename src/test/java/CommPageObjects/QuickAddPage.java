@@ -3,8 +3,6 @@ package CommPageObjects;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import java.util.concurrent.TimeUnit;
-
 import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertTrue;
 
@@ -12,10 +10,6 @@ import static junit.framework.TestCase.assertTrue;
 public class QuickAddPage extends BasePage {
 
     String[] array = {"!","@","#","$","%","&","*","(",")","+","=",";",":","~"};
-
-
-
-
 
     //Headings
 
@@ -138,13 +132,7 @@ public class QuickAddPage extends BasePage {
         isDisplayed(quickAddButton,6);
     }
 
-    public void slowDown(int i){
-        try {
-            TimeUnit.SECONDS.sleep(i);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-    }
+
 
     public void quickAddPathNoBand(String sitePartialText, String BandDropDown, String PathNameText,String LatitudeText, String Longitude, String ElevationText,  String Asr){
 
@@ -232,7 +220,7 @@ public class QuickAddPage extends BasePage {
         assertTrue(waitForIsDisplayed(addNewPathSlideOutClosed,10));
         assertTrue(isDisplayedAndClickable(quickAddButton,10));
         isDisplayed(quickAddButton);
-         click(quickAddButton,0);
+        click(quickAddButton,0);
         waitForIsDisplayed(pathName, 6);
         type(invalidEntry1, element1);
         type(invalidEntry2, element2);
