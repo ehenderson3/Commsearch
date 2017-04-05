@@ -27,7 +27,7 @@ public class CreateNewPathPage extends BasePage {
     By companyContactNameField = By.id("company-lookup-contact-name");
     By createButton = By.id("newProjectForm-submit");
     By newProjectField = By.id("newProjectForm-projectName");
-    By defaultLic = By.id("newProjectForm-defaultCompany");
+    By defaultCompany = By.id("newProjectForm-defaultCompany");
     By projectRequired = By.className("error-message");
     By filterField = By.id("project-summary-filter-input");
     By projectTitle = By.xpath("//span[text()='Project ']");
@@ -57,7 +57,7 @@ public class CreateNewPathPage extends BasePage {
         isDisplayed(createButton));
         type(projectName, newProjectField);
         click(pathRadioButton);
-        isDisplayed(defaultLic,20);
+        isDisplayed(defaultCompany,20);
         click(createButton);
         isDisplayed(filterField,10);
     }
@@ -67,7 +67,7 @@ public class CreateNewPathPage extends BasePage {
         isDisplayed(createButton));
         type(projectName, newProjectField);
         click(pathRadioButton);
-        isDisplayed(defaultLic,20);
+        isDisplayed(defaultCompany,20);
         isDisplayed(companyLookUp, 10);
         click(companyLookUp);
     }
@@ -114,7 +114,7 @@ public class CreateNewPathPage extends BasePage {
         isDisplayed(createButton));
         type(projectName, newProjectField);
         click(pathRadioButton);
-        isDisplayed(defaultLic,20);
+        isDisplayed(defaultCompany,20);
         click(createButton);
     }
 
@@ -130,7 +130,7 @@ public class CreateNewPathPage extends BasePage {
             click(commHome);
             assertTrue("can't find the Create button", isDisplayed(createButton));
             type(projectName, newProjectField);
-            type(defaultLicensee, defaultLic);
+            type(defaultLicensee, defaultCompany);
             click(pathRadioButton);
         }
         isDisplayed(errorMessage);
@@ -144,7 +144,7 @@ public class CreateNewPathPage extends BasePage {
         isDisplayed(createButton));
         type(projectName,newProjectField);
         click(pathRadioButton);
-        isDisplayed(defaultLic,20);
+        isDisplayed(defaultCompany,20);
         click(createButton);
 
     }
