@@ -38,6 +38,7 @@ public class PathSummaryTest extends BaseTest {
     @Rule
     public RetryTest.Retry retry = new RetryTest.Retry(1);
 
+
     /*
     Given a user wants to copy a path in the Project Summary table,
     When the caret in the ""#"" column is clicked,
@@ -75,8 +76,7 @@ public class PathSummaryTest extends BaseTest {
         createPath.createBrandNewProjectPath("Best Project Ever"+ randomNumber, "This is the Default");
         quickAdd.quickAddPathGeneral2("Test Path 1", "4.0 GHz", "ASR-Call","", "","55", "KA3982");
         quickAdd.quickAddPathGeneral2("Test Path 2", "4.0 GHz", "ASR-Call","", "","55", "KA2049");
-
-        //pathSummary.hoverPassiveRepeaterValSiteInfo();
+        //pathSummary.hoverPassiveRepeaterValSiteInfo();TODO feature not ready
     }
     //    Given that user is logged in with appropriate permission,
     //    When a cursor hovers over the Site Location icon icon in the SITE column,
@@ -126,12 +126,13 @@ public class PathSummaryTest extends BaseTest {
 
     @Test
     public void valFilterResultSet() {
-        createPath.createBrandNewProjectPath("Best Project Ever"+ randomNumber, "This is the Default");
+        createPath.enterProjectForCompany("Best Project Ever" +randomNumber+ "f", "This is the Default");
+        createPath.fillOutCompanyFilter("VZW111","", "",0);
         quickAdd.quickAddPathGeneral2("Test Path 1", "23.0 GHz", "ASR-Call","", "","55", "KA3982");
         pathSummary.hoverSiteLocationValSiteInfo(0);
         quickAdd.quickAddPathGeneral2("Test Path 2", "4.0 GHz", "ASR-Call","", "","55", "KA2049");
         pathSummary.hoverSiteLocationValSiteInfo(0);
-        quickAdd.quickAddPathGeneral2("Test Path 3", "4.0 GHz", "KOTA TX - Skyline","", "","55", "KA2124");
+        quickAdd.quickAddPathGeneral2("Test Path 3", "4.0 GHz", "ASR-Call","", "","55", "KA2049");
         pathSummary.hoverSiteLocationValSiteInfo(0);
         quickAdd.quickAddPathGeneral2("Test Path 4", "4.0 GHz", "KGO-TV","", "","55", "1000036");
         pathSummary.hoverSiteLocationValSiteInfo(0);
@@ -145,11 +146,11 @@ public class PathSummaryTest extends BaseTest {
         pathSummary.filter("Path Name","Test Path 3");
         pathSummary.validatePathNameFilteredResult("Test Path 3");
 
-        //NO Hurry... in the process of moving off the static data...https://www.screencast.com/t/wweHelHOqd
-        pathSummary.filter("Company","WILL BE CHANGING!!!");
+        //TODO update for company filter is
+        pathSummary.filter("Company","Verizon");
         pathSummary.showAllPathsWithNoAssignedFrequencyBandsPresent();
-        //assertEquals(pathSummary.showAllCheckBoxText(),"Show all Paths with No Assigned Licensee");
-        //pathSummary.validateLicenseeFilteredResult("Second Path adding extra for testing length", "Third Path", "Fourth Path", "Fifth Path");
+        assertEquals(pathSummary.showAllCheckBoxText(),"Show all Paths with No Assigned Company");
+       //pathSummary.validateLicenseeFilteredResult("Second Path adding extra for testing length", "Third Path", "Fourth Path", "Fifth Path");
 
         pathSummary.filter("Site Name", "KOTA TX - Skyline");
         pathSummary.validateSiteNameFilteredResult("Test Path 3");
@@ -250,7 +251,7 @@ public class PathSummaryTest extends BaseTest {
         pathSummary.hoverSiteLocationValSiteInfo(0);
         quickAdd.quickAddPathGeneral2("Test Path 2", "4.0 GHz", "ASR-Call","", "","55", "KA2049");
         pathSummary.hoverSiteLocationValSiteInfo(0);
-        quickAdd.quickAddPathGeneral2("Test Path 3", "4.0 GHz", "KOTA TX - Skyline","", "","55", "KA2124");
+        quickAdd.quickAddPathGeneral2("Test Path 3", "4.0 GHz", "ASR-Call","", "","55", "KA2049");
         pathSummary.hoverSiteLocationValSiteInfo(0);
         quickAdd.quickAddPathGeneral2("Test Path 4", "4.0 GHz", "KGO-TV","", "","55", "1000036");
         pathSummary.hoverSiteLocationValSiteInfo(0);
@@ -292,7 +293,7 @@ public class PathSummaryTest extends BaseTest {
         pathSummary.hoverSiteLocationValSiteInfo(0);
         quickAdd.quickAddPathGeneral2("Test Path 2", "4.0 GHz", "ASR-Call","", "","55", "KA2049");
         pathSummary.hoverSiteLocationValSiteInfo(0);
-        quickAdd.quickAddPathGeneral2("Test Path 3", "4.0 GHz", "KOTA TX - Skyline","", "","55", "KA2124");
+        quickAdd.quickAddPathGeneral2("Test Path 3", "4.0 GHz", "ASR-Call","", "","55", "KA2049");
         pathSummary.hoverSiteLocationValSiteInfo(0);
         quickAdd.quickAddPathGeneral2("Test Path 4", "4.0 GHz", "KGO-TV","", "","55", "1000036");
         pathSummary.hoverSiteLocationValSiteInfo(0);
@@ -343,7 +344,7 @@ public class PathSummaryTest extends BaseTest {
         pathSummary.hoverSiteLocationValSiteInfo(0);
         quickAdd.quickAddPathGeneral2("Test Path 2", "4.0 GHz", "ASR-Call","", "","55", "KA2049");
         pathSummary.hoverSiteLocationValSiteInfo(0);
-        quickAdd.quickAddPathGeneral2("Test Path 3", "4.0 GHz", "KOTA TX - Skyline","", "","55", "KA2124");
+        quickAdd.quickAddPathGeneral2("Test Path 3", "4.0 GHz", "ASR-Call","", "","55", "KA2049");
         pathSummary.hoverSiteLocationValSiteInfo(0);
         quickAdd.quickAddPathGeneral2("Test Path 4", "4.0 GHz", "KGO-TV","", "","55", "1000036");
         pathSummary.hoverSiteLocationValSiteInfo(0);
@@ -368,7 +369,7 @@ public class PathSummaryTest extends BaseTest {
         pathSummary.hoverSiteLocationValSiteInfo(0);
         quickAdd.quickAddPathGeneral2("Test Path 2", "4.0 GHz", "ASR-Call","37 47 59.7 N", "122 23 58.8 W","55", "KA2049");
         pathSummary.hoverSiteLocationValSiteInfo(0);
-        quickAdd.quickAddPathGeneral2("Test Path 3", "4.0 GHz", "KOTA TX - Skyline","44 04 07.4 N", "103 15 05 W","55", "KA2124");
+        quickAdd.quickAddPathGeneral2("Test Path 3", "4.0 GHz", "ASR-Call","37 47 59.7 N", "122 23 58.8 W","55", "KA2049");
         pathSummary.hoverSiteLocationValSiteInfo(0);
         quickAdd.quickAddPathGeneral2("Test Path 4", "4.0 GHz", "KGO-TV","37 41 47.6 N", "121 46 10.5 W","55", "1000036");
         pathSummary.hoverSiteLocationValSiteInfo(0);
@@ -397,7 +398,7 @@ public class PathSummaryTest extends BaseTest {
          pathSummary.hoverSiteLocationValSiteInfo(0);
          quickAdd.quickAddPathGeneral2("Test Path 2", "4.0 GHz", "ASR-Call","37 47 59.7 N", "122 23 58.8 W","55", "KA2049");
          pathSummary.hoverSiteLocationValSiteInfo(0);
-         quickAdd.quickAddPathGeneral2("Test Path 3", "4.0 GHz", "KOTA TX - Skyline","44 04 07.4 N", "103 15 05 W","55", "KA2124");
+         quickAdd.quickAddPathGeneral2("Test Path 3", "4.0 GHz", "ASR-Call","37 47 59.7 N", "122 23 58.8 W","55", "KA2049");
          pathSummary.hoverSiteLocationValSiteInfo(0);
          quickAdd.quickAddPathGeneral2("Test Path 4", "4.0 GHz", "KGO-TV","37 41 47.6 N", "121 46 10.5 W","55", "1000036");
          pathSummary.hoverSiteLocationValSiteInfo(0);
@@ -505,7 +506,9 @@ public class PathSummaryTest extends BaseTest {
 
     @Test
     public void viewDefaultSettingsFromProjectSetting() {
-        createPath.createBrandNewProjectPath("Best Project Ever"+ randomNumber, "This is the Default");
+        createPath.enterProjectForCompany("Best Project Ever" +randomNumber+ "f", "This is the Default");
+        createPath.fillOutCompanyFilter("VZW111","", "",0);
+        pathSummary.valSiteLocationToggleOn();
         quickAdd.quickAddPathGeneral2("Test Path 1", "23.0 GHz", "ASR-Call","32 47 16.4 N", "96 47 59 W","55", "KA3982");
         pathSummary.viewDefaultSettings();
     }
@@ -671,11 +674,11 @@ public class PathSummaryTest extends BaseTest {
         pathSummary.valSiteLocationToggleOn();
         quickAdd.quickAddPathGeneral2("Test Path 1", "23.0 GHz", "KDFW Studio","32 47 16.4 N", "96 47 59 W","55", "KA3982");
         quickAdd.quickAddPathGeneral2("Test Path 2", "4.0 GHz", "ASR-Call","37 47 59.7 N", "122 23 58.8 W","55", "KA2049");
-        quickAdd.quickAddPathGeneral2("Test Path 3", "4.0 GHz", "KOTA TX - Skyline","44 04 07.4 N", "103 15 05 W","55", "KA2124");
+        quickAdd.quickAddPathGeneral2("Test Path 3", "4.0 GHz", "ASR-Call","37 47 59.7 N", "122 23 58.8 W","55", "KA2049");
         pathSummary.viewPathBlueSection(0,"Test Path 1","1","MOD","","Details");
         pathSummary.viewSiteCallSignLatLongGeColumns1(0,"KDFW Studio","KA3982","32 47 16.4 N","96 47 59 W","54.99");
         pathSummary.viewSiteCallSignLatLongGeColumns1(1,"ASR-Call","KA2049","37 47 59.7 N","122 23 58.8 W","54.99");
-        pathSummary.viewSiteCallSignLatLongGeColumns1(2,"KOTA TX - Skyline","KA2124","44 4 7.4 N","103 15 5 W","54.99");
+        pathSummary.viewSiteCallSignLatLongGeColumns1(2,"ASR-Call","KA2049","37 47 59.7 N","122 23 58.8 W","54.99");
         //pathSummary.viewAntennaRadioBandwidthFreq();TODO feature not ready
         //pathSummary.viewDiversityAntAmcPassFail();TODO feature not ready
     }
@@ -711,16 +714,7 @@ public class PathSummaryTest extends BaseTest {
         pathSummary.hoverSiteLocationValSiteInfo(0);
         quickAdd.quickAddPathGeneral2("Test Path 2", "4.0 GHz", "ASR-Call","37 47 59.7 N", "122 23 58.8 W","55", "KA2049");
         pathSummary.hoverSiteLocationValSiteInfo(0);
-        quickAdd.quickAddPathGeneral2("Test Path 3", "4.0 GHz", "KOTA TX - Skyline","44 04 07.4 N", "103 15 05 W","55", "KA2124");
-       // pathSummary.quickAddSuggestedText();
+        quickAdd.quickAddPathGeneral2("Test Path 2", "4.0 GHz", "ASR-Call","37 47 59.7 N", "122 23 58.8 W","55", "KA2049");
     }
 
 }
-
-
-
-
-
-
-
-

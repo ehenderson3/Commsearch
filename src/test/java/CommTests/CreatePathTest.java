@@ -88,10 +88,10 @@ public class CreatePathTest extends BaseTest {
         assertEquals("Project name contains invalid characters.",createPath.projectFieldError());
     }
 
-    /*
-    COM-198
-    Create New Project: Error format is different when "/" character is used.
-     */
+        /*
+        COM-198
+        Create New Project: Error format is different when "/" character is used.
+         */
 
     @Test
     public void valProject_ValidChar() {

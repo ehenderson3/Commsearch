@@ -3,6 +3,8 @@ package CommPageObjects;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
+import java.util.concurrent.TimeUnit;
+
 import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertTrue;
 
@@ -40,7 +42,8 @@ public class QuickAddPage extends BasePage {
     By elevation = By.xpath("//*[contains(@name, 'elevation') and contains(@id, 'quick-add-site')]");
     By siteField = By.id("quick-add-site[0]siteName");
     ///Path2
-    By siteField2 = By.id("quick-add-site[1]siteName");  By latitude2 = By.id("quick-add-site[1]lat");
+    By siteField2 = By.id("quick-add-site[1]siteName");
+    By latitude2 = By.id("quick-add-site[1]lat");
     By longitude2 = By.id("quick-add-site[1]long");
     By callSign2 = By.id("quick-add-site[1]callSignOrASR");//Had to correct this had wrong
     By elevation2 = By.xpath("//*[contains(@name, 'sites[1]elevation') and contains(@id, 'quick-add-site[1]')]");
@@ -101,7 +104,7 @@ public class QuickAddPage extends BasePage {
 
         waitForIsDisplayed(quickAddButton,6);
         isDisplayed(quickAddButton,6);
-        isDisplayed(control,4);
+        slowDown(4000);
         click(quickAddButton);
         waitForIsDisplayed(pathName,6);
         type(PathNameText, pathName);
@@ -129,11 +132,18 @@ public class QuickAddPage extends BasePage {
         click(pathName);
         click(siteField);
         isDisplayed(option,10);
-        //hover(option);
         click(option);
         click(addPathButton,1);
         isDisplayed(addPathDetails,6);
         isDisplayed(quickAddButton,6);
+    }
+
+    public void slowDown(int i){
+        try {
+            TimeUnit.SECONDS.sleep(i);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     public void quickAddPathNoBand(String sitePartialText, String BandDropDown, String PathNameText,String LatitudeText, String Longitude, String ElevationText,  String Asr){
@@ -145,11 +155,11 @@ public class QuickAddPage extends BasePage {
 
         waitForIsDisplayed(quickAddButton,6);
         isDisplayed(quickAddButton,6);
-        isDisplayed(control,4);
+        //isDisplayed(control,4);
+        slowDown(4);
         click(quickAddButton);
         waitForIsDisplayed(pathName,6);
         type(PathNameText, pathName);
-        //selectFromDropdown(optionanBandDropDown, BandDropDown);
         type(sitePartialText,siteField);
         isDisplayed(option,6);
         hover(option);
@@ -169,25 +179,19 @@ public class QuickAddPage extends BasePage {
         click(siteField);
         isDisplayed(option,10);
         hover(option);
-
         click(pathName);
         click(siteField);
         isDisplayed(option,10);
-        //hover(option);
         click(option);
         click(addPathButton,1);
         isDisplayed(addPathDetails,6);
         isDisplayed(quickAddButton,6);
     }
 
-
-
-
     public void quickAddPathCallSignInvalidChar(){
         for (String invalidChars : array) {
             quickAddInvalidCharChecker(invalidChars,callSign,callSign2,pathName);
         }
-
     }
 
     private void quickAddInvalidCharChecker(String invalidChars,By field1, By field2, By field3){
@@ -285,7 +289,7 @@ public class QuickAddPage extends BasePage {
         waitForIsDisplayed(quickAddButton,10);
         isDisplayedAndClickable(quickAddButton,10);
         isDisplayed(quickAddButton,10);
-        isDisplayed(control,4);
+        slowDown(4);
 
         click(quickAddButton,0);
         waitForIsDisplayed(pathName,6);
@@ -308,8 +312,7 @@ public class QuickAddPage extends BasePage {
         waitForIsDisplayed(quickAddButton,10);
         isDisplayedAndClickable(quickAddButton,10);
         isDisplayed(quickAddButton,10);
-        isDisplayed(control,4);
-
+        slowDown(4);
         click(quickAddButton,0);
         waitForIsDisplayed(pathName,6);
         type(PathNameText, pathName);
@@ -325,19 +328,14 @@ public class QuickAddPage extends BasePage {
         type(Longitude,longitude2);
         type(Asr,callSign2);
         type(ElevationText,elevation2);
-
-        //click(option);
         click(latitude);
         click(longitude);
         click(pathName);
         click(addPathButton,1);
         isDisplayed(addPathDetails,6);
         isDisplayed(quickAddButton,6);
-        isDisplayed(control,6);
-
+        slowDown(6);
     }
-
-
 
     public void quickAddPathGeneral1(String PathNameText,String BandDropDown,String sitePartialText,String LatitudeText, String Longitude, String ElevationText,  String Asr){
 
@@ -357,7 +355,6 @@ public class QuickAddPage extends BasePage {
         isDisplayed(addPathButton,6);
         type("new",siteField2);
         isDisplayed(option,6);
-
         click(option);
         click(latitude);
         click(longitude);
@@ -365,7 +362,6 @@ public class QuickAddPage extends BasePage {
         click(addPathButton,1);
         isDisplayed(addPathDetails,6);
         isDisplayed(quickAddButton,6);
-
     }
 
     public void quickAddPathGeneral2(String PathNameText,String BandDropDown,String sitePartialText,String LatitudeText, String Longitude, String ElevationText,  String Asr){
@@ -385,27 +381,23 @@ public class QuickAddPage extends BasePage {
         type(LatitudeText,latitude);
         type(Longitude,longitude);
         type(Asr,callSign);
-
         isDisplayed(addPathButton,5);
         type("KA2124",callSign2);
 
         click(elevation2);
-        isDisplayed(control,6);
+        slowDown(6);
         type("23",elevation2);
-        isDisplayed(control,2);
-
-
-        click(latitude);
-        click(longitude);
+        slowDown(2);
         click(pathName);
         isDisplayed(errorMessage,6);
 
         type(ElevationText,elevation);
-        isDisplayed(control,2);
+        slowDown(3);
         click(pathName);
 
         click(addPathButton,1);
         assertTrue(isDisplayed(addNewPathSlideOutClosed,15));
+        slowDown(4);
         assertTrue(isDisplayed(addPathDetails,10));
         assertTrue(isDisplayed(quickAddButton,10));
 
@@ -441,7 +433,7 @@ public class QuickAddPage extends BasePage {
             isDisplayed(errorMessage, 6);
 
             type(ElevationText, elevation);
-            isDisplayed(control, 2);
+            slowDown(4);
             click(pathName);
 
             click(addPathButton, 1);
@@ -498,7 +490,7 @@ public class QuickAddPage extends BasePage {
         waitForIsDisplayed(pathName,6);
         type(PathNameText, pathName);
         selectFromDropdown(optionanBandDropDown, BandDropDown);
-        type(sitePartialText,siteField);//sitePartialText
+        type(sitePartialText,siteField);
         isDisplayed(option,6);
         click(option);
 

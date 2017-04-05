@@ -62,7 +62,7 @@ public class PathSummaryPage extends BasePage {
     //Path Entry Fields - Able to use the type method
     By targetAvailability = By.id("project-summary-settings-target-availability");
     By filterSelectionInput = By.id("project-summary-filter-input");
-    By defaultLicenseeField = By.id("project-summary-settings-default-company");
+    By defaultLicenseeField = By.id("newProjectForm-defaultCompany");
     By fresnelZoneRadiusPercentField = By.id("project-summary-settings-freznel-zone-radius");
     By kFactorField = By.id("project-summary-settings-k-factor");
     By minClearence = By.id("project-summary-settings-minimum-clearance");
@@ -478,7 +478,7 @@ public class PathSummaryPage extends BasePage {
         assertTrue("Project Fresnel Zone Radius (%) is not present", isDisplayed(fresnelZoneRadiusPercentField, 10));
         defaultCompany = getFieldText(defaultLicenseeField);
         defaultFresnelZoneRadius = getFieldText(fresnelZoneRadiusPercentField);
-        assertEquals("The defaultLic default val is not correct", defaultCompany, "Verizon");
+        assertEquals("The defaultLic default val is not correct", defaultCompany, "");
         assertEquals("The defaultFresnelZoneRadius default val is not correct", defaultFresnelZoneRadius, "60");
 
         clear(fresnelZoneRadiusPercentField);
@@ -546,9 +546,7 @@ public class PathSummaryPage extends BasePage {
     public void changeUnitsFromUsToSi(String editValMinClearence, String valPostSiSwitch) {
         String postSiSwitchValue;
         String changedMinClearence;
-        String groundElevationHeading;
         String minimumClearanceLable;
-        //valSiteLocationToggleOn();
         assertTrue("Hamburger menu is not present", isDisplayed(hamburgerDropDownInactive, 10));
         click(hamburgerDropDownInactive);
         assertTrue("Settings menu option is not present", isDisplayed(hamburgerSettings, 10));
@@ -615,6 +613,7 @@ public class PathSummaryPage extends BasePage {
     }
 
 
+
     public void selectAndViewSettingsFromHamburgerMenu() {
         assertTrue("Hamburger menu is not present", isDisplayed(hamburgerDropDownInactive, 10));
         click(hamburgerDropDownInactive);
@@ -650,8 +649,6 @@ public class PathSummaryPage extends BasePage {
         assertTrue("Delete Paths option is not present", isDisplayed(hamburgerDeletePaths,10));
         click(hamburgerDeletePaths);
         assertTrue("Delete modal is not present", isDisplayed(deleteModal,10));
-        //a = getText(deletePathPopupTitle);
-        //assertEquals(a,"pow");
         //TODO Can't get to title or sub title for Delete Path popup
         //assertTrue("Delete Path pop up sub title is not present", isDisplayed(deletePathPopupTitle,10));
         //assertTrue("There are no paths to be deleted, please select at least one path", isDisplayed(pathsToBeDeletedFromModal,10));
@@ -797,6 +794,7 @@ public class PathSummaryPage extends BasePage {
         assertTrue("Project US Unit is not present", isDisplayed(uSUnit,10));
         assertTrue("Project Site is not present", isDisplayed(showSiteLocationCheckBox,10));
         isDisplayed(saveButton,10);
+        slowDown(6);
         click(showSiteLocationCheckBox);
         click(saveButton);
         assertTrue(isDisplayed(siteHeader,20));
@@ -817,14 +815,13 @@ public class PathSummaryPage extends BasePage {
         filter(dropDown,location);
         pathReturnTotal = getText(totalPathsCount);
         a = Integer.parseInt(pathReturnTotal.toString());
-        //assertEquals(pathReturnTotal ,"0");
-        //return getText(totalPathsCount);
         return a;
     }
 
 
     public void filter(String dropDown, String location){
-        waitForIsDisplayed(filterSelection,10);
+        isDisplayed(filterSelection,10);
+        clear(filterSelectionInput);
         clear(filterSelectionInput);
         type(location, filterSelectionInput );
         selectFromDropdown(filterSelection, dropDown);
@@ -840,7 +837,6 @@ public class PathSummaryPage extends BasePage {
     }
 
     public void validatePathNameFilteredResult(String pathVal){
-        //String band;
         String path;
         isDisplayed(pathName3,3);
         path = getText(pathName3);
@@ -848,11 +844,7 @@ public class PathSummaryPage extends BasePage {
     }
 
     public void validateSiteNameFilteredResult(String pathVal){
-        //String band;
         String path;
-        //isDisplayed(bandValue,3);
-        //band = getText(bandValue);
-        //assertEquals(band, bandVal);
         isDisplayed(pathName3,3);
         path = getText(pathName3);
         assertEquals(path, pathVal);
@@ -931,36 +923,22 @@ public class PathSummaryPage extends BasePage {
 
     public void validateBlankFilteredResult (String pathVal1) {
         String path1;
-        String path2;
-        String path3;
-        String path4;
-        String path5;
         isDisplayed(pathName1,3);
         isDisplayed(pathName2,3);
         isDisplayed(pathName3,3);
         isDisplayed(pathName4,3);
         isDisplayed(pathName5,3);
         path1 = getText(pathName1);
-//        path2 = getText(pathName2);
-//        path3 = getText(pathName3);
-//        path4 = getText(pathName4);
-//        path5 = getText(pathName5);
+
         assertEquals(path1, pathVal1);
-//        assertEquals(path2, pathVal2);
-//        assertEquals(path3, pathVal3);
-//        assertEquals(path4, pathVal4);
-//        assertEquals(path5, pathVal5);
+
     }
 
     public void validateCallSignFilteredResult (String pathVal2) {
         String path2;
-
         isDisplayed(pathName2,3);
-;
         path2 = getText(pathName2);
-
         assertEquals(path2, pathVal2);
-
     }
 
     public void validateASRFilteredResult (String pathVal4){
@@ -1010,9 +988,6 @@ public class PathSummaryPage extends BasePage {
         assertEquals(path5, pathVal5);
     }
 
-//    public Boolean alertMessagePresent(){
-//        return waitForIsDisplayed(createButton,10);
-//    }
 
     public Boolean landedOnPathSummaryPage(){
         return waitForIsDisplayed(projectTitle,10);
