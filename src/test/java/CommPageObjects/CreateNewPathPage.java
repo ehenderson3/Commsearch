@@ -54,12 +54,12 @@ public class CreateNewPathPage extends BasePage {
         isDisplayed(commHome,10);
         click(commHome);
         assertTrue("can't find the Create button",
-        isDisplayed(createButton));
+        isDisplayed(createButton,30));
         type(projectName, newProjectField);
         click(pathRadioButton);
         isDisplayed(defaultCompany,20);
         click(createButton);
-        isDisplayed(filterField,10);
+        assertTrue(isDisplayed(filterField,20));
     }
     public void enterProjectForCompany(String projectName, String defaultLicensee){
         click(commHome);

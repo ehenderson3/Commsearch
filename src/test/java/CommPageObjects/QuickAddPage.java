@@ -96,16 +96,26 @@ public class QuickAddPage extends BasePage {
         String asr;
         String elev;
 
-        waitForIsDisplayed(quickAddButton,6);
-        isDisplayed(quickAddButton,6);
-        slowDown(4000);
-        click(quickAddButton);
-        waitForIsDisplayed(pathName,6);
+        waitForIsDisplayed(quickAddButton,10);
+        isDisplayedAndClickable(quickAddButton,10);
+        isDisplayed(quickAddButton,10);
+
+        slowDown(2);
+        click(quickAddButton,0);
+        isDisplayed(pathName,6);
         type(PathNameText, pathName);
         selectFromDropdown(optionanBandDropDown, BandDropDown);
         type(sitePartialText,siteField);
         isDisplayed(option,6);
-        hover(option);
+        if (isDisplayed(option,6) == true){
+            click(option);}
+        else {
+            click(siteField);
+            isDisplayed(option,6);
+            click(option);
+        }
+
+
         lat = getFieldText(latitude);
         longs = getFieldText(longitude);
         asr = getFieldText(callSign);
@@ -116,12 +126,12 @@ public class QuickAddPage extends BasePage {
         assertEquals(asr,Asr);
         isDisplayed(addPathButton,6);
         type("New",siteField2);
-        isDisplayed(option,6);
+        isDisplayed(option,11);
         click(option);
         click(pathName);
         click(siteField);
         isDisplayed(option,10);
-        hover(option);
+        click(option);
 
         click(pathName);
         click(siteField);
@@ -219,9 +229,10 @@ public class QuickAddPage extends BasePage {
         String pathError;
         assertTrue(waitForIsDisplayed(addNewPathSlideOutClosed,10));
         assertTrue(isDisplayedAndClickable(quickAddButton,10));
-        isDisplayed(quickAddButton);
+        slowDown(8);
         click(quickAddButton,0);
         waitForIsDisplayed(pathName, 6);
+        slowDown(2);
         type(invalidEntry1, element1);
         type(invalidEntry2, element2);
         assertTrue(isDisplayedAndClickable(pathName,10));
@@ -262,30 +273,33 @@ public class QuickAddPage extends BasePage {
     public void quickAddPathSiteName21Plus(String siteName){
         waitForIsDisplayed(quickAddButton,6);
         isDisplayed(quickAddButton,6);
-
         click(quickAddButton);
         waitForIsDisplayed(pathName, 6);
         type(siteName, siteField);
         type(siteName, siteField2);
-
         click(pathName);
     }
 
 
-    public boolean checkForExistingSite(String sitePartialText){
+    public boolean checkForExistingSite(String sitePartialText) {
 
-        waitForIsDisplayed(quickAddButton,10);
-        isDisplayedAndClickable(quickAddButton,10);
-        isDisplayed(quickAddButton,10);
+        waitForIsDisplayed(quickAddButton, 10);
+        isDisplayedAndClickable(quickAddButton, 10);
+        isDisplayed(quickAddButton, 10);
         slowDown(4);
+        click(quickAddButton, 0);
+        waitForIsDisplayed(pathName, 6);
+        type(sitePartialText, siteField);
+        isDisplayed(option, 10);
+/*        if (isDisplayed(option) == false) {
+            {
+                click(siteField);
+                isDisplayed(option, 10);
+            }
 
-        click(quickAddButton,0);
-        waitForIsDisplayed(pathName,6);
-        type(sitePartialText,siteField);
-         return isDisplayed(option,6);
-
-    }
-
+        }*/
+        return isDisplayed(option, 6);
+            }
     public void cancelPathCreation(){
         isDisplayed(cancelButton,10);
         click(cancelButton);
@@ -343,6 +357,10 @@ public class QuickAddPage extends BasePage {
         isDisplayed(addPathButton,6);
         type("new",siteField2);
         isDisplayed(option,6);
+        if(isDisplayed(option,10)== false){
+            click(siteField2);
+            isDisplayed(option,10);
+        }
         click(option);
         click(latitude);
         click(longitude);
@@ -352,44 +370,53 @@ public class QuickAddPage extends BasePage {
         isDisplayed(quickAddButton,6);
     }
 
-    public void quickAddPathGeneral2(String PathNameText,String BandDropDown,String sitePartialText,String LatitudeText, String Longitude, String ElevationText,  String Asr){
+    public void quickAddPathGeneral2(String PathNameText,String BandDropDown,String sitePartialText,String LatitudeText, String Longitude, String ElevationText,  String Asr) {
 
-        assertTrue(isDisplayed(quickAddButton,20));
-        switchBackToDefaultContent();
-        assertTrue(waitUntilNotPresent(addNewPathSlideOutOpen,15));
-        isDisplayed(addNewPathSlideOutClosed,15);
-        isDisplayed(siteField,1);
-        click(quickAddButton);
-        assertTrue(isDisplayed(addNewPathSlideOutOpen,15));
-        assertTrue(isDisplayed(pathName,6));
+        waitForIsDisplayed(quickAddButton,10);
+        isDisplayedAndClickable(quickAddButton,10);
+        isDisplayed(quickAddButton,10);
+
+        slowDown(10);
+
+        click(quickAddButton,0);
+
+        assertTrue(isDisplayed(addNewPathSlideOutOpen, 15));
+        isDisplayed(siteField, 1);
+        assertTrue(isDisplayed(pathName, 6));
         type(PathNameText, pathName);
         selectFromDropdown(optionanBandDropDown, BandDropDown);
-        type(sitePartialText,siteField);
+        type(sitePartialText, siteField);
         click(pathName);
-        type(LatitudeText,latitude);
-        type(Longitude,longitude);
-        type(Asr,callSign);
-        isDisplayed(addPathButton,5);
-        type("KA2124",callSign2);
+        type(LatitudeText, latitude);
+        type(Longitude, longitude);
+        type(Asr, callSign);
+        isDisplayed(addPathButton, 5);
+        type("KA2124", callSign2);
 
         click(elevation2);
-        slowDown(6);
-        type("23",elevation2);
-        slowDown(2);
+        slowDown(11);
+        type("23", elevation2);
         click(pathName);
-        isDisplayed(errorMessage,6);
+        isDisplayed(errorMessage, 6);
 
-        type(ElevationText,elevation);
+        type(ElevationText, elevation);
         slowDown(3);
         click(pathName);
+        click(addPathButton, 1);
+        assertTrue(isDisplayed(addNewPathSlideOutClosed, 15));
 
-        click(addPathButton,1);
-        assertTrue(isDisplayed(addNewPathSlideOutClosed,15));
-        slowDown(4);
-        assertTrue(isDisplayed(addPathDetails,10));
-        assertTrue(isDisplayed(quickAddButton,10));
+        if (isDisplayed(addPathDetails, 10) == false) {
+            slowDown(3);
+            isDisplayed(addPathDetails, 10);
+        } else {
+            isDisplayed(addPathDetails);
+            click(addPathDetails);
+            assertTrue(isDisplayed(quickAddButton, 10));
 
+        }
     }
+
+
 
 
         public void quickAddPathGeneralError2(String PathNameText,String BandDropDown,String sitePartialText,String LatitudeText, String Longitude, String ElevationText,  String Asr) {
