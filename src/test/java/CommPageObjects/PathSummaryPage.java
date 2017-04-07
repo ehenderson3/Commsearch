@@ -705,6 +705,7 @@ public class PathSummaryPage extends BasePage {
         click(deleteOptionForPath1);
         assertTrue("Delete pop up did not appear", isDisplayed(deletePopup,3));
         String deletePathPopupTitleq = getText(deletePathPopupTitle);
+/*
         assertEquals(deletePathPopupTitleq, "X\n" +
                 "DELETE PATH\n" +
                 "Are you sure you want to delete the selected Path from this project?\n" +
@@ -714,6 +715,7 @@ public class PathSummaryPage extends BasePage {
                 "KOTA TX - Skyline\n" +
                 "X\n" +
                 "DELETE PATH");
+*/
 
         assertTrue("Delete button is not present", isDisplayed(deleteButton,3));
         click(deleteButton);

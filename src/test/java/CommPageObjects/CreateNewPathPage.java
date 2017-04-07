@@ -83,9 +83,9 @@ public class CreateNewPathPage extends BasePage {
         type(coContactText, companyContactNameField);
         assertTrue("Can't find Search Button",isDisplayed(companySearchButton));
         click(companySearchButton);
-        isDisplayed(control,4);
+        slowDown(4);
         isDisplayed(searchResultArray,10);
-        isDisplayed(control,4);
+        slowDown(4);
         click(searchResultArray);
         a = getFieldText(defaultCompanyField);
         assertEquals(a, "Verizon");
@@ -104,7 +104,7 @@ public class CreateNewPathPage extends BasePage {
         type(coContactText, companyContactNameField);
         assertTrue("Can't find Search Button",isDisplayed(companySearchButton));
         click(companySearchButton);
-        isDisplayed(control,4);
+        slowDown(4);
         isDisplayed(searchResultArray,10);
     }
 
