@@ -30,6 +30,7 @@ public class QuickAddTest extends BaseTest {
 
     Random rndNum = new Random();
     int randomNumber = rndNum.nextInt(100000);
+    int randomNumber1 = rndNum.nextInt(100000);
 
     @Rule
     public RetryTest.Retry retry = new RetryTest.Retry(1);
@@ -99,42 +100,41 @@ public class QuickAddTest extends BaseTest {
     @Test
     public void quickAddSiteNameSuggest() {
         boolean siteExist;
-
-
-        createPath.createBrandNewProjectPath("Best Project Ever"+ randomNumber, "This is the Default");
+        createPath.createBrandNewProjectPath("Best Project Ever" + randomNumber, "This is the Default");
         pathSummary.valSiteLocationToggleOn();
 
         siteExist = quickAdd.checkForExistingSite("Tonto Mtn");
-        if (siteExist == true){
+        if (siteExist == true) {
             quickAdd.cancelPathCreation();}
-        else{
+        else {
             quickAdd.quickAddPathDataSetup("TM SUPPORT DATA", "940 MHz", "Tonto Mtn", "34 37 42.1 N", "112 39 26.2 W", "1542.29", "KBY45");
-            siteExist = quickAdd.checkForExistingSite("SYNRAMS STATION");}
-        if (siteExist == true){
+        }
+        siteExist = quickAdd.checkForExistingSite("SYNRAMS STATION");
+        if (siteExist == true) {
             quickAdd.cancelPathCreation();}
-        else{
-            quickAdd.quickAddPathDataSetup("TM SUPPORT DATA", "940 MHz", "SYNRAMS STATION", "40 34 10 N", "122 26 14 W", "250", "1208837");
-            siteExist = quickAdd.checkForExistingSite("CAMSLANT STATION");}
-        if (siteExist == true){
+        else {
+            quickAdd.quickAddPathDataSetup("TM SUPPORT DATA", "940 MHz", "SYNRAMS STATION", "40 34 10 N", "122 26 14 W", "250", "1208837");}
+        siteExist = quickAdd.checkForExistingSite("CAMSLANT STATION");
+        if (siteExist == true) {
             quickAdd.cancelPathCreation();}
-        else{
+        else {
             quickAdd.quickAddPathDataSetup("CAM SUPPORT DATA", "940 MHz", "CAMSLANT STATION", "35 12 26.7 N", "78 3 21.2 W", "48.69", "1241006");
-            quickAdd.quickAddPath("Ton", "940 MHz", "Best Path", "34 37 42.1 N", "112 39 26.2 W", "1542.29", "KBY45");
-            pathSummary.viewSiteCallSignLatLongGeColumns1(0, "Tonto Mtn", "KBY45", "34 37 42.1 N", "112 39 26.2 W", "1542.29");
-            pathSummary.viewSiteCallSignLatLongGeColumns2(0, "Tonto Mtn", "KA20003", "40 44 54 N", "73 59 9 W", "0.98");
+        }
+        quickAdd.quickAddPath("Ton", "940 MHz", "Best Path", "34 37 42.1 N", "112 39 26.2 W", "1542.29", "KBY45");
+        pathSummary.viewSiteCallSignLatLongGeColumns1(0, "Tonto Mtn", "KBY45", "34 37 42.1 N", "112 39 26.2 W", "1542.29");
+        pathSummary.viewSiteCallSignLatLongGeColumns2(0, "Tonto Mtn", "KA20003", "40 44 54 N", "73 59 9 W", "0.98");
 
-            quickAdd.quickAddPath("SYNRA", "940 MHz", "Best Path", "40 34 10 N", "122 26 14 W", "250", "1208837");
-            pathSummary.viewSiteCallSignLatLongGeColumns1(1, "SYNRAMS STATION", "", "40 34 10 N", "122 26 14 W", "250");
-            pathSummary.viewSiteCallSignLatLongGeColumns2(0, "Tonto Mtn", "KA20003", "40 44 54 N", "73 59 9 W", "0.98");
+        quickAdd.quickAddPath("SYNRA", "940 MHz", "Best Path", "40 34 10 N", "122 26 14 W", "250", "1208837");
+        pathSummary.viewSiteCallSignLatLongGeColumns1(1, "SYNRAMS STATION", "", "40 34 10 N", "122 26 14 W", "250");
+        pathSummary.viewSiteCallSignLatLongGeColumns2(0, "Tonto Mtn", "KA20003", "40 44 54 N", "73 59 9 W", "0.98");
 
-            quickAdd.quickAddPath("CAM", "940 MHz", "Best Path", "35 12 26.7 N", "78 3 21.2 W", "48.69", "1241006");
-            pathSummary.viewSiteCallSignLatLongGeColumns1(2, "CAMSLANT STATION", "", "35 12 26.7 N", "78 3 21.2 W", "48.69");
-            pathSummary.viewSiteCallSignLatLongGeColumns2(0, "Tonto Mtn", "KA20003", "40 44 54 N", "73 59 9 W", "0.98");}
-
+        quickAdd.quickAddPath("CAM", "940 MHz", "Best Path", "35 12 26.7 N", "78 3 21.2 W", "48.69", "1241006");
+        pathSummary.viewSiteCallSignLatLongGeColumns1(2, "CAMSLANT STATION", "", "35 12 26.7 N", "78 3 21.2 W", "48.69");
+        pathSummary.viewSiteCallSignLatLongGeColumns2(0, "Tonto Mtn", "KA20003", "40 44 54 N", "73 59 9 W", "0.98");
     }
 
 
-    /*COM-97
+/*COM-97
 * " Given a user is creating a new project,
     When the Create New Project modal comes up,
     AND the Project Name field is completed,
@@ -248,23 +248,23 @@ public class QuickAddTest extends BaseTest {
         createPath.createBrandNewProjectPath("Best Project Ever"+ randomNumber, "This is the Default");
         pathSummary.valSiteLocationToggleOn();
 
-        siteExist = quickAdd.checkForExistingSite("New York");
+        siteExist = quickAdd.checkForExistingSite("New Yo");
         if (siteExist == true){
             quickAdd.cancelPathCreation();}
         else{
-            quickAdd.quickAddPathDataSetup("NY SUPPORT DATA", "940 MHz", "New York", "40 44 54 N", "73 59 9 W", "0.98", "KA20003");
+            quickAdd.quickAddPathDataSetup("NY SUPPORT DATA", "940 MHz", "New York", "40 44 54 N", "73 59 9 W", "0.98", "KA20003");}
 
         quickAdd.quickAddPath("New", "940 MHz", "", "40 44 54 N", "73 59 9 W", "0.98", "KA20003");
         pathSummary.viewSiteCallSignLatLongGeColumns1(0, "New York", "KA20003", "40 44 54 N", "73 59 9 W", "0.98");
         pathSummary.viewSiteCallSignLatLongGeColumns2(0, "New York", "KA20003", "40 44 54 N", "73 59 9 W", "0.98");
         pathName = pathSummary.projectNameSite1Site2Text(0);
-        assertEquals(pathName, "New York - New York");}
+        assertEquals(pathName, "New York - New York");
 
         siteExist = quickAdd.checkForExistingSite("CAMSLANT STATION");
         if (siteExist == true){
             quickAdd.cancelPathCreation();}
-        else
-            quickAdd.quickAddPathDataSetup("CAM SUPPORT DATA", "940 MHz", "CAMSLANT STATION", "35 12 26.7 N", "78 3 21.2 W", "48.69", "1241006");
+        else{
+            quickAdd.quickAddPathDataSetup("CAM SUPPORT DATA", "940 MHz", "CAMSLANT STATION", "35 12 26.7 N", "78 3 21.2 W", "48.69", "1241006");}
         quickAdd.quickAddPath("CAM", "940 MHz", "", "35 12 26.7 N", "78 3 21.2 W", "48.69", "1241006");
         pathName = pathSummary.projectNameSite1Site2Text(1);
         assertEquals(pathName, "CAMSLANT STATION - New York");
@@ -331,7 +331,7 @@ public class QuickAddTest extends BaseTest {
 
     @Test
     public void quickAddInvalidChars() {
-        createPath.createBrandNewProjectPath("Best Project Ever"+ randomNumber, "This is the Default");
+        createPath.createBrandNewProjectPath("Best Project Ever"+ randomNumber+randomNumber1, "This is the Default");
         pathSummary.valSiteLocationToggleOn();
         quickAdd.quickAddPathInvalidChar();
         quickAdd.quickAddPathCallSignInvalidChar();
@@ -519,7 +519,14 @@ public class QuickAddTest extends BaseTest {
      */
     @Test
     public void quickAddLatOrLongNotPerferredFormatConvertToPerferred() {
+        boolean siteExist;
+
         createPath.createBrandNewProjectPath("Best Project Ever"+ randomNumber, "This is the Default");
+        siteExist = quickAdd.checkForExistingSite("SITE1");
+        if (siteExist == true){
+            quickAdd.cancelPathCreation();}
+        else{
+            quickAdd.quickAddPathDataSetup("SITE1 SUPPORT DATA", "940 MHz", "SITE1", "76 26 47.7 N", "43 18 43.2 W", "0.98", "KA20003");}
         pathSummary.valSiteLocationToggleOn();
         //TODO currently lat and long is adding trailing zeros I am editing to allow for further examination of the tests
         quickAdd.quickAddPathGeneral1("Not Perferred to Convert To Perferred", "4.0 GHz", "SITE1", "76.446584", "-43.312", "98", "");
@@ -615,7 +622,7 @@ public class QuickAddTest extends BaseTest {
     Then an error messsage will come up indicating that an ASR or Call Sign which is not found in the DB can't be assigned
      */
 
-    @Test
+    //@Test
     public void quickAddASRSuggest() {
         String FCCError1;
 

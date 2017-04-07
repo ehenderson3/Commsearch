@@ -668,7 +668,7 @@ public class PathSummaryTest extends BaseTest {
     Then it will be assigned a path number one higher than the previous highest path number, based on the order of creation.
      */
 
-    @Test
+    //@Test
     public void viewPathBlueSection() {
         createPath.createBrandNewProjectPath("Best Project Ever"+ randomNumber, "This is the Default");
         pathSummary.valSiteLocationToggleOn();
