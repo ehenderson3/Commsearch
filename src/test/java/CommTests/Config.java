@@ -3,7 +3,7 @@ package CommTests;
 
 public interface Config {
 
-    final String baseUrl            = System.getProperty("baseUrl", "https://ec2-34-196-128-40.compute-1.amazonaws.com/#/");
+    final String baseUrl            = System.getProperty("baseUrl", "https://comsearch.dev.surgeforward.com/#/");
     final String browser            = System.getProperty("browser", "chrome");
     final String host               = System.getProperty("host","localhost");// or browserstack
     final String browserVersion     = System.getProperty("browserVersion","55");
