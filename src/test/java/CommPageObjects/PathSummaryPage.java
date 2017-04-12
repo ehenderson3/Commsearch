@@ -46,11 +46,12 @@ public class PathSummaryPage extends BasePage {
     By sIUnit = By.className("styled-radio");
     By showSiteLocationCheckBox = By.id("project-summary-settings-summary-display-show");
     By closeSettings = By.cssSelector(".fa.fa-times");
-
     By saveButton = By.id("project-summary-settings-submit");
     By pathsNoFreqCheckBox = By.id("project-summary-filter-checkbox");
     //TODO need locator that will see the text of Show all check box under the filter box
-    By pathsNoFreqCheckBoxText = By.xpath("//*[@id=\"app\"]/div/div/div/div/div/div[1]/form/p[2]/label");
+    By pathsNoFreqCheckBoxText = By.xpath("//*[@id=\"app\"]/div/div/div[1]/form/p[2]/label");
+    By deselectSplitPath = By.xpath("//*[contains(@id,'project-summary-modal-remove-path')]");
+    By splitProjectButton = By.xpath("//*[contains(@id,'project-summary-modal-split-project-apply')]");
 
 
     //Drop down options
@@ -58,6 +59,8 @@ public class PathSummaryPage extends BasePage {
     By copyOption = By.xpath("//*[@id=\"path-menu-0\"]/li[2]");
     By deletePopup = By.cssSelector(".ReactModal__Content.ReactModal__Content--after-open");
     By hamburgerDeletePaths = By.id("project-settings-delete-paths-modal-trigger");
+    By hamburgerSplitPathsDisabled = By.xpath("//*[@id='project-settings-delete-paths-modal-trigger' and @class='disable-button']");
+    By hamburgerSplitPathsEnabled = By.xpath("//*[@id='project-settings-split-project-modal-trigger']");
 
     //Path Entry Fields - Able to use the type method
     By targetAvailability = By.id("project-summary-settings-target-availability");
@@ -67,6 +70,8 @@ public class PathSummaryPage extends BasePage {
     By kFactorField = By.id("project-summary-settings-k-factor");
     By minClearence = By.id("project-summary-settings-minimum-clearance");
     By fieldChange = By.xpath("//*[contains(@placeholder, 'Minimum Clearance (m)')]");
+    By splitProjectModalNewProjectNameField = By.id("newProjectForm-projectName");
+
 
     //Path hovers -- Able to use the hover method
     By passiveRepeaterIcon = By.xpath("//*[contains(@id, 'passive-repeater-tooltip-path')]");
@@ -96,12 +101,16 @@ public class PathSummaryPage extends BasePage {
     //TODO need locator for TOTAL PATHS count #
     By totalPathsCount = By.xpath("//*[@id=\"app\"]/div/div/div/div/div/div[1]/div[1]/p[3]/span[2]");
     By minimumClearance = By.xpath("//*[@id=\"project-summary-settings\"]/form/ul/li[4]/div[3]/label");
-    By remainingDeletePaths = By.xpath("//*[contains(@id, 'project-summary-modal-path-')]");//project-summary-modal-path-
+    By remainingDeletePaths = By.xpath("//*[contains(@id, 'project-summary-modal-path-')]");
+    By remainingSlipPaths = By.xpath("//*[contains(@id, 'project-summary-modal-path-')]");
+    By splitProjectModalTitle = By.xpath("//*[text() = 'Split Project' and @class = 'uppercase']");
+    By splitProjectModalSubTitle = By.xpath("//*[text() = 'Move selected Paths to a New Project.' and @class = 'padding-top-1']");
+
 
 
     //Path DropDown Fields -- Does it contain a list that has options that can be selected
     By filterSelection = By.id("project-summary-filter-select");
-    By hamburgerDropDownInactive = By.xpath("//*[@id='project-summary-menu-toggle' and @class='pointer pull-right']");
+    By hamburgerDropDownInactive = By.xpath("//*[@id='project-summary-menu-toggle' and @class='pull-right pointer ']");
     By hamburgerDropDownActive = By.xpath("//*[@id='project-summary-menu-toggle' and @class='pointer pull-right active']");
 
     //Index List -- Can you used an array to select item
@@ -119,10 +128,9 @@ public class PathSummaryPage extends BasePage {
     By pathBandValueIndex1 = By.xpath("//*[contains(@id, 'path-') and contains(@id, '-site-1-bandwidth')]");
     By pathBandValueIndex2 = By.xpath("//*[contains(@id, 'path-') and contains(@id, '-site-2-bandwidth')]");
     By pathCallsignValueIndex1 = By.xpath("//*[contains(@id, 'path-') and contains(@id, '-site-1-callsign')]");
-    //By pathCallsignValueIndex2 = By.xpath("//*[contains(@id, 'path-') and contains(@id, '-site-2-callsign')]");
-    By pathCallsignValueIndex2 = By.id("path-0-site-2-callsign");
+    By pathCallsignValueIndex2 = By.xpath("//*[contains(@id, 'path-') and contains(@id, '-site-2-callsign')]");
+    //By pathCallsignValueIndex2 = By.id("path-0-site-2-callsign");
 
-    //path-0-site-2-callsign
     By pathLatitudeValueIndex1 = By.xpath("//*[contains(@id, 'path-') and contains(@id, '-site-1-lat')]");
     By pathLatitudeValueIndex2 = By.xpath("//*[contains(@id, 'path-') and contains(@id, '-site-2-lat')]");
     By pathLongitudeValueIndex1 = By.xpath("//*[contains(@id, 'path-') and contains(@id, '-site-1-long')]");
@@ -146,16 +154,19 @@ public class PathSummaryPage extends BasePage {
     By listNamePaths = By.cssSelector(".path-name-value.margin-right-auto");
     By allPathsNotSelected = By.xpath("//*[contains(@class, 'path-info-td td-border-transparent')]");
     By pathsToBeDeletedFromModal = By.xpath("//*[contains(@class,'delete-paths-modal-path')]");
-
-//Modal -- Does it pop up over current window
+    //Modal -- Does it pop up over current window
     By deleteConfirmation = By.cssSelector(".ReactModal__Content.ReactModal__Content--after-open");
     By deleteModal = By.cssSelector(".ReactModal__Content.ReactModal__Content--after-open");
     By deleteConfirmationNew = By.cssSelector(".display-flex.justify-content-center");
     By projectSettingsPanel = By.cssSelector(".active.project-summary-settings.bg-grey-gadient");
     By projectSettingsPanelNotClosed = By.cssSelector(".project-summary-settings.bg-grey-gadient");
+    By splitProjectConfirmationModal = By.cssSelector(".ReactModal__Content.ReactModal__Content--after-open");
+    By splitProjectConfirmationModalSubText = By.cssSelector(".padding-1");
+    By stayInCurrentProjectButton = By.xpath("//*[@id=\"project-summary-modal-split-project\"]/div/div/button[1]/small");
+    By goToNewProjectButton = By.xpath("//*[@id=\"project-summary-modal-split-project\"]/div/div/button[2]/small");
+
 
     By control = By.className("slowDown");
-
 
 
     public PathSummaryPage(WebDriver driver) {
@@ -163,6 +174,13 @@ public class PathSummaryPage extends BasePage {
         visit("/project-summary/395");
     }
 
+
+    public void openSettingMenuValDisabledSplitOption(){
+        isDisplayed(hamburgerDropDownInactive,30);
+        click(hamburgerDropDownInactive);
+        isDisplayed(hamburgerSplitPathsDisabled,20);
+        click(closeSettings);
+    }
 
     public void selectCopyFromPath() {
         click(actionArrow);
@@ -229,6 +247,109 @@ public class PathSummaryPage extends BasePage {
         assertEquals(rowOneDetails, Details);
 
     }
+
+    public void splitProject(String projectName){
+        assertTrue("There are no paths present Pleases adjust your preconditions to include the setting up of PATH test data",isDisplayed(allPathsNew,10));
+        click(allPathsNew,3);
+        click(allPathsNew,4);
+        click(allPathsNew,5);
+        assertTrue("The path is not selected", isDisplayedArray(pathsSelectedByArray,0));
+        assertTrue("Hamburger menu is not present", isDisplayed(hamburgerDropDownInactive,10));
+        click(hamburgerDropDownInactive);
+        assertTrue("Split Paths option is not present", isDisplayed(hamburgerSplitPathsEnabled,10));
+        click(hamburgerSplitPathsEnabled);
+
+        assertTrue(isDisplayed(splitProjectModalTitle,30));
+        assertTrue(isDisplayed(splitProjectModalSubTitle,30));
+        assertTrue(isDisplayed(splitProjectModalNewProjectNameField,30));
+        assertTrue(isDisplayedArray(remainingSlipPaths,0));
+        assertTrue(isDisplayedArray(remainingSlipPaths,1));
+        assertTrue(isDisplayedArray(remainingSlipPaths,2));
+        assertTrue(isDisplayedArray(deselectSplitPath,0));
+        assertTrue(isDisplayedArray(deselectSplitPath,1));
+        assertTrue(isDisplayedArray(deselectSplitPath,2));
+        assertTrue(isDisplayed(splitProjectButton,10));
+
+        type(projectName, splitProjectModalNewProjectNameField);
+        click(splitProjectButton);
+
+        assertTrue(isDisplayed(splitProjectConfirmationModal,30));//class="ReactModal__Content ReactModal__Content--after-open"
+        //TODO update locators once Nemo updates
+        assertTrue(isDisplayed(splitProjectConfirmationModalSubText,30));//class="padding-1"
+        assertTrue(isDisplayed(stayInCurrentProjectButton,30));//class="display-flex justify-content-between"
+        assertTrue(isDisplayed(goToNewProjectButton,30));//class="btn bg-green hover-inverse btn-md"
+        click(goToNewProjectButton);
+
+        String nameOfProject;
+        isDisplayed(projectTitleName,20);
+        nameOfProject = getText(projectTitleName);
+        assertEquals("project name is not correct", nameOfProject, projectName);
+    }
+    public void splitProjectStay(String projectName){
+        assertTrue("There are no paths present Pleases adjust your preconditions to include the setting up of PATH test data",isDisplayed(allPathsNew,10));
+        click(allPathsNew,3);
+        click(allPathsNew,4);
+        click(allPathsNew,5);
+        assertTrue("The path is not selected", isDisplayedArray(pathsSelectedByArray,0));
+        assertTrue("Hamburger menu is not present", isDisplayed(hamburgerDropDownInactive,10));
+        click(hamburgerDropDownInactive);
+        assertTrue("Split Paths option is not present", isDisplayed(hamburgerSplitPathsEnabled,10));
+        click(hamburgerSplitPathsEnabled);
+
+        assertTrue(isDisplayed(splitProjectModalTitle,30));
+        assertTrue(isDisplayed(splitProjectModalSubTitle,30));
+        assertTrue(isDisplayed(splitProjectModalNewProjectNameField,30));
+        assertTrue(isDisplayedArray(remainingSlipPaths,0));
+        assertTrue(isDisplayedArray(remainingSlipPaths,1));
+        assertTrue(isDisplayedArray(remainingSlipPaths,2));
+        assertTrue(isDisplayedArray(deselectSplitPath,0));
+        assertTrue(isDisplayedArray(deselectSplitPath,1));
+        assertTrue(isDisplayedArray(deselectSplitPath,2));
+        assertTrue(isDisplayed(splitProjectButton,10));
+
+        type(projectName, splitProjectModalNewProjectNameField);
+        click(splitProjectButton);
+
+        assertTrue(isDisplayed(splitProjectConfirmationModal,30));//class="ReactModal__Content ReactModal__Content--after-open"
+        //TODO update locators once Nemo updates
+        assertTrue(isDisplayed(splitProjectConfirmationModalSubText,30));//class="padding-1"
+        assertTrue(isDisplayed(stayInCurrentProjectButton,30));//class="display-flex justify-content-between"
+        assertTrue(isDisplayed(goToNewProjectButton,30));//class="btn bg-green hover-inverse btn-md"
+        click(stayInCurrentProjectButton);
+
+        String nameOfProject;
+        isDisplayed(projectTitleName,20);
+    }
+
+    public void splitProjectStayAlt(String projectName){
+        assertTrue("There are no paths present Pleases adjust your preconditions to include the setting up of PATH test data",isDisplayed(allPathsNew,10));
+        click(allPathsNew,0);
+        assertTrue("The path is not selected", isDisplayedArray(pathsSelectedByArray,0));
+        assertTrue("Hamburger menu is not present", isDisplayed(hamburgerDropDownInactive,10));
+        click(hamburgerDropDownInactive);
+        assertTrue("Split Paths option is not present", isDisplayed(hamburgerSplitPathsEnabled,10));
+        click(hamburgerSplitPathsEnabled);
+
+        assertTrue(isDisplayed(splitProjectModalTitle,30));
+        assertTrue(isDisplayed(splitProjectModalNewProjectNameField,30));
+        assertTrue(isDisplayedArray(remainingSlipPaths,0));
+        assertTrue(isDisplayedArray(deselectSplitPath,0));
+        assertTrue(isDisplayed(splitProjectButton,10));
+
+        type(projectName, splitProjectModalNewProjectNameField);
+        click(splitProjectButton);
+
+        assertTrue(isDisplayed(splitProjectConfirmationModal,30));//class="ReactModal__Content ReactModal__Content--after-open"
+        //TODO update locators once Nemo updates
+        assertTrue(isDisplayed(splitProjectConfirmationModalSubText,30));//class="padding-1"
+        assertTrue(isDisplayed(stayInCurrentProjectButton,30));//class="display-flex justify-content-between"
+        assertTrue(isDisplayed(goToNewProjectButton,30));//class="btn bg-green hover-inverse btn-md"
+        click(stayInCurrentProjectButton);
+
+        String nameOfProject;
+        isDisplayed(projectTitleName,20);
+    }
+
 
     public void viewSiteCallSignLatLongGeColumns1(int rowIndex, String siteIndex, String callSign, String lat, String longi, String elev){
         String rowOneSite;
@@ -323,6 +444,7 @@ public class PathSummaryPage extends BasePage {
         String a;
         String defaultTargetAvailability;
         assertTrue("Hamburger menu is not present", isDisplayed(hamburgerDropDownInactive, 10));
+        slowDown(2);
         click(hamburgerDropDownInactive);
         assertTrue("Settings menu option is not present", isDisplayed(hamburgerSettings, 10));
         click(hamburgerSettings);
@@ -520,7 +642,7 @@ public class PathSummaryPage extends BasePage {
         isDisplayed(siteLocationIcon, 30);
         hover(siteLocationIcon);
         hoverSiteLocationValSiteInfo(0);
-        assertTrue("Hamburger menu is not present", isDisplayed(hamburgerDropDownInactive, 10));
+        assertTrue("Hamburger menu is not present", isDisplayed(hamburgerDropDownInactive, 15));
         click(hamburgerDropDownInactive);
         assertTrue("Settings menu option is not present", isDisplayed(hamburgerSettings, 10));
         click(hamburgerSettings);
@@ -1013,6 +1135,10 @@ public class PathSummaryPage extends BasePage {
 
     public String pathAmounts() {
         return getText(totalPathAmount);
+    }
+
+    public boolean disabledSplit() {
+        return isDisplayed(hamburgerSplitPathsDisabled);
     }
 
     public String licenseeName() {

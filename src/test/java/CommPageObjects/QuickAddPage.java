@@ -18,6 +18,7 @@ public class QuickAddPage extends BasePage {
     By addPathButton = By.cssSelector(".btn.bg-green.hover-inverse");
     By addPathDetails = By.cssSelector(".btn.bg-blue.hover-inverse");
     By cancelButton = By.cssSelector(".btn.text-red.inverse-default");
+    By addButton2 = By.xpath("//span[@class='btn bg-green hover-inverse' and contains(text(), 'Add Path')]");
     By quickAddButton = By.xpath("//span[@class='btn bg-green hover-inverse' and contains(text(), 'Quick Add')]");
 
 
@@ -329,7 +330,12 @@ public class QuickAddPage extends BasePage {
         type(LatitudeText,latitude2);
         type(Longitude,longitude2);
         type(Asr,callSign2);
+        click(latitude);
+        slowDown(10);
+        clear(elevation2);
+        clear(elevation);
         type(ElevationText,elevation2);
+        type(ElevationText,elevation);
         click(latitude);
         click(longitude);
         click(pathName);
@@ -410,16 +416,9 @@ public class QuickAddPage extends BasePage {
             isDisplayed(addPathDetails, 10);
         } else {
             isDisplayed(addPathDetails);
-            click(addPathDetails);
-            assertTrue(isDisplayed(quickAddButton, 10));
-
         }
     }
-
-
-
-
-        public void quickAddPathGeneralError2(String PathNameText,String BandDropDown,String sitePartialText,String LatitudeText, String Longitude, String ElevationText,  String Asr) {
+    public void quickAddPathGeneralError2(String PathNameText,String BandDropDown,String sitePartialText,String LatitudeText, String Longitude, String ElevationText,  String Asr) {
 
             assertTrue(isDisplayed(quickAddButton, 20));
             switchBackToDefaultContent();
@@ -450,11 +449,8 @@ public class QuickAddPage extends BasePage {
             type(ElevationText, elevation);
             slowDown(4);
             click(pathName);
-
             click(addPathButton, 1);
         }
-
-
 
     public void siteSuggestValidation(String PathNameText,String BandDropDown,String sitePartialText, String Longitude, String ElevationText,  String Asr){
         quickAddPathSuggested(PathNameText,BandDropDown,sitePartialText, siteField, Longitude, ElevationText, Asr);

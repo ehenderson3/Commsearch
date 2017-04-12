@@ -134,7 +134,6 @@ public class CreatePathTest extends BaseTest {
         createPath.createBrandNewProjectPath(randomProjectName, "This is the Default");
         assertTrue(createPath.landedOnPathSummaryPage());
         assertTrue(createPath.projectName());
-       // assertEquals("Licensee name is incorrect","acme", createPath.licenseeName());
         assertEquals("Project name is incorrect", randomProjectName, createPath.projectNameText());
         assertEquals("Paths amt incorrect", "0", createPath.pathAmounts());
     }
