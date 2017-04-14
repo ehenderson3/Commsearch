@@ -42,8 +42,8 @@ public class PathSummaryPage extends BasePage {
     By deletePathsButton = By.id("delete-paths-modal-delete-apply");
     By deselectPathForDeletion = By.xpath("//*[contains(@id,'project-summary-modal-remove-path-2')]");
     By hamburgerSettings = By.id("project-summary-settings-trigger");
-    By uSUnit = By.className("styled-radio");
-    By sIUnit = By.className("styled-radio");
+    By uSUnit = By.xpath("//*[@id=\"project-summary-settings\"]/form/ul/li[1]/div/div/div[1]/label/p");
+    By sIUnit = By.id("project-summary-settings-unit-SI-label-bottom");
     By showSiteLocationCheckBox = By.id("project-summary-settings-summary-display-show");
     By closeSettings = By.cssSelector(".fa.fa-times");
     By saveButton = By.id("project-summary-settings-submit");
@@ -56,6 +56,7 @@ public class PathSummaryPage extends BasePage {
 
     //Drop down options
     By deleteOptionForPath1 = By.id("path-menu-delete-0");
+    //TODO refactor
     By copyOption = By.xpath("//*[@id=\"path-menu-0\"]/li[2]");
     By deletePopup = By.cssSelector(".ReactModal__Content.ReactModal__Content--after-open");
     By hamburgerDeletePaths = By.id("project-settings-delete-paths-modal-trigger");
@@ -65,12 +66,12 @@ public class PathSummaryPage extends BasePage {
     //Path Entry Fields - Able to use the type method
     By targetAvailability = By.id("project-summary-settings-target-availability");
     By filterSelectionInput = By.id("project-summary-filter-input");
-    By defaultLicenseeField = By.id("newProjectForm-defaultCompany");
+    By defaultLicenseeField = By.id("project-summary-settings-default-company");
     By fresnelZoneRadiusPercentField = By.id("project-summary-settings-freznel-zone-radius");
     By kFactorField = By.id("project-summary-settings-k-factor");
     By minClearence = By.id("project-summary-settings-minimum-clearance");
     By fieldChange = By.xpath("//*[contains(@placeholder, 'Minimum Clearance (m)')]");
-    By splitProjectModalNewProjectNameField = By.id("newProjectForm-projectName");
+    By splitProjectModalNewProjectNameField = By.id("split-project-project-name");
 
 
     //Path hovers -- Able to use the hover method
@@ -99,8 +100,9 @@ public class PathSummaryPage extends BasePage {
     By groundElevation = By.xpath("//*[contains(@title, 'Ground Elevation')]");
     By warnFresnelZoneRadius = By.className("error-message");
     //TODO need locator for TOTAL PATHS count #
-    By totalPathsCount = By.xpath("//*[@id=\"app\"]/div/div/div/div/div/div[1]/div[1]/p[3]/span[2]");
-    By minimumClearance = By.xpath("//*[@id=\"project-summary-settings\"]/form/ul/li[4]/div[3]/label");
+    By totalPathsCount = By.xpath("//*[@id=\"app\"]/div/div/div[1]/div[1]/p[3]/span[2]");
+
+    By minimumClearance = By.id("project-summary-settings-minimum-clearance-label");
     By remainingDeletePaths = By.xpath("//*[contains(@id, 'project-summary-modal-path-')]");
     By remainingSlipPaths = By.xpath("//*[contains(@id, 'project-summary-modal-path-')]");
     By splitProjectModalTitle = By.xpath("//*[text() = 'Split Project' and @class = 'uppercase']");
@@ -599,9 +601,10 @@ public class PathSummaryPage extends BasePage {
         click(hamburgerSettings);
         assertTrue("Project Panel is not present", isDisplayed(projectSettingsPanel, 10));
         assertTrue("Project Fresnel Zone Radius (%) is not present", isDisplayed(fresnelZoneRadiusPercentField, 10));
+        assertTrue("Default Company is not present", isDisplayed(defaultLicenseeField, 10));
         defaultCompany = getFieldText(defaultLicenseeField);
         defaultFresnelZoneRadius = getFieldText(fresnelZoneRadiusPercentField);
-        assertEquals("The defaultLic default val is not correct", defaultCompany, "");
+        assertEquals("The defaultLic default val is not correct", defaultCompany, "Verizon");
         assertEquals("The defaultFresnelZoneRadius default val is not correct", defaultFresnelZoneRadius, "60");
 
         clear(fresnelZoneRadiusPercentField);
@@ -677,21 +680,21 @@ public class PathSummaryPage extends BasePage {
         assertTrue("Project Panel is not present", isDisplayed(projectSettingsPanel, 20));
         assertTrue("Project US Unit is not present", waitForIsDisplayed(saveButton, 30));
         isDisplayed(minClearence,30);
-        isDisplayed(sIUnit,30);
+        isDisplayed(sIUnit,10);
 
-        click(sIUnit, 0);
+        click(sIUnit);
 
         minimumClearanceLable = getText(minimumClearance);
-        assertTrue(minimumClearanceLable.contains("(ft)"));
+        assertTrue(minimumClearanceLable.contains("Minimum Clearance (m)"));
         clear(minClearence);
         type(editValMinClearence,minClearence);
-        isDisplayedArray(sIUnit, 1);
+        isDisplayed(sIUnit);
         isDisplayed(saveButton,10);
         changedMinClearence = getFieldText(minClearence);
         assertEquals("Min clearence did not change", changedMinClearence,editValMinClearence);
 
         isDisplayed(control,4);
-        click(sIUnit, 1);
+        click(sIUnit);
         isDisplayed(fieldChange, 10);
         isDisplayed(saveButton, 10);
         postSiSwitchValue = getFieldText(minClearence);

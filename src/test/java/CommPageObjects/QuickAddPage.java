@@ -126,7 +126,7 @@ public class QuickAddPage extends BasePage {
         assertEquals(longs,Longitude);
         assertEquals(asr,Asr);
         isDisplayed(addPathButton,6);
-        type("New",siteField2);
+        type("New Yor",siteField2);
         isDisplayed(option,11);
         click(option);
         click(pathName);
@@ -326,6 +326,9 @@ public class QuickAddPage extends BasePage {
         type(Asr,callSign);
         type(ElevationText,elevation);
         isDisplayed(addPathButton,6);
+        clear(siteField);
+        slowDown(2);
+        type(sitePartialText,siteField);
         type(sitePartialText,siteField2);
         type(LatitudeText,latitude2);
         type(Longitude,longitude2);
@@ -337,6 +340,9 @@ public class QuickAddPage extends BasePage {
         type(ElevationText,elevation2);
         type(ElevationText,elevation);
         click(latitude);
+        clear(siteField2);
+        slowDown(2);
+        type(sitePartialText,siteField2);
         click(longitude);
         click(pathName);
         click(addPathButton,1);
@@ -352,7 +358,7 @@ public class QuickAddPage extends BasePage {
         isDisplayed(quickAddButton,10);
 
         click(quickAddButton,0);
-        waitForIsDisplayed(pathName,6);
+        isDisplayed(pathName,30);
         type(PathNameText, pathName);
         selectFromDropdown(optionanBandDropDown, BandDropDown);
         type(sitePartialText,siteField);

@@ -9,8 +9,8 @@ import static org.junit.Assert.assertTrue;
 public class CreateNewPathPage extends BasePage {
 
     //Buttons
-    By pathRadioButton = By.className("styled-radio");
-    By companyLookUp = By.id("newProjectForm-defaultCompanyLookup");
+    By pathRadioButton = By.xpath("//span[text()='Path']");
+    By companyLookUp = By.id("default-company-lookup-trigger");
     By companySearchButton = By.id("company-lookup-submit");
 
     //Modal
@@ -20,14 +20,14 @@ public class CreateNewPathPage extends BasePage {
     //Fields
     By companyCodeField = By.id("company-lookup-company-code");
     By companyNameField = By.id("company-lookup-company-name");
-    By defaultCompanyField = By.id("newProjectForm-defaultCompany");
+    By defaultCompanyField = By.id("new-project-form-default-company");
     By searchResultArray = By.cssSelector(".react-grid-Row.react-grid-Row--even");
     By control = By.id("control");
 
     By companyContactNameField = By.id("company-lookup-contact-name");
     By createButton = By.id("newProjectForm-submit");
     By newProjectField = By.id("newProjectForm-projectName");
-    By defaultCompany = By.id("newProjectForm-defaultCompany");
+    By defaultCompany = By.id("new-project-form-default-company");
     By projectRequired = By.className("error-message");
     By filterField = By.id("project-summary-filter-input");
     By projectTitle = By.xpath("//span[text()='Project ']");
@@ -56,10 +56,20 @@ public class CreateNewPathPage extends BasePage {
         assertTrue("can't find the Create button",
         isDisplayed(createButton,30));
         type(projectName, newProjectField);
+        isDisplayed(pathRadioButton,30);
+
         click(pathRadioButton);
+
+
         isDisplayed(defaultCompany,20);
-        click(createButton);
-        assertTrue(isDisplayed(filterField,20));
+        //click(createButton);
+        //assertTrue(isDisplayed(filterField,20));
+
+        isDisplayed(companyLookUp, 10);
+        click(companyLookUp);
+        assertTrue("Can't find company modal",isDisplayed(companyModal,30));
+
+
     }
     public void enterProjectForCompany(String projectName, String defaultLicensee){
         click(commHome);
@@ -70,6 +80,8 @@ public class CreateNewPathPage extends BasePage {
         isDisplayed(defaultCompany,20);
         isDisplayed(companyLookUp, 10);
         click(companyLookUp);
+        assertTrue("Can't find company modal",isDisplayed(companyModal,30));
+
     }
 
     public void fillOutCompanyFilter(String coCodeText,String coNameText, String coContactText, Integer company) {
