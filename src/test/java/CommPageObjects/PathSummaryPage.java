@@ -8,6 +8,7 @@ import org.openqa.selenium.WebElement;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 public class PathSummaryPage extends BasePage {
@@ -124,6 +125,8 @@ public class PathSummaryPage extends BasePage {
     By pathModValue = By.cssSelector(".tooltip-trigger-decoration.show-decoration.acm-tooltip-decoration.uppercase");
     By pathDetailsIndex = By.cssSelector(".path-details-button.pointer");
     By pathSiteIndex = By.id("path-2-site-1-siteName");
+    By site1 = By.id("quick-add-site[0]siteName");
+    By site2 = By.id("quick-add-site[1]siteName");
     By siteName1 = By.xpath(""+PATH_VAL+" '-site-1-siteName')]");
     By siteName2 = By.xpath(""+PATH_VAL+" '-site-2-siteName')]");
 
@@ -169,7 +172,7 @@ public class PathSummaryPage extends BasePage {
     By splitProjectConfirmationModalSubText = By.cssSelector(".padding-1");
     By stayInCurrentProjectButton = By.xpath("//*[@id=\"project-summary-modal-split-project\"]/div/div/button[1]/small");
     By goToNewProjectButton = By.xpath("//*[@id=\"project-summary-modal-split-project\"]/div/div/button[2]/small");
-
+    By option =By.className("suggestion-element");
 
     By control = By.className("slowDown");
 
@@ -177,6 +180,15 @@ public class PathSummaryPage extends BasePage {
     public PathSummaryPage(WebDriver driver) {
         super(driver);
         visit("/project-summary/395");
+    }
+
+    public void checkSiteSuggestionQuickAdd(String site1val, String site2val){
+        assertTrue(isDisplayed(site1,20));
+        assertTrue(isDisplayed(site2,20));
+        type(site1val,site1);
+        assertFalse(isDisplayed(option,8));
+        type(site2val,site2);
+        assertFalse(isDisplayed(option,8));
     }
 
     public void openPathDetailForAddingPath(){

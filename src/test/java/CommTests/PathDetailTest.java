@@ -129,6 +129,8 @@ public class PathDetailTest extends BaseTest{
         pathSummary.valSiteLocationToggleOn();
         pathSummary.openPathDetailForAddingPath();
         pathDetail.checkSiteSuggestion("SITE1","Tonto Mtn");
+        pathDetail.closeDetailsOpenQuickAdd();
+        pathSummary.checkSiteSuggestionQuickAdd("SITE1","Tonto Mtn");
     }
 
     /**

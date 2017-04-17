@@ -17,6 +17,7 @@ public class PathDetailPage extends BasePage {
     By pathDetailNewButton = By.id("path-details-path-new-mod-icon");
     By pathDetailSaveDetailsButton = By.cssSelector(".heading-font.btn.btn-md.hover-inverse.bg-green");
     By pathDetailDiscardButton = By.cssSelector(".heading-font.btn.btn-md.hover-inverse.bg-blue.margin-left-1");
+    By quickAdd = By.id("project-summary-quick-add-open");
 
     //DropDown Fields -- Does it contain a list that has options that can be selected
     By pathDetailRadioServiceDropDownField1 = By.id("path-details-site-0-radio-service");
@@ -74,6 +75,14 @@ public class PathDetailPage extends BasePage {
         assertEquals(errors,errorText);
     }
 
+    public void closeDetailsOpenQuickAdd(){
+        isDisplayed(pathDetailDiscardButton,10);
+        click(pathDetailDiscardButton);
+        assertTrue(isDisplayed(quickAdd,12));
+        click(quickAdd);
+    }
+
+
     public void checkSiteSuggestion(String siteName,String siteName2 ){
         isDisplayed(pathDetailSiteNameField1,8);
         type(siteName,pathDetailSiteNameField1);
@@ -82,8 +91,8 @@ public class PathDetailPage extends BasePage {
         type(siteName2,pathDetailSiteNameField2);
         assertFalse(isDisplayed(pathDetailSuggested1,20));
         click(pathDetailCallSignField1);
-
     }
+
 
 
     public void checkCallSignEntry(String siteName,String siteName2 ){
@@ -182,7 +191,6 @@ public class PathDetailPage extends BasePage {
         assertEquals("call Sign is incorrect",latitudeValue,latitude);
         assertEquals("call Sign is incorrect",longitudeValue,longitude);
         assertEquals("call Sign is incorrect",elevationValue,elevation);
-
         assertEquals("call Sign is incorrect",bandValue,frequencyBand);
 
     }
@@ -239,14 +247,7 @@ public class PathDetailPage extends BasePage {
         assertEquals(longi,longitude);
         assertEquals(lati,latitude);
         assertEquals(elev,elevation);
-        //assertEquals(band,frequencyBand);
 
-
-
-
-//        type("enter into fields", fieldIdentifiedByLocator)
-//        click(quickAddbutton);
-//        isDisplayed(addPathNameField);
     }
 
     public void viewPathDetailValues2(String siteName, String callSign, String longitude, String latitude, String elevation, String frequencyBand){
@@ -261,8 +262,6 @@ public class PathDetailPage extends BasePage {
         assertTrue(isDisplayed(pathDetailCompanyNameField2,6));
         assertTrue(isDisplayed(pathDetailCallSignField2,6));
         assertTrue(isDisplayed(pathDetailAsrField2,6));
-//        type("enter into fields", fieldIdentifiedByLocator)
-//        click(quickAddbutton);
-//        isDisplayed(addPathNameField);
+
     }
 }
