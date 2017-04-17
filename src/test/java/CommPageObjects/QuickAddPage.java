@@ -18,6 +18,7 @@ public class QuickAddPage extends BasePage {
     By addPathButton = By.cssSelector(".btn.bg-green.hover-inverse");
     By addPathDetails = By.cssSelector(".btn.bg-blue.hover-inverse");
     By cancelButton = By.cssSelector(".btn.text-red.inverse-default");
+    By addButton2 = By.xpath("//span[@class='btn bg-green hover-inverse' and contains(text(), 'Add Path')]");
     By quickAddButton = By.xpath("//span[@class='btn bg-green hover-inverse' and contains(text(), 'Quick Add')]");
 
 
@@ -125,7 +126,7 @@ public class QuickAddPage extends BasePage {
         assertEquals(longs,Longitude);
         assertEquals(asr,Asr);
         isDisplayed(addPathButton,6);
-        type("New",siteField2);
+        type("New Yor",siteField2);
         isDisplayed(option,11);
         click(option);
         click(pathName);
@@ -325,12 +326,23 @@ public class QuickAddPage extends BasePage {
         type(Asr,callSign);
         type(ElevationText,elevation);
         isDisplayed(addPathButton,6);
+        clear(siteField);
+        slowDown(2);
+        type(sitePartialText,siteField);
         type(sitePartialText,siteField2);
         type(LatitudeText,latitude2);
         type(Longitude,longitude2);
         type(Asr,callSign2);
-        type(ElevationText,elevation2);
         click(latitude);
+        slowDown(10);
+        clear(elevation2);
+        clear(elevation);
+        type(ElevationText,elevation2);
+        type(ElevationText,elevation);
+        click(latitude);
+        clear(siteField2);
+        slowDown(2);
+        type(sitePartialText,siteField2);
         click(longitude);
         click(pathName);
         click(addPathButton,1);
@@ -346,7 +358,7 @@ public class QuickAddPage extends BasePage {
         isDisplayed(quickAddButton,10);
 
         click(quickAddButton,0);
-        waitForIsDisplayed(pathName,6);
+        isDisplayed(pathName,30);
         type(PathNameText, pathName);
         selectFromDropdown(optionanBandDropDown, BandDropDown);
         type(sitePartialText,siteField);
@@ -410,16 +422,9 @@ public class QuickAddPage extends BasePage {
             isDisplayed(addPathDetails, 10);
         } else {
             isDisplayed(addPathDetails);
-            click(addPathDetails);
-            assertTrue(isDisplayed(quickAddButton, 10));
-
         }
     }
-
-
-
-
-        public void quickAddPathGeneralError2(String PathNameText,String BandDropDown,String sitePartialText,String LatitudeText, String Longitude, String ElevationText,  String Asr) {
+    public void quickAddPathGeneralError2(String PathNameText,String BandDropDown,String sitePartialText,String LatitudeText, String Longitude, String ElevationText,  String Asr) {
 
             assertTrue(isDisplayed(quickAddButton, 20));
             switchBackToDefaultContent();
@@ -450,11 +455,8 @@ public class QuickAddPage extends BasePage {
             type(ElevationText, elevation);
             slowDown(4);
             click(pathName);
-
             click(addPathButton, 1);
         }
-
-
 
     public void siteSuggestValidation(String PathNameText,String BandDropDown,String sitePartialText, String Longitude, String ElevationText,  String Asr){
         quickAddPathSuggested(PathNameText,BandDropDown,sitePartialText, siteField, Longitude, ElevationText, Asr);

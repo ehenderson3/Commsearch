@@ -132,9 +132,9 @@ public class CreatePathTest extends BaseTest {
         String randomProjectName;
         randomProjectName = "Validating Landing" +randomNumber+"";
         createPath.createBrandNewProjectPath(randomProjectName, "This is the Default");
+        createPath.fillOutCompanyFilter("VZW111","", "",0);
         assertTrue(createPath.landedOnPathSummaryPage());
         assertTrue(createPath.projectName());
-       // assertEquals("Licensee name is incorrect","acme", createPath.licenseeName());
         assertEquals("Project name is incorrect", randomProjectName, createPath.projectNameText());
         assertEquals("Paths amt incorrect", "0", createPath.pathAmounts());
     }
