@@ -52,6 +52,9 @@ public class PathSummaryPage extends BasePage {
     By pathsNoFreqCheckBoxText = By.xpath("//*[@id=\"app\"]/div/div/div[1]/form/p[2]/label");
     By deselectSplitPath = By.xpath("//*[contains(@id,'project-summary-modal-remove-path')]");
     By splitProjectButton = By.xpath("//*[contains(@id,'project-summary-modal-split-project-apply')]");
+    By pathDetailButton = By.id("project-summary-quick-add-path-details");
+    By intraPathDetailButton = By.xpath("//*[contains(@id, 'path-') and contains(@id, '-path-details-button')]");
+
 
 
     //Drop down options
@@ -101,12 +104,12 @@ public class PathSummaryPage extends BasePage {
     By warnFresnelZoneRadius = By.className("error-message");
     //TODO need locator for TOTAL PATHS count #
     By totalPathsCount = By.xpath("//*[@id=\"app\"]/div/div/div[1]/div[1]/p[3]/span[2]");
-
     By minimumClearance = By.id("project-summary-settings-minimum-clearance-label");
     By remainingDeletePaths = By.xpath("//*[contains(@id, 'project-summary-modal-path-')]");
     By remainingSlipPaths = By.xpath("//*[contains(@id, 'project-summary-modal-path-')]");
     By splitProjectModalTitle = By.xpath("//*[text() = 'Split Project' and @class = 'uppercase']");
     By splitProjectModalSubTitle = By.xpath("//*[text() = 'Move selected Paths to a New Project.' and @class = 'padding-top-1']");
+    By pathDetailSiteNameField1 = By.id("path-details-site[0]siteName");
 
 
 
@@ -131,7 +134,6 @@ public class PathSummaryPage extends BasePage {
     By pathBandValueIndex2 = By.xpath("//*[contains(@id, 'path-') and contains(@id, '-site-2-bandwidth')]");
     By pathCallsignValueIndex1 = By.xpath("//*[contains(@id, 'path-') and contains(@id, '-site-1-callsign')]");
     By pathCallsignValueIndex2 = By.xpath("//*[contains(@id, 'path-') and contains(@id, '-site-2-callsign')]");
-    //By pathCallsignValueIndex2 = By.id("path-0-site-2-callsign");
 
     By pathLatitudeValueIndex1 = By.xpath("//*[contains(@id, 'path-') and contains(@id, '-site-1-lat')]");
     By pathLatitudeValueIndex2 = By.xpath("//*[contains(@id, 'path-') and contains(@id, '-site-2-lat')]");
@@ -156,6 +158,7 @@ public class PathSummaryPage extends BasePage {
     By listNamePaths = By.cssSelector(".path-name-value.margin-right-auto");
     By allPathsNotSelected = By.xpath("//*[contains(@class, 'path-info-td td-border-transparent')]");
     By pathsToBeDeletedFromModal = By.xpath("//*[contains(@class,'delete-paths-modal-path')]");
+
     //Modal -- Does it pop up over current window
     By deleteConfirmation = By.cssSelector(".ReactModal__Content.ReactModal__Content--after-open");
     By deleteModal = By.cssSelector(".ReactModal__Content.ReactModal__Content--after-open");
@@ -176,6 +179,18 @@ public class PathSummaryPage extends BasePage {
         visit("/project-summary/395");
     }
 
+    public void openPathDetailForAddingPath(){
+        assertTrue(isDisplayed(pathDetailButton,8));
+        click(pathDetailButton);
+        assertTrue(isDisplayed(pathDetailSiteNameField1,8));
+
+    }
+
+    public void openPathDetails(int i) {
+        isDisplayed(intraPathDetailButton,20);
+        click(intraPathDetailButton,i);
+        isDisplayed(pathDetailSiteNameField1,20);
+    }
 
     public void openSettingMenuValDisabledSplitOption(){
         isDisplayed(hamburgerDropDownInactive,30);

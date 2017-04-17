@@ -97,7 +97,7 @@ public class QuickAddPage extends BasePage {
         String asr;
         String elev;
 
-        waitForIsDisplayed(quickAddButton,10);
+        isDisplayed(quickAddButton,40);
         isDisplayedAndClickable(quickAddButton,10);
         isDisplayed(quickAddButton,10);
 
@@ -107,15 +107,8 @@ public class QuickAddPage extends BasePage {
         type(PathNameText, pathName);
         selectFromDropdown(optionanBandDropDown, BandDropDown);
         type(sitePartialText,siteField);
-        isDisplayed(option,6);
-        if (isDisplayed(option,6) == true){
-            click(option);}
-        else {
-            click(siteField);
-            isDisplayed(option,6);
-            click(option);
-        }
-
+        isDisplayed(option,10);
+        click(option);
 
         lat = getFieldText(latitude);
         longs = getFieldText(longitude);
