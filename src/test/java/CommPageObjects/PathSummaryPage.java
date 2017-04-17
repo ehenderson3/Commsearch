@@ -8,6 +8,7 @@ import org.openqa.selenium.WebElement;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 public class PathSummaryPage extends BasePage {
@@ -52,6 +53,9 @@ public class PathSummaryPage extends BasePage {
     By pathsNoFreqCheckBoxText = By.xpath("//*[@id=\"app\"]/div/div/div[1]/form/p[2]/label");
     By deselectSplitPath = By.xpath("//*[contains(@id,'project-summary-modal-remove-path')]");
     By splitProjectButton = By.xpath("//*[contains(@id,'project-summary-modal-split-project-apply')]");
+    By pathDetailButton = By.id("project-summary-quick-add-path-details");
+    By intraPathDetailButton = By.xpath("//*[contains(@id, 'path-') and contains(@id, '-path-details-button')]");
+
 
 
     //Drop down options
@@ -101,12 +105,12 @@ public class PathSummaryPage extends BasePage {
     By warnFresnelZoneRadius = By.className("error-message");
     //TODO need locator for TOTAL PATHS count #
     By totalPathsCount = By.xpath("//*[@id=\"app\"]/div/div/div[1]/div[1]/p[3]/span[2]");
-
     By minimumClearance = By.id("project-summary-settings-minimum-clearance-label");
     By remainingDeletePaths = By.xpath("//*[contains(@id, 'project-summary-modal-path-')]");
     By remainingSlipPaths = By.xpath("//*[contains(@id, 'project-summary-modal-path-')]");
     By splitProjectModalTitle = By.xpath("//*[text() = 'Split Project' and @class = 'uppercase']");
     By splitProjectModalSubTitle = By.xpath("//*[text() = 'Move selected Paths to a New Project.' and @class = 'padding-top-1']");
+    By pathDetailSiteNameField1 = By.id("path-details-site[0]siteName");
 
 
 
@@ -121,6 +125,8 @@ public class PathSummaryPage extends BasePage {
     By pathModValue = By.cssSelector(".tooltip-trigger-decoration.show-decoration.acm-tooltip-decoration.uppercase");
     By pathDetailsIndex = By.cssSelector(".path-details-button.pointer");
     By pathSiteIndex = By.id("path-2-site-1-siteName");
+    By site1 = By.id("quick-add-site[0]siteName");
+    By site2 = By.id("quick-add-site[1]siteName");
     By siteName1 = By.xpath(""+PATH_VAL+" '-site-1-siteName')]");
     By siteName2 = By.xpath(""+PATH_VAL+" '-site-2-siteName')]");
 
@@ -131,7 +137,6 @@ public class PathSummaryPage extends BasePage {
     By pathBandValueIndex2 = By.xpath("//*[contains(@id, 'path-') and contains(@id, '-site-2-bandwidth')]");
     By pathCallsignValueIndex1 = By.xpath("//*[contains(@id, 'path-') and contains(@id, '-site-1-callsign')]");
     By pathCallsignValueIndex2 = By.xpath("//*[contains(@id, 'path-') and contains(@id, '-site-2-callsign')]");
-    //By pathCallsignValueIndex2 = By.id("path-0-site-2-callsign");
 
     By pathLatitudeValueIndex1 = By.xpath("//*[contains(@id, 'path-') and contains(@id, '-site-1-lat')]");
     By pathLatitudeValueIndex2 = By.xpath("//*[contains(@id, 'path-') and contains(@id, '-site-2-lat')]");
@@ -156,6 +161,7 @@ public class PathSummaryPage extends BasePage {
     By listNamePaths = By.cssSelector(".path-name-value.margin-right-auto");
     By allPathsNotSelected = By.xpath("//*[contains(@class, 'path-info-td td-border-transparent')]");
     By pathsToBeDeletedFromModal = By.xpath("//*[contains(@class,'delete-paths-modal-path')]");
+
     //Modal -- Does it pop up over current window
     By deleteConfirmation = By.cssSelector(".ReactModal__Content.ReactModal__Content--after-open");
     By deleteModal = By.cssSelector(".ReactModal__Content.ReactModal__Content--after-open");
@@ -166,7 +172,7 @@ public class PathSummaryPage extends BasePage {
     By splitProjectConfirmationModalSubText = By.cssSelector(".padding-1");
     By stayInCurrentProjectButton = By.xpath("//*[@id=\"project-summary-modal-split-project\"]/div/div/button[1]/small");
     By goToNewProjectButton = By.xpath("//*[@id=\"project-summary-modal-split-project\"]/div/div/button[2]/small");
-
+    By option =By.className("suggestion-element");
 
     By control = By.className("slowDown");
 
@@ -176,6 +182,27 @@ public class PathSummaryPage extends BasePage {
         visit("/project-summary/395");
     }
 
+    public void checkSiteSuggestionQuickAdd(String site1val, String site2val){
+        assertTrue(isDisplayed(site1,20));
+        assertTrue(isDisplayed(site2,20));
+        type(site1val,site1);
+        assertFalse(isDisplayed(option,8));
+        type(site2val,site2);
+        assertFalse(isDisplayed(option,8));
+    }
+
+    public void openPathDetailForAddingPath(){
+        assertTrue(isDisplayed(pathDetailButton,8));
+        click(pathDetailButton);
+        assertTrue(isDisplayed(pathDetailSiteNameField1,8));
+
+    }
+
+    public void openPathDetails(int i) {
+        isDisplayed(intraPathDetailButton,20);
+        click(intraPathDetailButton,i);
+        isDisplayed(pathDetailSiteNameField1,20);
+    }
 
     public void openSettingMenuValDisabledSplitOption(){
         isDisplayed(hamburgerDropDownInactive,30);

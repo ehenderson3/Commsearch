@@ -25,13 +25,14 @@ import java.util.Random;
        pathSummary = new PathSummaryPage(driver);
        createPath = new CreateNewPathPage(driver);
 
-        }
+    }
 
     @Rule
     public RetryTest.Retry retry = new RetryTest.Retry(1);
 
     Random rndNum = new Random();
     int randomNumber = rndNum.nextInt(100000);
+
     @Test
     public void dataAddTest() {
         boolean siteExist;

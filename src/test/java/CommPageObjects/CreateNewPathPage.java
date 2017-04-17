@@ -11,6 +11,9 @@ public class CreateNewPathPage extends BasePage {
     //Buttons
     By pathRadioButton = By.xpath("//span[text()='Path']");
     By companyLookUp = By.id("default-company-lookup-trigger");
+    By pathDetailCompanyLookUp = By.id("path-details-company-lookup-trigger");
+
+    //path-details-company-lookup-trigger
     By companySearchButton = By.id("company-lookup-submit");
 
     //Modal
@@ -36,7 +39,7 @@ public class CreateNewPathPage extends BasePage {
     By licenseeName = By.xpath("//*[@class=\"project-summary-overview\"]/p[2]/span[2]");
     By errorMessage = By.className("error-message");
     By returnHome = By.id("header-homeLink");
-
+    By pathDetailDefaultCompanyField = By.id("path-details-site-0-company-name");
 
 
     //Project Landing
@@ -68,6 +71,22 @@ public class CreateNewPathPage extends BasePage {
         isDisplayed(companyLookUp, 10);
         click(companyLookUp);
         assertTrue("Can't find company modal",isDisplayed(companyModal,30));
+
+
+    }
+
+    public void createBrandNewProjectPathNoCompany(String projectName, String defaultLicensee){
+        String filterEntryField;
+        isDisplayed(commHome,10);
+        click(commHome);
+        assertTrue("can't find the Create button", isDisplayed(createButton,30));
+        type(projectName, newProjectField);
+        isDisplayed(pathRadioButton,30);
+        click(pathRadioButton);
+        isDisplayed(defaultCompany,20);
+        click(createButton);
+        assertTrue(isDisplayed(filterField,20));
+
 
 
     }
@@ -103,6 +122,27 @@ public class CreateNewPathPage extends BasePage {
         assertEquals(a, "Verizon");
         click(createButton);
         isDisplayed(filterField, 10);
+    }
+
+    public void fillOutCompanyFilterFromDetails(String coCodeText,String coNameText, String coContactText, Integer company) {
+        String a;
+        isDisplayed(pathDetailCompanyLookUp,10);
+        click(pathDetailCompanyLookUp,company);
+        assertTrue("Can't find company modal",isDisplayed(companyModal,10));
+        assertTrue("Can't find Code Field",isDisplayed(companyCodeField,10));
+        assertTrue("Can't find Name Field",isDisplayed(companyNameField,10));
+        assertTrue("Can't find Name Field",isDisplayed(companyContactNameField));
+        type(coCodeText, companyCodeField);
+        type(coNameText, companyNameField);
+        type(coContactText, companyContactNameField);
+        assertTrue("Can't find Search Button",isDisplayed(companySearchButton));
+        click(companySearchButton );
+        slowDown(2);
+        isDisplayed(searchResultArray,10);
+        slowDown(2);
+        click(searchResultArray);
+        a = getFieldText(pathDetailDefaultCompanyField);//path-details-site-0-company-name
+        assertEquals(a, "Verizon");
     }
 
     public void fillOutCompanyFilterErrorChecking(String coCodeText,String coNameText, String coContactText, Integer company) {
