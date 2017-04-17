@@ -227,7 +227,6 @@ public class PathDetailPage extends BasePage {
         String longi = getFieldText(pathDetailLongitudeField1);
         String lati = getFieldText(pathDetailLatitudeField1);
         String elev = getFieldText(pathDetailGroundElevationField1);
-        String band = getFieldTextTitle(pathDetailFrequencyBandDropDownField1);
 
 
         assertTrue(isDisplayed(pathDetailRadioServiceDropDownField1,6));

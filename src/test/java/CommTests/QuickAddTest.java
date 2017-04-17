@@ -411,10 +411,6 @@ public class QuickAddTest extends BaseTest {
             pathSummary.viewSiteCallSignLatLongGeColumns1(0, "New York", "KA20003", "40 44 54 N", "73 59 9 W", "0.98");
             pathSummary.viewSiteCallSignLatLongGeColumns2(0, "New York", "KA20003", "40 44 54 N", "73 59 9 W", "0.98");
         }
-
-
-
-
     }
 
     @Test
@@ -598,8 +594,6 @@ public class QuickAddTest extends BaseTest {
         assertEquals(pathError, "Site Name cannot be longer than 20 characters.");
         assertEquals(pathError2, "Site Name cannot be longer than 20 characters.");
     }
-
-
 
     /*COM-100
     Given that a Call Sign is 8 characters (US),
