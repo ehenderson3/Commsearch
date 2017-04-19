@@ -55,7 +55,6 @@ public class QuickAddPage extends BasePage {
     By addNewPathSlideOutClosed = By.className("quick-add-container ");
     By addNewPathSlideOutOpen = By.cssSelector(".quick-add-container.active");
 
-    By control = By.className("toSlowDown");
 
     public QuickAddPage(WebDriver driver) {
         super(driver);
@@ -76,15 +75,22 @@ public class QuickAddPage extends BasePage {
             pathError = projectFieldError(0);
             pathError1 = projectFieldError(1);
 
+            slowDown(1);
+
             assertEquals(pathError, "Site Name contains invalid characters.");
             assertEquals(pathError1, "Site Name contains invalid characters.");
 
+            clear(siteField);
+            clear(siteField2);
             clear(siteField);
             clear(siteField2);
             click(pathName);
 
             pathError = projectFieldError(0);
             pathError1 = projectFieldError(1);
+
+            slowDown(1);
+
             assertEquals(pathError, "Required");
             assertEquals(pathError1, "Required");
         }
@@ -97,7 +103,7 @@ public class QuickAddPage extends BasePage {
         String asr;
         String elev;
 
-        isDisplayed(quickAddButton,40);
+        assertTrue("Can't Find quickAddButton",isDisplayed(quickAddButton,40));
         isDisplayedAndClickable(quickAddButton,10);
         isDisplayed(quickAddButton,10);
 
@@ -107,7 +113,7 @@ public class QuickAddPage extends BasePage {
         type(PathNameText, pathName);
         selectFromDropdown(optionanBandDropDown, BandDropDown);
         type(sitePartialText,siteField);
-        isDisplayed(option,10);
+        isDisplayed(option,20);
         click(option);
 
         lat = getFieldText(latitude);

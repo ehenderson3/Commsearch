@@ -46,7 +46,8 @@ public class PathSummaryPage extends BasePage {
     By uSUnit = By.xpath("//*[@id=\"project-summary-settings\"]/form/ul/li[1]/div/div/div[1]/label/p");
     By sIUnit = By.id("project-summary-settings-unit-SI-label-bottom");
     By showSiteLocationCheckBox = By.id("project-summary-settings-summary-display-show");
-    By closeSettings = By.cssSelector(".fa.fa-times");
+    //TODO the current Id is making tests flaky
+    By closeSettings = By.xpath("//*[@id=\"project-summary-settings-trigger\"]/span");
     By saveButton = By.id("project-summary-settings-submit");
     By pathsNoFreqCheckBox = By.id("project-summary-filter-checkbox");
     //TODO need locator that will see the text of Show all check box under the filter box
@@ -174,7 +175,6 @@ public class PathSummaryPage extends BasePage {
     By goToNewProjectButton = By.xpath("//*[@id=\"project-summary-modal-split-project\"]/div/div/button[2]/small");
     By option =By.className("suggestion-element");
 
-    By control = By.className("slowDown");
 
 
     public PathSummaryPage(WebDriver driver) {
@@ -393,14 +393,15 @@ public class PathSummaryPage extends BasePage {
         assertTrue("path Lat Value is not present",isDisplayed(pathLatitudeValueIndex2,8));
         assertTrue("path Long Value is not present",isDisplayed(pathLongitudeValueIndex2,8));
         assertTrue("path GE Value is not present",isDisplayed(pathGroundElevationValueIndex2,8));
-        slowDown(2);
+        slowDown(4);
 
         rowOneSite = getTextPlural(pathSiteIndex1,rowIndex);
         rowOneCallsign = getTextPlural(pathCallsignValueIndex1,rowIndex);
-
         rowOneLatitude = getTextPlural(pathLatitudeValueIndex1,rowIndex);
         rowOneLongitude = getTextPlural(pathLongitudeValueIndex1,rowIndex);
         rowOneGroundElevation = getTextPlural(pathGroundElevationValueIndex1,rowIndex);
+
+        slowDown(4);
 
         assertEquals(rowOneSite, siteIndex);
         assertEquals(rowOneCallsign, callSign);
@@ -421,6 +422,7 @@ public class PathSummaryPage extends BasePage {
         assertTrue("path Long Value is not present",isDisplayed(pathLongitudeValueIndex2,8));
         assertTrue("path GE Value is not present",isDisplayed(pathGroundElevationValueIndex2,8));
 
+        slowDown(10);
         rowOneSite = getTextPlural(pathSiteIndex1,rowIndex);
         rowOneCallsign = getTextPlural(pathCallsignValueIndex2,rowIndex);
         rowOneLatitude = getTextPlural(pathLatitudeValueIndex2,rowIndex);
@@ -473,9 +475,10 @@ public class PathSummaryPage extends BasePage {
         String a;
         String defaultTargetAvailability;
         assertTrue("Hamburger menu is not present", isDisplayed(hamburgerDropDownInactive, 10));
-        slowDown(2);
+        slowDown(4);
         click(hamburgerDropDownInactive);
-        assertTrue("Settings menu option is not present", isDisplayed(hamburgerSettings, 10));
+        slowDown(2);
+        assertTrue("Settings menu option is not present", isDisplayed(hamburgerSettings, 30));
         click(hamburgerSettings);
         assertTrue("Project Panel is not present", isDisplayed(projectSettingsPanel, 10));
         assertTrue("Project Target Availability (%) is not present", isDisplayed(targetAvailability, 10));
@@ -483,7 +486,10 @@ public class PathSummaryPage extends BasePage {
         assertEquals("The Target Avail default val is not correct", defaultTargetAvailability, "99.995");
         clear(targetAvailability);
         type("w", targetAvailability);
+
+        assertTrue("saveButton not present", isDisplayed(saveButton, 10));
         click(saveButton);
+        assertTrue(isDisplayed(warnFresnelZoneRadius,30));
         a = getText(warnFresnelZoneRadius);
         assertEquals(a, "ONLY NUMERICAL VALUES ALLOWED");
 
@@ -502,19 +508,20 @@ public class PathSummaryPage extends BasePage {
         clear(targetAvailability);
         type("100", targetAvailability);
         click(saveButton);
+        slowDown(3);
 
-        assertTrue("Hamburger menu is not present", isDisplayed(hamburgerDropDownInactive, 10));
+        assertTrue("Hamburger menu is not present", isDisplayed(hamburgerDropDownInactive, 30));
         click(hamburgerDropDownInactive);
-        if(isDisplayed(closeSettings,10)){
-            isDisplayed(hamburgerDropDownInactive,10);
+/*        if(isDisplayed(closeSettings,30)){
+            isDisplayed(hamburgerDropDownInactive,30);
             click(hamburgerDropDownInactive);
-            assertTrue("Settings menu option is not present", isDisplayed(hamburgerSettings, 10));
+            assertTrue("IF Settings menu option is not present", isDisplayed(hamburgerSettings, 30));
             click(hamburgerSettings);
             defaultTargetAvailability = getFieldText(targetAvailability);
-            assertEquals("The Target Avail default val is not correct", "100",defaultTargetAvailability);
+            assertEquals("IF The Target Avail default val is not correct", "100",defaultTargetAvailability);
 
-        }
-        assertTrue("Settings menu option is not present", isDisplayed(hamburgerSettings, 10));
+        }*/
+        assertTrue("Settings menu option is not present", isDisplayed(hamburgerSettings, 30));
         click(hamburgerSettings);
         defaultTargetAvailability = getFieldText(targetAvailability);
         assertEquals("The Target Avail default val is not correct", "100",defaultTargetAvailability);
@@ -681,7 +688,7 @@ public class PathSummaryPage extends BasePage {
         assertTrue("Project settings is not present", isDisplayed(projectSettingsPanel, 10));
         assertTrue("Project Site Location is not present", isDisplayed(showSiteLocationCheckBox, 30));
         isDisplayed(saveButton, 10);
-        isDisplayed(control,2);
+        slowDown(3);
         click(showSiteLocationCheckBox);
 
         click(saveButton);
@@ -706,24 +713,22 @@ public class PathSummaryPage extends BasePage {
         click(hamburgerSettings);
         assertTrue("Project Panel is not present", isDisplayed(projectSettingsPanel, 20));
         assertTrue("Project US Unit is not present", waitForIsDisplayed(saveButton, 30));
-        isDisplayed(minClearence,30);
-        isDisplayed(sIUnit,10);
-
+        assertTrue("minClearence",isDisplayed(minClearence,30));
+        assertTrue("sIUnit",isDisplayed(sIUnit,10));
         click(sIUnit);
 
         minimumClearanceLable = getText(minimumClearance);
         assertTrue(minimumClearanceLable.contains("Minimum Clearance (m)"));
         clear(minClearence);
         type(editValMinClearence,minClearence);
-        isDisplayed(sIUnit);
-        isDisplayed(saveButton,10);
+        assertTrue(isDisplayed(sIUnit));
+        assertTrue(isDisplayed(saveButton,10));
         changedMinClearence = getFieldText(minClearence);
         assertEquals("Min clearence did not change", changedMinClearence,editValMinClearence);
-
-        isDisplayed(control,4);
+        slowDown(4);
         click(sIUnit);
-        isDisplayed(fieldChange, 10);
-        isDisplayed(saveButton, 10);
+        assertTrue(isDisplayed(fieldChange, 10));
+        assertTrue(isDisplayed(saveButton, 10));
         postSiSwitchValue = getFieldText(minClearence);
         assertEquals("Min clearence did not change", postSiSwitchValue,valPostSiSwitch);
 
@@ -944,7 +949,7 @@ public class PathSummaryPage extends BasePage {
         click(hamburgerDropDownInactive);
         assertTrue("Settings menu option is not present", isDisplayed(hamburgerSettings,10));
         click(hamburgerSettings);
-        assertTrue("Project Panel is not present", waitUntilNotPresent(hamburgerSettings,10));
+        //assertTrue("Project Panel is not present", waitUntilNotPresent(hamburgerSettings,10));
         assertTrue("Project Panel is not present", isDisplayed(projectSettingsPanel,10));
         assertTrue("Project US Unit is not present", isDisplayed(uSUnit,10));
         assertTrue("Project Site is not present", isDisplayed(showSiteLocationCheckBox,10));
