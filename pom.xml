@@ -6,7 +6,7 @@
 
     <groupId>CommSearchSelenium</groupId>
     <artifactId>CommSearchUITests</artifactId>
-    <version>0.0.6-SNAPSHOT</version>
+    <version>0.0.7-SNAPSHOT</version>
 
 <dependencies>
     <dependency>
@@ -41,7 +41,7 @@
                     <version>2.19.1</version>
                     <configuration>
                         <parallel>classesAndMethods</parallel>
-                        <threadCount>3</threadCount>
+                        <threadCount>1</threadCount>
                         <runOrder>random</runOrder>
                        <!-- <groups>${groups}</groups>-->
                     </configuration>

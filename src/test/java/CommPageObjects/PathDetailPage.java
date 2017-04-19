@@ -107,7 +107,7 @@ public class PathDetailPage extends BasePage {
     public void checkSiteSuggestionTrue(String siteName,String siteName2 ){
         isDisplayed(pathDetailSiteNameField1,20);
         type(siteName,pathDetailSiteNameField1);
-        assertTrue(isDisplayed(pathDetailSuggested1,20));
+        assertTrue("suggested dropdown did not appear",isDisplayed(pathDetailSuggested1,20));
         hover(pathDetailSuggested1);
         slowDown(3);
         type(siteName2,pathDetailSiteNameField2);
@@ -200,13 +200,13 @@ public class PathDetailPage extends BasePage {
         assertTrue(isDisplayed(pathDetailCallSignField2,10));
         type(asr2,pathDetailAsrField2);
         click(pathDetailLatitudeField2);
+        slowDown(8);
         assertTrue(isDisplayed(pathDetailLatitudeField2,10));
         assertTrue(isDisplayed(pathDetailLongitudeField2,10));
         assertTrue(isDisplayed(pathDetailGroundElevationField2,10));
         assertTrue(isDisplayed(pathDetailSiteNameField2,10));
         String siteNameValue = getFieldText(pathDetailSiteNameField2);
         String asrValue = getFieldText(pathDetailAsrField2);
-        slowDown(2);
         String latitudeValue = getFieldText(pathDetailLatitudeField2);
         String longitudeValue = getFieldText(pathDetailLongitudeField2);
         String elevationValue2 = getFieldText(pathDetailGroundElevationField2);

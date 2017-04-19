@@ -73,7 +73,7 @@ public class CreatePathTest extends BaseTest {
          */
     @Test
     public void maxProjectNameTest() {
-        createPath.attemptToCreateProject("12345678901234567890123456789012345678901", "This is the Default");
+        createPath.attemptToCreateProjectNameTooLong("12345678901234567890123456789012345678901", "This is the Default");
         assertEquals("Project name is too long.",createPath.projectFieldError());
     }
 
@@ -84,7 +84,7 @@ public class CreatePathTest extends BaseTest {
         */
     @Test
     public void valProject_InvalidChar() {
-        createPath.attemptToCreateProject("!@#$%^&*()", "This is the Default");
+        createPath.attemptToCreateProjectNameTooLong("!@#$%^&*()", "This is the Default");
         assertEquals("Project name contains invalid characters.",createPath.projectFieldError());
     }
 
