@@ -21,7 +21,10 @@ import java.util.Random;
 
     @Before
     public void Setup() {
-       quickAdd = new QuickAddPage(driver);
+        if(host != "localhost"){
+            driver.manage().window().maximize();
+        }
+        quickAdd = new QuickAddPage(driver);
        pathSummary = new PathSummaryPage(driver);
        createPath = new CreateNewPathPage(driver);
 
@@ -41,6 +44,11 @@ import java.util.Random;
 
         pathSummary.valSiteLocationToggleOn();
 
+
+        siteExist = quickAdd.checkForExistingSite("New Yor");
+        if (siteExist == true){quickAdd.cancelPathCreation();
+        } else {
+            quickAdd.quickAddPathDataSetup("NY SUPPORT DATA", "940 MHz", "New York", "40 44 54 N", "73 59 9 W", "0.98", "KA20003");}
 
         siteExist = quickAdd.checkForExistingSite("SITE1");
         if (siteExist == true){quickAdd.cancelPathCreation();

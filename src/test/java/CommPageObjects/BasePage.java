@@ -2,10 +2,7 @@ package CommPageObjects;
 
 
 import CommTests.Config;
-import org.openqa.selenium.Alert;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -93,6 +90,9 @@ public class BasePage implements Config {
      * @param locator
      */
     public void clear(By locator) {
+        if(browser.equals("IE")){
+            find(locator).sendKeys(Keys.CONTROL + "a");
+        }
         driver.findElement(locator).clear();
     }
 
@@ -113,6 +113,15 @@ public class BasePage implements Config {
 
         }
         return driver.findElements(locators);
+    }
+
+    public void max(){
+        driver.manage().window().maximize();
+    }
+
+
+    public void resizeTest() {
+        ((JavascriptExecutor)driver).executeScript("window.resizeTo(1024, 768);");
     }
 
     /**
@@ -152,6 +161,20 @@ public class BasePage implements Config {
         find(locator).click();
     }
 
+
+    public void waitForFieldText(String fieldTest, By locator) {
+        WebDriverWait wait = new WebDriverWait(driver, 30);
+        wait.until(ExpectedConditions.textToBePresentInElementValue((locator), fieldTest));
+    }
+    public void waitForText(String fieldTest, By locator) {
+        WebDriverWait wait = new WebDriverWait(driver, 30);
+        wait.until(ExpectedConditions.textToBePresentInElementLocated((locator), fieldTest));
+    }
+
+    public void waitForText(String fieldTest, By locator, int i) {
+        WebDriverWait wait = new WebDriverWait(driver, 30);
+        wait.until(ExpectedConditions.textToBePresentInElementLocated((locator), fieldTest));
+    }
     /**
      * finds multiple elements using the Selenium's findElements and clicking element using the seleinium's click method
      *
@@ -191,9 +214,10 @@ public class BasePage implements Config {
      * @param inputText
      * @param locator
      */
-    public void type(String inputText, By locator) {
-        find(locator).sendKeys(inputText);
-    }
+        public void type(String inputText, By locator) {
+            find(locator).sendKeys(inputText);
+        }
+
 
     public Boolean isDisplayed(By locator) {
         return find(locator).isDisplayed();

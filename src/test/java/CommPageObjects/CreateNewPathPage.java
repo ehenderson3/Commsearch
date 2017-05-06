@@ -15,8 +15,7 @@ public class CreateNewPathPage extends BasePage {
     //newProjectForm-projectType-PATH-label-top
 
     By companyLookUp = By.id("default-company-lookup-trigger");
-    By pathDetailCompanyLookUp = By.id("path-details-company-lookup-trigger");
-
+    By pathDetailCompanyLookUp = By.xpath("//*[contains(@id, 'path-details-company-') and contains(@id, '-lookup-trigger')]");
     //path-details-company-lookup-trigger
     By companySearchButton = By.id("company-lookup-submit");
 
@@ -84,7 +83,7 @@ public class CreateNewPathPage extends BasePage {
         click(pathRadioButton);
         isDisplayed(defaultCompany,20);
         click(createButton);
-        assertTrue(isDisplayed(filterField,20));
+        assertTrue("No FILTER FIELD",isDisplayed(filterField,20));
 
 
 
@@ -101,6 +100,7 @@ public class CreateNewPathPage extends BasePage {
 
     }
 
+    //TODO Flaky Test "Can't find Code Field"
     public void fillOutCompanyFilter(String coCodeText,String coNameText, String coContactText, Integer company) {
         String a;
         slowDown(8);
@@ -129,6 +129,8 @@ public class CreateNewPathPage extends BasePage {
         assertTrue("Can't find Code Field",isDisplayed(companyCodeField,10));
         assertTrue("Can't find Name Field",isDisplayed(companyNameField,10));
         assertTrue("Can't find Name Field",isDisplayed(companyContactNameField));
+        clear(companyCodeField);
+        clear(companyNameField);
         type(coCodeText, companyCodeField);
         type(coNameText, companyNameField);
         type(coContactText, companyContactNameField);
@@ -137,6 +139,7 @@ public class CreateNewPathPage extends BasePage {
         slowDown(2);
         isDisplayed(searchResultArray,10);
         slowDown(2);
+
         click(searchResultArray);
         a = getFieldText(pathDetailDefaultCompanyField);//path-details-site-0-company-name
         assertEquals(a, "Verizon");
@@ -156,6 +159,10 @@ public class CreateNewPathPage extends BasePage {
         isDisplayed(searchResultArray,10);
     }
 
+
+    public void max(){
+        max();
+    }
     public void attemptToCreateProject(String projectName, String defaultLicensee){
 
         assertTrue("can't find the commHome ", isDisplayed(commHome,30));

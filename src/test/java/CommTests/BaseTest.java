@@ -2,16 +2,16 @@ package CommTests;
 
 import org.junit.Rule;
 import org.junit.rules.ExternalResource;
-import org.junit.rules.TestRule;
-import org.junit.runner.Description;
-import org.junit.runners.model.Statement;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.remote.RemoteWebDriver;
+import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
-import java.net.URL;
+import org.openqa.selenium.remote.RemoteWebDriver;
 
+import java.io.File;
+import java.net.URL;
 
 
 /**
@@ -32,7 +32,9 @@ public class BaseTest implements Config {
                 capabilities.setCapability("browser_version", browserVersion);
                 capabilities.setCapability("os", platform);
                 capabilities.setCapability("os_version", os_version);
+                capabilities.setCapability("resolution", resolution);
                 capabilities.setCapability("browserstack.debug", "true");
+
                 String browserStackUrl = String.format("https://browserstack624:y5XpN57x7g4QQrMHqNVK@hub-cloud.browserstack.com/wd/hub");
                 driver = new RemoteWebDriver(new URL(browserStackUrl), capabilities);
             } else if (host.equals("localhost")) {
@@ -41,9 +43,25 @@ public class BaseTest implements Config {
                             System.getProperty("user.dir") + "/vendor/wires.exe");
                     driver = new FirefoxDriver();
                 } else if (browser.equals("chrome")) {
+                    DesiredCapabilities capabilities = DesiredCapabilities.chrome();
+                    ChromeOptions options = new ChromeOptions();
+                    options.addArguments("--incognito");
+                    capabilities.setCapability(ChromeOptions.CAPABILITY, options);
                     System.setProperty("webdriver.chrome.driver",
                             System.getProperty("user.dir") + "/vendor/chromedriver.exe");
-                    driver = new ChromeDriver();
+                   driver = new ChromeDriver(capabilities);
+                } else if (browser.equals("IE")){
+                    DesiredCapabilities ieCapabilities = DesiredCapabilities.internetExplorer();
+
+                    ieCapabilities.setCapability("nativeEvents", false);
+                    ieCapabilities.setCapability("unexpectedAlertBehaviour", "accept");
+                    ieCapabilities.setCapability("ignoreProtectedModeSettings", true);
+                    ieCapabilities.setCapability("disable-popup-blocking", true);
+                    ieCapabilities.setCapability("enablePersistentHover", true);
+                    File file = new File("C:/AutomationFrameWorks/CommMaster/comsearch-ui-tests/vendor/IEDriverServer.exe");
+                    System.setProperty("webdriver.ie.driver", file.getAbsolutePath());
+                    driver = new InternetExplorerDriver(ieCapabilities);
+
                 }
             }
         }
