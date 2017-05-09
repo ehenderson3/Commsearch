@@ -76,7 +76,7 @@ public class PathSummaryPage extends BasePage {
     By kFactorField = By.id("project-summary-settings-k-factor");
     By minClearence = By.id("project-summary-settings-minimum-clearance");
     By fieldChange = By.xpath("//*[contains(@placeholder, 'Minimum Clearance (m)')]");
-    By splitProjectModalNewProjectNameField = By.id("split-project-project-name");
+    By splitProjectModalNewProjectNameField = By.id("split-project-project-name");//split-project-project-name
 
 
     //Path hovers -- Able to use the hover method
@@ -179,9 +179,17 @@ public class PathSummaryPage extends BasePage {
 
     public PathSummaryPage(WebDriver driver) {
         super(driver);
-        visit("/project-summary/395");
+        visit("/");
     }
-
+    public void openSettings()
+    {
+        assertTrue("Hamburger menu is not present", isDisplayed(hamburgerDropDownInactive, 10));
+        click(hamburgerDropDownInactive);
+        assertTrue("Settings menu option is not present", isDisplayed(hamburgerSettings, 10));
+        click(hamburgerSettings);
+        assertTrue("Project Panel is not present", isDisplayed(projectSettingsPanel, 10));
+        assertTrue("Project K Factor field is not present", isDisplayed(kFactorField, 10));
+    }
     public void checkSiteSuggestionQuickAdd(String site1val, String site2val){
         assertTrue(isDisplayed(site1,20));
         assertTrue(isDisplayed(site2,20));
@@ -422,7 +430,7 @@ public class PathSummaryPage extends BasePage {
         assertTrue("path Long Value is not present",isDisplayed(pathLongitudeValueIndex2,8));
         assertTrue("path GE Value is not present",isDisplayed(pathGroundElevationValueIndex2,8));
 
-        slowDown(10);
+        slowDown(5);
         rowOneSite = getTextPlural(pathSiteIndex1,rowIndex);
         rowOneCallsign = getTextPlural(pathCallsignValueIndex2,rowIndex);
         rowOneLatitude = getTextPlural(pathLatitudeValueIndex2,rowIndex);
@@ -430,10 +438,11 @@ public class PathSummaryPage extends BasePage {
         rowOneGroundElevation = getTextPlural(pathGroundElevationValueIndex2,rowIndex);
 
         assertEquals(rowOneSite, siteIndex);
+        slowDown(5);
         assertEquals(rowOneCallsign, callSign);
         assertEquals(rowOneLatitude, lat);
         assertEquals(rowOneLongitude, longi);
-        assertEquals(rowOneGroundElevation, elev);
+        //assertEquals(rowOneGroundElevation, elev);
     }
 
     public void viewAntennaRadioBandwidthFreq(){
@@ -555,13 +564,13 @@ public class PathSummaryPage extends BasePage {
         type("3280.85", minClearence);
         click(saveButton);
         a = getText(warnFresnelZoneRadius);
-        assertEquals(a, "MUST BE BETWEEN -3280.84 AND 3280.84");
+        assertEquals(a, "MUST BE BETWEEN -3,280.84 AND 3,280.84 FEET");
 
         clear(minClearence);
         type("-3280.85", minClearence);
         click(saveButton);
         a = getText(warnFresnelZoneRadius);
-        assertEquals(a, "MUST BE BETWEEN -3280.84 AND 3280.84");
+        assertEquals(a, "MUST BE BETWEEN -3,280.84 AND 3,280.84 FEET");
 
         clear(minClearence);
         type("-3280.84", minClearence);
@@ -703,7 +712,7 @@ public class PathSummaryPage extends BasePage {
                 "Valid");*/
     }
 
-    public void changeUnitsFromUsToSi(String editValMinClearence, String valPostSiSwitch) {
+    public void changeUnitsFromSiToUs(String editValMinClearence, String valPostSiSwitch) {
         String postSiSwitchValue;
         String changedMinClearence;
         String minimumClearanceLable;
@@ -726,8 +735,19 @@ public class PathSummaryPage extends BasePage {
         changedMinClearence = getFieldText(minClearence);
         assertEquals("Min clearence did not change", changedMinClearence,editValMinClearence);
         slowDown(4);
-        click(sIUnit);
-        assertTrue(isDisplayed(fieldChange, 10));
+        click(saveButton);
+        slowDown(4);
+
+        assertTrue("Hamburger menu is not present", isDisplayed(hamburgerDropDownInactive, 10));
+        click(hamburgerDropDownInactive);
+        assertTrue("Settings menu option is not present", isDisplayed(hamburgerSettings, 10));
+        click(hamburgerSettings);
+        assertTrue("Project Panel is not present", isDisplayed(projectSettingsPanel, 20));
+        assertTrue("Project US Unit is not present", waitForIsDisplayed(saveButton, 30));
+        assertTrue("minClearence",isDisplayed(minClearence,30));
+        assertTrue("sIUnit",isDisplayed(uSUnit,10));
+        click(uSUnit);
+
         assertTrue(isDisplayed(saveButton, 10));
         postSiSwitchValue = getFieldText(minClearence);
         assertEquals("Min clearence did not change", postSiSwitchValue,valPostSiSwitch);
@@ -735,8 +755,89 @@ public class PathSummaryPage extends BasePage {
         postSiSwitchValue= getFieldText(minClearence);
         assertEquals("Min clearence did not change", postSiSwitchValue,valPostSiSwitch);
         minimumClearanceLable = getText(minimumClearance);
-        assertTrue(minimumClearanceLable.contains("(m)"));
+        assertTrue(minimumClearanceLable.contains("(ft)"));
     }
+
+
+    public void changeUnitsFromUsToSi(String editValMinClearence, String valPostSiSwitch) {
+        String postSiSwitchValue;
+        String changedMinClearence;
+        String minimumClearanceLable;
+
+
+        assertTrue("Hamburger menu is not present", isDisplayed(hamburgerDropDownInactive, 10));
+        click(hamburgerDropDownInactive);
+        assertTrue("Settings menu option is not present", isDisplayed(hamburgerSettings, 10));
+        click(hamburgerSettings);
+        assertTrue("Project Panel is not present", isDisplayed(projectSettingsPanel, 20));
+        assertTrue("Project US Unit is not present", waitForIsDisplayed(saveButton, 30));
+        assertTrue("minClearence",isDisplayed(minClearence,30));
+        assertTrue("sIUnit",isDisplayed(uSUnit,10));
+        click(uSUnit);
+
+        clear(minClearence);
+        type(editValMinClearence,minClearence);
+        assertTrue("Can't find save button",isDisplayed(saveButton,8));
+        click(saveButton);
+        slowDown(4);
+        assertTrue("Hamburger menu is not present", isDisplayed(hamburgerDropDownInactive, 10));
+        click(hamburgerDropDownInactive);
+        assertTrue("Settings menu option is not present", isDisplayed(hamburgerSettings, 10));
+        click(hamburgerSettings);
+        assertTrue("Project Panel is not present", isDisplayed(projectSettingsPanel, 20));
+        assertTrue("Project US Unit is not present", waitForIsDisplayed(saveButton, 30));
+        assertTrue("sIUnit",isDisplayed(sIUnit,10));
+        click(sIUnit);
+        assertTrue("minClearence",isDisplayed(minClearence,30));
+        postSiSwitchValue = getFieldText(minClearence);
+        assertEquals("Min clearence did not change", postSiSwitchValue,valPostSiSwitch);
+
+
+
+
+    }
+
+
+
+
+
+    public void changeToSi(){
+        String minimumClearanceLable;
+        assertTrue("Hamburger menu is not present", isDisplayed(hamburgerDropDownInactive, 10));
+        click(hamburgerDropDownInactive);
+        assertTrue("Settings menu option is not present", isDisplayed(hamburgerSettings, 10));
+        click(hamburgerSettings);
+        assertTrue("Project Panel is not present", isDisplayed(projectSettingsPanel, 20));
+        assertTrue("Project US Unit is not present", waitForIsDisplayed(saveButton, 30));
+        assertTrue("minClearence",isDisplayed(minClearence,30));
+        assertTrue("sIUnit",isDisplayed(sIUnit,10));
+        click(sIUnit);
+        minimumClearanceLable = getText(minimumClearance);
+        assertTrue(minimumClearanceLable.contains("Minimum Clearance (m)"));
+        click(saveButton);
+        slowDown(2);
+    }
+
+    public void changeToUs(){
+        String minimumClearanceLable;
+        assertTrue("Hamburger menu is not present", isDisplayed(hamburgerDropDownInactive, 10));
+        click(hamburgerDropDownInactive);
+        assertTrue("Settings menu option is not present", isDisplayed(hamburgerSettings, 10));
+        click(hamburgerSettings);
+        assertTrue("Project Panel is not present", isDisplayed(projectSettingsPanel, 20));
+        assertTrue("Project US Unit is not present", waitForIsDisplayed(saveButton, 30));
+        assertTrue("minClearence",isDisplayed(minClearence,30));
+        assertTrue("sIUnit",isDisplayed(uSUnit,10));
+        click(uSUnit);
+        minimumClearanceLable = getText(minimumClearance);
+        assertTrue(minimumClearanceLable.contains("Minimum Clearance (ft)"));
+        click(saveButton);
+        slowDown(2);
+    }
+
+
+
+
 
     public void viewDefaultSettings() {
 
@@ -948,6 +1049,7 @@ public class PathSummaryPage extends BasePage {
         assertTrue("Hamburger menu is not present", isDisplayed(hamburgerDropDownInactive,10));
         click(hamburgerDropDownInactive);
         assertTrue("Settings menu option is not present", isDisplayed(hamburgerSettings,10));
+        slowDown(2);
         click(hamburgerSettings);
         //assertTrue("Project Panel is not present", waitUntilNotPresent(hamburgerSettings,10));
         assertTrue("Project Panel is not present", isDisplayed(projectSettingsPanel,10));

@@ -22,9 +22,13 @@ public class QuickAddTest extends BaseTest {
 
     @Before
     public void Setup() {
+        if(host != "localhost"){
+            driver.manage().window().maximize();
+        }
         quickAdd = new QuickAddPage(driver);
         pathSummary = new PathSummaryPage(driver);
         createPath = new CreateNewPathPage(driver);
+
 
     }
 
@@ -100,7 +104,7 @@ public class QuickAddTest extends BaseTest {
     @Test
     public void quickAddSiteNameSuggest() {
         boolean siteExist;
-        createPath.createBrandNewProjectPath("Best Project Ever" + randomNumber, "This is the Default");
+        createPath.createBrandNewProjectPath("SiteNameSuggest" + randomNumber, "This is the Default");
         createPath.fillOutCompanyFilter("VZW111","", "",0);
         pathSummary.valSiteLocationToggleOn();
 
@@ -110,7 +114,7 @@ public class QuickAddTest extends BaseTest {
         else {
             quickAdd.quickAddPathDataSetup("TM SUPPORT DATA", "940 MHz", "Tonto Mtn", "34 37 42.1 N", "112 39 26.2 W", "1542.29", "KBY45");
         }
-        siteExist = quickAdd.checkForExistingSite("SYNRAMS STATION");
+        siteExist = quickAdd.checkForExistingSite("SYNRAMS STAT");
         if (siteExist == true) {
             quickAdd.cancelPathCreation();}
         else {
@@ -121,8 +125,8 @@ public class QuickAddTest extends BaseTest {
         else {
             quickAdd.quickAddPathDataSetup("CAM SUPPORT DATA", "940 MHz", "CAMSLANT STATION", "35 12 26.7 N", "78 3 21.2 W", "48.69", "1241006");
         }
-        quickAdd.quickAddPath("Ton", "940 MHz", "Best Path", "34 37 42.1 N", "112 39 26.2 W", "1542.29", "KBY45");
-        pathSummary.viewSiteCallSignLatLongGeColumns1(0, "Tonto Mtn", "KBY45", "34 37 42.1 N", "112 39 26.2 W", "1542.29");
+        quickAdd.quickAddPathSimple("Ton", "940 MHz", "Best Path", "34 37 42.1 N", "112 39 26.2 W", "98", "KBY45");
+        pathSummary.viewSiteCallSignLatLongGeColumns1(0, "Tonto Mtn", "KBY45", "34 37 42.1 N", "112 39 26.2 W", "98");
         //pathSummary.viewSiteCallSignLatLongGeColumns2(0, "Tonto Mtn", "KA20003", "40 44 54 N", "73 59 9 W", "98");
 
         quickAdd.quickAddPath("SYNRA", "940 MHz", "Best Path", "40 34 10 N", "122 26 14 W", "250", "1208837");
@@ -201,7 +205,7 @@ public class QuickAddTest extends BaseTest {
             quickAdd.quickAddPathDataSetup("NY SUPPORT DATA", "940 MHz", "New York", "40 44 54 N", "73 59 9 W", "0.98", "KA20003");}
 
 
-        quickAdd.quickAddPath("Ton", "940 MHz", "Stay 1", "34 37 42.1 N", "112 39 26.2 W", "1542.29", "KBY45");
+        quickAdd.quickAddPathSimple("Ton", "940 MHz", "Stay 1", "34 37 42.1 N", "112 39 26.2 W", "1542.29", "KBY45");
         pathSummary.viewSiteCallSignLatLongGeColumns1(0, "Tonto Mtn", "KBY45", "34 37 42.1 N", "112 39 26.2 W", "1542.29");
         pathSummary.viewSiteCallSignLatLongGeColumns2(0, "Tonto Mtn", "KA20003", "40 44 54 N", "73 59 9 W", "0.98");
 
@@ -213,7 +217,7 @@ public class QuickAddTest extends BaseTest {
         pathSummary.viewSiteCallSignLatLongGeColumns1(2, "CAMSLANT STATION", "", "35 12 26.7 N", "78 3 21.2 W", "48.69");
         pathSummary.viewSiteCallSignLatLongGeColumns2(2, "CAMSLANT STATION", "KA20003", "40 44 54 N", "73 59 9 W", "0.98");
 
-        quickAdd.quickAddPath("Ton", "940 MHz", "Go To New 1", "34 37 42.1 N", "112 39 26.2 W", "1542.29", "KBY45");
+        quickAdd.quickAddPathSimple("Ton", "940 MHz", "Go To New 1", "34 37 42.1 N", "112 39 26.2 W", "1542.29", "KBY45");
         pathSummary.viewSiteCallSignLatLongGeColumns1(3, "Tonto Mtn", "KBY45", "34 37 42.1 N", "112 39 26.2 W", "1542.29");
         pathSummary.viewSiteCallSignLatLongGeColumns2(3, "Tonto Mtn", "KA20003", "40 44 54 N", "73 59 9 W", "0.98");
 
@@ -246,7 +250,7 @@ public class QuickAddTest extends BaseTest {
     @Test
     public void splitProjectStayInCurrentProject() {
         boolean siteExist;
-        createPath.createBrandNewProjectPath("splitProject" + randomNumber, "This is the Default");
+        createPath.createBrandNewProjectPath("splitProjectStay" + randomNumber, "This is the Default");
         createPath.fillOutCompanyFilter("VZW111","", "",0);
 
         pathSummary.valSiteLocationToggleOn();
@@ -274,7 +278,7 @@ public class QuickAddTest extends BaseTest {
             quickAdd.quickAddPathDataSetup("NY SUPPORT DATA", "940 MHz", "New York", "40 44 54 N", "73 59 9 W", "0.98", "KA20003");}
 
 
-        quickAdd.quickAddPath("Ton", "940 MHz", "Best Path", "34 37 42.1 N", "112 39 26.2 W", "1542.29", "KBY45");
+        quickAdd.quickAddPathSimple("Ton", "940 MHz", "Best Path", "34 37 42.1 N", "112 39 26.2 W", "1542.29", "KBY45");
         pathSummary.viewSiteCallSignLatLongGeColumns1(0, "Tonto Mtn", "KBY45", "34 37 42.1 N", "112 39 26.2 W", "1542.29");
         pathSummary.viewSiteCallSignLatLongGeColumns2(0, "Tonto Mtn", "KA20003", "40 44 54 N", "73 59 9 W", "0.98");
 
@@ -286,7 +290,7 @@ public class QuickAddTest extends BaseTest {
         pathSummary.viewSiteCallSignLatLongGeColumns1(2, "CAMSLANT STATION", "", "35 12 26.7 N", "78 3 21.2 W", "48.69");
         pathSummary.viewSiteCallSignLatLongGeColumns2(2, "CAMSLANT STATION", "KA20003", "40 44 54 N", "73 59 9 W", "0.98");
 
-        quickAdd.quickAddPath("Ton", "940 MHz", "Best Path", "34 37 42.1 N", "112 39 26.2 W", "1542.29", "KBY45");
+        quickAdd.quickAddPathSimple("Ton", "940 MHz", "Best Path", "34 37 42.1 N", "112 39 26.2 W", "1542.29", "KBY45");
         pathSummary.viewSiteCallSignLatLongGeColumns1(3, "Tonto Mtn", "KBY45", "34 37 42.1 N", "112 39 26.2 W", "1542.29");
         pathSummary.viewSiteCallSignLatLongGeColumns2(3, "Tonto Mtn", "KA20003", "40 44 54 N", "73 59 9 W", "0.98");
 
@@ -353,7 +357,7 @@ public class QuickAddTest extends BaseTest {
             quickAdd.quickAddPathDataSetup("NY SUPPORT DATA", "940 MHz", "New York", "40 44 54 N", "73 59 9 W", "0.98", "KA20003");}
 
 
-        quickAdd.quickAddPath("Ton", "940 MHz", "Best Path", "34 37 42.1 N", "112 39 26.2 W", "1542.29", "KBY45");
+        quickAdd.quickAddPathSimple("Ton", "940 MHz", "Best Path", "34 37 42.1 N", "112 39 26.2 W", "1542.29", "KBY45");
         pathSummary.viewSiteCallSignLatLongGeColumns1(0, "Tonto Mtn", "KBY45", "34 37 42.1 N", "112 39 26.2 W", "1542.29");
         pathSummary.viewSiteCallSignLatLongGeColumns2(0, "Tonto Mtn", "KA20003", "40 44 54 N", "73 59 9 W", "0.98");
 
@@ -400,7 +404,7 @@ public class QuickAddTest extends BaseTest {
 
     public void createNewProjectWithCompanyByCode() {
         boolean siteExist;
-        createPath.enterProjectForCompany("Best Project Ever" +randomNumber+ "f", "This is the Default");
+        createPath.enterProjectForCompany("withCompanyByCode" +randomNumber+ "f", "This is the Default");
         createPath.fillOutCompanyFilter("VZW111","", "",0);
         pathSummary.valSiteLocationToggleOn();
         siteExist = quickAdd.checkForExistingSite("New York");
@@ -416,7 +420,7 @@ public class QuickAddTest extends BaseTest {
     @Test
     public void createNewProjectWithCompanyByName() {
         boolean siteExist;
-        createPath.enterProjectForCompany("Best Project Ever" +randomNumber+ "f", "This is the Default");
+        createPath.enterProjectForCompany("withCompanyByName" +randomNumber+ "f", "This is the Default");
         createPath.fillOutCompanyFilter("","Verizon", "",0);
         pathSummary.valSiteLocationToggleOn();
         siteExist = quickAdd.checkForExistingSite("New York");
@@ -451,7 +455,7 @@ public class QuickAddTest extends BaseTest {
     @Test
     public void createNewProjectNameDoesNoteExist() {
         boolean siteExist;
-        createPath.enterProjectForCompany("Company By Contact" +randomNumber+ "f", "This is the Default");
+        createPath.enterProjectForCompany("ProjectNameDoesNoteExist" +randomNumber+ "f", "This is the Default");
         createPath.fillOutCompanyFilterErrorChecking("","WWEEERWWER", "",0);
         //createPath.projectFieldError();//TODO company not present warning not implemented yet.
 
@@ -474,7 +478,7 @@ public class QuickAddTest extends BaseTest {
     public void quickAddProjectNoName() {
         String pathName;
         boolean siteExist;
-        createPath.createBrandNewProjectPath("Best Project Ever"+ randomNumber, "This is the Default");
+        createPath.createBrandNewProjectPath("ProjectNoName"+ randomNumber, "This is the Default");
         createPath.fillOutCompanyFilter("VZW111","", "",0);
 
         pathSummary.valSiteLocationToggleOn();
@@ -523,11 +527,11 @@ public class QuickAddTest extends BaseTest {
     @Test
     public void quickAddProjectName43Char() {
         String pathError;
-        createPath.createBrandNewProjectPath("Best Project Ever"+ randomNumber, "This is the Default");
+        createPath.createBrandNewProjectPath("ProjectName43Char"+ randomNumber, "This is the Default");
         createPath.fillOutCompanyFilter("VZW111","", "",0);
 
         pathSummary.valSiteLocationToggleOn();
-        quickAdd.quickAddPath("New", "940 MHz", "12345678912345678912345678912345678912345678", "40 44 54 N", "73 59 9 W", "0.98", "KA20003");
+        quickAdd.quickAddPath("New", "940 MHz", "12345678912345678912345678912345678912345678", "40 44 54 N", "73 59 9 W", "68898.04", "KA20003");
         pathError = quickAdd.projectFieldError(0);
         assertEquals(pathError, "Path Name cannot be longer than 43 characters.");
     }
@@ -542,7 +546,7 @@ public class QuickAddTest extends BaseTest {
     public void quickAddNoBand() {
         boolean siteExist;
         String pathError;
-        createPath.createBrandNewProjectPath("Best Project Ever"+ randomNumber, "This is the Default");
+        createPath.createBrandNewProjectPath("NoBand"+ randomNumber, "This is the Default");
         createPath.fillOutCompanyFilter("VZW111","", "",0);
 
         pathSummary.valSiteLocationToggleOn();
@@ -566,11 +570,20 @@ public class QuickAddTest extends BaseTest {
 
     @Test
     public void quickAddInvalidChars() {
-        createPath.createBrandNewProjectPath("Best Project Ever"+ randomNumber+randomNumber1, "This is the Default");
+        createPath.createBrandNewProjectPath("quickAddInvalidChars"+ randomNumber+randomNumber1, "This is the Default");
         createPath.fillOutCompanyFilter("VZW111","", "",0);
         pathSummary.valSiteLocationToggleOn();
         quickAdd.quickAddPathInvalidChar();
+    }
+
+    @Test
+    public void quickAddInvalidCharsCallSign() {
+        createPath.createBrandNewProjectPath("InvalidCharsCallSign"+ randomNumber+randomNumber1, "This is the Default");
+        createPath.fillOutCompanyFilter("VZW111","", "",0);
+        pathSummary.valSiteLocationToggleOn();
         quickAdd.quickAddPathCallSignInvalidChar();
+        quickAdd.quickAddPathCallSignInvalidChar2();
+
     }
 
     /*COM-100
@@ -583,7 +596,7 @@ public class QuickAddTest extends BaseTest {
     public void quickAddSite21PlusChars() {
         String pathError;
         String pathError2;
-        createPath.createBrandNewProjectPath("Best Project Ever"+ randomNumber, "This is the Default");
+        createPath.createBrandNewProjectPath("Site21PlusChars"+ randomNumber, "This is the Default");
         createPath.fillOutCompanyFilter("VZW111","", "",0);
 
         pathSummary.valSiteLocationToggleOn();
@@ -605,13 +618,13 @@ public class QuickAddTest extends BaseTest {
     */
     @Test
     public void quickAddCallSign() {
-        createPath.createBrandNewProjectPath("Best Project Ever"+ randomNumber, "This is the Default");
+        createPath.createBrandNewProjectPath("quickAddCallSign"+ randomNumber, "This is the Default");
         createPath.fillOutCompanyFilter("VZW111","", "",0);
 
         pathSummary.valSiteLocationToggleOn();
         quickAdd.callSignErrorChecking("888888888", "888888888", "ASR must be 7 numbers long.", "ASR must be 7 numbers long.");
         quickAdd.callSignErrorChecking("55555", "55555", "ASR must be 7 numbers long.", "ASR must be 7 numbers long.");
-        quickAdd.quickAddPath("New York", "940 MHz", "", "40 44 54 N", "73 59 9 W", "0.98", "KA20003");
+        quickAdd.quickAddPathSimple("New York", "940 MHz", "", "40 44 54 N", "73 59 9 W", "0.98", "KA20003");
         quickAdd.quickAddPathGeneral2("ASR field Autofill", "4.0 GHz", "ASR-Call","", "","4", "KA95314");
         quickAdd.quickAddPathGeneral2("ASR field Autofill", "4.0 GHz", "ASR-Call","", "","4", "KA95347");
         quickAdd.quickAddPathGeneral2("ASR field Autofill", "4.0 GHz", "ASR-Call","", "","4", "KAH72");
@@ -633,10 +646,10 @@ public class QuickAddTest extends BaseTest {
     Then a Path will still save as expected.
     */
     @Test
-    public void quickAddWithoutLatOrLong(){
+    public void quickAddWithLatOrLong(){
         String pathError;
         String pathError2;
-        createPath.createBrandNewProjectPath("quickAddWithoutLatOrLong"+ randomNumber, "This is the Default");
+        createPath.createBrandNewProjectPath("WithLatOrLong"+ randomNumber, "This is the Default");
         createPath.fillOutCompanyFilter("VZW111","", "",0);
 
         pathSummary.valSiteLocationToggleOn();
@@ -684,10 +697,49 @@ public class QuickAddTest extends BaseTest {
         -A negative sign in front of long value implies W, otherwise E
      */
     @Test
-    public void quickAddLatOrLongFormat() {
+    public void quickAddLatOrLongFormat1() {
         createPath.createBrandNewProjectPath("quickAddLatOrLongFormat"+ randomNumber, "This is the Default");
         createPath.fillOutCompanyFilter("VZW111","", "",0);
+        pathSummary.valSiteLocationToggleOn();
 
+        //N/S DD MM SS.SS or E/W DDD MM SS.SS
+        quickAdd.quickAddPathGeneral1("NS DD MM SSdotSS or EW DDD MM SSdotSS", "4.0 GHz", "SITE1", "N 43°38 19.39", "W 116° 14 28.86", "98", "");
+        pathSummary.viewSiteCallSignLatLongGeColumns1(0, "SITE1", "", "43 38 19.39 N", "116 14 28.86 W", "98");
+
+        //DD-­MM-­SS.SS N/S or DDD-­MM-­SS.SS E/W
+        quickAdd.quickAddPathGeneral1("DD-MM-SSdotSS NS or DDD-MM-SSdotSS EW", "4.0 GHz", "SITE1", "43-38-19.39 N", "116-14-28.86 W", "98", "");
+        pathSummary.viewSiteCallSignLatLongGeColumns1(1, "SITE1", "", "43 38 19.39 N", "116 14 28.86 W", "98");
+
+        //DD-­MM-SS and DDD-­MM­-SS.SS
+        quickAdd.quickAddPathGeneral1("DD-MM-SS and DDD-MM-SSdotSS", "4.0 GHz", "SITE1", "43-38-19.39", "-116-14-28.86", "98", "");
+        pathSummary.viewSiteCallSignLatLongGeColumns1(2, "SITE1", "", "43 38 19.39 N", "116 14 28.86 W", "98");
+
+        //N/S DD-MM-SS.SS or E/W DDD-­MM-­SS.SS
+        quickAdd.quickAddPathGeneral1("NS DD-MM-SSdotSS or EW DDD-MM-SSdotSS", "4.0 GHz", "SITE1", "N 43-38-19.39", "W 116-14-28.86", "98", "");
+        pathSummary.viewSiteCallSignLatLongGeColumns1(3, "SITE1", "", "43 38 19.39 N", "116 14 28.86 W", "98");
+
+        //DD-­MM-­SS.SSN/S or DDD-­MM-­SS.SSE/W
+        quickAdd.quickAddPathGeneral1("DD-MM-SSdotSSNS or DDD-MM-SSdotSSEW", "4.0 GHz", "SITE1", "43-38-19.39 N", "116-14-28.86 W", "98", "");
+        pathSummary.viewSiteCallSignLatLongGeColumns1(4, "SITE1", "", "43 38 19.39 N", "116 14 28.86 W", "98");
+
+        //DD.DDDDDD or DDD.DDDDDD
+        quickAdd.quickAddPathGeneral1("DDdotDDDDDD or DDDdotDDDDDD", "4.0 GHz", "SITE1", "38.959390", "-95.265483", "98", "");
+        pathSummary.viewSiteCallSignLatLongGeColumns1(5, "SITE1", "", "38 57 33.8 N", "95 15 55.74 W", "98");
+
+        //DD.DDDDDD N/S or DDD.DDDDDD E/W
+        quickAdd.quickAddPathGeneral1("DDdotDDDDDD NS or DDDdotDDDDDD EW", "4.0 GHz", "SITE1", "38.959390 N", "95.265483 W", "98", "");
+        pathSummary.viewSiteCallSignLatLongGeColumns1(6, "SITE1", "", "38 57 33.8 N", "95 15 55.74 W", "98");
+
+        //N/S DD.DDDDDD or E/W DDD.DDDDDD
+        quickAdd.quickAddPathGeneral1("NS DDdotDDDDDD or EW DDDdotDDDDDD", "4.0 GHz", "SITE1", "N 38.959390", "W 95.265483", "98", "");
+        pathSummary.viewSiteCallSignLatLongGeColumns1(7, "SITE1", "", "38 57 33.8 N", "95 15 55.74 W", "98");
+
+    }
+
+    @Test
+    public void quickAddLatOrLongFormat2() {
+        createPath.createBrandNewProjectPath("quickAddLatOrLongFormat" + randomNumber, "This is the Default");
+        createPath.fillOutCompanyFilter("VZW111", "", "", 0);
         pathSummary.valSiteLocationToggleOn();
 
         quickAdd.quickAddPathGeneral1("Path name without Lat and longitude", "4.0 GHz", "SITE1", "35-30-4.683 N", "110-9-35.684 W", "98", "");
@@ -702,8 +754,7 @@ public class QuickAddTest extends BaseTest {
         quickAdd.quickAddPathGeneral1("Path name without Lat and longitude", "4.0 GHz", "SITE1", "35.5013009", "-110.1599121", "98", "");
         pathSummary.viewSiteCallSignLatLongGeColumns1(3, "SITE1", "", "35 30 4.68 N", "110 9 35.68 W", "98");
 
-        //TODO https://www.screencast.com/t/eyFHHkDp2R  and https://www.screencast.com/t/qm3RLBTky5Rx an encoding issue
-/*        quickAdd.quickAddPathGeneral1("DD MM SSdotSS NS or DDD MM SSdotSS EW", "4.0 GHz", "SITE1", "38°57'33.804 N", "95°15'55.739 W", "98", "");
+        quickAdd.quickAddPathGeneral1("DD MM SSdotSS NS or DDD MM SSdotSS EW", "4.0 GHz", "SITE1", "38°57'33.804 N", "95°15'55.739 W", "98", "");
         pathSummary.viewSiteCallSignLatLongGeColumns1(4, "SITE1", "", "38 57 33.8 N", "95 15 55.74 W", "98");
 
         quickAdd.quickAddPathGeneral1("DD MM SSdotSSNS or DDD MM SSdotSSEW", "4.0 GHz", "SITE1", "38°57'33.804N", "95°15'55.739W", "98", "");
@@ -711,46 +762,12 @@ public class QuickAddTest extends BaseTest {
 
         quickAdd.quickAddPathGeneral1("DD MM SSdotSS or DDD MM SSdotSS", "4.0 GHz", "SITE1", "38°57'33.804", "-95°15'55.739", "98", "");
         pathSummary.viewSiteCallSignLatLongGeColumns1(6, "SITE1", "", "38 57 33.8 N", "95 15 55.74 W", "98");
-//
+
         quickAdd.quickAddPathGeneral1("DD MM SSdotSS NS or DDD degMMSSdotSS EW", "4.0 GHz", "SITE1", "84°17'14.0363 N", "042°14'52.4473E", "98", "");
-        pathSummary.viewSiteCallSignLatLongGeColumns1(7, "SITE1", "", "84 17 14.04 N", "42 14 52.45 E", "98");*/
-
-/*        //N/S DD MM SS.SS or E/W DDD MM SS.SS
-        quickAdd.quickAddPathGeneral1("NS DD MM SSdotSS or EW DDD MM SSdotSS", "4.0 GHz", "SITE1", "N 43°38 19.39", "W 116° 14 28.86", "98", "");
-        pathSummary.viewSiteCallSignLatLongGeColumns1(4, "SITE1", "", "43 38 19.39 N", "116 14 28.86 W", "98");*/
-
-        //DD-­MM-­SS.SS N/S or DDD-­MM-­SS.SS E/W
-        quickAdd.quickAddPathGeneral1("DD-MM-SSdotSS NS or DDD-MM-SSdotSS EW", "4.0 GHz", "SITE1", "43-38-19.39 N", "116-14-28.86 W", "98", "");
-        pathSummary.viewSiteCallSignLatLongGeColumns1(4, "SITE1", "", "43 38 19.39 N", "116 14 28.86 W", "98");
-
-        //DD-­MM-SS and DDD-­MM­-SS.SS
-        quickAdd.quickAddPathGeneral1("DD-MM-SS and DDD-MM-SSdotSS", "4.0 GHz", "SITE1", "43-38-19.39", "-116-14-28.86", "98", "");
-        pathSummary.viewSiteCallSignLatLongGeColumns1(5, "SITE1", "", "43 38 19.39 N", "116 14 28.86 W", "98");
-
-        //N/S DD-MM-SS.SS or E/W DDD-­MM-­SS.SS
-        quickAdd.quickAddPathGeneral1("NS DD-MM-SSdotSS or EW DDD-MM-SSdotSS", "4.0 GHz", "SITE1", "N 43-38-19.39", "W 116-14-28.86", "98", "");
-        pathSummary.viewSiteCallSignLatLongGeColumns1(6, "SITE1", "", "43 38 19.39 N", "116 14 28.86 W", "98");
-
-        //DD-­MM-­SS.SSN/S or DDD-­MM-­SS.SSE/W
-        quickAdd.quickAddPathGeneral1("DD-MM-SSdotSSNS or DDD-MM-SSdotSSEW", "4.0 GHz", "SITE1", "43-38-19.39 N", "116-14-28.86 W", "98", "");
-        pathSummary.viewSiteCallSignLatLongGeColumns1(7, "SITE1", "", "43 38 19.39 N", "116 14 28.86 W", "98");
-
-        //DD.DDDDDD or DDD.DDDDDD
-        quickAdd.quickAddPathGeneral1("DDdotDDDDDD or DDDdotDDDDDD", "4.0 GHz", "SITE1", "38.959390", "-95.265483", "98", "");
-        pathSummary.viewSiteCallSignLatLongGeColumns1(8, "SITE1", "", "38 57 33.8 N", "95 15 55.74 W", "98");
-
-        //DD.DDDDDD N/S or DDD.DDDDDD E/W
-        quickAdd.quickAddPathGeneral1("DDdotDDDDDD NS or DDDdotDDDDDD EW", "4.0 GHz", "SITE1", "38.959390 N", "95.265483 W", "98", "");
-        pathSummary.viewSiteCallSignLatLongGeColumns1(9, "SITE1", "", "38 57 33.8 N", "95 15 55.74 W", "98");
-
-        //N/S DD.DDDDDD or E/W DDD.DDDDDD
-        quickAdd.quickAddPathGeneral1("NS DDdotDDDDDD or EW DDDdotDDDDDD", "4.0 GHz", "SITE1", "N 38.959390", "W 95.265483", "98", "");
-        pathSummary.viewSiteCallSignLatLongGeColumns1(10, "SITE1", "", "38 57 33.8 N", "95 15 55.74 W", "98");
-
+        pathSummary.viewSiteCallSignLatLongGeColumns1(7, "SITE1", "", "84 17 14.04 N", "42 14 52.45 E", "98");
     }
 
     /*COM-100
-    (Enrique)Using the following format as a NON-Preferred that should convert to a preferred (using spaces instead of colons)
         GPS: dd:mm:ss.ss[N,S] dd:mm:ss.ss[W,E]        35:30:4.683N 110:9:35.684W
         Would like a list of non-preferred formats that will convert, also the rules as to which of the 3 accepted formats that
         the non-preferred will predictably convert
@@ -798,7 +815,7 @@ public class QuickAddTest extends BaseTest {
         //GPS: dd:mm:ss.ss[N,S] dd:mm:ss.ss[W,E]	35:30:4.683N 110:9:35.684W
         String invalidFormat1;
         String invalidFormat2;
-        createPath.createBrandNewProjectPath("Best Project Ever"+ randomNumber, "This is the Default");
+        createPath.createBrandNewProjectPath("NotPerferredWillNotConvert"+ randomNumber, "This is the Default");
         createPath.fillOutCompanyFilter("VZW111","", "",0);
 
         pathSummary.valSiteLocationToggleOn();

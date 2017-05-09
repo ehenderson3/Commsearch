@@ -18,12 +18,19 @@ import static org.junit.Assert.assertTrue;
 public class CreatePathTest extends BaseTest {
     private CreateNewPathPage createPath;
 
+
+
     @Before
     public void Setup(){
         createPath = new CreateNewPathPage(driver);
+        if(host != "localhost"){
+            driver.manage().window().maximize();
+        }
     }
     Random rndNum = new Random();
     int randomNumber = rndNum.nextInt(100000);
+
+
 
     @Rule
     public RetryTest.Retry retry = new RetryTest.Retry(1);

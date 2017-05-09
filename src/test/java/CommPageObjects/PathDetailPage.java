@@ -18,6 +18,11 @@ public class PathDetailPage extends BasePage {
     By pathDetailSaveDetailsButton = By.cssSelector(".heading-font.btn.btn-md.hover-inverse.bg-green");
     By pathDetailDiscardButton = By.cssSelector(".heading-font.btn.btn-md.hover-inverse.bg-blue.margin-left-1");
     By quickAdd = By.id("project-summary-quick-add-open");
+    By siteLookUpSearchButtonModal = By.id("site-lookup-submit");
+    By siteSearchLookUpButton1 = By.id("path-details-site-0-lookup-trigger");
+    By siteSearchLookUpButton2 = By.id("path-details-site-1-lookup-trigger");
+    By closeSiteLookUpMotal = By.id("site-lookup-modal-close");
+
 
     //DropDown Fields -- Does it contain a list that has options that can be selected
     By pathDetailRadioServiceDropDownField1 = By.id("path-details-site-0-radio-service");
@@ -29,6 +34,11 @@ public class PathDetailPage extends BasePage {
     By pathDetailRadioServiceDropDownField2 = By.id("path-details-site-1-radio-service");
     By pathDetailStationClassDropDownField2 = By.id("path-details-site-1-station-class");
     By pathDetailLicenseBasisDropDownField2 = By.id("path-details-site-1-license-basis");
+
+    By licBasis1 = By.id("path-details-site-0-license-basis");
+    By licBasis2 = By.id("path-details-site-1-license-basis");
+
+
 
     //Drop down options
 
@@ -52,12 +62,24 @@ public class PathDetailPage extends BasePage {
     By pathDetailSuggested1 = By.className("react-autosuggest__suggestion");
     By error = By.className("error-message");
 
-
+    By pathDetailSiteLookUpSiteName = By.id("site-lookup-site-name");
+    By pathDetailSiteLookUpCallSign = By.id("site-lookup-call-sign");
+    By pathDetailSiteLookUpAsr = By.id("site-lookup-asr");
+    By pathDetailSiteLookUpLatitude = By.id("site-lookup-latitude");
+    By pathDetailSiteLookUpLongitude = By.id("site-lookup-longitude");
+    By pathDetailSiteLookUpRadius = By.id("site-lookup-radius");
 
 
     //hovers -- Able to use the hover method
 
     //Data Fields - Element is read only and can use getFieldText method
+    By pathDetailSiteLookUpSiteNameResults = By.xpath("//*[contains(@id, 'site-lookup-results-site-') and contains(@id, '-site-name')]");
+    By pathDetailSiteLookUpCallSignResults  = By.xpath("//*[contains(@id, 'site-lookup-results-site-') and contains(@id, '-callsign')]");
+    By pathDetailSiteLookUpAsrResults  = By.xpath("//*[contains(@id, 'site-lookup-results-site-') and contains(@id, '-asr')]");
+    By pathDetailSiteLookUpLatitudeResults  = By.xpath("//*[contains(@id, 'site-lookup-results-site-') and contains(@id, '-latitude')]");
+    By pathDetailSiteLookUpLongitudeResults  = By.xpath("//*[contains(@id, 'site-lookup-results-site-') and contains(@id, '-longitude')]");
+    By pathDetailSiteLookUpRadiusResults  = By.xpath("//*[contains(@id, 'site-lookup-results-site-') and contains(@id, '-distance')]");
+
 
     //Index List -- Can you used an array to select item
 
@@ -67,12 +89,148 @@ public class PathDetailPage extends BasePage {
     public PathDetailPage(WebDriver driver) {
         super(driver);
         visit("/");
-        //assertTrue(isDisplayed(amIInTheRightPlace,3));
     }
 
+    public void closeSiteLookup(){
+        isDisplayed(closeSiteLookUpMotal,8);
+        click(closeSiteLookUpMotal);
+        isDisplayed(pathDetailSiteLookUpLatitude,8);
+
+    }
+
+
+    public void siteSearchResults(int i,String siteName,String callSign,String asr,String lat,String longi,String radius){
+
+        String siteNameResults;
+        String callSignResults;
+        String asrResults;
+        String latResults;
+        String longiResults;
+        String radiusResults;
+
+        slowDown(4);
+        siteNameResults = getTextPlural(pathDetailSiteLookUpSiteNameResults,i);
+        callSignResults = getTextPlural(pathDetailSiteLookUpCallSignResults,i);
+        //asrResults = getTextPlural(pathDetailSiteLookUpAsrResults,i);
+        latResults = getTextPlural(pathDetailSiteLookUpLatitudeResults,i);
+        longiResults = getTextPlural(pathDetailSiteLookUpLongitudeResults,i);
+        radiusResults = getTextPlural(pathDetailSiteLookUpRadiusResults,i);
+
+        assertEquals("Site siteNameResults is not correct",siteNameResults,siteName);
+        assertEquals("Site callSignResults is not correct",callSignResults,callSign);
+        //assertEquals("Site asrResults is not correct",asrResults,asr);
+        assertEquals("Site latResults is not correct",latResults,lat);
+        assertEquals("Site longiResults is not correct",longiResults,longi);
+        assertEquals("Site radiusResults is not correct",radiusResults,radius);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    }
+    public void siteSearch1(String siteName,String callSign,String asr,String lat,String longi,String radius){
+        assertTrue("Cannot find path detail site look up search button",isDisplayed(siteSearchLookUpButton1,8));
+        slowDown(2);
+        click(siteSearchLookUpButton1);
+        assertTrue("Cannot find Site Lookup modal",isDisplayed(pathDetailSiteLookUpSiteName,8));
+        type(siteName,pathDetailSiteLookUpSiteName);
+        type(callSign, pathDetailSiteLookUpCallSign);
+        type(asr, pathDetailSiteLookUpAsr);
+        //type(lat,pathDetailSiteLookUpLatitude);
+        //type(longi,pathDetailSiteLookUpLongitude);
+        //type(radius, pathDetailSiteLookUpRadius);
+        click(siteLookUpSearchButtonModal);
+        slowDown(3);
+
+
+    }
+
+
+    public void siteSearch2(String siteName,String callSign,String asr,String lat,String longi,String radius){
+        assertTrue("Cannot find path detail site look up search button",isDisplayed(siteSearchLookUpButton1,8));
+        click(siteSearchLookUpButton2);
+        assertTrue("Cannot find Site Lookup modal",isDisplayed(pathDetailSiteLookUpSiteName,8));
+        type(siteName,pathDetailSiteLookUpSiteName);
+        type(callSign, pathDetailSiteLookUpCallSign);
+        type(asr, pathDetailSiteLookUpAsr);
+        //type(lat,pathDetailSiteLookUpLatitude);
+        //type(longi,pathDetailSiteLookUpLongitude);
+        //type(radius, pathDetailSiteLookUpRadius);
+        click(siteLookUpSearchButtonModal);
+    }
+
+    public void radioService1(String defaultRadio, String radioSelection){
+        String radio;
+        assertTrue("Can't find Path Details (1) Radio field",isDisplayed(pathDetailRadioServiceDropDownField1,30));
+
+        radio = getFieldText(pathDetailRadioServiceDropDownField1);
+        assertEquals(radio,defaultRadio);
+        selectFromDropdown(pathDetailRadioServiceDropDownField1,radioSelection );
+    }
+    public void radioService2(String defaultRadio, String radioSelection){
+        assertTrue("Can't find Path Details (2) Radio field",isDisplayed(pathDetailRadioServiceDropDownField2,30));
+        selectFromDropdown(pathDetailRadioServiceDropDownField2,radioSelection );
+
+    }
+
+    public void radioServiceLoop1( String radioSelection){
+        String radio;
+        assertTrue("Can't find Path Details (1) Radio field",isDisplayed(pathDetailRadioServiceDropDownField1,30));
+
+        radio = getFieldText(pathDetailRadioServiceDropDownField1);
+        selectFromDropdown(pathDetailRadioServiceDropDownField1,radioSelection );
+    }
+    public void radioServiceLoop2( String radioSelection){
+        assertTrue("Can't find Path Details (2) Radio field",isDisplayed(pathDetailRadioServiceDropDownField2,30));
+        selectFromDropdown(pathDetailRadioServiceDropDownField2,radioSelection );
+
+    }
+
+
+    public void saveDetails(){
+        assertTrue("The Save button is not present",isDisplayed(pathDetailSaveDetailsButton,5));
+        click(pathDetailSaveDetailsButton);
+        slowDown(3);
+    }
+
+    public void licSelection1(String defaultLic, String licSelection){
+        String lic;
+
+        lic = getFieldText(licBasis1);assertEquals("Default Lic is not correct",lic,defaultLic);
+        selectFromDropdown(licBasis1,licSelection);
+        lic = getFieldText(licBasis1);
+        assertEquals("Default Lic is not correct",lic,"2");
+
+    }
+
+    public void licSelection2(String defaultLic, String licSelection){
+        String lic;
+        lic = getFieldText(licBasis2);
+        assertEquals("Default Lic is not correct",lic,defaultLic);
+        selectFromDropdown(licBasis2,licSelection);
+        lic = getFieldText(licBasis2);
+        assertEquals("Default Lic is not correct",lic,"2");
+
+    }
     public void pathDetailErrors(String errorText ){
         String errors = getText(error);
-        assertEquals(errors,errorText);
+        assertTrue(errors.equalsIgnoreCase(errorText));
     }
 
     public void closeDetailsOpenQuickAdd(){
@@ -107,6 +265,10 @@ public class PathDetailPage extends BasePage {
     public void checkSiteSuggestionTrue(String siteName,String siteName2 ){
         isDisplayed(pathDetailSiteNameField1,20);
         type(siteName,pathDetailSiteNameField1);
+        if (browser.equals("IE")){
+            click(pathDetailAsrField1);
+            click(pathDetailSiteNameField1);
+        }
         assertTrue("suggested dropdown did not appear",isDisplayed(pathDetailSuggested1,20));
         hover(pathDetailSuggested1);
         slowDown(3);
@@ -129,17 +291,21 @@ public class PathDetailPage extends BasePage {
         String siteNameValue = getFieldText(pathDetailSiteNameField1);
         String callSignValue = getFieldText(pathDetailCallSignField1);
         slowDown(2);
+        clear(pathDetailGroundElevationField1);
+        slowDown(2);
         type(elevation,pathDetailGroundElevationField1);
+        //clear(pathDetailGroundElevationField1);
+        //type(siteName,pathDetailSiteNameField1);
         String latitudeValue = getFieldText(pathDetailLatitudeField1);
         String longitudeValue = getFieldText(pathDetailLongitudeField1);
         String elevationValue = getFieldText(pathDetailGroundElevationField1);
         String bandValue = getFieldText(pathDetailFrequencyBandDropDownField1);
+        click(pathDetailLatitudeField1);
         assertEquals("Site Name is incorrect",siteNameValue,siteName);
         assertEquals("call Sign is incorrect",callSignValue,callSign);
         assertEquals("call Sign is incorrect",latitudeValue,latitude);
         assertEquals("call Sign is incorrect",longitudeValue,longitude);
         assertEquals("call Sign is incorrect",elevationValue,elevation);
-
         assertEquals("call Sign is incorrect",bandValue,frequencyBand);
 
     }
@@ -149,14 +315,17 @@ public class PathDetailPage extends BasePage {
         assertTrue(isDisplayed(pathDetailCallSignField2,10));
         type(callSign2,pathDetailCallSignField2);
         click(pathDetailLongitudeField2);
+        slowDown(4);
         assertTrue(isDisplayed(pathDetailLatitudeField2,10));
         assertTrue(isDisplayed(pathDetailLongitudeField2,10));
         assertTrue(isDisplayed(pathDetailGroundElevationField2,10));
         assertTrue(isDisplayed(pathDetailSiteNameField2,10));
         String siteNameValue = getFieldText(pathDetailSiteNameField2);
         String callSignValue = getFieldText(pathDetailCallSignField2);
-        slowDown(2);
-       // type(elevation2,pathDetailGroundElevationField2);
+        clear(pathDetailGroundElevationField2);
+        type(elevation2,pathDetailGroundElevationField2);
+        click(pathDetailCallSignField2);
+        slowDown(3);
         String latitudeValue = getFieldText(pathDetailLatitudeField2);
         String longitudeValue = getFieldText(pathDetailLongitudeField2);
         String elevationValue = getFieldText(pathDetailGroundElevationField2);
