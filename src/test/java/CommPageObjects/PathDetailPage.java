@@ -23,6 +23,9 @@ public class PathDetailPage extends BasePage {
     By siteSearchLookUpButton2 = By.id("path-details-site-1-lookup-trigger");
     By closeSiteLookUpMotal = By.id("site-lookup-modal-close");
 
+    By addDiversity = By.cssSelector(".fa.fa-plus-circle");
+
+
 
     //DropDown Fields -- Does it contain a list that has options that can be selected
     By pathDetailRadioServiceDropDownField1 = By.id("path-details-site-0-radio-service");
@@ -69,6 +72,22 @@ public class PathDetailPage extends BasePage {
     By pathDetailSiteLookUpLongitude = By.id("site-lookup-longitude");
     By pathDetailSiteLookUpRadius = By.id("site-lookup-radius");
 
+    By antennaModel_1  = By.xpath("//*[contains(@id, 'path-details-site-0-') and contains(@id, '-antenna-model')]");
+    By antennaCenterline_1  = By.xpath("//*[contains(@id, 'path-details-site-0-') and contains(@id, '-centerline')]");
+    By antennaMode_1  = By.xpath("//*[contains(@id, 'path-details-site-0-') and contains(@id, '-mode')]");
+    By antennaCode_1  = By.xpath("//*[contains(@id, 'path-details-site-0-') and contains(@id, '-antenna-code')]");
+    By antennaGain_1  = By.xpath("//*[contains(@id, 'path-details-site-0-') and contains(@id, '-gain')]");
+
+
+
+
+
+    By antennaModel_2  = By.xpath("//*[contains(@id, 'path-details-site-1-') and contains(@id, '-antenna-model')]");
+    By antennaCenterline_2  = By.xpath("//*[contains(@id, 'path-details-site-1-') and contains(@id, '-centerline')]");
+    By antennaMode_2  = By.xpath("//*[contains(@id, 'path-details-site-1-') and contains(@id, '-mode')]");
+    By antennaCode_2  = By.xpath("//*[contains(@id, 'path-details-site-1-') and contains(@id, '-antenna-code')]");
+    By antennaGain_2  = By.xpath("//*[contains(@id, 'path-details-site-1-') and contains(@id, '-gain')]");
+
 
     //hovers -- Able to use the hover method
 
@@ -89,6 +108,39 @@ public class PathDetailPage extends BasePage {
     public PathDetailPage(WebDriver driver) {
         super(driver);
         visit("/");
+    }
+
+
+    public void antennaFieldValidation(){
+        assertTrue(isDisplayed(antennaModel_1,8));
+        assertTrue(isDisplayed(antennaCenterline_1,8));
+        assertTrue(isDisplayed(antennaMode_1,8));
+        assertTrue(isDisplayed(antennaCode_1,8));
+        assertTrue(isDisplayed(antennaGain_1,8));
+        assertTrue(isDisplayed(antennaModel_2,8));
+        assertTrue(isDisplayed(antennaCenterline_2,8));
+        assertTrue(isDisplayed(antennaMode_2,8));
+        assertTrue(isDisplayed(antennaCode_2,8));
+        assertTrue(isDisplayed(antennaGain_2,8));
+        assertTrue(isDisplayed(addDiversity,8));
+    }
+
+    public void antennaFieldFieldEntry1(){
+        assertTrue(isDisplayed(antennaModel_1,8));
+        assertTrue(isDisplayed(antennaCenterline_1,8));
+        assertTrue(isDisplayed(antennaMode_1,8));
+        assertTrue(isDisplayed(antennaCode_1,8));
+        assertTrue(isDisplayed(antennaGain_1,8));
+        assertTrue(isDisplayed(addDiversity,8));
+    }
+
+    public void antennaFieldFieldEntry2(){
+        assertTrue(isDisplayed(antennaModel_2,8));
+        assertTrue(isDisplayed(antennaCenterline_2,8));
+        assertTrue(isDisplayed(antennaMode_2,8));
+        assertTrue(isDisplayed(antennaCode_2,8));
+        assertTrue(isDisplayed(antennaGain_2,8));
+        assertTrue(isDisplayed(addDiversity,8));
     }
 
     public void closeSiteLookup(){
