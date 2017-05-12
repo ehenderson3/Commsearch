@@ -138,7 +138,7 @@ public class QuickAddTest extends BaseTest {
        // pathSummary.viewSiteCallSignLatLongGeColumns2(0, "Tonto Mtn", "KA20003", "40 44 54 N", "73 59 9 W", "98");
     }
 
-    /**
+    /**COM-255 Split Project handling in UI
      * "Given a user wants to split a project,
      When one or more paths are selected in the project summary page,
      Then the Split Paths button is activated in the Project Settings menu."
@@ -239,7 +239,7 @@ public class QuickAddTest extends BaseTest {
         pathSummary.viewSiteCallSignLatLongGeColumns2(2, "CAMSLANT STATION", "KA20003", "40 44 54 N", "73 59 9 W", "0.98");
     }
 
-    /**
+    /**COM-255 Split Project handling in UI
      *      "Given two buttons are displayed providing the options: Stay in Current Project; and Go To New Project,
      When user clicks the Stay in Current Project button,
      Then then the paths that were selected transfer to the new project,
@@ -312,7 +312,7 @@ public class QuickAddTest extends BaseTest {
 
     }
 
-    /**
+    /**COM-255 Split Project handling in UI
      *      * "Given the Split Project modal is displayed,
      When a user clicks on the Split Project button before a New Project Name is entered,
      Then a graceful error is displayed about the Project Name being required. "
@@ -401,7 +401,6 @@ public class QuickAddTest extends BaseTest {
     AND user can select an item from the search results."
 * */
     @Test
-
     public void createNewProjectWithCompanyByCode() {
         boolean siteExist;
         createPath.enterProjectForCompany("withCompanyByCode" +randomNumber+ "f", "This is the Default");
@@ -489,9 +488,9 @@ public class QuickAddTest extends BaseTest {
         else{
             quickAdd.quickAddPathDataSetup("NY SUPPORT DATA", "940 MHz", "New York", "40 44 54 N", "73 59 9 W", "0.98", "KA20003");}
 
-        quickAdd.quickAddPath("New", "940 MHz", "", "40 44 54 N", "73 59 9 W", "0.98", "KA20003");
-        pathSummary.viewSiteCallSignLatLongGeColumns1(0, "New York", "KA20003", "40 44 54 N", "73 59 9 W", "0.98");
-        pathSummary.viewSiteCallSignLatLongGeColumns2(0, "New York", "KA20003", "40 44 54 N", "73 59 9 W", "0.98");
+        quickAdd.quickAddPath("New", "940 MHz", "", "40 44 54 N", "73 59 9 W", "68898.04", "KA20003");
+        pathSummary.viewSiteCallSignLatLongGeColumns1(0, "New York", "KA20003", "40 44 54 N", "73 59 9 W", "68898.04");
+        pathSummary.viewSiteCallSignLatLongGeColumns2(0, "New York", "KA20003", "40 44 54 N", "73 59 9 W", "68898.04");
         pathName = pathSummary.projectNameSite1Site2Text(0);
         assertEquals(pathName, "New York - New York");
 

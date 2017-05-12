@@ -42,7 +42,7 @@ public class PathSummaryTest extends BaseTest {
     public RetryTest.Retry retry = new RetryTest.Retry(1);
 
 
-    /*
+    /*COM-240 UI: As a user, I want to copy a path in the Path Summary table
     Given a user wants to copy a path in the Project Summary table,
     When the caret in the ""#"" column is clicked,
     Then it will reveal a Copy button."
@@ -599,6 +599,30 @@ public class PathSummaryTest extends BaseTest {
         assertEquals("Elevation warning not found or not correct",elevationWarning, "Must be between -304.495 and 30,479.695 meters.");
     }
 
+
+    /**
+     * COM-324 Quick Add Form
+     * "Given Unit is set to US in Project Settings,
+     When the entry in Quick Add>Elevation field is <-999 OR >99,999,
+     Then an error is displayed stating, ""Must be between -999 and 99,999 feet."""
+     "In Project Settings, Set Unit to SI.
+     AND, if a Default Company isn't assigned yet, assign one;
+     AND activate the Show Site Location Details checkbox.
+     Click Save Settings.
+     In the Quick Add slide out, create a new site with an elevation of 16.765 meters.
+     Click Add Path button.
+     In Project Settings, change the Unit setting to US and click Save Settings.
+     In Quick Add>Site field, start typing the name of the Site that was created. When the selection appears, hover the cursor over it
+     EXPECTED RESULTS:
+     The G.E. in the tooltip is 55.
+
+     Select the Site from the dropdown options.
+     EXPECTED RESULTS:
+     The Elevation is 55 when the Elevation field auto fills.
+     The Elevation is 55 in the Project Summary G.E.(ft) column."
+     */
+
+
     @Test
     public void quickAdd_shouldGiveWarning_whenElevationIsOutSideOfNeg999And99999US() {
         createPath.createBrandNewProjectPath("QuickAddElevationBoundary" + randomNumber, "This is the Default");
@@ -619,6 +643,23 @@ public class PathSummaryTest extends BaseTest {
         assertEquals("Elevation warning not found or not correct",elevationWarning, "Must be between -999 and 99,999 feet.");
     }
 
+    /**COM-324 Quick Add Form
+     * "In Project Settings, Set Unit to SI.
+     AND, if a Default Company isn't assigned yet, assign one;
+     AND activate the Show Site Location Details checkbox.
+     Click Save Settings.
+     In the Quick Add slide out, create a new site with an elevation of 16.765 meters.
+     Click Add Path button.
+     In Project Settings, change the Unit setting to US and click Save Settings.
+     In Quick Add>Site field, start typing the name of the Site that was created. When the selection appears, hover the cursor over it
+     EXPECTED RESULTS:
+     The G.E. in the tooltip is 55.
+
+     Select the Site from the dropdown options.
+     EXPECTED RESULTS:
+     The Elevation is 55 when the Elevation field auto fills.
+     The Elevation is 55 in the Project Summary G.E.(ft) column."
+     */
     @Test
     public void quickAdd_GEshouldPersistAndNotRecalculate_whenGEUsIsSetStored() {
         createPath.createBrandNewProjectPath("QuickAddElevationBoundary" + randomNumber, "This is the Default");
@@ -856,7 +897,7 @@ public class PathSummaryTest extends BaseTest {
     //  pathSummary.pathWithSameConfig_OneRadio();
 
     }
-    /*
+    /*COM-146 Site auto suggest
     "Given a user is searching for a Site in the Quick Add section of Project Summary,
     When the user begins typing a valid site name,
     AND after the 1st character is typed,
