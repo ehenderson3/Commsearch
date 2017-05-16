@@ -79,7 +79,7 @@ public class PathDetailTest extends BaseTest{
      AND the sorting caret will be visible to the right side of the ASR results header."
      */
 
-    @Test//https://www.screencast.com/t/tKXfSNK0CkY
+    @Test
     public void pathDetailSiteSearch_searchResultsShouldContainAppropriateSite_whenSearchingBySiteName() {
         createPath.createBrandNewProjectPath("Path Detail elev SI range test" + randomNumber, "This is the Default");
         createPath.fillOutCompanyFilter("VZW111", "", "", 0);
@@ -103,7 +103,7 @@ public class PathDetailTest extends BaseTest{
         pathSummary.openPathDetailForAddingPath();
 
         pathDetail.siteSearch1("New York","KA20003","","","","");
-        pathDetail.siteSearchResults(0,"New  York","KA20003","","40 44 54 N","73 59 9 W","-");
+        pathDetail.siteSearchResults(0,"New York","KA20003","","40 44 54 N","73 59 9 W","-");
 
         pathDetail.closeSiteLookup();
 
@@ -126,18 +126,18 @@ public class PathDetailTest extends BaseTest{
 
         pathDetail.closePathDetails();
 
-        quickAdd.quickAddPath("SYNRA", "940 MHz", "Best Path", "40 34 10 N", "122 26 14 W", "250", "1208837");
-        pathSummary.viewSiteCallSignLatLongGeColumns1(1, "SYNRAMS STATION", "", "40 34 10 N", "122 26 14 W", "250");
+        quickAdd.quickAddPath("SYNRA", "940 MHz", "Best Path", "34 37 42.1 N", "112 39 26.2 W", "250", "KBY45");
+        pathSummary.viewSiteCallSignLatLongGeColumns1(1, "SYNRAMS STATION", "KBY45", "34 37 42.1 N", "112 39 26.2 W", "-656.21");
         pathSummary.viewSiteCallSignLatLongGeColumns2(0, "Tonto Mtn", "KA20003", "40 44 54 N", "73 59 9 W", "98");
 
         pathSummary.openPathDetails(1);
 
-        pathDetail.viewPathDetailValue1("SYNRAMS STATION", "", "40 34 10 N", "122 26 14 W", "250","940 MHz");
+        pathDetail.viewPathDetailValue1("SYNRAMS STATION", "KBY45", "34 37 42.1 N", "112 39 26.2 W", "-656.21","940 MHz");
         pathDetail.viewPathDetailValues2("Tonto Mtn", "KA20003", "40 44 54 N", "73 59 9 W", "0.98","940 MHz");
 
         pathDetail.closePathDetails();
 
-        quickAdd.quickAddPath("CAM", "940 MHz", "Best Path", "35 12 26.7 N", "78 3 21.2 W", "48.69", "1241006");
+        quickAdd.quickAddPath("CAM", "940 MHz", "Best Path", "34 37 42.1 N", "78 3 21.2 W", "48.69", "1241006");
         pathSummary.viewSiteCallSignLatLongGeColumns1(2, "CAMSLANT STATION", "", "35 12 26.7 N", "78 3 21.2 W", "48.69");
         pathSummary.viewSiteCallSignLatLongGeColumns2(0, "Tonto Mtn", "KA20003", "40 44 54 N", "73 59 9 W", "98");
         pathSummary.openPathDetails(2);
@@ -167,7 +167,7 @@ public class PathDetailTest extends BaseTest{
         pathDetail.pathDetailErrors("Must be between -304.495 and 30,479.695 meters.");
         pathDetail.addCallSignPathViaPathDetail2("New York", "KA20003", "40 44 54 N", "73 59 9 W", "30479.696");
         pathDetail.pathDetailErrors("Must be between -304.495 and 30,479.695 meters.");
-        pathDetail.viewPathDetailValue1("Tonto Mtn", "KBY45", "34 37 42.1 N", "112 39 26.2 W", "-305.001","1");
+        pathDetail.viewPathDetailValue1("SYNRAMS STATION", "KBY45", "34 37 42.1 N", "112 39 26.2 W", "-305.001","1");
         pathDetail.viewPathDetailValues2("New York", "KA20003", "40 44 54 N", "73 59 9 W", "30479.696","1");
         pathDetail.closePathDetails();    }
 

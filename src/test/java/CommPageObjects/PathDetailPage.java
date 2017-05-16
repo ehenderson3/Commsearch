@@ -346,8 +346,8 @@ public class PathDetailPage extends BasePage {
         clear(pathDetailGroundElevationField1);
         slowDown(2);
         type(elevation,pathDetailGroundElevationField1);
-        //clear(pathDetailGroundElevationField1);
-        //type(siteName,pathDetailSiteNameField1);
+        clear(pathDetailSiteNameField1);
+        type(siteName,pathDetailSiteNameField1);
         String latitudeValue = getFieldText(pathDetailLatitudeField1);
         String longitudeValue = getFieldText(pathDetailLongitudeField1);
         String elevationValue = getFieldText(pathDetailGroundElevationField1);

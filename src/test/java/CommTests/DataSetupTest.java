@@ -1,6 +1,7 @@
 package CommTests;
 
 import CommPageObjects.CreateNewPathPage;
+import CommPageObjects.PathDetailPage;
 import CommPageObjects.PathSummaryPage;
 import CommPageObjects.QuickAddPage;
 import org.junit.Before;
@@ -17,6 +18,7 @@ import java.util.Random;
     private QuickAddPage quickAdd;
     private PathSummaryPage pathSummary;
     private CreateNewPathPage createPath;
+    private PathDetailPage pathDetail;
 
 
     @Before
@@ -25,8 +27,8 @@ import java.util.Random;
             driver.manage().window().maximize();
         }
         quickAdd = new QuickAddPage(driver);
-       pathSummary = new PathSummaryPage(driver);
-       createPath = new CreateNewPathPage(driver);
+        pathSummary = new PathSummaryPage(driver);
+        createPath = new CreateNewPathPage(driver);
 
     }
 
