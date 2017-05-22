@@ -178,7 +178,7 @@ public class QuickAddTest extends BaseTest {
     @Test
     public void splitProjectGoToNewProject() {
         boolean siteExist;
-        createPath.createBrandNewProjectPath("splitProject" + randomNumber, "This is the Default");
+        createPath.createBrandNewProjectPath("splitProjectNEW" + randomNumber, "This is the Default");
         createPath.fillOutCompanyFilter("VZW111","", "",0);
         pathSummary.valSiteLocationToggleOn();
 
@@ -188,55 +188,23 @@ public class QuickAddTest extends BaseTest {
         else {
             quickAdd.quickAddPathDataSetup("TM SUPPORT DATA", "940 MHz", "Tonto Mtn", "34 37 42.1 N", "112 39 26.2 W", "1542.29", "KBY45");
         }
-        siteExist = quickAdd.checkForExistingSite("SYNRAMS STATION");
-        if (siteExist == true) {
-            quickAdd.cancelPathCreation();}
-        else {
-            quickAdd.quickAddPathDataSetup("TM SUPPORT DATA", "940 MHz", "SYNRAMS STATION", "40 34 10 N", "122 26 14 W", "250", "1208837");}
-        siteExist = quickAdd.checkForExistingSite("CAMSLANT STATION");
-        if (siteExist == true) {
-            quickAdd.cancelPathCreation();}
-        else {
-            quickAdd.quickAddPathDataSetup("CAM SUPPORT DATA", "940 MHz", "CAMSLANT STATION", "35 12 26.7 N", "78 3 21.2 W", "48.69", "1241006");
-        }
-        siteExist = quickAdd.checkForExistingSite("New York");
-        if (siteExist == true){quickAdd.cancelPathCreation();
-        } else {
-            quickAdd.quickAddPathDataSetup("NY SUPPORT DATA", "940 MHz", "New York", "40 44 54 N", "73 59 9 W", "0.98", "KA20003");}
 
+        quickAdd.quickAddPathSimple("Tonto Mtn", "940 MHz", "Stay 1", "34 37 42.1 N", "112 39 26.2 W", "1542.29", "KBY45");
+        quickAdd.quickAddPathExistingSetup("STAY2", "940 MHz", "Stay 2", "34 37 42.1 N", "112 39 26.2 W", "250", "KBY45");
+        quickAdd.quickAddPathExistingSetup("STAY3", "940 MHz", "Stay 3", "35 12 26.7 N", "78 3 21.2 W", "48.69", "1241006");
+        quickAdd.quickAddPathSimple("Tonto Mtn", "940 MHz", "Go To New 1", "34 37 42.1 N", "112 39 26.2 W", "1542.29", "KBY45");
+        quickAdd.quickAddPathExistingSetup("NEW2", "940 MHz", "Go To New 2", "40 34 10 N", "122 26 14 W", "250", "1208837");
+        quickAdd.quickAddPathExistingSetup("NEW3", "940 MHz", "Go To New 3", "35 12 26.7 N", "78 3 21.2 W", "48.69", "1241006");
 
-        quickAdd.quickAddPathSimple("Ton", "940 MHz", "Stay 1", "34 37 42.1 N", "112 39 26.2 W", "1542.29", "KBY45");
-        pathSummary.viewSiteCallSignLatLongGeColumns1(0, "Tonto Mtn", "KBY45", "34 37 42.1 N", "112 39 26.2 W", "1542.29");
-        pathSummary.viewSiteCallSignLatLongGeColumns2(0, "Tonto Mtn", "KA20003", "40 44 54 N", "73 59 9 W", "0.98");
-
-        quickAdd.quickAddPath("SYNRA", "940 MHz", "Stay 2", "34 37 42.1 N", "112 39 26.2 W", "250", "KBY45");
-        pathSummary.viewSiteCallSignLatLongGeColumns1(1, "SYNRAMS STATION", "KBY45", "34 37 42.1 N", "112 39 26.2 W", "250");
-        pathSummary.viewSiteCallSignLatLongGeColumns2(1, "SYNRAMS STATION", "KA20003", "40 44 54 N", "73 59 9 W", "0.98");
-
-        quickAdd.quickAddPath("CAM", "940 MHz", "Stay 3", "35 12 26.7 N", "78 3 21.2 W", "48.69", "1241006");
-        pathSummary.viewSiteCallSignLatLongGeColumns1(2, "CAMSLANT STATION", "", "35 12 26.7 N", "78 3 21.2 W", "48.69");
-        pathSummary.viewSiteCallSignLatLongGeColumns2(2, "CAMSLANT STATION", "KA20003", "40 44 54 N", "73 59 9 W", "0.98");
-
-        quickAdd.quickAddPathSimple("Ton", "940 MHz", "Go To New 1", "34 37 42.1 N", "112 39 26.2 W", "1542.29", "KBY45");
-        pathSummary.viewSiteCallSignLatLongGeColumns1(3, "Tonto Mtn", "KBY45", "34 37 42.1 N", "112 39 26.2 W", "1542.29");
-        pathSummary.viewSiteCallSignLatLongGeColumns2(3, "Tonto Mtn", "KA20003", "40 44 54 N", "73 59 9 W", "0.98");
-
-        quickAdd.quickAddPath("SYNRA", "940 MHz", "Go To New 2", "40 34 10 N", "122 26 14 W", "250", "1208837");
-        pathSummary.viewSiteCallSignLatLongGeColumns1(4, "SYNRAMS STATION", "", "40 34 10 N", "122 26 14 W", "250");
-        pathSummary.viewSiteCallSignLatLongGeColumns2(4, "SYNRAMS STATION", "KA20003", "40 44 54 N", "73 59 9 W", "0.98");
-
-        quickAdd.quickAddPath("CAM", "940 MHz", "Go To New 3", "35 12 26.7 N", "78 3 21.2 W", "48.69", "1241006");
-        pathSummary.viewSiteCallSignLatLongGeColumns1(5, "CAMSLANT STATION", "", "35 12 26.7 N", "78 3 21.2 W", "48.69");
-        pathSummary.viewSiteCallSignLatLongGeColumns2(5, "CAMSLANT STATION", "KA20003", "40 44 54 N", "73 59 9 W", "0.98");
 
         pathSummary.splitProject("Splitting Half of Project "+randomNumber);
         pathSummary.valSiteLocationToggleOn();
         pathSummary.viewSiteCallSignLatLongGeColumns1(0, "Tonto Mtn","KBY45", "34 37 42.1 N", "112 39 26.2 W", "1542.29");
-        pathSummary.viewSiteCallSignLatLongGeColumns2(0, "Tonto Mtn", "KA20003", "40 44 54 N", "73 59 9 W", "0.98");
-        pathSummary.viewSiteCallSignLatLongGeColumns1(1, "SYNRAMS STATION", "", "40 34 10 N", "122 26 14 W", "250");
-        pathSummary.viewSiteCallSignLatLongGeColumns2(1, "SYNRAMS STATION","KA20003", "40 44 54 N", "73 59 9 W", "0.98");
-        pathSummary.viewSiteCallSignLatLongGeColumns1(2, "CAMSLANT STATION","", "35 12 26.7 N", "78 3 21.2 W", "48.69");
-        pathSummary.viewSiteCallSignLatLongGeColumns2(2, "CAMSLANT STATION", "KA20003", "40 44 54 N", "73 59 9 W", "0.98");
+        pathSummary.viewSiteCallSignLatLongGeColumns2(0, "Tonto Mtn", "KA20003", "40 44 54 N", "73 59 9 W", "180.45");
+        pathSummary.viewSiteCallSignLatLongGeColumns1(1, "NEW2", "", "40 34 10 N", "122 26 14 W", "250");
+        pathSummary.viewSiteCallSignLatLongGeColumns2(1, "NEW2","KA20003", "40 44 54 N", "73 59 9 W", "180.45");
+        pathSummary.viewSiteCallSignLatLongGeColumns1(2, "NEW3","", "35 12 26.7 N", "78 3 21.2 W", "48.69");
+        pathSummary.viewSiteCallSignLatLongGeColumns2(2, "NEW3", "KA20003", "40 44 54 N", "73 59 9 W", "180.45");
     }
 
     /**COM-255 Split Project handling in UI
@@ -406,14 +374,10 @@ public class QuickAddTest extends BaseTest {
         createPath.enterProjectForCompany("withCompanyByCode" +randomNumber+ "f", "This is the Default");
         createPath.fillOutCompanyFilter("VZW111","", "",0);
         pathSummary.valSiteLocationToggleOn();
-        siteExist = quickAdd.checkForExistingSite("New York");
-        if (siteExist == true){quickAdd.cancelPathCreation();
-        } else {
-            quickAdd.quickAddPathDataSetup("NY SUPPORT DATA", "940 MHz", "New York", "40 44 54 N", "73 59 9 W", "0.98", "KA20003");
             quickAdd.quickAddPath("New", "940 MHz", "", "40 44 54 N", "73 59 9 W", "0.98", "KA20003");
             pathSummary.viewSiteCallSignLatLongGeColumns1(0, "New York", "KA20003", "40 44 54 N", "73 59 9 W", "0.98");
             pathSummary.viewSiteCallSignLatLongGeColumns2(0, "New York", "KA20003", "40 44 54 N", "73 59 9 W", "0.98");
-        }
+
     }
 
     @Test
