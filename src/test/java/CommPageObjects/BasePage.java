@@ -84,6 +84,15 @@ public class BasePage implements Config {
 
     }
 
+    public String getFieldText(By locator, String alt) {
+        WebElement TxtBoxContent = driver.findElement(locator);
+        String s = new String();
+        s = TxtBoxContent.getAttribute(alt);
+        return s;
+
+    }
+
+
     /**
      * deletes  field text of element(locator) being passed via parameter
      *
@@ -166,6 +175,16 @@ public class BasePage implements Config {
         WebDriverWait wait = new WebDriverWait(driver, 30);
         wait.until(ExpectedConditions.textToBePresentInElementValue((locator), fieldTest));
     }
+
+    public void waitForFieldToBeNotNull(final By locator) {
+        (new WebDriverWait(driver, 10)).until(new ExpectedCondition<Boolean>() {
+            public Boolean apply(WebDriver d) {
+                return d.findElement(locator).getAttribute("value").length() != 0;
+            }
+        });
+    }
+
+
     public void waitForText(String fieldTest, By locator) {
         WebDriverWait wait = new WebDriverWait(driver, 30);
         wait.until(ExpectedConditions.textToBePresentInElementLocated((locator), fieldTest));

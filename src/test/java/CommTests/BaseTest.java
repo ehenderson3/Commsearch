@@ -39,8 +39,7 @@ public class BaseTest implements Config {
                 driver = new RemoteWebDriver(new URL(browserStackUrl), capabilities);
             } else if (host.equals("localhost")) {
                 if (browser.equals("firefox")) {
-
-                    System.setProperty("webdriver.gecko.driver", System.getProperty("user.dir") + "/BrowserDrivers/geckodriver.exe");
+                    System.setProperty("webdriver.gecko.driver", System.getProperty("user.dir") + "/vendor/geckodriver.exe");
                     DesiredCapabilities cap = DesiredCapabilities.firefox();
                     cap.setCapability("marionette", true);
                     driver = new MarionetteDriver(cap);
@@ -55,7 +54,6 @@ public class BaseTest implements Config {
                    driver = new ChromeDriver(capabilities);
                 } else if (browser.equals("IE")){
                     DesiredCapabilities ieCapabilities = DesiredCapabilities.internetExplorer();
-
                     ieCapabilities.setCapability("nativeEvents", false);
                     ieCapabilities.setCapability("unexpectedAlertBehaviour", "accept");
                     ieCapabilities.setCapability("ignoreProtectedModeSettings", true);

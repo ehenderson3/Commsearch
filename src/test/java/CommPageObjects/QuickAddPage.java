@@ -124,6 +124,88 @@ public class QuickAddPage extends BasePage {
         }
     }
 
+
+
+
+
+
+
+
+    public void quickAddPathExistingSetup(String setupSiteName, String BandDropDown, String PathNameText,String LatitudeText, String Longitude, String ElevationText,  String Asr){
+
+        String lat;
+        String longs;
+        String asr;
+        String elev;
+
+        assertTrue("Can't Find quickAddButton",isDisplayed(quickAddButton,40));
+        isDisplayedAndClickable(quickAddButton,10);
+        isDisplayed(quickAddButton,10);
+
+        slowDown(2);
+        click(quickAddButton,0);
+        isDisplayed(pathName,6);
+        selectFromDropdown(optionanBandDropDown, BandDropDown);
+
+        type(Asr,callSign);
+        click(pathName);
+        waitForFieldToBeNotNull(latitude);
+
+        type(PathNameText, pathName);
+
+        clear(siteField);
+        type(setupSiteName,siteField);
+        if (browser.equals("IE")){
+            click(latitude);
+            click(siteField);
+        }
+
+        clear(latitude);
+        click(pathName);
+        type(LatitudeText,latitude);
+
+        clear(longitude);
+        click(pathName);
+        type(Longitude, longitude);
+
+        clear(elevation);
+        click(pathName);
+        type(ElevationText, elevation);
+
+        lat = getFieldText(latitude);
+        longs = getFieldText(longitude);
+        asr = getFieldText(callSign);
+
+        slowDown(4);
+
+        elev = getFieldText(elevation);
+        assertEquals(lat, LatitudeText);
+        assertEquals(elev, ElevationText);
+        assertEquals(longs,Longitude);
+        assertEquals(asr,Asr);
+        isDisplayed(addPathButton,6);
+        type("New Yo",siteField2);
+        if (browser.equals("IE")){
+            click(latitude);
+            click(siteField2);
+        }
+
+        isDisplayed(option,11);
+        click(option);
+        click(pathName);
+        click(addPathButton,1);
+        isDisplayed(addPathDetails,6);
+        isDisplayed(quickAddButton,6);
+    }
+
+
+
+
+
+
+
+
+
     public void quickAddPath(String sitePartialText, String BandDropDown, String PathNameText,String LatitudeText, String Longitude, String ElevationText,  String Asr){
 
         String lat;
@@ -152,9 +234,7 @@ public class QuickAddPage extends BasePage {
         lat = getFieldText(latitude);
         longs = getFieldText(longitude);
         asr = getFieldText(callSign);
-        clear(elevation);
-        slowDown(4);
-        type(ElevationText,elevation);
+
         slowDown(4);
 
         elev = getFieldText(elevation);
@@ -172,14 +252,15 @@ public class QuickAddPage extends BasePage {
         isDisplayed(option,11);
         click(option);
         click(pathName);
-        click(siteField);
-        isDisplayed(option,10);
-        click(option);
+        //click(siteField);
+        //isDisplayed(option,10);
+        //click(option);
 
-        click(pathName);
-        click(siteField);
-        isDisplayed(option,10);
-        click(option);
+        //click(pathName);
+       // click(siteField);
+        //isDisplayed(option,10);
+       // click(option);
+
         click(addPathButton,1);
         isDisplayed(addPathDetails,6);
         isDisplayed(quickAddButton,6);
@@ -525,7 +606,7 @@ public class QuickAddPage extends BasePage {
         click(option);
         click(latitude);
         elevationStored = getFieldText(elevation);
-        assertEquals("Is not the stored value",elevationStored, "4");
+        assertEquals("Is not the stored value",elevationStored, "55");
 
 
     }
