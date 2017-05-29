@@ -662,20 +662,17 @@ public class PathSummaryTest extends BaseTest {
      */
     @Test
     public void quickAdd_GEshouldPersistAndNotRecalculate_whenGEUsIsSetStored() {
-        createPath.createBrandNewProjectPath("QuickAddElevationBoundary" + randomNumber, "This is the Default");
+        createPath.createBrandNewProjectPath("GEshouldPersistAndNotRecalculate" + randomNumber, "This is the Default");
         createPath.fillOutCompanyFilter("VZW111" ,"", "",0);
         pathSummary.valSiteLocationToggleOn();
 
         pathSummary.changeToSi();
 
-        quickAdd.quickAddPathGeneral1("ElevLOWBoundarySuccess1", "23.0 GHz", "ASR-Call", "32 47 16.4 N", "96 47 59 W", "16.765", "KA3982");
-
+       // quickAdd.quickAddPathGeneral1("ElevLOWBoundarySuccess1", "23.0 GHz", "ASR-Call", "32 47 16.4 N", "96 47 59 W", "16.765", "KA3982");
+        quickAdd.quickAddPathExistingSetup("ElevLOW", "23.0 GHz", "ASR-Call", "32 47 16.4 N", "96 47 59 W", "16.765", "KA3982");
         pathSummary.changeToUs();
-
-        quickAdd.quickAddPathValidateSite("ElevLOWBoundarySuccess1", "23.0 GHz", "ASR-Call", "32 47 16.4 N", "96 47 59 W", "16.765", "KA3982");
-
-
-        pathSummary.viewSiteCallSignLatLongGeColumns1(0,"KDFW Studio","KA3982","32 47 16.4 N","96 47 59 W","55");
+        quickAdd.quickAddPathExistingSetup("ElevLOWBoundarySuccess1", "23.0 GHz", "ASR-Call", "32 47 16.4 N", "96 47 59 W", "16.765", "KA3982");
+        pathSummary.viewSiteCallSignLatLongGeColumns1(0,"ElevLOW","KA3982","32 47 16.4 N","96 47 59 W","55");
 
     }
 
@@ -864,9 +861,9 @@ public class PathSummaryTest extends BaseTest {
     Then it will be assigned a path number one higher than the previous highest path number, based on the order of creation.
      */
 
-    //@Test
+    @Test
     public void viewPathBlueSection() {
-        createPath.createBrandNewProjectPath("Best Project Ever"+ randomNumber, "This is the Default");
+        createPath.createBrandNewProjectPath("viewPathBlueSection"+ randomNumber, "This is the Default");
         createPath.fillOutCompanyFilter("VZW111" ,"", "",0);
 
         pathSummary.valSiteLocationToggleOn();
@@ -874,9 +871,9 @@ public class PathSummaryTest extends BaseTest {
         quickAdd.quickAddPathGeneral2("Test Path 2", "4.0 GHz", "ASR-Call","37 47 59.7 N", "122 23 58.8 W","55", "KA2049");
         quickAdd.quickAddPathGeneral2("Test Path 3", "4.0 GHz", "ASR-Call","37 47 59.7 N", "122 23 58.8 W","55", "KA2049");
         pathSummary.viewPathBlueSection(0,"Test Path 1","1","MOD","","Details");
-        pathSummary.viewSiteCallSignLatLongGeColumns1(0,"KDFW Studio","KA3982","32 47 16.4 N","96 47 59 W","54.99");
-        pathSummary.viewSiteCallSignLatLongGeColumns1(1,"ASR-Call","KA2049","37 47 59.7 N","122 23 58.8 W","54.99");
-        pathSummary.viewSiteCallSignLatLongGeColumns1(2,"ASR-Call","KA2049","37 47 59.7 N","122 23 58.8 W","54.99");
+        pathSummary.viewSiteCallSignLatLongGeColumns1(0,"KDFW Studio","KA3982","32 47 16.4 N","96 47 59 W","55");
+        pathSummary.viewSiteCallSignLatLongGeColumns1(1,"ASR-Call","KA2049","37 47 59.7 N","122 23 58.8 W","55");
+        pathSummary.viewSiteCallSignLatLongGeColumns1(2,"ASR-Call","KA2049","37 47 59.7 N","122 23 58.8 W","55");
         //pathSummary.viewAntennaRadioBandwidthFreq();TODO feature not ready
         //pathSummary.viewDiversityAntAmcPassFail();TODO feature not ready
     }

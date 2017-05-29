@@ -69,8 +69,16 @@ public class CreateNewPathPage extends BasePage {
         assertTrue("can't find the Default company button",isDisplayed(defaultCompany,30));
         assertTrue("can't find the company lookup button",isDisplayed(companyLookUp, 30));
         click(companyLookUp);
+    }
 
-
+    public void createProjectPath(String projectName, String defaultLicensee){
+        slowDown(2);
+        assertTrue("can't find the home ",isDisplayed(commHome,30));
+        click(commHome);
+        assertTrue("can't find the Create button", isDisplayed(createButton,30));
+        type(projectName, newProjectField);
+        assertTrue("can't find the path radio button",isDisplayed(pathRadioButton,30));
+        click(pathRadioButton);
     }
 
     public void createBrandNewProjectPathNoCompany(String projectName, String defaultLicensee){
@@ -118,6 +126,12 @@ public class CreateNewPathPage extends BasePage {
         click(searchResultArray);
         a = getFieldText(defaultCompanyField);
         assertEquals(a, "Verizon");
+        click(createButton);
+        isDisplayed(filterField, 30);
+    }
+
+    public void simpleClickCreateNewProjectButton(){
+        isDisplayed(createButton, 30);
         click(createButton);
         isDisplayed(filterField, 30);
     }

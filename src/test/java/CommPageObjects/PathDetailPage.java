@@ -362,6 +362,114 @@ public class PathDetailPage extends BasePage {
 
     }
 
+    public void addPathViaPathDetailBasicSetup1(String siteName, String callSign, String latitude,String longitude, String elevation, String frequencyBand){
+        isDisplayed(pathDetailSiteNameField1,20);
+        type(callSign,pathDetailCallSignField1);
+        click(pathDetailAsrField1);
+
+
+        waitForFieldToBeNotNull(pathDetailLatitudeField1);
+        clear(pathDetailSiteNameField1);
+        clear(pathDetailSiteNameField1);
+        click(pathDetailAsrField1);
+        clear(pathDetailGroundElevationField1);
+        click(pathDetailAsrField1);
+        clear(pathDetailLatitudeField1);
+        click(pathDetailAsrField1);
+        clear(pathDetailLongitudeField1);
+        click(pathDetailAsrField1);
+
+        clear(pathDetailSiteNameField1);
+        clear(pathDetailSiteNameField1);
+        click(pathDetailAsrField1);
+        clear(pathDetailGroundElevationField1);
+        clear(pathDetailGroundElevationField1);
+
+        click(pathDetailAsrField1);
+        clear(pathDetailLatitudeField1);
+        click(pathDetailAsrField1);
+        clear(pathDetailLongitudeField1);
+        click(pathDetailAsrField1);
+
+
+        type(latitude,pathDetailLatitudeField1);
+        type(longitude,pathDetailLongitudeField1);
+        type(elevation,pathDetailGroundElevationField1);
+        type(siteName,pathDetailSiteNameField1);
+
+        assertTrue(isDisplayed(pathDetailCallSignField1,10));
+        selectFromDropdown(pathDetailFrequencyBandDropDownField1,"940 MHz");
+        String siteNameValue = getFieldText(pathDetailSiteNameField1);
+        String callSignValue = getFieldText(pathDetailCallSignField1);
+        String latitudeValue = getFieldText(pathDetailLatitudeField1);
+        String longitudeValue = getFieldText(pathDetailLongitudeField1);
+        String elevationValue = getFieldText(pathDetailGroundElevationField1);
+        String bandValue = getFieldText(pathDetailFrequencyBandDropDownField1);
+        click(pathDetailLatitudeField1);
+        assertEquals("Site Name is incorrect",siteNameValue,siteName);
+        assertEquals("call Sign is incorrect",callSignValue,callSign);
+        assertEquals("call Sign is incorrect",latitudeValue,latitude);
+        assertEquals("call Sign is incorrect",longitudeValue,longitude);
+        assertEquals("call Sign is incorrect",elevationValue,elevation);
+        assertEquals("call Sign is incorrect",bandValue,frequencyBand);
+
+    }
+
+    public void addPathViaPathDetailBasicSetup2(String siteName2, String callSign2, String latitude2,String longitude2, String elevation2){
+        isDisplayed(pathDetailSiteNameField2,20);
+        type(callSign2,pathDetailCallSignField2);
+        click(pathDetailAsrField2);
+
+
+        waitForFieldToBeNotNull(pathDetailLatitudeField2);
+        clear(pathDetailSiteNameField2);
+        clear(pathDetailSiteNameField2);
+        click(pathDetailAsrField2);
+        clear(pathDetailGroundElevationField2);
+        click(pathDetailAsrField2);
+        clear(pathDetailLatitudeField2);
+        click(pathDetailAsrField2);
+        clear(pathDetailLongitudeField2);
+        click(pathDetailAsrField2);
+
+        clear(pathDetailSiteNameField2);
+        clear(pathDetailSiteNameField2);
+        click(pathDetailAsrField2);
+        clear(pathDetailGroundElevationField2);
+        clear(pathDetailGroundElevationField2);
+
+        click(pathDetailAsrField2);
+        clear(pathDetailLatitudeField2);
+        click(pathDetailAsrField2);
+        clear(pathDetailLongitudeField2);
+        click(pathDetailAsrField2);
+
+
+        type(latitude2,pathDetailLatitudeField2);
+        type(longitude2,pathDetailLongitudeField2);
+        type(elevation2,pathDetailGroundElevationField2);
+        type(siteName2,pathDetailSiteNameField2);
+
+        assertTrue(isDisplayed(pathDetailCallSignField2,10));
+        selectFromDropdown(pathDetailFrequencyBandDropDownField1,"940 MHz");
+        String siteNameValue2 = getFieldText(pathDetailSiteNameField2);
+        String callSignValue2 = getFieldText(pathDetailCallSignField2);
+        String latitudeValue2 = getFieldText(pathDetailLatitudeField2);
+        String longitudeValue2 = getFieldText(pathDetailLongitudeField2);
+        String elevationValue2 = getFieldText(pathDetailGroundElevationField2);
+        String bandValue = getFieldText(pathDetailFrequencyBandDropDownField1);
+        click(pathDetailLatitudeField1);
+        assertEquals("Site Name is incorrect",siteNameValue2,siteName2);
+        assertEquals("call Sign is incorrect",callSignValue2,callSign2);
+        assertEquals("call Sign is incorrect",latitudeValue2,latitude2);
+        assertEquals("call Sign is incorrect",longitudeValue2,longitude2);
+        assertEquals("call Sign is incorrect",elevationValue2,elevation2);
+
+    }
+
+
+
+
     public void addCallSignPathViaPathDetail2(String siteName2, String callSign2, String latitude2,String longitude2, String elevation2){
         type(siteName2,pathDetailSiteNameField2);
         assertTrue(isDisplayed(pathDetailCallSignField2,10));

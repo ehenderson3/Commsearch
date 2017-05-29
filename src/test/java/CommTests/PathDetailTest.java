@@ -163,9 +163,9 @@ public class PathDetailTest extends BaseTest{
         createPath.fillOutCompanyFilter("VZW111","", "",0);
         pathSummary.changeToSi();
         pathSummary.openPathDetailForAddingPath();
-        pathDetail.addCallSignPathViaPathDetail1("SYNRAMS STATION", "KBY45", "34 37 42.1 N", "112 39 26.2 W", "-305.001","1");
+        pathDetail.addPathViaPathDetailBasicSetup1("SYNRAMS STATION", "KBY45", "34 37 42.1 N", "112 39 26.2 W", "-305.001","1");
         pathDetail.pathDetailErrors("Must be between -304.495 and 30,479.695 meters.");
-        pathDetail.addCallSignPathViaPathDetail2("New York", "KA20003", "40 44 54 N", "73 59 9 W", "30479.696");
+        pathDetail.addPathViaPathDetailBasicSetup2("New York", "KA20003", "40 44 54 N", "73 59 9 W", "30479.696");
         pathDetail.pathDetailErrors("Must be between -304.495 and 30,479.695 meters.");
         pathDetail.viewPathDetailValue1("SYNRAMS STATION", "KBY45", "34 37 42.1 N", "112 39 26.2 W", "-305.001","1");
         pathDetail.viewPathDetailValues2("New York", "KA20003", "40 44 54 N", "73 59 9 W", "30479.696","1");
@@ -191,10 +191,10 @@ public class PathDetailTest extends BaseTest{
         createPath.fillOutCompanyFilter("VZW111","", "",0);
         pathSummary.changeToSi();
         pathSummary.openPathDetailForAddingPath();
-        pathDetail.addCallSignPathViaPathDetail1("SYNRAMS STATION", "KBY45", "34 37 42.1 N", "112 39 26.2 W", "-200.012","1");
+        pathDetail.addPathViaPathDetailBasicSetup1("SYNRAMS STATION", "KBY45", "34 37 42.1 N", "112 39 26.2 W", "-200.012","1");
         pathDetail.licSelection1("1","Secondary");
         pathDetail.licSelection2("1","Secondary");
-        pathDetail.addCallSignPathViaPathDetail2("New York", "KA20003", "40 44 54 N", "73 59 9 W", "21000.124");
+        pathDetail.addPathViaPathDetailBasicSetup2("New York", "KA20003", "40 44 54 N", "73 59 9 W", "21000.124");
         pathDetail.saveDetails();
          }
 
@@ -205,12 +205,12 @@ public class PathDetailTest extends BaseTest{
         createPath.fillOutCompanyFilter("VZW111","", "",0);
         pathSummary.changeToSi();
         pathSummary.openPathDetailForAddingPath();
-        pathDetail.addCallSignPathViaPathDetail1("SYNRAMS STATION", "KBY45", "34 37 42.1 N", "112 39 26.2 W", "-200.012","1");
+        pathDetail.addPathViaPathDetailBasicSetup1("SYNRAMS STATION", "KBY45", "34 37 42.1 N", "112 39 26.2 W", "-200.012","1");
         pathDetail.licSelection1("1","Secondary");
         pathDetail.licSelection2("1","Secondary");
         pathDetail.radioService1("5","AB—Aural Microwave Booster");
         pathDetail.radioService2("5","MW—Microwave Public Safety Pool");
-        pathDetail.addCallSignPathViaPathDetail2("New York", "KA20003", "40 44 54 N", "73 59 9 W", "21000.124");
+        pathDetail.addPathViaPathDetailBasicSetup2("New York", "KA20003", "40 44 54 N", "73 59 9 W", "21000.124");
         pathDetail.saveDetails();
     }
 
@@ -287,12 +287,12 @@ public class PathDetailTest extends BaseTest{
         pathSummary.changeToSi();
         for (String value : array) {
             pathSummary.openPathDetailForAddingPath();
-            pathDetail.addCallSignPathViaPathDetail1("Tonto Mtn", "KBY45", "34 37 42.1 N", "112 39 26.2 W", "-200.012", "1");
+            pathDetail.addPathViaPathDetailBasicSetup1("RadioVal1", "KBY45", "34 37 42.1 N", "112 39 26.2 W", "-200.012", "1");
             pathDetail.licSelection1("1", "Secondary");
             pathDetail.licSelection2("1", "Secondary");
             pathDetail.radioServiceLoop1(value);
             pathDetail.radioServiceLoop2(value);
-            pathDetail.addCallSignPathViaPathDetail2("New York", "KA20003", "40 44 54 N", "73 59 9 W", "21000.124");
+            pathDetail.addPathViaPathDetailBasicSetup2("RadioVal1", "KA20003", "40 44 54 N", "73 59 9 W", "21000.124");
             pathDetail.saveDetails();
         }
 
@@ -311,9 +311,9 @@ public class PathDetailTest extends BaseTest{
         createPath.fillOutCompanyFilter("VZW111","", "",0);
         pathSummary.changeToUs();
         pathSummary.openPathDetailForAddingPath();
-        pathDetail.addCallSignPathViaPathDetail1("SYNRAMS STATION", "KBY45", "34 37 42.1 N", "112 39 26.2 W", "-1000","1");
+        pathDetail.addPathViaPathDetailBasicSetup1("SYNRAMS STATION", "KBY45", "34 37 42.1 N", "112 39 26.2 W", "-1000","1");
         pathDetail.pathDetailErrors("Must be between -999 and 99,999 feet.");
-        pathDetail.addCallSignPathViaPathDetail2("New York", "KA20003", "40 44 54 N", "73 59 9 W", "100000");
+        pathDetail.addPathViaPathDetailBasicSetup2("New York", "KA20003", "40 44 54 N", "73 59 9 W", "100000");
         pathDetail.pathDetailErrors("Must be between -999 and 99,999 feet.");
         pathDetail.closePathDetails();    }
 
@@ -474,6 +474,37 @@ public class PathDetailTest extends BaseTest{
 
         pathDetail.antennaFieldValidation();
     }
+    @Test
+    //COM-397
+    // * Company Lookup Search Fields
+    // * Given a user needs to lookup a Company in the Path Details Site section,
+    // When the Company Lookup icon is clicked,
+    // Then it will open a modal with the following search fields:
+    // Company Code; Company Name; and Contact Name.
+    // Company Lookup search results
+    // Given a user clicks the Company lookup icon in the Path Details screen,
+    // When user enters a valid Company name (or at least the first letter) from among a project's Sites,
+    // AND clicks the search button,
+    // IF Company(s) exist which match the search criteria
+    // AND character(s) match the character(s) in the search criteria,
+    // Then a selection of companies will be displayed.
+    // Company Name field populates	Given a Company Name is being looked up in the Path Details page for a new path,
+    // When the Company Name is successfully found and selected,
+    // Then the Company lookup will close,
+    // AND the selected Company Name will populate the Site's Company Name field.
+    public void pathDetail_searchingTheFirstLetterOfAnExistingCompany_ResultSetShouldIncludeAppropriateCompanies() {
+        boolean siteExist;
+        createPath.createProjectPath("search1StCharOfCompany" + randomNumber, "This is the Default");
+        createPath.simpleClickCreateNewProjectButton();
+        pathSummary.valSiteLocationToggleOn();
+        pathSummary.openPathDetailForAddingPath();
+        pathDetail.addAsrPathViaPathDetail1("CAMSLANT STATION", "1241006", "35 12 26.7 N", "78 3 21.2 W", "48.7","1");
+        createPath.fillOutCompanyFilterFromDetails("","V", "",0);
+        pathDetail.addAsrPathViaPathDetail2("SYNRAMS STATION", "1208837", "40 34 10 N", "122 26 14 W", "250");
+        createPath.fillOutCompanyFilterFromDetails("","V", "",1);
+        pathDetail.antennaFieldValidation();
+    }
+
 
 
 
