@@ -138,7 +138,7 @@ public class CreateNewPathPage extends BasePage {
 
     public void fillOutCompanyFilterFromDetails(String coCodeText,String coNameText, String coContactText, Integer company) {
         String a;
-        isDisplayed(pathDetailCompanyLookUp,10);
+        assertTrue("Can't find LookUp",isDisplayed(pathDetailCompanyLookUp,10));
         click(pathDetailCompanyLookUp,company);
         assertTrue("Can't find Code Field",isDisplayed(companyCodeField,10));
         assertTrue("Can't find Name Field",isDisplayed(companyNameField,10));
@@ -151,7 +151,7 @@ public class CreateNewPathPage extends BasePage {
         assertTrue("Can't find Search Button",isDisplayed(companySearchButton));
         click(companySearchButton );
         slowDown(2);
-        isDisplayed(searchResultArray,10);
+        assertTrue("Can't find Results",isDisplayed(searchResultArray,10));
         slowDown(2);
 
         click(searchResultArray);

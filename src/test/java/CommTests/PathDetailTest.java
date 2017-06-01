@@ -38,6 +38,7 @@ public class PathDetailTest extends BaseTest{
     public RetryTest.Retry retry = new RetryTest.Retry(1);
 
     /**COM-316 Site lookup (without radius)
+     * COM-322(UI Test) Site Section of Path Detail
      * "Given a user clicks the Site lookup icon in the Path Details screen
      When user enters Site Name, Call Sign, and/or ASR,
      AND clicks the search button,
@@ -147,6 +148,7 @@ public class PathDetailTest extends BaseTest{
     }
 
     /**COM-325 Path Details Form - Elevation
+     * COM-321
      Given Unit is set to SI in Project Settings,
      When the entry in Path Details>Elevation field is <-304.495 OR >30,479.695,
      Then an error is displayed stating, "Must be between -304.495 and 30,479.695 meters."

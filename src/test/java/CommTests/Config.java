@@ -3,9 +3,9 @@ package CommTests;
 
 public interface Config {
 
-    final String baseUrl            = System.getProperty("baseUrl", "https://comsearch.staging.surgeforward.com");
+    //final String baseUrl            = System.getProperty("baseUrl", "https://comsearch.staging.surgeforward.com");
     //final String baseUrl            = System.getProperty("baseUrl", "https://comsearch.dev.surgeforward.com/#/");
-    //final String baseUrl            = System.getProperty("baseUrl", "https://legosandbox.com");
+    final String baseUrl            = System.getProperty("baseUrl", "https://legosandbox.com");
 
     final String browser            = System.getProperty("browser", "chrome");
     final String host               = System.getProperty("host","localhost");// "localhost" or browserstack

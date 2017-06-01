@@ -175,26 +175,6 @@ public class PathDetailPage extends BasePage {
         assertEquals("Site longiResults is not correct",longiResults,longi);
         assertEquals("Site radiusResults is not correct",radiusResults,radius);
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     }
     public void siteSearch1(String siteName,String callSign,String asr,String lat,String longi,String radius){
         assertTrue("Cannot find path detail site look up search button",isDisplayed(siteSearchLookUpButton1,8));

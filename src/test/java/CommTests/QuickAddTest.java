@@ -630,36 +630,37 @@ public class QuickAddTest extends BaseTest {
         pathSummary.valSiteLocationToggleOn();
 
         //N/S DD MM SS.SS or E/W DDD MM SS.SS
-        quickAdd.quickAddPathGeneral1("NS DD MM SSdotSS or EW DDD MM SSdotSS", "4.0 GHz", "SITE1", "N 43°38 19.39", "W 116° 14 28.86", "98", "");
-        pathSummary.viewSiteCallSignLatLongGeColumns1(0, "SITE1", "", "43 38 19.39 N", "116 14 28.86 W", "98");
+        quickAdd.quickAddPathExistingSetupNoVal("NS DD MM SSdotSS", "4.0 GHz", "First", "N 43°38 19.39", "W 116° 14 28.86", "98", "KBY45");
+        pathSummary.viewSiteCallSignLatLongGeColumns1(0, "NS DD MM SSdotSS", "KBY45", "43 38 19.39 N", "116 14 28.86 W", "98");
+        //("SPLIT_C1", "940 MHz", "Best Path", "34 37 42.1 N", "112 39 26.2 W", "250", "KBY45")
 
         //DD-­MM-­SS.SS N/S or DDD-­MM-­SS.SS E/W
-        quickAdd.quickAddPathGeneral1("DD-MM-SSdotSS NS or DDD-MM-SSdotSS EW", "4.0 GHz", "SITE1", "43-38-19.39 N", "116-14-28.86 W", "98", "");
-        pathSummary.viewSiteCallSignLatLongGeColumns1(1, "SITE1", "", "43 38 19.39 N", "116 14 28.86 W", "98");
+        quickAdd.quickAddPathExistingSetupNoVal("DD-MM-SSdotSS NS", "4.0 GHz", "Second", "43-38-19.39 N", "116-14-28.86 W", "98", "KBY45");
+        pathSummary.viewSiteCallSignLatLongGeColumns1(1, "DD-MM-SSdotSS NS", "KBY45", "43 38 19.39 N", "116 14 28.86 W", "98");
 
         //DD-­MM-SS and DDD-­MM­-SS.SS
-        quickAdd.quickAddPathGeneral1("DD-MM-SS and DDD-MM-SSdotSS", "4.0 GHz", "SITE1", "43-38-19.39", "-116-14-28.86", "98", "");
-        pathSummary.viewSiteCallSignLatLongGeColumns1(2, "SITE1", "", "43 38 19.39 N", "116 14 28.86 W", "98");
+        quickAdd.quickAddPathExistingSetupNoVal("DD-MM-SS", "4.0 GHz", "third", "43-38-19.39", "-116-14-28.86", "98", "KBY45");
+        pathSummary.viewSiteCallSignLatLongGeColumns1(2, "DD-MM-SS", "KBY45", "43 38 19.39 N", "116 14 28.86 W", "98");
 
         //N/S DD-MM-SS.SS or E/W DDD-­MM-­SS.SS
-        quickAdd.quickAddPathGeneral1("NS DD-MM-SSdotSS or EW DDD-MM-SSdotSS", "4.0 GHz", "SITE1", "N 43-38-19.39", "W 116-14-28.86", "98", "");
-        pathSummary.viewSiteCallSignLatLongGeColumns1(3, "SITE1", "", "43 38 19.39 N", "116 14 28.86 W", "98");
+        quickAdd.quickAddPathExistingSetupNoVal("NS DD-MM-SSdotSS", "4.0 GHz", "forth", "N 43-38-19.39", "W 116-14-28.86", "98", "KBY45");
+        pathSummary.viewSiteCallSignLatLongGeColumns1(3, "NS DD-MM-SSdotSS", "KBY45", "43 38 19.39 N", "116 14 28.86 W", "98");
 
         //DD-­MM-­SS.SSN/S or DDD-­MM-­SS.SSE/W
-        quickAdd.quickAddPathGeneral1("DD-MM-SSdotSSNS or DDD-MM-SSdotSSEW", "4.0 GHz", "SITE1", "43-38-19.39 N", "116-14-28.86 W", "98", "");
-        pathSummary.viewSiteCallSignLatLongGeColumns1(4, "SITE1", "", "43 38 19.39 N", "116 14 28.86 W", "98");
+        quickAdd.quickAddPathExistingSetupNoVal("DD-MM-SSdotSSNS", "4.0 GHz", "fifth", "43-38-19.39 N", "116-14-28.86 W", "98", "KBY45");
+        pathSummary.viewSiteCallSignLatLongGeColumns1(4, "DD-MM-SSdotSSNS", "KBY45", "43 38 19.39 N", "116 14 28.86 W", "98");
 
         //DD.DDDDDD or DDD.DDDDDD
-        quickAdd.quickAddPathGeneral1("DDdotDDDDDD or DDDdotDDDDDD", "4.0 GHz", "SITE1", "38.959390", "-95.265483", "98", "");
-        pathSummary.viewSiteCallSignLatLongGeColumns1(5, "SITE1", "", "38 57 33.8 N", "95 15 55.74 W", "98");
+        quickAdd.quickAddPathExistingSetupNoVal("DDdotDDDDDD", "4.0 GHz", "sixth", "38.959390", "-95.265483", "98", "KBY45");
+        pathSummary.viewSiteCallSignLatLongGeColumns1(5, "DDdotDDDDDD", "KBY45", "38 57 33.8 N", "95 15 55.74 W", "98");
 
         //DD.DDDDDD N/S or DDD.DDDDDD E/W
-        quickAdd.quickAddPathGeneral1("DDdotDDDDDD NS or DDDdotDDDDDD EW", "4.0 GHz", "SITE1", "38.959390 N", "95.265483 W", "98", "");
-        pathSummary.viewSiteCallSignLatLongGeColumns1(6, "SITE1", "", "38 57 33.8 N", "95 15 55.74 W", "98");
+        quickAdd.quickAddPathExistingSetupNoVal("DDdotDDDDDD NS", "4.0 GHz", "seventh", "38.959390 N", "95.265483 W", "98", "KBY45");
+        pathSummary.viewSiteCallSignLatLongGeColumns1(6, "DDdotDDDDDD NS", "KBY45", "38 57 33.8 N", "95 15 55.74 W", "98");
 
         //N/S DD.DDDDDD or E/W DDD.DDDDDD
-        quickAdd.quickAddPathGeneral1("NS DDdotDDDDDD or EW DDDdotDDDDDD", "4.0 GHz", "SITE1", "N 38.959390", "W 95.265483", "98", "");
-        pathSummary.viewSiteCallSignLatLongGeColumns1(7, "SITE1", "", "38 57 33.8 N", "95 15 55.74 W", "98");
+        quickAdd.quickAddPathExistingSetupNoVal("NS DDdotDDDDDD", "4.0 GHz", "eighth", "N 38.959390", "W 95.265483", "98", "KBY45");
+        pathSummary.viewSiteCallSignLatLongGeColumns1(7, "NS DDdotDDDDDD", "KBY45", "38 57 33.8 N", "95 15 55.74 W", "98");
 
     }
 

@@ -19,6 +19,11 @@ public class PathDetailAntennaPage extends BasePage {
 
     By lookUpSearchButton = By.id("site-lookup-submit");
     By saveDetailsButton = By.id("path-details-submit-button");
+    By antennaClearX = By.cssSelector(".fa.fa-spinner.fa-pulse.fa-fw");
+    By antennaClearX2 = By.className("clear-input-button");
+    By antennaClearX3 = By.className("pointer");
+    By antennaClearX4 = By.xpath("//*[@id=\"app\"]/div/div/div[2]/div/div/div/form/div[3]/div/div[1]/div[1]/ul/li[4]/div/div/span");
+
 
 
     //Path DropDown Fields -- Does it contain a list that has options that can be selected
@@ -245,6 +250,13 @@ public class PathDetailAntennaPage extends BasePage {
         String antCodeError2 = getText(antCodeErrorText2);
         assertEquals(antCodeError2, antError2);
 
+    }
+
+    public void clearAntennaField(){
+        assertTrue("Can't see the antenna X",isDisplayed(antennaClearX2,30));
+        slowDown(2);
+        click(antennaClearX);
+        waitForText(null,antennaModel1);
     }
 
     public void antennaCode3CharTriggersIncludeRevisions(String antennaCodeText){

@@ -551,6 +551,7 @@ public class PathSummaryTest extends BaseTest {
     }
 
     /**COM-324 Quick Add Form
+     * COM-321
      * Given Project Settings Unit format is set to SI,
        When the Minimum Clearance rounds with a number more than three decimals,
        Then the Min Clearance field will support three decimals.
@@ -906,7 +907,6 @@ public class PathSummaryTest extends BaseTest {
     public void valQuickAddSuggestedText() {
         createPath.createBrandNewProjectPath("Best Project Ever"+ randomNumber, "This is the Default");
         createPath.fillOutCompanyFilter("VZW111" ,"", "",0);
-
         quickAdd.quickAddPathGeneral2("Test Path 1", "23.0 GHz", "ASR-Call","32 47 16.4 N", "96 47 59 W","55", "KA3982");
         pathSummary.hoverSiteLocationValSiteInfo(0);
         quickAdd.quickAddPathGeneral2("Test Path 2", "4.0 GHz", "ASR-Call","37 47 59.7 N", "122 23 58.8 W","55", "KA2049");

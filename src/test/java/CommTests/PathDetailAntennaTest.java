@@ -2,6 +2,7 @@ package CommTests;
 
 import CommPageObjects.*;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 
@@ -78,6 +79,19 @@ public class PathDetailAntennaTest extends BaseTest {
      When user clicks the X on the right hand side of the field,
      Then all fields in that antenna section will be cleared.
      */
+
+    @Ignore //TODO can't get the intra field clear to work
+    public void pathDetailAntenna_allAntennaFieldCleared_WhenClickingTheDeleteX() {
+        createPath.createBrandNewProjectPath("Antenna Code onBlur" + randomNumber, "This is the Default");
+        createPath.fillOutCompanyFilter("VZW111", "", "", 0);
+        pathSummary.changeToSi();
+        pathSummary.openPathDetailForAddingPath();
+        pathDetail.addPathViaPathDetailBasicSetup1("MatchOnAntCode1", "KBY45", "34 37 42.1 N", "112 39 26.2 W", "66", "1");
+        pathDetail.addPathViaPathDetailBasicSetup2("MatchOnAntCode2", "KA20003", "40 44 54 N", "73 59 9 W", "55");
+        pathDetailAnt.enterAntennaDataAndonBlurRelatedFieldsPopulate("P8F-9", "txrx", "02306A", "3.2°", "20.3", "P8F-9", "txrx", "02306A", "3.2°", "20.3");
+        pathDetailAnt.clearAntennaField();
+        pathDetailAnt.clickSaveDetails();
+    }
 
     /**COM-341 UI/UX: Antenna Lookup
      * Given a user clicks on the Antenna lookup icon,
@@ -163,7 +177,47 @@ public class PathDetailAntennaTest extends BaseTest {
 
     }
 
+/**COM-340
+ * Given a value is entered in the Gain (dBi) field,
+ When a user views it,
+ Then it will have a value from 0 to 100,
+ AND the precision will be stored up to second decimal place.
+ Beam-width (degrees)	Given the Antenna Model lookup or Antenna Code field have accepted a valid input value,
 
+ When user views the Beam-width field,
+ Then it will autofill based on the Antenna Model/Code
+ AND it will be non-editable.
+ Centerline	Given the Unit is set to 'US' in Project Settings,
+
+ When Centerline contains a value in the Path Detail>Antenna section,
+ Then it will be calculated in feet
+ AND it will be a number that is > 0.
+ Centerline	Given the Unit is set to 'SI' in Project Settings,
+
+ When Centerline contains a value in the Path Detail>Antenna section,
+ Then it will be calculated in meters
+ AND it will be a number that is > 0.
+ Transmit Mode	Given a user is on the Path Details screen,
+
+ When user views the Mode dropdown selector,
+ Then the dropdown options will appear in the following order:
+ TX/RX
+ TX Only
+ RX Only,
+ AND RX Only will not be available for the primary antenna (Site 1).
+ Add Diversity Antenna	Given a Diversity Antenna needs to be added to a path,
+
+ When the 'Diversity Antenna' button is clicked,
+ Then a Diversity Antenna section will open up.
+ Delete Diversity Antenna	Given a Diversity Antenna needs to be deleted from a path,
+ When the "X" in the upper right corner of the Diversity Antenna section is clicked,
+ Then the Diversity Antenna section will close and its contents will be deleted.
+ Diversity Antenna - No Tilt	Given a Diversity Antenna is added,
+
+ When its fields are populated,
+ Then the Diversity Antenna Model lookup, Diversity Antenna Code field, and all other fields will function the same as the primary antenna,
+ BUT there will be no Tilt field and the Mode dropdown will contain all three options (TX/RX, TX only, RX only).
+ */
 
 
 
