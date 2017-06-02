@@ -6,7 +6,7 @@
 
     <groupId>CommSearchSelenium</groupId>
     <artifactId>CommSearchUITests</artifactId>
-    <version>0.0.8-SNAPSHOT</version>
+    <version>0.0.9-SNAPSHOT</version>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -27,7 +27,7 @@
     <dependency>
         <groupId>org.seleniumhq.selenium</groupId>
         <artifactId>selenium-java</artifactId>
-        <version>2.53.0</version>
+        <version>3.4.0</version>
     </dependency>
 
     <dependency>
@@ -35,8 +35,14 @@
         <artifactId>selenium-edge-driver</artifactId>
         <version>3.0.1</version>
     </dependency>
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-firefox-driver</artifactId>
+            <version>3.0.1</version>
+            <scope>test</scope>
+        </dependency>
 
-</dependencies>
+    </dependencies>
 
     <build>
         <pluginManagement>
@@ -47,7 +53,7 @@
                     <version>2.19.1</version>
                     <configuration>
                         <parallel>classesAndMethods</parallel>
-                        <threadCount>2</threadCount>
+                        <threadCount>1</threadCount>
                         <runOrder>random</runOrder>
                        <!-- <groups>${groups}</groups>-->
                     </configuration>
