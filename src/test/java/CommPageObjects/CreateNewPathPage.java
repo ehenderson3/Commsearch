@@ -29,8 +29,9 @@ public class CreateNewPathPage extends BasePage {
     By defaultCompanyField = By.id("new-project-form-default-company");
     //By searchResultArray = By.cssSelector(".react-grid-Row.react-grid-Row--even");
     //react-grid-Cell
-    By searchResultArray = By.cssSelector(".react-grid-Cell");
+    By searchResultArray = By.xpath("//*[contains(@id, 'company-lookup-modal-table-data-companyCode-') and contains(@id, '-companyCode')]");
 
+    //By searchResultArray = By.cssSelector(".react-grid-Cell");
 
     By companyContactNameField = By.id("company-lookup-contact-name");
     By createButton = By.id("newProjectForm-submit");
@@ -122,7 +123,7 @@ public class CreateNewPathPage extends BasePage {
         click(companySearchButton);
         slowDown(4);
         isDisplayed(searchResultArray,30);
-        slowDown(4);
+        slowDown(3);
         click(searchResultArray);
         a = getFieldText(defaultCompanyField);
         assertEquals(a, "Verizon");

@@ -14,7 +14,13 @@ public class PathDetailAntennaPage extends BasePage {
     //Headings
 
     //Buttons
-    By antennaModelSearch1 = By.id("path-details-antenna-0-0-lookup-trigger");
+    //By antennaModelSearch1 = By.className("lookup-component");
+    //By antennaModelSearch1 = By.cssSelector(".lookup-trigger-icon.margin-left-half.pointer.pull-right.flex-child-1-0-auto");
+    //By antennaModelSearch1 = By.className("lookup-trigger-icon");
+    By antennaModelSearch1 = By.xpath("//*[@id=\"path-details-antenna-0-0-lookup-trigger\"]");
+    //*[@id="path-details-antenna-0-0-lookup-trigger"]
+
+    //lookup-trigger-icon margin-left-half pointer pull-right flex-child-1-0-auto
     By antennaModelSearch2 = By.id("path-details-antenna-1-0-lookup-trigger");
 
     By lookUpSearchButton = By.id("site-lookup-submit");
@@ -261,8 +267,9 @@ public class PathDetailAntennaPage extends BasePage {
 
     public void antennaCode3CharTriggersIncludeRevisions(String antennaCodeText){
         //Verify that the Antenna Model field is present (that tells us that we are on the Antenna module)
-        isDisplayed(antennaModel1);
+        isDisplayed(antennaModel1,8);
         // Click the antenna model 1 search button
+        isDisplayed(antennaModelSearch1,8);
         click(antennaModelSearch1);
         //Verify that the Antenna Lookup pop up appears (We will use the Antenna Model field)
         assertTrue(isDisplayed(lookUpAntennaModel,6));

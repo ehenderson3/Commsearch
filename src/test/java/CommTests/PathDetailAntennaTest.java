@@ -121,9 +121,9 @@ public class PathDetailAntennaTest extends BaseTest {
      Then the results will include all matched radios plus any and all revisions they may have.
      */
 
-    @Test
+    @Ignore //COM-400 takes this functionality out for the time being
     public void pathDetailAntModal_includeRevisionsShouldAppear_when3charsAreEnteredInAntennaCode() {
-        createPath.createBrandNewProjectPath("Add Antenna" + randomNumber, "This is the Default");
+        createPath.createBrandNewProjectPath("3Char" + randomNumber, "This is the Default");
         createPath.fillOutCompanyFilter("VZW111", "", "", 0);
         pathSummary.changeToSi();
         pathSummary.openPathDetailForAddingPath();
