@@ -200,7 +200,8 @@ public class PathSummaryPage extends BasePage {
     }
 
     public void openPathDetailForAddingPath(){
-        assertTrue(isDisplayed(pathDetailButton,8));
+        assertTrue(isDisplayed(pathDetailButton,10));
+        slowDown(3);
         click(pathDetailButton);
         assertTrue(isDisplayed(pathDetailSiteNameField1,8));
 
@@ -885,7 +886,7 @@ public class PathSummaryPage extends BasePage {
         assertEquals("The defaultFresnelZoneRadius default val is not correct", defaultFresnelZoneRadius, "60");
         assertEquals("The defaultKFactor default val is not correct", defaultKFactor, "1");
         assertEquals("The defaultMinimumClearance default val is not correct", defaultMinimumClearance, "0");
-        assertEquals("The Target Avail default val is not correct", defaultTargetAvailability, "99.995");
+        assertEquals("The Target Avail default val is not correct", defaultTargetAvailability, "99.999");
     }
 
 

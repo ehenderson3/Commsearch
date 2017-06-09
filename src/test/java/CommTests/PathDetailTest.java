@@ -5,6 +5,7 @@ import CommPageObjects.PathDetailPage;
 import CommPageObjects.PathSummaryPage;
 import CommPageObjects.QuickAddPage;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 
@@ -93,7 +94,7 @@ public class PathDetailTest extends BaseTest{
         pathDetail.closeSiteLookup();
 
         pathDetail.siteSearch2("SITE1","KA20003","","","","");
-        pathDetail.siteSearchResults(0,"SITE1","KA20003","","40 44 54 N","73 59 9 W","-");
+        pathDetail.siteSearchResults(0,"SITE1","KA20003","","35 30 4.68 N","110 9 35.68 W","-");
     }
 
     @Test
@@ -109,7 +110,7 @@ public class PathDetailTest extends BaseTest{
         pathDetail.closeSiteLookup();
 
         pathDetail.siteSearch2("SITE1","KA20003","","","","");
-        pathDetail.siteSearchResults(0,"SITE1","KA20003","","40 44 54 N","73 59 9 W","-");
+        pathDetail.siteSearchResults(0,"SITE1","KA20003","","35 30 4.68 N","110 9 35.68 W","-");
     }
 
     @Test
@@ -120,32 +121,89 @@ public class PathDetailTest extends BaseTest{
         pathSummary.valSiteLocationToggleOn();
         quickAdd.quickAddPathSimple("Ton", "5.8 GHz", "Best Path", "34 37 42.1 N", "112 39 26.2 W", "1542.29", "KBY45");
         pathSummary.viewSiteCallSignLatLongGeColumns1(0, "Tonto Mtn", "KBY45", "34 37 42.1 N", "112 39 26.2 W", "1542.29");
-        pathSummary.viewSiteCallSignLatLongGeColumns2(0, "Tonto Mtn", "KA20003", "40 44 54 N", "73 59 9 W", "98");
+        pathSummary.viewSiteCallSignLatLongGeColumns2(0, "Tonto Mtn", "KA20003", "45 26 42.7 N", "4 7 9 W", "98");
         pathSummary.openPathDetails(0);
         pathDetail.viewPathDetailValue1("Tonto Mtn", "KBY45", "34 37 42.1 N", "112 39 26.2 W", "1542.29","940 MHz");
         pathDetail.viewPathDetailValues2("New York", "KA20003", "40 44 54 N", "73 59 9 W", "0.98","940 MHz");
-
+        //COM-429 0.0.10 Staging when attempting to select the Return button via Selenium can't see the button
         pathDetail.closePathDetails();
 
         quickAdd.quickAddPathExistingSetup("Existing", "940 MHz", "Best Path", "34 37 42.1 N", "112 39 26.2 W", "250", "KBY45");
         pathSummary.viewSiteCallSignLatLongGeColumns1(1, "Existing", "KBY45", "34 37 42.1 N", "112 39 26.2 W", "250");
-        pathSummary.viewSiteCallSignLatLongGeColumns2(0, "Tonto Mtn", "KA20003", "40 44 54 N", "73 59 9 W", "98");
+        pathSummary.viewSiteCallSignLatLongGeColumns2(0, "Tonto Mtn", "KA20003", "45 26 42.7 N", "4 7 9 W", "98");
 
         pathSummary.openPathDetails(1);
 
         pathDetail.viewPathDetailValue1("Existing", "KBY45", "34 37 42.1 N", "112 39 26.2 W", "250","940 MHz");
-        pathDetail.viewPathDetailValues2("Tonto Mtn", "KA20003", "40 44 54 N", "73 59 9 W", "0.98","940 MHz");
+        pathDetail.viewPathDetailValues2("Tonto Mtn", "KA20003", "45 26 42.7 N", "4 7 9 W", "0.98","940 MHz");
 
         pathDetail.closePathDetails();
 
         quickAdd.quickAddPathExistingSetup("CAMSLANT STATION", "940 MHz", "Best Path", "34 37 42.1 N", "78 3 21.2 W", "48.69", "1241006");
         pathSummary.viewSiteCallSignLatLongGeColumns1(2, "CAMSLANT STATION", "", "34 37 42.1 N", "78 3 21.2 W", "48.69");
-        pathSummary.viewSiteCallSignLatLongGeColumns2(0, "Tonto Mtn", "KA20003", "40 44 54 N", "73 59 9 W", "98");
+        pathSummary.viewSiteCallSignLatLongGeColumns2(0, "Tonto Mtn", "KA20003", "45 26 42.7 N", "4 7 9 W", "98");
         pathSummary.openPathDetails(2);
         pathDetail.viewPathDetailValue1("CAMSLANT STATION", "", "34 37 42.1 N", "78 3 21.2 W", "48.69","940 MHz");
-        pathDetail.viewPathDetailValues2("Tonto Mtn", "KA20003", "40 44 54 N", "73 59 9 W", "48.69","940 MHz");
+        pathDetail.viewPathDetailValues2("Tonto Mtn", "KA20003", "45 26 42.7 N", "4 7 9 W", "48.69","940 MHz");
 
     }
+//COM-396
+//    Given a Site row in the Site lookup fits needed criteria,
+//    When a user selects a segment end (Site),
+//    Then the current site info will be replaced with the following selected site info:
+//            1. Site Name
+//            2. Latitude
+//            3. Longitude
+//            4. Ground Elevation
+//            5. Call Sign
+//            6. ASR
+//            7. Company
+//    Site search order priority	Given a user is searching for a Site using the site lookup,
+//    When multiple parameters are used for finding a Site,
+//    Then the Site search order is 1.Site Name; 2.ASR; 3.Call Sign.
+//
+//    STEPS FOR MANUAL TESTING:
+//    Navigate to Path Details>Site, and click on the company lookup icon.
+//    Enter an existing Site's name and ASR into the search fields.
+//    Click the search button (magnifying glass icon).
+//    EXPECTED RESULTS:
+//    The search results will return only the matching site,
+//    AND the sorting caret will be visible to the right side of the Site Name results header (the results are sorted by the column by which this caret is displayed).
+//
+//    Next, in Path Details>Site, enter an existing ASR and Call Sign into their respective fields (delete the Site Name if one auto fills)
+//    AND note down the ASR and Call Sign.
+//    Click on the Site Name lookup icon.
+//    In the lookup modal, enter both the Call Sign and the ASR that were noted down.
+//    Click the search button (magnifying glass icon).
+//    EXPECTED RESULTS:
+//    The search results will return only the matching site,
+//    AND the sorting caret will be visible to the right side of the ASR results header.
+//    Given a user is searching for a Site using the site lookup,
+//    When multiple parameters are used for finding a Site,
+//    Then the Site search order is 1.Site Name; 2.ASR; 3.Call Sign.
+//
+//    STEPS FOR MANUAL TESTING:
+//    Navigate to Path Details>Site, and click on the company lookup icon.
+@Test
+public void pathDetailSiteSearch_searchResultsShouldContainAppropriateSite_whenSearchingForSiteUsingMultipleParameters() {
+    createPath.createBrandNewProjectPath("Search Site multi parameters" + randomNumber, "This is the Default");
+    createPath.fillOutCompanyFilter("VZW111", "", "", 0);
+    pathSummary.changeToUs();
+    pathSummary.openPathDetailForAddingPath();
+    pathDetail.addPathPathDetailWithAsrAndCall1("ASRandCALL1", "KBY45", "1000037","34 37 42.1 N", "112 39 26.2 W", "66", "1");
+    pathDetail.addPathPathDetailWithAsrAndCall2("ASRandCALL2", "KA20003", "1000038","40 44 54 N", "73 59 9 W", "55");
+    pathSummary.openPathDetailForAddingPath();
+//    Enter an existing Site's name and ASR into the search fields.
+//    Click the search button (magnifying glass icon).
+    pathDetail.siteSearch1("","KA20003","1000038","","","");
+//    EXPECTED RESULTS:
+//    The search results will return only the matching site,
+//    AND the sorting caret will be visible to the right side of the Site Name results header (the results are sorted by the column by which this caret is displayed).
+//    Next, in Path Details>Site, enter an existing ASR and Call Sign into their respective fields (delete the Site Name if one auto fills)
+    pathDetail.siteSearchResultWithASR(0,"ASRandCALL2","KA20003","1000038","40 44 54 N","73 59 9 W","-");
+}
+
+
 
     /**COM-325 Path Details Form - Elevation
      * COM-321
@@ -265,7 +323,7 @@ public class PathDetailTest extends BaseTest{
      * MO Mobile
      * MO5 Mobile and Temporary Fixed"
      */
-    @Test
+    @Ignore //TODO OM-428  Staging 0.0.10 - Getting Error saving path when attempting to save via Path Detail
     public void pathDetailRadioService_shouldSaveRecord_whenSelectingEachRadioOption() {
         boolean siteExist;
         String[] array = {"AB—Aural Microwave Booster",

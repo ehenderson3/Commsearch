@@ -14,24 +14,14 @@ public class PathDetailAntennaPage extends BasePage {
     //Headings
 
     //Buttons
-    //By antennaModelSearch1 = By.className("lookup-component");
-    //By antennaModelSearch1 = By.cssSelector(".lookup-trigger-icon.margin-left-half.pointer.pull-right.flex-child-1-0-auto");
-    //By antennaModelSearch1 = By.className("lookup-trigger-icon");
-    By antennaModelSearch1 = By.xpath("//*[@id=\"path-details-antenna-0-0-lookup-trigger\"]");
-    //*[@id="path-details-antenna-0-0-lookup-trigger"]
-
-    //lookup-trigger-icon margin-left-half pointer pull-right flex-child-1-0-auto
+    By antennaModelSearch1 = By.id("path-details-antenna-0-0-lookup-trigger");
     By antennaModelSearch2 = By.id("path-details-antenna-1-0-lookup-trigger");
-
     By lookUpSearchButton = By.id("site-lookup-submit");
     By saveDetailsButton = By.id("path-details-submit-button");
     By antennaClearX = By.cssSelector(".fa.fa-spinner.fa-pulse.fa-fw");
     By antennaClearX2 = By.className("clear-input-button");
     By antennaClearX3 = By.className("pointer");
     By antennaClearX4 = By.xpath("//*[@id=\"app\"]/div/div/div[2]/div/div/div/form/div[3]/div/div[1]/div[1]/ul/li[4]/div/div/span");
-
-
-
     //Path DropDown Fields -- Does it contain a list that has options that can be selected
 
     //Drop down options
@@ -53,21 +43,18 @@ public class PathDetailAntennaPage extends BasePage {
     By antennaCodeField2 = By.id("path-details-site-1-0-antenna-code");
     By beamwithField2 = By.id("path-details-site-1-0-beamWidth");
     By gainField2 = By.id("path-details-site-1-0-gain");
-
     By antennaModelForTextField = By.name("antennas[0][0]modelNumber");
     By includeRevisionsCheckBox = By.id("antenna-lookup-include-revisions-include");
     By lookUpAntennaCode = By.id("antenna-lookup-antenna-code");
-
 
     //Path hovers -- Able to use the hover method
     By revisionIcon = By.className("revisions-icon");
     By revisionIconText = By.cssSelector(".text-blue.center-text");
 
-
     //Path Data Fields - Element is read only and can use getFieldText method
     By antResultListEven = By.cssSelector(".react-grid-Row.react-grid-Row--even");
     By antResultListOdd = By.cssSelector(".react-grid-Row.react-grid-Row--even");
-
+    By antResultListItem = By.xpath("//*[contains(@id, 'antenna-lookup-modal-table-data-antennaCode-') and contains(@id, 'antenna-lookup-modal-table-data-antennaCode-')]");
     By antCodeErrorText = By.id("path-details-site-0-0-antenna-code-error-message");
     By antCodeErrorText2 = By.id("path-details-site-1-0-antenna-code-error-message");
     By tempAntennaCodeArray = By.xpath("//*[@id=\"antenna-lookup-modal\"]/div[2]/div/div/div/div[2]/div/div/div/div[1]/div/div[1]/div/div/span/div");
@@ -90,7 +77,7 @@ public class PathDetailAntennaPage extends BasePage {
         //******************LEFT ANTENNA*************************************************
 
         // Click the antenna model 1 search button
-        click(antennaModelSearch1);
+        clickJS(antennaModelSearch1);
 
         //Verify that the Antenna Lookup pop up appears (We will use the Antenna Model field)
         assertTrue(isDisplayed(lookUpAntennaModel,6));
@@ -102,10 +89,10 @@ public class PathDetailAntennaPage extends BasePage {
         click(lookUpSearchButton);
 
         //Verify that there is at least one search result
-        isDisplayed(antResultListEven,8);
+        isDisplayed(antResultListItem,8);
 
         //Click on the first row
-        click(antResultListEven);
+        clickJS(antResultListItem);
 
         //Verify that we have returned to the Path Detail page
         isDisplayed(pathDetail,8);
@@ -146,10 +133,10 @@ public class PathDetailAntennaPage extends BasePage {
         click(lookUpSearchButton);
 
         //Verify that there is at least one search result
-        isDisplayed(antResultListEven,8);
+        isDisplayed(antResultListItem,8);
 
         //Click on the first row
-        click(antResultListEven);
+        click(antResultListItem);
 
         //Verify that we have returned to the Path Detail page
         isDisplayed(centerlineField2);
@@ -206,16 +193,11 @@ public class PathDetailAntennaPage extends BasePage {
         assertEquals(antennaCodeFieldText, antCode);
         assertEquals(beamwidthFieldText, beamwith);
         assertEquals(gainFieldText, gain);
-
-
         //enter valid or invalid Antenna Code
         type(antCode,antennaCodeField2);
-
         //re-focus to field other than Antenna Code
         click(gainField2);
         waitForFieldToBeNotNull(gainField2);
-
-
         //validate the related values populate
         String antennaModelFieldText2;
         String modeFieldText2;
@@ -284,9 +266,9 @@ public class PathDetailAntennaPage extends BasePage {
 
     public void antennaCodeListsRevisions(String antennaCodeText){
         //Verify that the Antenna Model field is present (that tells us that we are on the Antenna module)
-        isDisplayed(antennaModel1);
+        isDisplayed(antennaModel1,10);
         //Click the antenna model 1 search button
-        click(antennaModelSearch1);
+        clickJS(antennaModelSearch1);
         //Verify that the Antenna Lookup pop up appears (We will use the Antenna Model field)
         assertTrue(isDisplayed(lookUpAntennaModel,6));
         //check that Include Revisions check box is not present
@@ -313,8 +295,6 @@ public class PathDetailAntennaPage extends BasePage {
         String list = getText(tempAntennaCodeArray);
         assertEquals(list,"02306A");
     }
-
-
 
     public void clickSaveDetails(){
         isDisplayed(saveDetailsButton,8);

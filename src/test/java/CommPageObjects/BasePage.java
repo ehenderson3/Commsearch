@@ -106,6 +106,14 @@ public class BasePage implements Config {
     }
 
     /**
+     * Clicks on elements that are difficult to locate
+     * @param locator
+     */
+    public void clickJS(By locator){
+        WebElement invisible = driver.findElement(locator);
+        ((JavascriptExecutor)driver).executeScript("arguments[0].click();", invisible );}
+
+    /**
      * produces a list of elements and prints the attribute list
      *
      * @param locators

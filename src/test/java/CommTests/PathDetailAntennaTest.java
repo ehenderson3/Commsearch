@@ -32,7 +32,7 @@ public class PathDetailAntennaTest extends BaseTest {
     @Rule
     public RetryTest.Retry retry = new RetryTest.Retry(1);
 
-    @Test
+    @Test//COM-427 Antenna Model button not accessiblehttps://www.screencast.com/t/lhm5EgHS
     public void pathDetailAntennaSearch_shouldReturnRows_whenValidSearchCriteriaIsEntered() {
         createPath.createBrandNewProjectPath("Add Antenna" + randomNumber, "This is the Default");
         createPath.fillOutCompanyFilter("VZW111","", "",0);
@@ -100,7 +100,7 @@ public class PathDetailAntennaTest extends BaseTest {
          Then the selected antenna's info will auto fill in path details sheet
          AND the antenna lookup modal will close after an antenna is selected
      */
-    @Test
+    @Test //TODO COM-427 Antenna Model button not accessible
     public void pathDetailAntModle_shouldAutoFill_whenExistingAntennaIsFoundOnSearch() {
         createPath.createBrandNewProjectPath("Add Antenna" + randomNumber, "This is the Default");
         createPath.fillOutCompanyFilter("VZW111", "", "", 0);
@@ -121,7 +121,7 @@ public class PathDetailAntennaTest extends BaseTest {
      Then the results will include all matched radios plus any and all revisions they may have.
      */
 
-    @Ignore //COM-400 takes this functionality out for the time being
+    @Ignore// TODO COM-400 takes this functionality out for the time being
     public void pathDetailAntModal_includeRevisionsShouldAppear_when3charsAreEnteredInAntennaCode() {
         createPath.createBrandNewProjectPath("3Char" + randomNumber, "This is the Default");
         createPath.fillOutCompanyFilter("VZW111", "", "", 0);
@@ -148,7 +148,7 @@ public class PathDetailAntennaTest extends BaseTest {
         AND hovering the cursor over the "R" will bring up a tooltip indicating that it's a Revised Model,
         AND the tooltip will contain a link to see more recent revisions of the antenna.
      */
-    @Test
+    @Ignore// TODO this feature is being removed COM-400
     public void pathDetailAntModal_allRevisionsShouldAppear_whenAntennaModelContainsRevisions() {
         createPath.createBrandNewProjectPath("Revision results" + randomNumber, "This is the Default");
         createPath.fillOutCompanyFilter("VZW111", "", "", 0);
@@ -176,59 +176,6 @@ public class PathDetailAntennaTest extends BaseTest {
      pathDetailAnt.enterBadAntennaDataAndonBlurError("2145", "No match found for Antenna Code.","5854", "No match found for Antenna Code.");
 
     }
-
-/**COM-340
- * Given a value is entered in the Gain (dBi) field,
- When a user views it,
- Then it will have a value from 0 to 100,
- AND the precision will be stored up to second decimal place.
- Beam-width (degrees)	Given the Antenna Model lookup or Antenna Code field have accepted a valid input value,
-
- When user views the Beam-width field,
- Then it will autofill based on the Antenna Model/Code
- AND it will be non-editable.
- Centerline	Given the Unit is set to 'US' in Project Settings,
-
- When Centerline contains a value in the Path Detail>Antenna section,
- Then it will be calculated in feet
- AND it will be a number that is > 0.
- Centerline	Given the Unit is set to 'SI' in Project Settings,
-
- When Centerline contains a value in the Path Detail>Antenna section,
- Then it will be calculated in meters
- AND it will be a number that is > 0.
- Transmit Mode	Given a user is on the Path Details screen,
-
- When user views the Mode dropdown selector,
- Then the dropdown options will appear in the following order:
- TX/RX
- TX Only
- RX Only,
- AND RX Only will not be available for the primary antenna (Site 1).
- Add Diversity Antenna	Given a Diversity Antenna needs to be added to a path,
-
- When the 'Diversity Antenna' button is clicked,
- Then a Diversity Antenna section will open up.
- Delete Diversity Antenna	Given a Diversity Antenna needs to be deleted from a path,
- When the "X" in the upper right corner of the Diversity Antenna section is clicked,
- Then the Diversity Antenna section will close and its contents will be deleted.
- Diversity Antenna - No Tilt	Given a Diversity Antenna is added,
-
- When its fields are populated,
- Then the Diversity Antenna Model lookup, Diversity Antenna Code field, and all other fields will function the same as the primary antenna,
- BUT there will be no Tilt field and the Mode dropdown will contain all three options (TX/RX, TX only, RX only).
- */
-
-
-
-
-
-
-
-
-
-
-
 
 }
 
