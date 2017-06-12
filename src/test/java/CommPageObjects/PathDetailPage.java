@@ -248,6 +248,7 @@ public class PathDetailPage extends BasePage {
         latResults = getTextPlural(pathDetailSiteLookUpLatitudeResults,i);
         longiResults = getTextPlural(pathDetailSiteLookUpLongitudeResults,i);
         radiusResults = getTextPlural(pathDetailSiteLookUpRadiusResults,i);
+        //TODO can't search by latitude
 
         assertEquals("Site siteNameResults is not correct",siteNameResults,siteName);
         assertEquals("Site callSignResults is not correct",callSignResults,callSign);
@@ -308,10 +309,11 @@ public class PathDetailPage extends BasePage {
         type(siteName,pathDetailSiteLookUpSiteName);
         type(callSign, pathDetailSiteLookUpCallSign);
         type(asr, pathDetailSiteLookUpAsr);
-        //type(lat,pathDetailSiteLookUpLatitude);
+        type(lat,pathDetailSiteLookUpLatitude);
         //type(longi,pathDetailSiteLookUpLongitude);
         //type(radius, pathDetailSiteLookUpRadius);
-        click(siteLookUpSearchButtonModal);
+        clickJS(siteLookUpSearchButtonModal);
+        slowDown(5);
     }
 
     public void radioService1(String defaultRadio, String radioSelection){
