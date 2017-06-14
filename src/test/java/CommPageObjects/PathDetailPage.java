@@ -259,6 +259,17 @@ public class PathDetailPage extends BasePage {
 
     }
 
+    /**
+     *
+     * @param i selects the row to validate
+     * @param siteName validates that the site entered in search is present in the search result
+     * @param callSign validates that the callSign entered in search is present in the search result
+     * @param asr validates that the asr entered in search is present in the search result
+     * @param lat validates that the latitude entered in search is present in the search result
+     * @param longi validates that the longitude entered in search is present in the search result
+     * @param radius validates that the radius entered in search is present in the search result
+     */
+
     public void siteSearchResultWithASR(int i,String siteName,String callSign,String asr,String lat,String longi,String radius){
 
         String siteNameResults;

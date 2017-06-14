@@ -482,8 +482,8 @@ public class PathSummaryPage extends BasePage {
     }
 
     public void valKDefaultAvailabilityTargetSetting() {
-        String a;
-        String b;
+        String fresnelWarning;
+        String targetVal;
         String defaultTargetAvailability;
         assertTrue("Hamburger menu is not present", isDisplayed(hamburgerDropDownInactive, 10));
         slowDown(4);
@@ -502,20 +502,20 @@ public class PathSummaryPage extends BasePage {
         assertTrue("saveButton not present", isDisplayed(saveButton, 10));
         click(saveButton);
         assertTrue(isDisplayed(warnFresnelZoneRadius,30));
-        a = getText(warnFresnelZoneRadius);
-        assertEquals(a, "ONLY NUMERICAL VALUES ALLOWED");
+        fresnelWarning = getText(warnFresnelZoneRadius);
+        assertEquals(fresnelWarning, "ONLY NUMERICAL VALUES ALLOWED");
 
         clear(targetAvailability);
         type("1001", targetAvailability);
         click(saveButton);
-        a = getText(warnFresnelZoneRadius);
-        assertEquals(a, "MUST BE BETWEEN 50 AND 100");
+        fresnelWarning = getText(warnFresnelZoneRadius);
+        assertEquals(fresnelWarning, "MUST BE BETWEEN 50 AND 100");
 
         clear(targetAvailability);
         type("-1001", targetAvailability);
         click(saveButton);
-        a = getText(warnFresnelZoneRadius);
-        assertEquals(a, "MUST BE BETWEEN 50 AND 100");
+        fresnelWarning = getText(warnFresnelZoneRadius);
+        assertEquals(fresnelWarning, "MUST BE BETWEEN 50 AND 100");
 
         //COM-400 COM-388
         clear(targetAvailability);
@@ -529,8 +529,8 @@ public class PathSummaryPage extends BasePage {
         click(hamburgerSettings);
         assertTrue("Project Panel is not present", isDisplayed(projectSettingsPanel, 10));
         assertTrue("Project Target Availability (%) is not present", isDisplayed(targetAvailability, 10));
-        b = getFieldText(targetAvailability);
-        assertEquals(b, "99.123456");
+        targetVal = getFieldText(targetAvailability);
+        assertEquals(targetVal, "99.123456");
 
         clear(targetAvailability);
         type("100", targetAvailability);
@@ -555,7 +555,7 @@ public class PathSummaryPage extends BasePage {
     }
 
     public void valKMinClearanceSetting() {
-        String a;
+        String fresnelWarning;
         String defaultMinimumClearance;
 
         assertTrue("Hamburger menu is not present", isDisplayed(hamburgerDropDownInactive, 10));
@@ -569,26 +569,26 @@ public class PathSummaryPage extends BasePage {
         clear(minClearence);
         type(".1", minClearence);
         click(saveButton);
-        a = getText(warnFresnelZoneRadius);
-        assertEquals(a, "ONLY NUMERICAL VALUES ALLOWED");
+        fresnelWarning = getText(warnFresnelZoneRadius);
+        assertEquals(fresnelWarning, "ONLY NUMERICAL VALUES ALLOWED");
 
         clear(minClearence);
         type("w", minClearence);
         click(saveButton);
-        a = getText(warnFresnelZoneRadius);
-        assertEquals(a, "ONLY NUMERICAL VALUES ALLOWED");
+        fresnelWarning = getText(warnFresnelZoneRadius);
+        assertEquals(fresnelWarning, "ONLY NUMERICAL VALUES ALLOWED");
 
         clear(minClearence);
         type("3280.85", minClearence);
         click(saveButton);
-        a = getText(warnFresnelZoneRadius);
-        assertEquals(a, "MUST BE BETWEEN -3,280.84 AND 3,280.84 FEET");
+        fresnelWarning = getText(warnFresnelZoneRadius);
+        assertEquals(fresnelWarning, "MUST BE BETWEEN -3,280.84 AND 3,280.84 FEET");
 
         clear(minClearence);
         type("-3280.85", minClearence);
         click(saveButton);
-        a = getText(warnFresnelZoneRadius);
-        assertEquals(a, "MUST BE BETWEEN -3,280.84 AND 3,280.84 FEET");
+        fresnelWarning = getText(warnFresnelZoneRadius);
+        assertEquals(fresnelWarning, "MUST BE BETWEEN -3,280.84 AND 3,280.84 FEET");
 
         clear(minClearence);
         type("-3280.84", minClearence);

@@ -203,7 +203,8 @@ public class PathDetailTest extends BaseTest {
 //    The search results will return only the matching site,
 //    AND the sorting caret will be visible to the right side of the Site Name results header (the results are sorted by the column by which this caret is displayed).
 //    Next, in Path Details>Site, enter an existing ASR and Call Sign into their respective fields (delete the Site Name if one auto fills)
-        pathDetail.siteSearchResultWithASR(0, "ASRandCALL2", "KA20003", "1000038", "40 44 54 N", "73 59 9 W", "-");
+
+        pathDetail.siteSearchResultWithASR(0, "ASRandCALL2", "KA20003", "1000038", "35 29 43.2 N", "97 33 58.5 W", "-");
     }
 
 

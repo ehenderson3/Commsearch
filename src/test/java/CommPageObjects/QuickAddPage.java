@@ -502,14 +502,7 @@ public class QuickAddPage extends BasePage {
         type(sitePartialText,siteField);
         isDisplayed(option,6);
         hover(option);
-        lat = getFieldText(latitude);
-        longs = getFieldText(longitude);
-        //asr = getFieldText(callSign);
         elev = getFieldText(elevation);
-        assertEquals(lat, LatitudeText);
-        assertEquals(elev, ElevationText);
-        assertEquals(longs,Longitude);
-        //assertEquals(asr,Asr);
         isDisplayed(addPathButton,6);
         type("New",siteField2);
         isDisplayed(option,6);

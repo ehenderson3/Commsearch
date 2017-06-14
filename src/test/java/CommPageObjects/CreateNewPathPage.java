@@ -215,6 +215,7 @@ public class CreateNewPathPage extends BasePage {
         assertTrue("can't find the Create button", isDisplayed(createButton));
         type(projectName, newProjectField);
         click(pathRadioButton);
+        assertTrue("can't find the defaultCompany ",isDisplayed(defaultCompany,20));
         click(createButton);
         if(isDisplayed(filterField,10)){
             click(returnHome);
