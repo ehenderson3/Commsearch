@@ -21,7 +21,7 @@ public class PathDetailPage extends BasePage {
     By siteLookUpSearchButtonModal = By.id("site-lookup-submit");
     By siteSearchLookUpButton1 = By.id("path-details-site-0-lookup-trigger");
     By siteSearchLookUpButton2 = By.id("path-details-site-1-lookup-trigger");
-    By closeSiteLookUpMotal = By.id("site-lookup-modal-close");
+    By closeSiteLookUpMotal = By.id("site-lookup-modal-heading-close");
 
     By addDiversity = By.cssSelector(".fa.fa-plus-circle");
 
@@ -68,7 +68,7 @@ public class PathDetailPage extends BasePage {
     By pathDetailSiteLookUpSiteName = By.id("site-lookup-site-name");
     By pathDetailSiteLookUpCallSign = By.id("site-lookup-call-sign");
     By pathDetailSiteLookUpAsr = By.id("site-lookup-asr");
-    By pathDetailSiteLookUpLatitude = By.id("site-lookup-latitude");
+    By pathDetailSiteLookUpLatitude = By.id("path-details-site-0-latitude");
     By pathDetailSiteLookUpLongitude = By.id("site-lookup-longitude");
     By pathDetailSiteLookUpRadius = By.id("site-lookup-radius");
 
@@ -92,12 +92,12 @@ public class PathDetailPage extends BasePage {
     //hovers -- Able to use the hover method
 
     //Data Fields - Element is read only and can use getFieldText method
-    By pathDetailSiteLookUpSiteNameResults = By.xpath("//*[contains(@id, 'site-lookup-results-site-') and contains(@id, '-site-name')]");
-    By pathDetailSiteLookUpCallSignResults  = By.xpath("//*[contains(@id, 'site-lookup-results-site-') and contains(@id, '-callsign')]");
-    By pathDetailSiteLookUpAsrResults  = By.xpath("//*[contains(@id, 'site-lookup-results-site-') and contains(@id, '-asr')]");
-    By pathDetailSiteLookUpLatitudeResults  = By.xpath("//*[contains(@id, 'site-lookup-results-site-') and contains(@id, '-latitude')]");
-    By pathDetailSiteLookUpLongitudeResults  = By.xpath("//*[contains(@id, 'site-lookup-results-site-') and contains(@id, '-longitude')]");
-    By pathDetailSiteLookUpRadiusResults  = By.xpath("//*[contains(@id, 'site-lookup-results-site-') and contains(@id, '-distance')]");
+    By pathDetailSiteLookUpSiteNameResults = By.xpath("//*[contains(@id, 'site-lookup-modal-table-data-siteId-') and contains(@id, '-siteName')]/span");
+    By pathDetailSiteLookUpCallSignResults  = By.xpath("//*[contains(@id, 'site-lookup-modal-table-data-siteId-') and contains(@id, '-callSign')]/span");
+    By pathDetailSiteLookUpAsrResults  = By.xpath("//*[contains(@id, 'site-lookup-modal-table-data-siteId-') and contains(@id, '-asr')]/span");
+    By pathDetailSiteLookUpLatitudeResults  = By.xpath("//*[contains(@id, 'site-lookup-modal-table-data-siteId-') and contains(@id, '-latitude')]/span");
+    By pathDetailSiteLookUpLongitudeResults  = By.xpath("//*[contains(@id, 'site-lookup-modal-table-data-siteId-') and contains(@id, '-longitude')]/span");
+    By pathDetailSiteLookUpRadiusResults  = By.xpath("//*[contains(@id, 'site-lookup-modal-table-data-siteId-') and contains(@id, '-distance')]/span");
 
 
     //Index List -- Can you used an array to select item
@@ -176,6 +176,32 @@ public class PathDetailPage extends BasePage {
         assertEquals("Site radiusResults is not correct",radiusResults,radius);
 
     }
+
+    public void siteSearchResultWithASR(int i,String siteName,String callSign,String asr,String lat,String longi,String radius){
+
+        String siteNameResults;
+        String callSignResults;
+        String asrResults;
+        String latResults;
+        String longiResults;
+        String radiusResults;
+
+        slowDown(4);
+        siteNameResults = getTextPlural(pathDetailSiteLookUpSiteNameResults,i);
+        callSignResults = getTextPlural(pathDetailSiteLookUpCallSignResults,i);
+        asrResults = getTextPlural(pathDetailSiteLookUpAsrResults,i);
+        latResults = getTextPlural(pathDetailSiteLookUpLatitudeResults,i);
+        longiResults = getTextPlural(pathDetailSiteLookUpLongitudeResults,i);
+        radiusResults = getTextPlural(pathDetailSiteLookUpRadiusResults,i);
+
+        assertEquals("Site siteNameResults is not correct",siteNameResults,siteName);
+        assertEquals("Site callSignResults is not correct",callSignResults,callSign);
+        assertEquals("Site asrResults is not correct",asrResults,asr);
+        assertEquals("Site latResults is not correct",latResults,lat);
+        assertEquals("Site longiResults is not correct",longiResults,longi);
+        assertEquals("Site radiusResults is not correct",radiusResults,radius);
+    }
+
     public void siteSearch1(String siteName,String callSign,String asr,String lat,String longi,String radius){
         assertTrue("Cannot find path detail site look up search button",isDisplayed(siteSearchLookUpButton1,8));
         slowDown(2);
@@ -393,6 +419,90 @@ public class PathDetailPage extends BasePage {
         assertEquals("call Sign is incorrect",elevationValue,elevation);
         assertEquals("call Sign is incorrect",bandValue,frequencyBand);
 
+    }
+
+    public void addPathPathDetailWithAsrAndCall1(String siteName, String callSign, String asr, String latitude,String longitude, String elevation, String frequencyBand){
+        isDisplayed(pathDetailSiteNameField1,20);
+        type(callSign,pathDetailCallSignField1);
+        click(pathDetailAsrField1);
+
+
+        waitForFieldToBeNotNull(pathDetailLatitudeField1);
+        clear(pathDetailSiteNameField1);
+        clear(pathDetailSiteNameField1);
+        click(pathDetailAsrField1);
+        clear(pathDetailGroundElevationField1);
+        click(pathDetailAsrField1);
+        clear(pathDetailLatitudeField1);
+        click(pathDetailAsrField1);
+        clear(pathDetailLongitudeField1);
+        click(pathDetailAsrField1);
+
+        clear(pathDetailSiteNameField1);
+        clear(pathDetailSiteNameField1);
+        click(pathDetailAsrField1);
+        clear(pathDetailGroundElevationField1);
+        clear(pathDetailGroundElevationField1);
+
+        click(pathDetailAsrField1);
+        clear(pathDetailLatitudeField1);
+        click(pathDetailAsrField1);
+        clear(pathDetailLongitudeField1);
+        click(pathDetailAsrField1);
+
+
+        type(latitude,pathDetailLatitudeField1);
+        type(longitude,pathDetailLongitudeField1);
+        type(elevation,pathDetailGroundElevationField1);
+        type(siteName,pathDetailSiteNameField1);
+        type(asr,pathDetailAsrField1);
+
+        assertTrue(isDisplayed(pathDetailCallSignField1,10));
+        selectFromDropdown(pathDetailFrequencyBandDropDownField1,"940 MHz");
+        click(pathDetailLatitudeField1);
+    }
+
+    public void addPathPathDetailWithAsrAndCall2(String siteName2, String callSign2, String asr2,String latitude2,String longitude2, String elevation2){
+        isDisplayed(pathDetailSiteNameField2,20);
+        type(callSign2,pathDetailCallSignField2);
+        click(pathDetailAsrField2);
+
+
+        waitForFieldToBeNotNull(pathDetailLatitudeField2);
+        clear(pathDetailSiteNameField2);
+        clear(pathDetailSiteNameField2);
+        click(pathDetailAsrField2);
+        clear(pathDetailGroundElevationField2);
+        click(pathDetailAsrField2);
+        clear(pathDetailLatitudeField2);
+        click(pathDetailAsrField2);
+        clear(pathDetailLongitudeField2);
+        click(pathDetailAsrField2);
+
+        clear(pathDetailSiteNameField2);
+        clear(pathDetailSiteNameField2);
+        click(pathDetailAsrField2);
+        clear(pathDetailGroundElevationField2);
+        clear(pathDetailGroundElevationField2);
+
+        click(pathDetailAsrField2);
+        clear(pathDetailLatitudeField2);
+        click(pathDetailAsrField2);
+        clear(pathDetailLongitudeField2);
+        click(pathDetailAsrField2);
+
+
+        type(latitude2,pathDetailLatitudeField2);
+        type(longitude2,pathDetailLongitudeField2);
+        type(elevation2,pathDetailGroundElevationField2);
+        type(siteName2,pathDetailSiteNameField2);
+        type(asr2,pathDetailAsrField2);
+
+
+        assertTrue(isDisplayed(pathDetailCallSignField2,10));
+        selectFromDropdown(pathDetailFrequencyBandDropDownField1,"940 MHz");
+        click(pathDetailLatitudeField1);
+        click(pathDetailSaveDetailsButton);
     }
 
     public void addPathViaPathDetailBasicSetup2(String siteName2, String callSign2, String latitude2,String longitude2, String elevation2){

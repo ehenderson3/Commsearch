@@ -200,7 +200,8 @@ public class PathSummaryPage extends BasePage {
     }
 
     public void openPathDetailForAddingPath(){
-        assertTrue(isDisplayed(pathDetailButton,8));
+        assertTrue(isDisplayed(pathDetailButton,10));
+        slowDown(3);
         click(pathDetailButton);
         assertTrue(isDisplayed(pathDetailSiteNameField1,8));
 
@@ -482,6 +483,7 @@ public class PathSummaryPage extends BasePage {
 
     public void valKDefaultAvailabilityTargetSetting() {
         String a;
+        String b;
         String defaultTargetAvailability;
         assertTrue("Hamburger menu is not present", isDisplayed(hamburgerDropDownInactive, 10));
         slowDown(4);
@@ -492,7 +494,8 @@ public class PathSummaryPage extends BasePage {
         assertTrue("Project Panel is not present", isDisplayed(projectSettingsPanel, 10));
         assertTrue("Project Target Availability (%) is not present", isDisplayed(targetAvailability, 10));
         defaultTargetAvailability = getFieldText(targetAvailability);
-        assertEquals("The Target Avail default val is not correct", defaultTargetAvailability, "99.995");
+        //COM-400 COM-387 - Bug Fix
+        assertEquals("The Target Avail default val is not correct", defaultTargetAvailability, "99.999");
         clear(targetAvailability);
         type("w", targetAvailability);
 
@@ -513,6 +516,21 @@ public class PathSummaryPage extends BasePage {
         click(saveButton);
         a = getText(warnFresnelZoneRadius);
         assertEquals(a, "MUST BE BETWEEN 50 AND 100");
+
+        //COM-400 COM-388
+        clear(targetAvailability);
+        type("99.123456", targetAvailability);
+        click(saveButton);
+        slowDown(2);
+        assertTrue("Settings menu option is not present", isDisplayed(hamburgerDropDownInactive, 30));
+        click(hamburgerDropDownInactive);
+        slowDown(2);
+        assertTrue("Settings menu option is not present", isDisplayed(hamburgerSettings, 30));
+        click(hamburgerSettings);
+        assertTrue("Project Panel is not present", isDisplayed(projectSettingsPanel, 10));
+        assertTrue("Project Target Availability (%) is not present", isDisplayed(targetAvailability, 10));
+        b = getFieldText(targetAvailability);
+        assertEquals(b, "99.123456");
 
         clear(targetAvailability);
         type("100", targetAvailability);
@@ -868,7 +886,7 @@ public class PathSummaryPage extends BasePage {
         assertEquals("The defaultFresnelZoneRadius default val is not correct", defaultFresnelZoneRadius, "60");
         assertEquals("The defaultKFactor default val is not correct", defaultKFactor, "1");
         assertEquals("The defaultMinimumClearance default val is not correct", defaultMinimumClearance, "0");
-        assertEquals("The Target Avail default val is not correct", defaultTargetAvailability, "99.995");
+        assertEquals("The Target Avail default val is not correct", defaultTargetAvailability, "99.999");
     }
 
 

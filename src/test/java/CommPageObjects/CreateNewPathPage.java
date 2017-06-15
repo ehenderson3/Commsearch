@@ -29,13 +29,14 @@ public class CreateNewPathPage extends BasePage {
     By defaultCompanyField = By.id("new-project-form-default-company");
     //By searchResultArray = By.cssSelector(".react-grid-Row.react-grid-Row--even");
     //react-grid-Cell
-    By searchResultArray = By.cssSelector(".react-grid-Cell");
+    By searchResultArray = By.xpath("//*[contains(@id, 'company-lookup-modal-table-data-companyCode-')]");
 
+    //By searchResultArray = By.cssSelector(".react-grid-Cell");
 
     By companyContactNameField = By.id("company-lookup-contact-name");
     By createButton = By.id("newProjectForm-submit");
     By newProjectField = By.id("newProjectForm-projectName");
-    By defaultCompany = By.id("new-project-form-default-company");
+    By defaultCompany = By.id("default-company-lookup-trigger");
     By projectRequired = By.className("error-message");
     By filterField = By.id("project-summary-filter-input");
     By projectTitle = By.xpath("//span[text()='Project ']");
@@ -108,7 +109,6 @@ public class CreateNewPathPage extends BasePage {
 
     }
 
-    //TODO Flaky Test "Can't find Code Field"
     public void fillOutCompanyFilter(String coCodeText,String coNameText, String coContactText, Integer company) {
         String a;
         slowDown(8);
@@ -122,7 +122,7 @@ public class CreateNewPathPage extends BasePage {
         click(companySearchButton);
         slowDown(4);
         isDisplayed(searchResultArray,30);
-        slowDown(4);
+        slowDown(3);
         click(searchResultArray);
         a = getFieldText(defaultCompanyField);
         assertEquals(a, "Verizon");
