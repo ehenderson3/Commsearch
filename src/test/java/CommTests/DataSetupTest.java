@@ -47,12 +47,12 @@ import java.util.Random;
         pathSummary.valSiteLocationToggleOn();
 
 
-        siteExist = quickAdd.checkForExistingSite("New Yor");
+        siteExist = quickAdd.checkForExistingSite("New York2");
         if (siteExist == true){quickAdd.cancelPathCreation();
         } else {
             quickAdd.cancelPathCreation();
             quickAdd.quickAddInitPathDataSetup1("Not York", "940 MHz", "NY SUPPORT DATA", "40 44 44 N", "73 59 5 W", "0.98", "KA20003");
-            quickAdd.quickAddInitPathDataSetup2("New York", "40 44 54 N", "73 59 9 W", "0.98", "KA20003");}
+            quickAdd.quickAddInitPathDataSetup2("New York2", "40 44 54 N", "73 59 9 W", "0.98", "KA20003");}
 
         siteExist = quickAdd.checkForExistingSite("SITE1");
         if (siteExist == true){quickAdd.cancelPathCreation();
@@ -60,7 +60,7 @@ import java.util.Random;
             //quickAdd.quickAddPathDataSetup("SITE1 SUPPORT DATA", "4.0 GHz", "SITE1", "35-30-4.683 N", "110-9-35.684 W", "98", "KA20003");
             quickAdd.cancelPathCreation();
             quickAdd.quickAddInitPathDataSetup1("SITE1", "4.0 GHz", "SITE1 SUPPORT DATA", "35 30 4.68 N", "110 9 35.68 W", "98", "KA20003");
-            quickAdd.quickAddInitPathDataSetup2("New York", "40 44 54 N", "73 59 9 W", "0.98", "KA20003");
+            quickAdd.quickAddInitPathDataSetup2("New York2", "40 44 54 N", "73 59 9 W", "0.98", "KA20003");
         }
 
         siteExist = quickAdd.checkForExistingSite("Tonto Mtn");
@@ -70,7 +70,7 @@ import java.util.Random;
             //quickAdd.quickAddPathDataSetup("TM SUPPORT DATA", "940 MHz", "Tonto Mtn", "34 37 42.1 N", "112 39 26.2 W", "1542.29", "KBY45");
             quickAdd.cancelPathCreation();
             quickAdd.quickAddInitPathDataSetup1("Tonto Mtn", "940 MHz", "TM SUPPORT DATA", "34 37 42.1 N", "112 39 26.2 W", "1542.29", "KBY45");
-            quickAdd.quickAddInitPathDataSetup2("New York", "40 44 54 N", "73 59 9 W", "0.98", "KA20003");
+            quickAdd.quickAddInitPathDataSetup2("New York2", "40 44 54 N", "73 59 9 W", "0.98", "KA20003");
         }
         siteExist = quickAdd.checkForExistingSite("SYNRAMS STATION");
         if (siteExist == true) {
@@ -79,7 +79,7 @@ import java.util.Random;
             //quickAdd.quickAddPathDataSetup("SS SUPPORT DATA", "940 MHz", "SYNRAMS STATION", "40 34 10 N", "122 26 14 W", "250", "1208837");
             quickAdd.cancelPathCreation();
             quickAdd.quickAddInitPathDataSetup1("SYNRAMS STATION", "940 MHz", "SS SUPPORT DATA", "40 34 10 N", "122 26 14 W", "250", "1208837");
-            quickAdd.quickAddInitPathDataSetup2("New York", "40 44 54 N", "73 59 9 W", "0.98", "KA20003");
+            quickAdd.quickAddInitPathDataSetup2("New York2", "40 44 54 N", "73 59 9 W", "0.98", "KA20003");
         }
         siteExist = quickAdd.checkForExistingSite("CAMSLANT STATION");
         if (siteExist == true) {
@@ -88,7 +88,7 @@ import java.util.Random;
             //quickAdd.quickAddPathDataSetup("CAM SUPPORT DATA", "940 MHz", "CAMSLANT STATION", "35 12 26.7 N", "78 3 21.2 W", "48.69", "1241006");
             quickAdd.cancelPathCreation();
             quickAdd.quickAddInitPathDataSetup1("CAMSLANT STATION", "940 MHz", "CAM SUPPORT DATA", "35 12 26.7 N", "78 3 21.2 W", "48.69", "1241006");
-            quickAdd.quickAddInitPathDataSetup2("New York", "40 44 54 N", "73 59 9 W", "0.98", "KA20003");
+            quickAdd.quickAddInitPathDataSetup2("New York2", "40 44 54 N", "73 59 9 W", "0.98", "KA20003");
         }
         siteExist = quickAdd.checkForExistingSite("New Yor");
         if (siteExist == true){quickAdd.cancelPathCreation();

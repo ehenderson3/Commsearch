@@ -67,6 +67,57 @@ public class PathDetailAntennaTest extends BaseTest {
         pathDetailAnt.clickSaveDetails();
     }
 
+
+//    Search results COM-398
+//    Given a user clicks the ASR lookup icon in the Path Details screen
+//    When user enters a valid ASR Number (or at least the first several numbers),
+//    AND clicks the search button,
+//    IF ASR numbers exist which match the search criteria
+//    AND character(s) match the character(s) in the search criteria,
+//    Then a selection of ASRs will be displayed.
+
+//    Search results
+//    Given a user clicks the ASR lookup icon in the Path Details screen,
+//    When user enters too few numbers of a valid ASR Number (typically 2 characters, but this varies depending on the number),
+//    AND clicks the search button,
+//    Then an error is displayed that says, "Too many results returned. Please refine your search."
+
+//    FCC matches are displayed
+//    Given a site is being created,
+//    When a user searches for an existing ASR via the Path Details ASR lookup,
+//    Then the site(s) from the FCC that match the search criteria are displayed in the lookup search results.
+//
+//    Site fields auto-populate
+//    Given a selection of ASR numbers is displayed,
+//    When a user clicks on an ASR row from the search results,
+//    Then the Lat, Long, Elevation and ASR fields auto-populate with information (when it exists) for that site
+//    AND the lookup closes.
+//    Unit of measurement	Given the ASR Lookup is used to search for an ASR,
+//    When search results are returned,
+//    Then the Unit for Ground Elevation and Overall Height should match the user default (units can be superseded by project settings).
+    @Test
+    public void pathDetailAntenna_willAutoFill_whenThereIsAMatchOnASR() {
+        createPath.createBrandNewProjectPath("ASR onBlur" + randomNumber, "This is the Default");
+        createPath.fillOutCompanyFilter("VZW111", "", "", 0);
+        pathSummary.changeToSi();
+        pathSummary.openPathDetailForAddingPath();
+        pathDetail.addPathViaPathDetailASR1("1300000", "35 57 12 N", "85 2 6.7 W", "170.658", "ASR Created2");
+        pathDetail.addPathViaPathDetailASR2("1200000", "39 58 38.7 N", "95 0 49.1 W", "97.17" ,"ASR Created2");
+        pathDetailAnt.clickSaveDetails();
+    }
+
+    @Test
+    public void pathDetailAntenna_willError_whenThereIsNotAMatchOnASR() {
+        createPath.createBrandNewProjectPath("ASR onBlur" + randomNumber, "This is the Default");
+        createPath.fillOutCompanyFilter("VZW111", "", "", 0);
+        pathSummary.changeToSi();
+        pathSummary.openPathDetailForAddingPath();
+        pathDetail.addPathViaPathDetailASR1Error("6fg6hg64");
+        pathDetailAnt.clickSaveDetails();
+    }
+
+
+
     /**
      When the entry has <6 or >8 characters,
      Then a graceful error will be displayed.
@@ -176,6 +227,9 @@ public class PathDetailAntennaTest extends BaseTest {
      pathDetailAnt.enterBadAntennaDataAndonBlurError("2145", "No match found for Antenna Code.","5854", "No match found for Antenna Code.");
 
     }
+
+
+
 
 }
 

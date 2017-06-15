@@ -288,7 +288,7 @@ public class QuickAddPage extends BasePage {
         assertEquals(longs,Longitude);
         assertEquals(asr,Asr);
         isDisplayed(addPathButton,6);
-        type("New Yo",siteField2);
+        type("New York2",siteField2);
         if (browser.equals("IE")){
             click(latitude);
             click(siteField2);
@@ -352,7 +352,7 @@ public class QuickAddPage extends BasePage {
 
         elev = getFieldText(elevation);
         isDisplayed(addPathButton,6);
-        type("New Yo",siteField2);
+        type("New York2",siteField2);
         if (browser.equals("IE")){
             click(latitude);
             click(siteField2);
@@ -409,7 +409,7 @@ public class QuickAddPage extends BasePage {
         assertEquals(longs,Longitude);
         assertEquals(asr,Asr);
         isDisplayed(addPathButton,6);
-        type("New Yo",siteField2);
+        type("New York2",siteField2);
         if (browser.equals("IE")){
             click(latitude);
             click(siteField2);
@@ -471,7 +471,7 @@ public class QuickAddPage extends BasePage {
         assertEquals(longs,Longitude);
         assertEquals(asr,Asr);
         isDisplayed(addPathButton,6);
-        type("New Yo",siteField2);
+        type("New York2",siteField2);
         if (browser.equals("IE")){
             click(latitude);
             click(siteField2);
@@ -504,12 +504,12 @@ public class QuickAddPage extends BasePage {
         hover(option);
         lat = getFieldText(latitude);
         longs = getFieldText(longitude);
-        asr = getFieldText(callSign);
+        //asr = getFieldText(callSign);
         elev = getFieldText(elevation);
         assertEquals(lat, LatitudeText);
         assertEquals(elev, ElevationText);
         assertEquals(longs,Longitude);
-        assertEquals(asr,Asr);
+        //assertEquals(asr,Asr);
         isDisplayed(addPathButton,6);
         type("New",siteField2);
         isDisplayed(option,6);

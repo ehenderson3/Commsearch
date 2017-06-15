@@ -24,7 +24,11 @@ public class PathDetailPage extends BasePage {
     By closeSiteLookUpMotal = By.id("site-lookup-modal-heading-close");
 
     By addDiversity = By.cssSelector(".fa.fa-plus-circle");
+    By pathDetailAsrSearch1 = By.id("path-details-asr-0-lookup-trigger");
+    By asrLookUpSearchButton = By.id("asr-lookup-submit");
+    By pathDetailAsrSearch2 = By.id("path-details-asr-1-lookup-trigger");
 
+    //path-details-asr-1-lookup-trigger
 
 
     //DropDown Fields -- Does it contain a list that has options that can be selected
@@ -88,6 +92,8 @@ public class PathDetailPage extends BasePage {
     By antennaCode_2  = By.xpath("//*[contains(@id, 'path-details-site-1-') and contains(@id, '-antenna-code')]");
     By antennaGain_2  = By.xpath("//*[contains(@id, 'path-details-site-1-') and contains(@id, '-gain')]");
 
+    By asrLookUpAsrNumberField = By.id("asr-lookup-asr");
+
 
     //hovers -- Able to use the hover method
 
@@ -98,7 +104,9 @@ public class PathDetailPage extends BasePage {
     By pathDetailSiteLookUpLatitudeResults  = By.xpath("//*[contains(@id, 'site-lookup-modal-table-data-siteId-') and contains(@id, '-latitude')]/span");
     By pathDetailSiteLookUpLongitudeResults  = By.xpath("//*[contains(@id, 'site-lookup-modal-table-data-siteId-') and contains(@id, '-longitude')]/span");
     By pathDetailSiteLookUpRadiusResults  = By.xpath("//*[contains(@id, 'site-lookup-modal-table-data-siteId-') and contains(@id, '-distance')]/span");
+    By asrLookUpResultRow  = By.xpath("//*[contains(@id, 'asr-lookup-modal-table-data-asr-') and contains(@id, '-entityName')]");
 
+    By pdError = By.id("path-details-site-0-asr-error-message");
 
     //Index List -- Can you used an array to select item
 
@@ -108,6 +116,79 @@ public class PathDetailPage extends BasePage {
     public PathDetailPage(WebDriver driver) {
         super(driver);
         visit("/");
+    }
+
+
+    public void addPathViaPathDetailASR1(String asr, String latitude, String longitude, String elevation, String siteNameVal) {
+        //Prove that you've arrived on the PathDetail page
+        assertTrue("Did not land on path detail", isDisplayed(pathDetailCallSignField1, 5));
+        //Verify that the ASR search button is present
+        assertTrue("Can't find the ASR search button", isDisplayed(pathDetailAsrSearch1, 5));//path-details-asr-0-lookup-trigger
+        //Click the ASR search button
+        clickJS(pathDetailAsrSearch1);
+        //Verify that the ASR look up appears
+        assertTrue("Can't find the asrLookUpAsrNumberField", isDisplayed(asrLookUpAsrNumberField, 5));
+        //Enter 1300000 in the ASR Number field
+        type(asr,asrLookUpAsrNumberField);//asr-lookup-asr
+        //Click the search button
+        clickJS(asrLookUpSearchButton);//asr-lookup-submit
+        //Click the result row
+        assertTrue("Can't find the asrLookUpAsrNumberField", isDisplayed(asrLookUpResultRow, 20));
+
+        click(asrLookUpResultRow, 0);
+        //validate that the appropriate fields1 are populated
+        String asrValue = getFieldText(pathDetailAsrField1);
+        String latitudeValue = getFieldText(pathDetailLatitudeField1);
+        String longitudeValue = getFieldText(pathDetailLongitudeField1);
+        String elevationValue = getFieldText(pathDetailGroundElevationField1);
+        String bandValue = getFieldText(pathDetailFrequencyBandDropDownField1);
+        assertEquals("call Sign is incorrect", asrValue, asr);
+        assertEquals("latitudeValue is incorrect", latitudeValue, latitude);
+        assertEquals("longitudeValue is incorrect", longitudeValue, longitude);
+        assertEquals("elevationValue is incorrect", elevationValue, elevation);
+        //assertEquals("bandValue is incorrect", bandValue, frequencyBand);
+        //enter a site name
+        type(siteNameVal,pathDetailSiteNameField1);
+    }
+
+    public void addPathViaPathDetailASR1Error(String asr) {
+        //Prove that you've arrived on the PathDetail page
+        assertTrue("Did not land on path detail", isDisplayed(pathDetailCallSignField1, 5));
+        //Verify that the ASR search button is present
+        assertTrue("Can't find the ASR search button", isDisplayed(pathDetailAsrSearch1, 5));//path-details-asr-0-lookup-trigger
+        type(asr, pathDetailAsrField1);//asr-lookup-asr
+        //Click the search button
+        click(pathDetailCallSignField1);
+        slowDown(5);
+        String invalidInput = getText(pdError);
+        assertEquals(invalidInput,"Invalid input.");
+    }
+
+      public void addPathViaPathDetailASR2(String asr2,String latitude2,String longitude2,String elevation2,String siteNameVal2){
+        assertTrue("Can't find the ASR search button",isDisplayed(pathDetailAsrSearch2,5));
+        //Click the ASR2 search button
+        clickJS(pathDetailAsrSearch2);//path-details-asr-1-lookup-trigger
+        //Verify that the ASR look up appears
+        assertTrue("Can't find the asrLookUpAsrNumberField", isDisplayed(asrLookUpAsrNumberField, 5));
+
+        //Enter 1200000 in the ASR Number field
+        type(asr2, asrLookUpAsrNumberField);
+        //Click the search button
+        click(asrLookUpSearchButton);//asr-lookup-submit
+          //Click the result row
+          assertTrue("Can't find the asrLookUpAsrNumberField", isDisplayed(asrLookUpResultRow, 20));
+          click(asrLookUpResultRow, 0);
+        //validate that the appropriate fields2 are populated
+        String asrValue2 = getFieldText(pathDetailAsrField2);
+        String latitudeValue2 = getFieldText(pathDetailLatitudeField2);
+        String longitudeValue2 = getFieldText(pathDetailLongitudeField2);
+        String elevationValue2 = getFieldText(pathDetailGroundElevationField2);
+        assertEquals("asr2 is incorrect",asrValue2,asr2);
+        assertEquals("latitudeValue2 is incorrect",latitudeValue2,latitude2);
+        assertEquals("longitudeValue2 is incorrect",longitudeValue2,longitude2);
+        assertEquals("elevationValue2 is incorrect",elevationValue2,elevation2);
+        //enter a site name2
+        type(siteNameVal2, pathDetailSiteNameField2);
     }
 
 
