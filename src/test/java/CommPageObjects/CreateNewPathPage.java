@@ -16,6 +16,7 @@ public class CreateNewPathPage extends BasePage {
 
     By companyLookUp = By.id("default-company-lookup-trigger");
     By pathDetailCompanyLookUp = By.xpath("//*[contains(@id, 'path-details-company-') and contains(@id, '-lookup-trigger')]");
+    By authPOCSuccess = By.id("api-auth-success-poc");
     //path-details-company-lookup-trigger
     By companySearchButton = By.id("company-lookup-submit");
 
@@ -74,6 +75,18 @@ public class CreateNewPathPage extends BasePage {
 
     public void createProjectPath(String projectName, String defaultLicensee){
         slowDown(2);
+        assertTrue("can't find the home ",isDisplayed(commHome,30));
+        click(commHome);
+        assertTrue("can't find the Create button", isDisplayed(createButton,30));
+        type(projectName, newProjectField);
+        assertTrue("can't find the path radio button",isDisplayed(pathRadioButton,30));
+        click(pathRadioButton);
+    }
+
+    public void createProjectPathAuth(String projectName, String defaultLicensee){
+        slowDown(2);
+
+        assertTrue("auth was not successful",isDisplayed(authPOCSuccess,30));
         assertTrue("can't find the home ",isDisplayed(commHome,30));
         click(commHome);
         assertTrue("can't find the Create button", isDisplayed(createButton,30));
@@ -202,6 +215,7 @@ public class CreateNewPathPage extends BasePage {
         assertTrue("can't find the Create button", isDisplayed(createButton));
         type(projectName, newProjectField);
         click(pathRadioButton);
+        assertTrue("can't find the defaultCompany ",isDisplayed(defaultCompany,20));
         click(createButton);
         if(isDisplayed(filterField,10)){
             click(returnHome);

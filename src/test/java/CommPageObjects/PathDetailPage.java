@@ -248,6 +248,7 @@ public class PathDetailPage extends BasePage {
         latResults = getTextPlural(pathDetailSiteLookUpLatitudeResults,i);
         longiResults = getTextPlural(pathDetailSiteLookUpLongitudeResults,i);
         radiusResults = getTextPlural(pathDetailSiteLookUpRadiusResults,i);
+        //TODO can't search by latitude
 
         assertEquals("Site siteNameResults is not correct",siteNameResults,siteName);
         assertEquals("Site callSignResults is not correct",callSignResults,callSign);
@@ -257,6 +258,17 @@ public class PathDetailPage extends BasePage {
         assertEquals("Site radiusResults is not correct",radiusResults,radius);
 
     }
+
+    /**
+     *
+     * @param i selects the row to validate
+     * @param siteName validates that the site entered in search is present in the search result
+     * @param callSign validates that the callSign entered in search is present in the search result
+     * @param asr validates that the asr entered in search is present in the search result
+     * @param lat validates that the latitude entered in search is present in the search result
+     * @param longi validates that the longitude entered in search is present in the search result
+     * @param radius validates that the radius entered in search is present in the search result
+     */
 
     public void siteSearchResultWithASR(int i,String siteName,String callSign,String asr,String lat,String longi,String radius){
 
@@ -308,10 +320,11 @@ public class PathDetailPage extends BasePage {
         type(siteName,pathDetailSiteLookUpSiteName);
         type(callSign, pathDetailSiteLookUpCallSign);
         type(asr, pathDetailSiteLookUpAsr);
-        //type(lat,pathDetailSiteLookUpLatitude);
+        type(lat,pathDetailSiteLookUpLatitude);
         //type(longi,pathDetailSiteLookUpLongitude);
         //type(radius, pathDetailSiteLookUpRadius);
-        click(siteLookUpSearchButtonModal);
+        clickJS(siteLookUpSearchButtonModal);
+        slowDown(5);
     }
 
     public void radioService1(String defaultRadio, String radioSelection){
