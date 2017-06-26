@@ -81,7 +81,19 @@ public class BasePage implements Config {
         String s = new String();
         s = TxtBoxContent.getAttribute("value");
         return s;
+    }
 
+    /**
+     * This method allows you to use the i parameter to select the element form an array of elements to get the locator's field text
+     * @param locator
+     * @param i
+     * @return
+     */
+    public String getFieldTextPlural(By locator, int i) {
+        WebElement TxtBoxContent = driver.findElements(locator).get(i);
+        String s = new String();
+        s = TxtBoxContent.getAttribute("value");
+        return s;
     }
 
     public String getFieldText(By locator, String alt) {
@@ -245,6 +257,11 @@ public class BasePage implements Config {
             find(locator).sendKeys(inputText);
         }
 
+
+        public void typePlural(String inputText, By locator,int i) {
+        WebElement we = driver.findElements(locator).get(i);
+        we.sendKeys(inputText);
+    }
 
     public Boolean isDisplayed(By locator) {
         return find(locator).isDisplayed();

@@ -1,9 +1,11 @@
 package CommPageObjects;
 
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import static junit.framework.TestCase.assertEquals;
+import static junit.framework.TestCase.assertNotSame;
 import static junit.framework.TestCase.assertTrue;
 
 
@@ -24,6 +26,7 @@ public class QuickAddPage extends BasePage {
 
     By addButton2 = By.xpath("//span[@class='btn bg-green hover-inverse' and contains(text(), 'Add Path')]");
     By quickAddButton = By.xpath("//span[@class='btn bg-green hover-inverse' and contains(text(), 'Quick Add')]");
+    By leaveWithoutSavingConfirmButton = By.cssSelector(".bg-blue.btn.btn-md.hover-inverse.margin-left-1.margin-right-1.heading-font");
 
 
     //Path DropDown Fields -- Does it contain a list that has options that can be selected
@@ -53,6 +56,9 @@ public class QuickAddPage extends BasePage {
     //Path Data Fields - Element is read only and can use getFieldText method
     By errorMessage = By.className("error-message");
     By errorMessage2 = By.className("error-message");
+    By leaveWithoutSavingText = By.cssSelector(".padding-half.center-text");
+    By quickAddMatchingOnLatAndLongiWarning = By.id("quick-add-error");
+    By quickAddSavedSiteName = By.xpath("//*[contains(@id, 'path-') and contains(@id, '-site-1-siteName')]");
 
 
     //Index List -- Can you used an array to select item
@@ -62,6 +68,7 @@ public class QuickAddPage extends BasePage {
     By addNewPathSlideOutClosedFox = By.className(".quick-add-start.heading-font");
 
     By addNewPathSlideOutOpen = By.cssSelector(".quick-add-container.active");
+    By doYouWantToLeaveModal = By.className("path-details-footer-modal");
 
 
     public QuickAddPage(WebDriver driver) {
@@ -69,6 +76,11 @@ public class QuickAddPage extends BasePage {
         visit("");
     }
 
+    public void compareText(String isNot, String is, int i){
+        String trimmed = getTextPlural(quickAddSavedSiteName, i);
+        assertEquals(is,trimmed);
+        assertNotSame(isNot,trimmed);
+    }
     public void quickAddPathInvalidChar( ){
         click(quickAddButton);
 
@@ -111,20 +123,6 @@ public class QuickAddPage extends BasePage {
             clear(siteField2);
             slowDown(1);
             clear(siteField2);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         }
     }
 
@@ -233,7 +231,12 @@ public class QuickAddPage extends BasePage {
         click(addPathButton);
     }
 
-
+    public void closeConfirmation(){
+        Assert.assertTrue(isDisplayed(doYouWantToLeaveModal,8));
+        String leaveWithoutSavingPathMessageText = getText(leaveWithoutSavingText);
+        Assert.assertEquals(leaveWithoutSavingPathMessageText,"DO YOU WANT TO LEAVE?");
+        click(leaveWithoutSavingConfirmButton);
+    }
 
     public void quickAddPathExistingSetup(String setupSiteName, String BandDropDown, String PathNameText,String LatitudeText, String Longitude, String ElevationText,  String Asr){
 
@@ -242,6 +245,9 @@ public class QuickAddPage extends BasePage {
         String asr;
         String elev;
 
+        if (isDisplayed(doYouWantToLeaveModal,8)==  true){
+            closeConfirmation();
+        }
         assertTrue("Can't Find quickAddButton",isDisplayed(quickAddButton,40));
         isDisplayedAndClickable(quickAddButton,10);
         isDisplayed(quickAddButton,10);
@@ -736,9 +742,20 @@ public class QuickAddPage extends BasePage {
         click(longitude);
         click(pathName);
         click(addPathButton);
+        if (isDisplayed(quickAddMatchingOnLatAndLongiWarning,20)== true){
+            longLatMatchingWarning();
+        }
         isDisplayed(addPathDetails,6);
         isDisplayed(quickAddButton,6);
     }
+
+
+    private void longLatMatchingWarning(){
+        isDisplayed(quickAddMatchingOnLatAndLongiWarning,20);//id="quick-add-error"
+        String matchingLatLongText = getText(quickAddMatchingOnLatAndLongiWarning);
+        assertEquals(matchingLatLongText,"Fount 1 Error: Segment Ends values for latitude / longitude cannot be the same values.");
+    }
+
 
     public void quickAddPathValidateSite(String PathNameText,String BandDropDown,String sitePartialText,String LatitudeText, String Longitude, String ElevationText,  String Asr){
 

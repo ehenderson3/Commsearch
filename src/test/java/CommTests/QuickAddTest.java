@@ -1,8 +1,6 @@
 package CommTests;
 
-import CommPageObjects.CreateNewPathPage;
-import CommPageObjects.PathSummaryPage;
-import CommPageObjects.QuickAddPage;
+import CommPageObjects.*;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -18,6 +16,9 @@ public class QuickAddTest extends BaseTest {
     private QuickAddPage quickAdd;
     private PathSummaryPage pathSummary;
     private CreateNewPathPage createPath;
+    private PathDetailPage pathDetail;
+    private PathDetailAntennaPage pathDetailAnt;
+
 
 
     @Before
@@ -28,6 +29,8 @@ public class QuickAddTest extends BaseTest {
         quickAdd = new QuickAddPage(driver);
         pathSummary = new PathSummaryPage(driver);
         createPath = new CreateNewPathPage(driver);
+        pathDetail = new PathDetailPage(driver);
+        pathDetailAnt = new PathDetailAntennaPage(driver);
 
 
     }
@@ -771,7 +774,7 @@ public class QuickAddTest extends BaseTest {
             quickAdd.quickAddPathGeneralNoSave("Elevation Autofill User Can Overwrite", "4.0 GHz", "new", "45 26 47.70 N", "4 7 12.00 W", "98", "Td5G43s");
             quickAdd.changeLatLong("9 26 42.70 N", "8 7 9.00 W");
             quickAdd.savePath();
-            pathSummary.viewSiteCallSignLatLongGeColumns2(0, "New York", "KA20003", "45 26 42.7 N", "4 7 9 W", "0.98");
+            pathSummary.viewSiteCallSignLatLongGeColumns2(0, "New York", "KA20003", "40 44 54 N", "73 59 9 W", "0.98");
 
     }
     /*COM-148
@@ -842,7 +845,7 @@ public class QuickAddTest extends BaseTest {
         quickAdd.quickAddPathGeneral2("ASR field Autofill", "960 MHz", "WTCM-FM Tx Site","44 27 31 N", "","", "KBM93");
         pathSummary.viewSiteCallSignLatLongGeColumns1(2, "WTCM-FM Tx Site", "KBM93", "44 27 31 N", "85 42 2 W", "323.1");
 
-        quickAdd.quickAddPathGeneral2("ASR field Autofill", "6.4 GHz", "KSTU Transmitter","40 39 33 N", "112 12 08 W","8", "KA44228");
+        quickAdd.quickAddPathGeneral2("ASR field Autofill", "6.4 GHz", "KSTU Transmitter","40 39 33 N", "12 12 08 W","8", "KA44228");
         pathSummary.viewSiteCallSignLatLongGeColumns1(3, "KSTU Transmitter", "KA44228", "40 39 33 N", "112 12 8 W", "8");
 
         quickAdd.quickAddPathGeneralError2("ASR field Autofill", "4.0 GHz", "ASR-Call","", "","4", "NoFound");
@@ -851,4 +854,188 @@ public class QuickAddTest extends BaseTest {
         assertEquals(FCCError1,"Call Sign 'NoFound' not found");
 
     }
+
+    /**COM-452
+     *  Given a path is created in Path Details or Quick Add,
+        When space " " character(s) are used before or after a path or site name,
+        Then they will be trimmed off of the Path and Site names in the both the Path Summary list AND the Path Detail screen.
+     */
+    @Test//
+    public void creatingQuickAddPath_WhenThereIsSpace_TrimSpaceOnBlur() {
+        String pathError;
+        createPath.createBrandNewProjectPath("TrimSpaceOnBlur"+ randomNumber, "This is the Default");
+        createPath.fillOutCompanyFilter("VZW111","", "",0);
+
+        pathSummary.valSiteLocationToggleOn();
+        quickAdd.quickAddPathExistingSetup("TrailingSpace ", "940 MHz", "TrailingSpace ", "34 44 46.3 N", "92 16 20.5 W", "68898.04", "KA2133");
+        quickAdd.compareText("TrailingSpace ", "TrailingSpace",0);
+
+        pathSummary.valSiteLocationToggleOn();
+        quickAdd.quickAddPathExistingSetup(" PreSpace", "940 MHz", "PreSpace", "34 44 46.3 N", "92 16 20.5 W", "68898.04", "KA2133");
+        quickAdd.compareText(" PreSpace", "PreSpace",1);
+
+    }
+
+    /**COM-454
+     *  Given a user is in the Path Details screen
+        AND a Frequency Band is assigned to a path,
+        When user clicks on Passive Repeater button in the Path Details header,
+        Then the Passive Repeater section modal opens.
+     */
+    @Test
+    public void passiveRepeater_OpenPassiveRepeaterForm_ValidateAllFieldsAndButtons() {
+        createPath.createBrandNewProjectPath("OPEN Passive Repeater"+ randomNumber, "This is the Default");
+        createPath.fillOutCompanyFilter("VZW111","", "",0);
+
+        pathSummary.valSiteLocationToggleOn();
+        quickAdd.quickAddPathExistingSetup("Passive Repeater", "940 MHz", "Passive Repeater", "34 44 46.3 N", "92 16 20.5 W", "68898.04", "KA2133");
+
+        pathDetail.openPathDetailViaDetails();
+        pathDetail.openPassiveRepeaterAndValidateFieldsAndButtons();
+        }
+
+    /**COM-454
+     *  Given a user is in the Path Details screen
+        AND NO Frequency Band is assigned to a path,
+        When user clicks on Passive Repeater button in the Path Details header,
+        Then the Passive Repeater section modal does NOT open.*/
+    @Test
+    public void passiveRepeater_NoFrequencyBand_PassiveRepeaterTriggerInactive() {
+        createPath.createBrandNewProjectPath("Inactive Passive Repeater"+ randomNumber, "This is the Default");
+        createPath.fillOutCompanyFilter("VZW111","", "",0);
+
+        pathSummary.valSiteLocationToggleOn();
+        quickAdd.quickAddPathExistingSetup("Passive Repeater", "Band", "Passive Repeater", "34 44 46.3 N", "92 16 20.5 W", "68898.04", "KA2133");
+
+        pathDetail.openPathDetailViaDetails();
+        pathDetail.clickInactivePassiveRepeaterTrigger();
+    }
+
+    /**COM-454
+     *  Given the required fields for >= one Passive Repeater have been filled in with relevant data,
+        When the + Passive Repeater button in the lower left corner of the Passive Repeater modal is clicked,
+        Then the entry fields for a new Passive Repeater will be added,
+        AND following this process will add up to a total of 3 repeaters.//TODO will implement in 13
+
+         Site Search	Given a default company is assigned to a project,
+         When a user is searching for a site in the Site field of the Passive Repeater modal,
+         Then Site auto suggest will populate with sites that are associated with the project's default company.
+         Site Lookup search results	Given the Site lookup icon is clicked in the Passive Repeater modal,
+         When user enters Site Name, Call Sign, and/or ASR,
+         AND clicks the search button,
+         IF sites exist which match the search criteria
+         AND their first character(s) match the first character(s) in the search criteria,
+         Then a selection of sites will be displayed.
+         Passive Repeater Site fields filled	Given a selection of sites is displayed in the Passive Repeater Site Lookup modal,
+         When a user selects a site,
+         Then the lookup closes
+         AND the following current site fields will be filled with the selected site info for the following fields:
+         Site Name, Lat, Long, Elevation
+
+
+         Site Name field
+         Given the Add Passive Repeater modal is open,
+         When a valid passive Site Name is entered and the field is unfocused,
+         Then the Latitude, Longitude and Ground Elevation fields will auto fill.
+
+         Given the Add Passive Repeater modal is open,
+         When the Repeater Type "Back-to-Back" is selected,
+         Then the following fields will be displayed:
+         Site Name; Latitude; Longitude; Ground Elev; Common Loss; Polarization Change (Yes/No selector); Antenna Model (2x); Antenna Code (2x) and Centerline (2x)
+         AND a tooltip icon will be displayed to the right of the Ground Elev and Centerline (2x) field titles,
+         AND the following lookups will be displayed:
+         Site Name and Antenna Model (2x).
+
+     */
+    @Test
+    public void passiveRepeater_AllValidData_PassiveRepeaterRecordIsCreated() {
+        createPath.createBrandNewProjectPath("Inactive Passive Repeater"+ randomNumber, "This is the Default");
+        createPath.fillOutCompanyFilter("VZW111","", "",0);
+
+        pathSummary.valSiteLocationToggleOn();
+        quickAdd.quickAddPathExistingSetup("Passive Repeater", "940 MHz", "Passive Repeater", "34 44 46.3 N", "92 16 20.5 W", "68898.04", "KA2133");
+
+        pathDetail.openPathDetailViaDetails();
+        pathDetail.addBackToBackPassiveRepeater();
+        pathDetailAnt.antennaLookUpFromPassiveRepeater("02306A");
+        pathDetail.returnFromAntennaLookUp("P8F-9","02306A");
+        pathDetail.setAntennaOnPassiveRepeater(1,"02306A");
+        pathDetail.savePassiveRepeater();
+    }
+
+    /**COM-454
+     *  Remove passive Repeater	Given a passive repeater needs to be removed from a path,
+        When the Remove button is clicked,
+        Then the repeater from the section in which the Remove button was clicked will be removed.
+
+         Creating a Back to Back type passive repeater	Given a Back to Back type repeater needs to be added to path,
+         When the Passive Repeater modal is open,
+         Then a valid Site Name, Back to Back Repeater Type, Common Loss (an integer), Antenna Models (2) OR Antenna Codes (2), and Centerlines (2) can be entered
+         AND the Latitude, Longitude, Ground Elevation and Antenna Code fields are auto-filled.
+         Edit Passive Repeater	Given a passive repeater's details need to be changed,
+         When "+ Passive Repeater" is clicked
+         Then field entry(s) in an existing repeater can be edited.
+     */
+
+
+    @Test
+    public void passiveRepeater_SelectRemoveButton_PassiveRepeaterRecordWillBeRemoved() {
+        createPath.createBrandNewProjectPath("Inactive Passive Repeater"+ randomNumber, "This is the Default");
+        createPath.fillOutCompanyFilter("VZW111","", "",0);
+
+        pathSummary.valSiteLocationToggleOn();
+        quickAdd.quickAddPathExistingSetup("Passive Repeater", "940 MHz", "Passive Repeater", "34 44 46.3 N", "92 16 20.5 W", "68898.04", "KA2133");
+
+        pathDetail.openPathDetailViaDetails();
+        pathDetail.addBackToBackPassiveRepeater();
+        pathDetailAnt.antennaLookUpFromPassiveRepeater("02306A");
+        pathDetail.returnFromAntennaLookUp("P8F-9","02306A");
+        pathDetail.setAntennaOnPassiveRepeater(1,"02306A");
+        pathDetail.savePassiveRepeater();
+        pathDetail.removePassiveRepeater();
+    }
+
+    /**COM-454
+     *  Billboard Repeater fields	Given the Passive Repeater modal is open,
+        When the Repeater Type "Billboard" is selected,
+        Then the following fields will be displayed:
+        Site Name; Latitude; Longitude; Ground Elev; Antenna Model; Antenna Code; Centerline
+        Back-to-Back Repeater fields
+
+        Creating a Billboard type passive repeater	Given a Billboard type Passive Repeater needs to be added to a path,
+        When the Passive Repeater modal is open,
+        Then a valid Site Name, Billboard Repeater Type, and Antenna Model/Code & Centerline can be entered,
+        AND then the Latitude, Longitude, Ground Elevation and Antenna Code fields are auto-filled.
+     */
+
+    @Test
+    public void passiveRepeater_AddBillboardPassiveRepeater_RecordWillBeAdded() {
+        createPath.createBrandNewProjectPath("Inactive Passive Repeater"+ randomNumber, "This is the Default");
+        createPath.fillOutCompanyFilter("VZW111","", "",0);
+
+        pathSummary.valSiteLocationToggleOn();
+        quickAdd.quickAddPathExistingSetup("Passive Repeater", "940 MHz", "Passive Repeater", "34 44 46.3 N", "92 16 20.5 W", "68898.04", "KA2133");
+
+        pathDetail.openPathDetailViaDetails();
+        pathDetail.addBillboardPassiveRepeater();
+        pathDetailAnt.antennaLookUpFromPassiveRepeater("%");
+        pathDetail.returnFromAntennaLookUp("30x32 Foot Passive Billboard","3032RF");
+        pathDetail.savePassiveRepeater();
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
+
+

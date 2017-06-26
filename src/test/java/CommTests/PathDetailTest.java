@@ -91,12 +91,12 @@ public class PathDetailTest extends BaseTest {
         pathSummary.openPathDetailForAddingPath();
 
         pathDetail.siteSearch1("New York", "", "", "", "", "");
-        pathDetail.siteSearchResults(0, "New York", "KA20003", "", "40 44 54 N", "73 59 9 W", "-");
+        pathDetail.siteSearchResults(0, "New York", "KA20003", "", "9 26 42.7 N", "8 7 9 W", "-");
 
         pathDetail.closeSiteLookup();
 
         pathDetail.siteSearch2("New York", "KA20003", "", "40 44 54 N", "", "");
-        pathDetail.siteSearchResults(0, "New York", "KA20003", "", "40 44 54 N", "73 59 9 W", "-");
+        pathDetail.siteSearchResults(0, "New York", "KA20003", "", "9 26 42.7 N", "8 7 9 W", "-");
     }
 
     @Test
@@ -107,12 +107,12 @@ public class PathDetailTest extends BaseTest {
         pathSummary.openPathDetailForAddingPath();
 
         pathDetail.siteSearch1("New York", "KA20003", "", "", "", "");
-        pathDetail.siteSearchResults(0, "New York", "KA20003", "", "40 44 54 N", "73 59 9 W", "-");
+        pathDetail.siteSearchResults(0, "New York", "KA20003", "", "9 26 42.7 N", "8 7 9 W", "-");
 
         pathDetail.closeSiteLookup();
 
         pathDetail.siteSearch2("New York", "KA20003", "", "", "", "");
-        pathDetail.siteSearchResults(0, "New York", "KA20003", "", "40 44 54 N", "73 59 9 W", "-");
+        pathDetail.siteSearchResults(0, "New York", "KA20003", "", "9 26 42.7 N", "8 7 9 W", "-");
     }
 
     @Test
@@ -126,7 +126,7 @@ public class PathDetailTest extends BaseTest {
         pathSummary.viewSiteCallSignLatLongGeColumns2(0, "Tonto Mtn", "KA20003", "40 44 54 N", "73 59 9 W", "98");
         pathSummary.openPathDetails(0);
         pathDetail.viewPathDetailValue1("Tonto Mtn", "KBY45", "34 37 42.1 N", "112 39 26.2 W", "1542.29", "940 MHz");
-        pathDetail.viewPathDetailValues2("New York", "KA20003", "40 44 54 N", "73 59 9 W", "0.98", "940 MHz");
+        pathDetail.viewPathDetailValues2("New York", "KA20003","9 26 42.7 N", "8 7 9 W", "0.98", "940 MHz");
         //COM-429 0.0.10 Staging when attempting to select the Return button via Selenium can't see the button
         pathDetail.closePathDetails();
 
@@ -204,7 +204,7 @@ public class PathDetailTest extends BaseTest {
 //    AND the sorting caret will be visible to the right side of the Site Name results header (the results are sorted by the column by which this caret is displayed).
 //    Next, in Path Details>Site, enter an existing ASR and Call Sign into their respective fields (delete the Site Name if one auto fills)
 
-        pathDetail.siteSearchResultWithASR(0, "ASRandCALL2", "KA20003", "1000038", "35 29 43.2 N", "97 33 58.5 W", "-");
+        pathDetail.siteSearchResultWithASR(0, "ASRandCALL2", "KA20003", "1000038", "40 44 54 N", "73 59 9 W", "-");
     }
 
 
@@ -584,6 +584,130 @@ public class PathDetailTest extends BaseTest {
     public void authenticationToken_whenAuthIsCurrent_AutenticationWillPass() {
         boolean siteExist;
         createPath.createProjectPathAuth("Autentication POC" + randomNumber, "This is the Default");
+
+
+    }
+
+    /**COM-453
+     *Given user has filled in all required fields for creating a path on the Path Details page,
+      When the Save button located in the Path Details footer is clicked,
+      Then a modal will display which says, "Path Saved Successfully - You have successfully saved (name of path)"
+      AND the success modal will auto close after 3 seconds
+      AND user will be taken to the Project Summary page.
+
+      Given a user has saved a path using the Save button in the Path Details footer,
+      When user clicks on the Detail button to see the path,
+      Then all of the path information will persist
+     */
+
+    @Test
+    public void pathDetailMessage_SuccessMessage_WhenPathIsSaved() {
+        boolean siteExist;
+        createPath.createBrandNewProjectPath("Path Detail Success Message" + randomNumber, "This is the Default");
+        createPath.fillOutCompanyFilter("VZW111", "", "", 0);
+        pathSummary.changeToSi();
+        pathSummary.openPathDetailForAddingPath();
+        pathDetail.addPathViaPathDetailBasicSetup1("SYNRAMS STATION", "KBY45", "34 37 42.1 N", "112 39 26.2 W", "250", "1");
+        pathDetail.addPathViaPathDetailBasicSetup2("New York", "KA20003", "40 44 54 N", "73 59 9 W", "0.98");
+        pathDetail.saveAndValidateSuccessMessage("PATH SAVED SUCCESSFULLY\n" +
+                "You have successfully saved SYNRAMS STATION - New York");
+        pathDetail.openPathDetailViaDetails();
+        pathDetail.savedPathInfoPersists1("SYNRAMS STATION","KBY45", "34 37 42.1 N", "112 39 26.2 W", "250", "1");
+        pathDetail.savedPathInfoPersists2("New York", "KA20003", "40 44 54 N", "73 59 9 W", "0.98");
+    }
+
+    /**COM-453
+     * Given no required site fields have entries in them,
+       When the Save button in the footer is clicked,
+       Then a "Required" error will be displayed under all required fields: Site Name, Lat, Long, Ground Elev.
+     */
+    @Test
+    public void pathDetailMessage_RequiredError_WhenNoRequiredFieldsHaveEntries() {
+        boolean siteExist;
+        createPath.createBrandNewProjectPath("Path Detail Required Error" + randomNumber, "This is the Default");
+        createPath.fillOutCompanyFilter("VZW111", "", "", 0);
+        pathSummary.changeToSi();
+        pathSummary.openPathDetailForAddingPath();
+        pathDetail.saveAndValidateRequiredMessage("Required");
+    }
+
+    /**COM-453
+     * Given user is in the Path Details screen of a saved path,
+       When the Copy button located in the Path Details footer is clicked,
+       Then a modal will display a success message that says, "Path Copied Successfully - You have successfully copied (name of path that was copied)
+       AND the modal will stay open until user clicks off of the message
+       AND then the user will remain on the original path (not the copied one)
+       AND when user navigates to Project Summary screen the copied path will be included at the bottom of the path summary list.
+     */
+
+
+    @Test
+    public void pathDetailCopy_NewPathIsCreatedAndUserRemainsOnOriginalPath_WhenPathIsCopied() {
+        boolean siteExist;
+        createPath.createBrandNewProjectPath("Path Detail Copy Path" + randomNumber, "This is the Default");
+        createPath.fillOutCompanyFilter("VZW111", "", "", 0);
+        pathSummary.changeToSi();
+        pathSummary.openPathDetailForAddingPath();
+        pathDetail.addPathViaPathDetailBasicSetup1("SYNRAMS STATION", "KBY45", "34 37 42.1 N", "112 39 26.2 W", "250", "1");
+        pathDetail.addPathViaPathDetailBasicSetup2("New York", "KA20003", "40 44 54 N", "73 59 9 W", "0.98");
+        pathDetail.saveAndValidateSuccessMessage("PATH SAVED SUCCESSFULLY\n" +
+                "You have successfully saved SYNRAMS STATION - New York");
+        pathDetail.openPathDetailViaDetails();
+        pathDetail.copyPathViaPathDetails();
+        pathDetail.savedPathInfoPersists1("SYNRAMS STATION","KBY45", "34 37 42.1 N", "112 39 26.2 W", "250", "1");
+        pathDetail.savedPathInfoPersists2("New York", "KA20003", "40 44 54 N", "73 59 9 W", "0.98");
+
+    }
+
+    /**
+     * Given user is in the Path Details screen of a saved path,
+       When the Flip Sites button located in the Path Details footer is clicked,
+       Then all data in Site 1 will swap to Site 2
+       AND the Passive Repeater order will be inverted
+       AND Back to Back locations will be inverted.
+     */
+    @Test
+    public void pathDetailFlip_PathDetailWillFlip_WhenPathFlipButtonIsClicked() {
+        createPath.createBrandNewProjectPath("Path Detail Flip Path" + randomNumber, "This is the Default");
+        createPath.fillOutCompanyFilter("VZW111", "", "", 0);
+        pathSummary.changeToSi();
+        pathSummary.openPathDetailForAddingPath();
+        pathDetail.addPathViaPathDetailBasicSetup1("SYNRAMS STATION", "KBY45", "34 37 42.1 N", "112 39 26.2 W", "250", "1");
+        pathDetail.addPathViaPathDetailBasicSetup2("New York", "KA20003", "40 44 54 N", "73 59 9 W", "0.98");
+        pathDetail.saveAndValidateSuccessMessage("PATH SAVED SUCCESSFULLY\n" +
+                "You have successfully saved SYNRAMS STATION - New York");
+        pathDetail.openPathDetailViaDetails();
+        pathDetail.savedPathInfoPersists1("SYNRAMS STATION","KBY45", "34 37 42.1 N", "112 39 26.2 W", "250", "1");
+        pathDetail.savedPathInfoPersists2("New York", "KA20003", "40 44 54 N", "73 59 9 W", "0.98");
+        pathDetail.flipPath();
+        pathDetail.savedPathInfoPersists2("SYNRAMS STATION","KBY45", "34 37 42.1 N", "112 39 26.2 W", "250");
+        pathDetail.savedPathInfoPersists1("New York", "KA20003", "40 44 54 N", "73 59 9 W", "0.98", "1");
+    }
+    /**COM-455
+     *   Navigate to a saved path in Path Details.
+         Copy the path.
+         hover over the Next button.
+         ACTUAL RESULTS:
+         The next button is inactive.
+         EXPECTED RESULTS:
+         Because the copied path is inserted at the bottom of the list (in Project Summary path list), the copied path is after the original path, so it was expected that the Next button would be active.
+     */
+    @Test
+    public void pathDetailCopy_NextButtonShouldBeActive_WhenPathIsCopied() {
+        boolean siteExist;
+        createPath.createBrandNewProjectPath("Copy Next Button Active" + randomNumber, "This is the Default");
+        createPath.fillOutCompanyFilter("VZW111", "", "", 0);
+        pathSummary.changeToSi();
+        pathSummary.openPathDetailForAddingPath();
+        pathDetail.addPathViaPathDetailBasicSetup1("SYNRAMS STATION", "KBY45", "34 37 42.1 N", "112 39 26.2 W", "250", "1");
+        pathDetail.addPathViaPathDetailBasicSetup2("New York", "KA20003", "40 44 54 N", "73 59 9 W", "0.98");
+        pathDetail.saveAndValidateSuccessMessage("PATH SAVED SUCCESSFULLY\n" +
+                "You have successfully saved SYNRAMS STATION - New York");
+        pathDetail.openPathDetailViaDetails();
+        pathDetail.copyPathViaPathDetails();
+        pathDetail.nextArrow();
+        pathDetail.savedPathInfoPersists1("SYNRAMS STATION","KBY45", "34 37 42.1 N", "112 39 26.2 W", "250", "1");
+        pathDetail.savedPathInfoPersists2("New York", "KA20003", "40 44 54 N", "73 59 9 W", "0.98");
 
     }
 }

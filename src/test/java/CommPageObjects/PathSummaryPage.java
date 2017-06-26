@@ -181,6 +181,9 @@ public class PathSummaryPage extends BasePage {
         super(driver);
         visit("/");
     }
+
+
+
     public void openSettings()
     {
         assertTrue("Hamburger menu is not present", isDisplayed(hamburgerDropDownInactive, 10));

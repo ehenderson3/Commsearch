@@ -32,7 +32,7 @@ public class PathDetailAntennaTest extends BaseTest {
     @Rule
     public RetryTest.Retry retry = new RetryTest.Retry(1);
 
-    @Test//COM-427 Antenna Model button not accessiblehttps://www.screencast.com/t/lhm5EgHS
+    @Ignore//TODO Waiting on COM-464 Antenna Lookup for Passive Repeater, should filter antennas by passive type
     public void pathDetailAntennaSearch_shouldReturnRows_whenValidSearchCriteriaIsEntered() {
         createPath.createBrandNewProjectPath("Add Antenna" + randomNumber, "This is the Default");
         createPath.fillOutCompanyFilter("VZW111","", "",0);
@@ -63,7 +63,7 @@ public class PathDetailAntennaTest extends BaseTest {
         pathSummary.openPathDetailForAddingPath();
         pathDetail.addPathViaPathDetailBasicSetup1("MatchOnAntCode1", "KBY45", "34 37 42.1 N", "112 39 26.2 W", "66", "1");
         pathDetail.addPathViaPathDetailBasicSetup2("MatchOnAntCode2", "KA20003", "40 44 54 N", "73 59 9 W", "55");
-        pathDetailAnt.enterAntennaDataAndonBlurRelatedFieldsPopulate("P8F-9", "txrx", "02306A", "3.2°", "20.3", "P8F-9", "txrx", "02306A", "3.2°", "20.3");
+        pathDetailAnt.enterAntennaDataAndonBlurRelatedFieldsPopulate("P8F-9", "Tx/Rx", "02306A", "3.2°", "20.3", "P8F-9", "Tx/Rx", "02306A", "3.2°", "20.3");
         pathDetailAnt.clickSaveDetails();
     }
 
@@ -151,7 +151,7 @@ public class PathDetailAntennaTest extends BaseTest {
          Then the selected antenna's info will auto fill in path details sheet
          AND the antenna lookup modal will close after an antenna is selected
      */
-    @Test //TODO COM-427 Antenna Model button not accessible
+    @Ignore//TODO Waiting on COM-464 Antenna Lookup for Passive Repeater, should filter antennas by passive type
     public void pathDetailAntModle_shouldAutoFill_whenExistingAntennaIsFoundOnSearch() {
         createPath.createBrandNewProjectPath("Add Antenna" + randomNumber, "This is the Default");
         createPath.fillOutCompanyFilter("VZW111", "", "", 0);
@@ -218,7 +218,7 @@ public class PathDetailAntennaTest extends BaseTest {
      */
      @Test
      public void pathDetailAntenna_willError_whenThereIsNoAMatchOnAntennaCode() {
-     createPath.createBrandNewProjectPath("Error No Ant Match" + randomNumber, "This is the Default");
+     createPath.createBrandNewProjectPath("ErrorNoAnt Match" + randomNumber, "This is the Default");
      createPath.fillOutCompanyFilter("VZW111","", "",0);
      pathSummary.changeToSi();
      pathSummary.openPathDetailForAddingPath();
