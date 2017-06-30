@@ -12,11 +12,12 @@ public class PathDetailPage extends BasePage {
 
 
     //Headings
+    By pIcon = By.id("path-details-passive-repeater-tooltip-trigger");
 
     //Buttons
     By pathDetailNewButton = By.id("path-details-path-new-mod-icon");
     By pathDetailSaveDetailsButton = By.cssSelector(".heading-font.btn.btn-md.hover-inverse.bg-green");
-    By pathDetailDiscardButton = By.cssSelector(".heading-font.btn.btn-md.hover-inverse.bg-blue.margin-left-1");
+    By pathDetailDiscardButton = By.id("path-details-discard-button");
     By quickAdd = By.id("project-summary-quick-add-open");
     By siteLookUpSearchButtonModal = By.id("site-lookup-submit");
     By siteSearchLookUpButton1 = By.id("path-details-site-0-lookup-trigger");
@@ -27,8 +28,18 @@ public class PathDetailPage extends BasePage {
     By pathDetailAsrSearch1 = By.id("path-details-asr-0-lookup-trigger");
     By asrLookUpSearchButton = By.id("asr-lookup-submit");
     By pathDetailAsrSearch2 = By.id("path-details-asr-1-lookup-trigger");
+    By pathDetailCopyButton = By.id("path-details-footer-copy-path-button");
+    By pathDetailFlipButton = By.cssSelector(".heading-font.btn.btn-md.hover-inverse.bg-blue.margin-left-1");
+    By leaveWithoutSavingConfirmButton = By.cssSelector(".bg-blue.btn.btn-md.hover-inverse.margin-left-1.margin-right-1.heading-font");
+    By activePathDetailNextArrowButton = By.id("path-details-footer-next-path-button");
+    By passiveRepeaterTrigger = By.id("path-details-passive-repeater-trigger");
 
-    //path-details-asr-1-lookup-trigger
+    By passiveRepeaterSiteSearchButton = By.id("path-details-passive-site-0-lookup-trigger");
+    By passiveRepeaterRemoveButton = By.id("path-details-passive-repeaters-0-remove");
+    By passiveRepeaterSaveButton = By.id("path-details-passive-repeater-save");
+    By passiveRepeaterAddPassiveRepeaterTrigger = By.id("path-details-passive-repeater-add-repeater");
+    By passiveRepeaterAntennaModelSearchButton = By.id("path-details-antenna-0-0-lookup-trigger");
+    By passiveRepeaterAntennaModelSearchButtonPlural = By.xpath("//*[contains(@id, 'path-details-antenna-0-') and contains(@id, '-lookup-trigger')]");
 
 
     //DropDown Fields -- Does it contain a list that has options that can be selected
@@ -45,6 +56,7 @@ public class PathDetailPage extends BasePage {
     By licBasis1 = By.id("path-details-site-0-license-basis");
     By licBasis2 = By.id("path-details-site-1-license-basis");
 
+    By overLay = By.cssSelector(".ReactModal__Overlay.ReactModal__Overlay--after-open");
 
 
     //Drop down options
@@ -68,6 +80,7 @@ public class PathDetailPage extends BasePage {
     By pathDetailAsrField2 = By.id("path-details-site-1-asr");
     By pathDetailSuggested1 = By.className("react-autosuggest__suggestion");
     By error = By.className("error-message");
+    By pathDetailSuccessfulCopyMessage = By.className("path-details-footer-modal");
 
     By pathDetailSiteLookUpSiteName = By.id("site-lookup-site-name");
     By pathDetailSiteLookUpCallSign = By.id("site-lookup-call-sign");
@@ -81,11 +94,6 @@ public class PathDetailPage extends BasePage {
     By antennaMode_1  = By.xpath("//*[contains(@id, 'path-details-site-0-') and contains(@id, '-mode')]");
     By antennaCode_1  = By.xpath("//*[contains(@id, 'path-details-site-0-') and contains(@id, '-antenna-code')]");
     By antennaGain_1  = By.xpath("//*[contains(@id, 'path-details-site-0-') and contains(@id, '-gain')]");
-
-
-
-
-
     By antennaModel_2  = By.xpath("//*[contains(@id, 'path-details-site-1-') and contains(@id, '-antenna-model')]");
     By antennaCenterline_2  = By.xpath("//*[contains(@id, 'path-details-site-1-') and contains(@id, '-centerline')]");
     By antennaMode_2  = By.xpath("//*[contains(@id, 'path-details-site-1-') and contains(@id, '-mode')]");
@@ -93,6 +101,26 @@ public class PathDetailPage extends BasePage {
     By antennaGain_2  = By.xpath("//*[contains(@id, 'path-details-site-1-') and contains(@id, '-gain')]");
 
     By asrLookUpAsrNumberField = By.id("asr-lookup-asr");
+    By passiveRepeaterSiteNameField = By.id("asr-lookup-asr");
+    By passiveRepeaterTypeField = By.id("path-details-passive-repeaters-0-passive-repeater-type");
+    By passiveRepeaterLatitudeField = By.id("path-details-passive-repeaters-0-latitude");
+    By passiveRepeaterLongitudeField = By.id("path-details-passive-repeaters-0-longitude");
+    By passiveRepeaterGroundElevField = By.id("path-details-passive-repeaters-0-elevation");
+    By passiveRepeaterAntennaCodeFieldPlural = By.xpath("//*[contains(@id, 'path-details-passive-repeaters-0-antennas-') and contains(@id, '-antenna-code')]");
+
+    By passiveRepeaterAntennaModelField = By.id("path-details-passive-repeaters-0-antennas-0-antenna-model");
+    By passiveRepeaterAntennaModelFieldPlural = By.xpath("//*[contains(@id, 'path-details-passive-repeaters-0-antennas-') and contains(@id, '-antenna-model')]");
+
+    By passiveRepeaterAntennaCodeField = By.id("path-details-passive-repeaters-0-antennas-0-antenna-code");
+    By passiveRepeaterCenterlineField = By.id("path-details-passive-repeaters-0-antennas-0-centerline");
+    By passiveRepeaterCenterlineField2 = By.id("path-details-passive-repeaters-0-antennas-1-centerline");
+
+    By passiveRepeaterCenterlineFieldPlural = By.xpath("//*[contains(@id, 'path-details-passive-repeaters-0-antennas-') and contains(@id, '-centerline')]");
+
+    By passiveRepeaterCommonLossField = By.id("path-details-passive-repeaters-0-back-to-back-0-commonLoss");
+    By lookUpAntennaCode = By.id("antenna-lookup-antenna-code");
+    By lookUpSearchButton = By.id("site-lookup-submit");
+
 
 
     //hovers -- Able to use the hover method
@@ -107,10 +135,16 @@ public class PathDetailPage extends BasePage {
     By asrLookUpResultRow  = By.xpath("//*[contains(@id, 'asr-lookup-modal-table-data-asr-') and contains(@id, '-entityName')]");
 
     By pdError = By.id("path-details-site-0-asr-error-message");
+    By successHeadingText = By.className("path-details-footer-modal");
+    By editDetailsLink = By.id("path-0-path-details-button");
+    By leaveWithoutSavingText = By.cssSelector(".padding-half.center-text");
+    By siteRowItem = By.xpath("//*[contains(@id, 'site-lookup-modal-table-data-siteId-')]");
+    By antResultListItem = By.xpath("//*[contains(@id, 'antenna-lookup-modal-table-data-antennaCode-') and contains(@id, 'antenna-lookup-modal-table-data-antennaCode-')]");
 
     //Index List -- Can you used an array to select item
 
     //Modal -- Does it pop up over current window
+    By doYouWantToLeaveModal = By.className("path-details-footer-modal");
 
 
     public PathDetailPage(WebDriver driver) {
@@ -118,6 +152,259 @@ public class PathDetailPage extends BasePage {
         visit("/");
     }
 
+    public void savePassiveRepeater(){
+        isDisplayed(passiveRepeaterSaveButton,10);
+        click(passiveRepeaterSaveButton);
+        isDisplayed(pIcon,7);
+    }
+
+    public void addBillboardPassiveRepeater(){
+        //Is the Passive Repeater trigger pressent and active
+        assertTrue(isDisplayed(passiveRepeaterTrigger,10));
+        assertTrue(isDisplayedAndClickable(passiveRepeaterTrigger,10));
+        //Click Passive Repeater trigger
+        click(passiveRepeaterTrigger);
+        //Change to Back to Back
+        isDisplayed(passiveRepeaterTypeField,20);
+        selectFromDropdown(passiveRepeaterTypeField, "Billboard");
+        //Click the Site search button
+        isDisplayed(passiveRepeaterSiteSearchButton,10);
+        click(passiveRepeaterSiteSearchButton);
+        //Wait for the Site Look Up popup
+        isDisplayed(pathDetailSiteLookUpSiteName,10);
+        //Enter Site Name
+        type("New York",pathDetailSiteLookUpSiteName);
+        click(siteLookUpSearchButtonModal);
+        //Validate that at least one row
+        isDisplayed(pathDetailSiteLookUpRadiusResults,10);
+        click(pathDetailSiteLookUpRadiusResults);
+        //Click Antenna Model search button
+        click(passiveRepeaterAntennaModelSearchButton);
+    }
+
+    public void removePassiveRepeater(){
+        assertTrue(isDisplayed(passiveRepeaterTrigger,10));
+        click(passiveRepeaterTrigger);
+        isDisplayed(passiveRepeaterRemoveButton,10);
+        click(passiveRepeaterRemoveButton);
+        assertTrue(!isDisplayed(pIcon,7));
+
+    }
+
+    public void returnFromAntennaLookUp(String antModel, String antCode){
+        isDisplayed(passiveRepeaterAntennaModelField, 10);
+        String antModFieldText = getFieldText(passiveRepeaterAntennaModelField);
+        String antModCodeText = getFieldText(passiveRepeaterAntennaCodeField);
+        assertEquals(antModFieldText,antModel);
+        assertEquals(antModCodeText,antCode);
+        type("12",passiveRepeaterCenterlineField);
+    }
+
+    public void setAntennaOnPassiveRepeater(int i, String antCode){
+        isDisplayed(passiveRepeaterAntennaModelSearchButton,10);
+        isDisplayedArray(passiveRepeaterAntennaModelSearchButtonPlural,i);
+        click(passiveRepeaterAntennaModelSearchButtonPlural, i);
+        isDisplayed(lookUpAntennaCode,10);
+        type(antCode, lookUpAntennaCode);
+        click(siteLookUpSearchButtonModal);
+        isDisplayed(antResultListItem,8);
+        click(antResultListItem);
+        String antCodeTextPlural = getFieldTextPlural(passiveRepeaterAntennaCodeFieldPlural,i);
+        assertEquals(antCode,antCodeTextPlural);
+        type("12",passiveRepeaterCenterlineField2);
+    }
+
+    public void addBackToBackPassiveRepeater(){
+        //Is the Passive Repeater trigger pressent and active
+        assertTrue(isDisplayed(passiveRepeaterTrigger,10));
+        assertTrue(isDisplayedAndClickable(passiveRepeaterTrigger,10));
+        //Click Passive Repeater trigger
+        click(passiveRepeaterTrigger);
+        //Change to Back to Back
+        isDisplayed(passiveRepeaterTypeField,20);
+        selectFromDropdown(passiveRepeaterTypeField, "Back to Back");
+        //Click the Site search button
+        isDisplayed(passiveRepeaterSiteSearchButton,10);
+        click(passiveRepeaterSiteSearchButton);
+        //Wait for the Site Look Up popup
+        isDisplayed(pathDetailSiteLookUpSiteName,10);
+        //Enter Site Name
+        type("New York",pathDetailSiteLookUpSiteName);
+        click(siteLookUpSearchButtonModal);
+        //Validate that at least one row
+        isDisplayed(pathDetailSiteLookUpRadiusResults,10);
+        click(pathDetailSiteLookUpRadiusResults);
+        //Enter common loss
+        type("12",passiveRepeaterCommonLossField);
+        //Click Antenna Model search button
+        click(passiveRepeaterAntennaModelSearchButton);
+    }
+
+    public void openPassiveRepeaterAndValidateFieldsAndButtons(){
+        //Is the Passive Repeater trigger pressent and active
+        assertTrue(isDisplayed(passiveRepeaterTrigger,10));
+        assertTrue(isDisplayedAndClickable(passiveRepeaterTrigger,10));
+        //Click Passive Repeater trigger
+        click(passiveRepeaterTrigger);
+        //Validate all fields are available
+        isDisplayed(passiveRepeaterSiteNameField,3);
+        isDisplayed(passiveRepeaterTypeField,3);
+        isDisplayed(passiveRepeaterLatitudeField,3);
+        isDisplayed(passiveRepeaterLongitudeField,3);
+        isDisplayed(passiveRepeaterGroundElevField,3);
+        isDisplayed(passiveRepeaterAntennaModelField,3);
+        isDisplayed(passiveRepeaterAntennaCodeField,3);
+        isDisplayed(passiveRepeaterCenterlineField,3);
+        //Validate All buttons and Triggers
+        isDisplayed(passiveRepeaterSiteSearchButton,3);
+        isDisplayed(passiveRepeaterRemoveButton,3);
+        isDisplayed(passiveRepeaterSaveButton,3);
+        isDisplayed(passiveRepeaterAddPassiveRepeaterTrigger,3);
+        isDisplayed(passiveRepeaterAntennaModelSearchButton,3);
+    }
+
+    public void clickInactivePassiveRepeaterTrigger(){
+        //p-icon not in place
+        assertTrue(!isDisplayed(pIcon,6));
+        //Passive repeater trigger inactive
+        isDisplayed(passiveRepeaterTrigger,12);
+        //Is not clickable
+        click(passiveRepeaterTrigger);
+        //Passive repeater does not appear
+        assertTrue(!isDisplayed(passiveRepeaterLatitudeField,3));
+    }
+
+    public void flipPath(){
+        //Are you on the Path Detail page?
+        assertTrue("The Path Detail page did not appear",isDisplayed(pathDetailSiteNameField1,8));
+        //Is the copy button present?
+        assertTrue("pathDetailCopyButton did not appear",isDisplayed(pathDetailFlipButton,8));
+        //Select the copy button
+        click(pathDetailFlipButton,1);
+        //A Modal will appear success
+        slowDown(9);
+    }
+
+
+    public void copyPathViaPathDetails(){
+        //Are you on the Path Detail page?
+        assertTrue("The Path Detail page did not appear",isDisplayed(pathDetailSiteNameField1,8));
+        //Is the copy button present?
+        assertTrue("pathDetailCopyButton did not appear",isDisplayed(pathDetailCopyButton,8));
+        //Select the copy button
+        click(pathDetailCopyButton);
+        //A Modal will appear success
+        isDisplayed(pathDetailSuccessfulCopyMessage,10);
+        String copySuccessMessage = getText(pathDetailSuccessfulCopyMessage);
+        assertEquals(copySuccessMessage,"PATH COPIED SUCCESSFULLY\n" +
+                "You have successfully copied SYNRAMS STATION - New York");
+        //Click away
+        isDisplayed(overLay,30);
+        click(overLay);
+        //retun to original
+        isDisplayed(pathDetailAsrField1,8);
+    }
+
+    public void nextArrow(){
+        isDisplayed(activePathDetailNextArrowButton,8);//path-details-footer-next-path-button
+        click(activePathDetailNextArrowButton);
+        closeConfirmation();
+    }
+
+    public void saveAndValidateRequiredMessage(String requiredMessage){
+        //Are you on the Path Detail page
+        assertTrue("The Path Detail page did not appear",isDisplayed(pathDetailSiteNameField1,8));
+        //Is the save button present
+        assertTrue("Save button is not present", isDisplayed(pathDetailSaveDetailsButton));
+        //click the save button
+        click(pathDetailSaveDetailsButton);
+        //validate that all required fields Warn required
+        isDisplayed(error,5);
+        String pathDetailSiteRequiredError1 = getTextPlural(error ,0);
+        String pathDetailLatError1 = getTextPlural(error ,1);
+        String pathDetailLongRequiredError1 = getTextPlural(error ,2);
+        String pathDetailElevRequiredError1 = getTextPlural(error ,3);
+        String pathDetailSiteRequiredError2 = getTextPlural(error ,4);
+        String pathDetailLatError2 = getTextPlural(error ,5);
+        String pathDetailLongRequiredError2 = getTextPlural(error ,6);
+        String pathDetailElevRequiredError2 = getTextPlural(error ,7);
+        assertEquals(pathDetailSiteRequiredError1,requiredMessage);
+        assertEquals(pathDetailLatError1,requiredMessage);
+        assertEquals(pathDetailLongRequiredError1,requiredMessage);
+        assertEquals(pathDetailElevRequiredError1,requiredMessage);
+        assertEquals(pathDetailSiteRequiredError2,requiredMessage);
+        assertEquals(pathDetailLatError2,requiredMessage);
+        assertEquals(pathDetailLongRequiredError2,requiredMessage);
+        assertEquals(pathDetailElevRequiredError2,requiredMessage);
+    }
+
+    public void savedPathInfoPersists1(String siteName, String callSign, String latitude,String longitude, String elevation, String frequencyBand){
+        isDisplayed(pathDetailAsrField1,10);
+
+        String siteNameValue = getFieldText(pathDetailSiteNameField1);
+        String callSignValue = getFieldText(pathDetailCallSignField1);
+        String latitudeValue = getFieldText(pathDetailLatitudeField1);
+        String longitudeValue = getFieldText(pathDetailLongitudeField1);
+        String elevationValue = getFieldText(pathDetailGroundElevationField1);
+        String bandValue = getFieldText(pathDetailFrequencyBandDropDownField1);
+        assertEquals("Site Name is incorrect",siteNameValue,siteName);
+        assertEquals("call Sign is incorrect",callSignValue,callSign);
+        assertEquals("call Sign is incorrect",latitudeValue,latitude);
+        assertEquals("call Sign is incorrect",longitudeValue,longitude);
+        assertEquals("call Sign is incorrect",elevationValue,elevation);
+        assertEquals("call Sign is incorrect",bandValue,frequencyBand);
+    }
+
+    public void savedPathInfoPersists2(String siteNameVal2,String asr2,String latitude2,String longitude2,String elevation2){
+        isDisplayed(pathDetailAsrField1,10);
+
+        String asrValue2 = getFieldText(pathDetailCallSignField2);
+        String latitudeValue2 = getFieldText(pathDetailLatitudeField2);
+        String longitudeValue2 = getFieldText(pathDetailLongitudeField2);
+        String elevationValue2 = getFieldText(pathDetailGroundElevationField2);
+        assertEquals("asr2 is incorrect",asrValue2,asr2);
+        assertEquals("latitudeValue2 is incorrect",latitudeValue2,latitude2);
+        assertEquals("longitudeValue2 is incorrect",longitudeValue2,longitude2);
+        assertEquals("elevationValue2 is incorrect",elevationValue2,elevation2);
+
+    }
+
+    public void openPathDetailViaDetails(){
+        //Make sure that the Details link is present
+        assertTrue("DetailsLink is not present",isDisplayed(editDetailsLink,30));
+        //Click the Details link from the saved path
+        click(editDetailsLink);
+        //Verify that the path detail form opens
+        assertTrue("The path details form did not open",isDisplayed(pathDetailAsrField1,5));
+    }
+
+    public void saveAndValidateSuccessMessage(String saveSuccessMessage){
+        //Verify that the save button is present
+        isDisplayed(pathDetailSaveDetailsButton,6);
+        //Click the Save button
+        click(pathDetailSaveDetailsButton);
+        //Validate that the success message appears
+        assertTrue(isDisplayed(successHeadingText,5));
+        String saveSuccessVal = getText(successHeadingText);
+        assertEquals(saveSuccessVal,saveSuccessMessage);
+        //Validate that the success message disappears after 3 seconds
+        waitUntilNotPresent(successHeadingText,8);
+        //validate that the user is returned to the
+        assertTrue(isDisplayed(quickAdd,10));
+    }
+
+/*    public void saveAndValidateRequiredMessage(String reqiredMessage){
+        //Verify that the save button is present
+        isDisplayed(pathDetailSaveDetailsButton,6);
+        //Click the Save button
+        click(pathDetailSaveDetailsButton);
+        //Validate that the success message appears
+        assertTrue(isDisplayed(successHeadingText,5));
+        String saveSuccessVal = getText(successHeadingText);
+        assertEquals(saveSuccessVal,reqiredMessage);
+        //Validate that the success message disappears after 3 seconds
+        //validate that the user is returned to the
+    }*/
 
     public void addPathViaPathDetailASR1(String asr, String latitude, String longitude, String elevation, String siteNameVal) {
         //Prove that you've arrived on the PathDetail page
@@ -388,10 +675,17 @@ public class PathDetailPage extends BasePage {
     public void closeDetailsOpenQuickAdd(){
         isDisplayed(pathDetailDiscardButton,10);
         click(pathDetailDiscardButton);
+        closeConfirmation();
         assertTrue(isDisplayed(quickAdd,12));
         click(quickAdd);
     }
 
+    public void closeConfirmation(){
+        assertTrue(isDisplayed(doYouWantToLeaveModal,8));
+        String leaveWithoutSavingPathMessageText = getText(leaveWithoutSavingText);
+        assertEquals(leaveWithoutSavingPathMessageText,"DO YOU WANT TO LEAVE?");
+        click(leaveWithoutSavingConfirmButton);
+    }
 
     public void checkSiteSuggestion(String siteName,String siteName2 ){
         isDisplayed(pathDetailSiteNameField1,8);
@@ -686,6 +980,8 @@ public class PathDetailPage extends BasePage {
         type(siteName,pathDetailSiteNameField1);
         assertTrue(isDisplayed(pathDetailCallSignField1,10));
         type(asr,pathDetailAsrField1);
+        click(pathDetailLongitudeField1);
+        slowDown(2);
         assertTrue(isDisplayed(pathDetailLatitudeField1,10));
         assertTrue(isDisplayed(pathDetailLongitudeField1,10));
         assertTrue(isDisplayed(pathDetailGroundElevationField1,10));

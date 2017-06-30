@@ -914,4 +914,23 @@ public class PathSummaryTest extends BaseTest {
         quickAdd.quickAddPathGeneral2("Test Path 2", "4.0 GHz", "ASR-Call","37 47 59.7 N", "122 23 58.8 W","55", "KA2049");
     }
 
+    /**COM-455
+     * Enter information that causes error (e.g. lat/long the same for both sites in a path).
+     ACTUAL RESULTS:
+     See screenshot "Validation error not graceful.png" - Error message isn't meaningful for user.
+     EXPECTED RESULTS:
+     Validation error message explains the error in a way that provides relevant information to the user about the cause of the issue.
+     */
+    @Test
+    public void quickAdd_shouldGiveWarning_whenLatAndLongAreTheSame() {
+        createPath.createBrandNewProjectPath("QuickAddElevationBoundary" + randomNumber, "This is the Default");
+        createPath.fillOutCompanyFilter("VZW111" ,"", "",0);
+        pathSummary.valSiteLocationToggleOn();
+        pathSummary.changeToSi();
+        quickAdd.quickAddPathGeneral1("SameLatLong", "23.0 GHz", "New York", "40 44 54 N", "73 59 9 W", "0.98", "KA20003");
+
+    }
+
+
+
 }

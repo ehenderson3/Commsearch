@@ -3,7 +3,6 @@ package CommPageObjects;
 
 import CommTests.Config;
 import org.openqa.selenium.*;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
@@ -77,18 +76,30 @@ public class BasePage implements Config {
      * @return
      */
     public String getFieldText(By locator) {
-        WebElement TxtBoxContent = driver.findElement(locator);
-        String s = new String();
-        s = TxtBoxContent.getAttribute("value");
-        return s;
+        WebElement txtBoxContent = driver.findElement(locator);
+        String fieldValue = new String();
+        fieldValue = txtBoxContent.getAttribute("value");
+        return fieldValue;
+    }
 
+    /**
+     * This method allows you to use the i parameter to select the element form an array of elements to get the locator's field text
+     * @param locator
+     * @param i
+     * @return
+     */
+    public String getFieldTextPlural(By locator, int i) {
+        WebElement txtBoxContent = driver.findElements(locator).get(i);
+        String textValue = new String();
+        textValue = txtBoxContent.getAttribute("value");
+        return textValue;
     }
 
     public String getFieldText(By locator, String alt) {
-        WebElement TxtBoxContent = driver.findElement(locator);
-        String s = new String();
-        s = TxtBoxContent.getAttribute(alt);
-        return s;
+        WebElement txtBoxContent = driver.findElement(locator);
+        String textValue = new String();
+        textValue = txtBoxContent.getAttribute(alt);
+        return textValue;
 
     }
 
@@ -148,10 +159,10 @@ public class BasePage implements Config {
      * @return
      */
     public String getText(By locator) {
-        WebElement TxtBoxContent = driver.findElement(locator);
-        String s = new String();
-        s = TxtBoxContent.getText();
-        return s;
+        WebElement txtBoxContent = driver.findElement(locator);
+        String textValue = new String();
+        textValue = txtBoxContent.getText();
+        return textValue;
     }
 
     /**
@@ -163,10 +174,10 @@ public class BasePage implements Config {
      * @return
      */
     public String getTextPlural(By locator, int i) {
-        WebElement TxtBoxContent = driver.findElements(locator).get(i);
-        String s = new String();
-        s = TxtBoxContent.getText();
-        return s;
+        WebElement txtBoxContent = driver.findElements(locator).get(i);
+        String textValue = new String();
+        textValue = txtBoxContent.getText();
+        return textValue;
     }
 
     /**
@@ -219,9 +230,18 @@ public class BasePage implements Config {
      * @param i
      */
     public void hover(By locator, int i) {
-        Actions action = new Actions(driver);
+
+        String javaScript = "var evObj = document.createEvent('MouseEvents');" +
+                "evObj.initMouseEvent(\"mouseover\",true, false, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);" +
+                "arguments[0].dispatchEvent(evObj);";
+
         WebElement we = driver.findElements(locator).get(i);
-        action.moveToElement(we).click().build().perform();
+        ((JavascriptExecutor)driver).executeScript(javaScript, we);
+
+
+/*        Actions action = new Actions(driver);
+        WebElement we = driver.findElements(locator).get(i);
+        action.moveToElement(we).click().build().perform();*/
     }
 
     /**
@@ -230,9 +250,19 @@ public class BasePage implements Config {
      * @param locator
      */
     public void hover(By locator) {
-        Actions action = new Actions(driver);
+
+        String javaScript = "var evObj = document.createEvent('MouseEvents');" +
+                "evObj.initMouseEvent(\"mouseover\",true, false, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);" +
+                "arguments[0].dispatchEvent(evObj);";
+
         WebElement we = driver.findElement(locator);
-        action.moveToElement(we).click().build().perform();
+        ((JavascriptExecutor)driver).executeScript(javaScript, we);
+
+
+
+/*        Actions action = new Actions(driver);
+        WebElement we = driver.findElement(locator);
+        action.moveToElement(we).click().build().perform();*/
     }
 
     /**
@@ -245,6 +275,11 @@ public class BasePage implements Config {
             find(locator).sendKeys(inputText);
         }
 
+
+        public void typePlural(String inputText, By locator,int i) {
+        WebElement we = driver.findElements(locator).get(i);
+        we.sendKeys(inputText);
+    }
 
     public Boolean isDisplayed(By locator) {
         return find(locator).isDisplayed();

@@ -17,7 +17,7 @@ public class PathDetailAntennaPage extends BasePage {
     By antennaModelSearch1 = By.id("path-details-antenna-0-0-lookup-trigger");
     By antennaModelSearch2 = By.id("path-details-antenna-1-0-lookup-trigger");
     By lookUpSearchButton = By.id("site-lookup-submit");
-    By saveDetailsButton = By.id("path-details-submit-button");
+    By saveDetailsButton = By.id("path-details-footer-save-path-button");
     By antennaClearX = By.cssSelector(".fa.fa-spinner.fa-pulse.fa-fw");
     By antennaClearX2 = By.className("clear-input-button");
     By antennaClearX3 = By.className("pointer");
@@ -36,12 +36,12 @@ public class PathDetailAntennaPage extends BasePage {
     By antennaModelField = By.id("path-details-site-0-0-antenna-model");
     By modeField = By.id("path-details-site-0-0-mode");
     By antennaCodeField = By.id("path-details-site-0-0-antenna-code");
-    By beamwithField = By.id("path-details-site-0-0-beamWidth");
+    By beamwithField = By.id("path-details-site-0-0-beamwidth");
     By gainField = By.id("path-details-site-0-0-gain");
     By antennaModelField2 = By.id("path-details-site-1-0-antenna-model");
     By modeField2 = By.id("path-details-site-1-0-mode");
     By antennaCodeField2 = By.id("path-details-site-1-0-antenna-code");
-    By beamwithField2 = By.id("path-details-site-1-0-beamWidth");
+    By beamwithField2 = By.id("path-details-site-1-0-beamwidth");
     By gainField2 = By.id("path-details-site-1-0-gain");
     By antennaModelForTextField = By.name("antennas[0][0]modelNumber");
     By includeRevisionsCheckBox = By.id("antenna-lookup-include-revisions-include");
@@ -70,6 +70,17 @@ public class PathDetailAntennaPage extends BasePage {
         super(driver);
         visit("/");
     }
+
+    public void antennaLookUpFromPassiveRepeater(String codeText){
+        isDisplayed(lookUpAntennaCode,10);
+        type(codeText,lookUpAntennaCode);
+        isDisplayed(lookUpSearchButton,10);
+        click(lookUpSearchButton);
+        isDisplayed(antResultListItem,8);
+        clickJS(antResultListItem);
+    }
+
+
     public void addAntennaToPath(String luAntMod, String mode, String antCode, String beamwith, String gain,String luAntMod2,String mode2, String antCode2, String beamwith2, String gain2){
         //Verify that the Antenna Model field is present (that tells us that we are on the Antenna module)
         isDisplayed(antennaModel1);
@@ -172,6 +183,7 @@ public class PathDetailAntennaPage extends BasePage {
         type(antCode,antennaCodeField);
 
         //re-focus to field other than Antenna Code
+        isDisplayed(gainField,20);
         click(gainField);
         waitForFieldToBeNotNull(gainField);
 
@@ -299,6 +311,7 @@ public class PathDetailAntennaPage extends BasePage {
     public void clickSaveDetails(){
         isDisplayed(saveDetailsButton,8);
         click(saveDetailsButton);
+
     }
 
 }
