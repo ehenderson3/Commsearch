@@ -40,9 +40,7 @@
             <artifactId>selenium-firefox-driver</artifactId>
             <version>3.0.1</version>
             <scope>test</scope>
-        </dependency>
-
-    </dependencies>
+      </dependencies>
 
     <build>
         <pluginManagement>
@@ -53,7 +51,7 @@
                     <version>2.19.1</version>
                     <configuration>
                         <parallel>classesAndMethods</parallel>
-                        <threadCount>1</threadCount>
+                        <threadCount>2</threadCount>
                         <runOrder>random</runOrder>
                        <!-- <groups>${groups}</groups>-->
                     </configuration>

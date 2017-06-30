@@ -90,9 +90,9 @@ public class BasePage implements Config {
      */
     public String getFieldTextPlural(By locator, int i) {
         WebElement txtBoxContent = driver.findElements(locator).get(i);
-        String s = new String();
-        s = txtBoxContent.getAttribute("value");
-        return s;
+        String textValue = new String();
+        textValue = txtBoxContent.getAttribute("value");
+        return textValue;
     }
 
     public String getFieldText(By locator, String alt) {
