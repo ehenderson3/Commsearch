@@ -602,7 +602,6 @@ public class PathDetailTest extends BaseTest {
 
     @Test
     public void pathDetailMessage_SuccessMessage_WhenPathIsSaved() {
-        boolean siteExist;
         createPath.createBrandNewProjectPath("Path Detail Success Message" + randomNumber, "This is the Default");
         createPath.fillOutCompanyFilter("VZW111", "", "", 0);
         pathSummary.changeToSi();
@@ -623,7 +622,6 @@ public class PathDetailTest extends BaseTest {
      */
     @Test
     public void pathDetailMessage_RequiredError_WhenNoRequiredFieldsHaveEntries() {
-        boolean siteExist;
         createPath.createBrandNewProjectPath("Path Detail Required Error" + randomNumber, "This is the Default");
         createPath.fillOutCompanyFilter("VZW111", "", "", 0);
         pathSummary.changeToSi();
@@ -643,7 +641,6 @@ public class PathDetailTest extends BaseTest {
 
     @Test
     public void pathDetailCopy_NewPathIsCreatedAndUserRemainsOnOriginalPath_WhenPathIsCopied() {
-        boolean siteExist;
         createPath.createBrandNewProjectPath("Path Detail Copy Path" + randomNumber, "This is the Default");
         createPath.fillOutCompanyFilter("VZW111", "", "", 0);
         pathSummary.changeToSi();
@@ -694,7 +691,6 @@ public class PathDetailTest extends BaseTest {
      */
     @Test
     public void pathDetailCopy_NextButtonShouldBeActive_WhenPathIsCopied() {
-        boolean siteExist;
         createPath.createBrandNewProjectPath("Copy Next Button Active" + randomNumber, "This is the Default");
         createPath.fillOutCompanyFilter("VZW111", "", "", 0);
         pathSummary.changeToSi();

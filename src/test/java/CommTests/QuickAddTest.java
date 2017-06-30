@@ -1,6 +1,11 @@
 package CommTests;
+import CommPageObjects.CreateNewPathPage;
+import CommPageObjects.PathSummaryPage;
+import CommPageObjects.QuickAddPage;
+import CommPageObjects.PathDetailPage;
+import CommPageObjects.PathDetailAntennaPage;
 
-import CommPageObjects.*;
+//import CommPageObjects.*;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -862,7 +867,6 @@ public class QuickAddTest extends BaseTest {
      */
     @Test//
     public void creatingQuickAddPath_WhenThereIsSpace_TrimSpaceOnBlur() {
-        String pathError;
         createPath.createBrandNewProjectPath("TrimSpaceOnBlur"+ randomNumber, "This is the Default");
         createPath.fillOutCompanyFilter("VZW111","", "",0);
 
@@ -1022,18 +1026,6 @@ public class QuickAddTest extends BaseTest {
         pathDetail.returnFromAntennaLookUp("30x32 Foot Passive Billboard","3032RF");
         pathDetail.savePassiveRepeater();
     }
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 }
