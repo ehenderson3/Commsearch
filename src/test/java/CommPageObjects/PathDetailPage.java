@@ -384,7 +384,7 @@ public class PathDetailPage extends BasePage {
         //Click the Save button
         click(pathDetailSaveDetailsButton);
         //Validate that the success message appears
-        assertTrue(isDisplayed(successHeadingText,5));
+        assertTrue(isDisplayed(successHeadingText,10));
         String saveSuccessVal = getText(successHeadingText);
         assertEquals(saveSuccessVal,saveSuccessMessage);
         //Validate that the success message disappears after 3 seconds
