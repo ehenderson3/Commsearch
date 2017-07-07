@@ -213,6 +213,7 @@ public class PathDetailTest extends BaseTest {
             try
             {
                 pathDetail.siteSearchResultWithASR(i, "ASRandCALL2", "KA20003", "1000038", "40 44 54 N", "73 59 9 W", "-");
+                break;
             }
             catch (org.junit.ComparisonFailure failure)
             {
