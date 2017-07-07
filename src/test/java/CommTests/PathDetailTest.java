@@ -204,7 +204,26 @@ public class PathDetailTest extends BaseTest {
 //    AND the sorting caret will be visible to the right side of the Site Name results header (the results are sorted by the column by which this caret is displayed).
 //    Next, in Path Details>Site, enter an existing ASR and Call Sign into their respective fields (delete the Site Name if one auto fills)
 
-        pathDetail.siteSearchResultWithASR(0, "ASRandCALL2", "KA20003", "1000038", "40 44 54 N", "73 59 9 W", "-");
+
+        //so you get the max number of rows
+        int rows = pathDetail.getRows();
+        //Then loop through and do your check
+        for (int i = 0; i < rows; i++) {
+            //try and catch would be inside the for loop
+            try
+            {
+                pathDetail.siteSearchResultWithASR(i, "ASRandCALL2", "KA20003", "1000038", "40 44 54 N", "73 59 9 W", "-");
+                break;
+            }
+            catch (org.junit.ComparisonFailure failure)
+            {
+                //in the catch you would check to see if there are any more rows left.
+                if (i >= rows) {
+                    throw failure;
+                }
+            }
+
+        }
     }
 
 
