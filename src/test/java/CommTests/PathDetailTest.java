@@ -218,7 +218,7 @@ public class PathDetailTest extends BaseTest {
             {
                 //in the catch you would check to see if there are any more rows left.
                 if (i >= rows) {
-                    break;
+                    throw failure;
                 }
             }
 
