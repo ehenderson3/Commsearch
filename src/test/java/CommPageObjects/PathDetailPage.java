@@ -145,11 +145,17 @@ public class PathDetailPage extends BasePage {
 
     //Modal -- Does it pop up over current window
     By doYouWantToLeaveModal = By.className("path-details-footer-modal");
+    By rowItems = By.xpath("//*[contains(@id, 'site-lookup-modal-table-data-siteId-')and contains(@id, '-siteName')]");
 
 
     public PathDetailPage(WebDriver driver) {
         super(driver);
         visit("/");
+    }
+
+    public int getRows(){
+        int rows =  finds(rowItems).size();
+        return rows;
     }
 
     public void savePassiveRepeater(){
@@ -598,6 +604,7 @@ public class PathDetailPage extends BasePage {
 
 
     }
+
 
 
     public void siteSearch2(String siteName,String callSign,String asr,String lat,String longi,String radius){
