@@ -1,9 +1,6 @@
 package CommTests;
 
-import CommPageObjects.CreateNewPathPage;
-import CommPageObjects.PathDetailPage;
-import CommPageObjects.PathSummaryPage;
-import CommPageObjects.QuickAddPage;
+import CommPageObjects.*;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Rule;
@@ -19,6 +16,8 @@ public class PathDetailTest extends BaseTest {
     private PathSummaryPage pathSummary;
     private CreateNewPathPage createPath;
     private PathDetailPage pathDetail;
+    private PathDetailAntennaPage pathDetailAnt;
+
 
     @Before
     public void Setup() {
@@ -26,6 +25,7 @@ public class PathDetailTest extends BaseTest {
         quickAdd = new QuickAddPage(driver);
         pathSummary = new PathSummaryPage(driver);
         pathDetail = new PathDetailPage(driver);
+        pathDetailAnt = new PathDetailAntennaPage(driver);
         if (host != "localhost") {
             driver.manage().window().maximize();
         }
@@ -86,7 +86,7 @@ public class PathDetailTest extends BaseTest {
     @Test
     public void pathDetailSiteSearch_searchResultsShouldContainAppropriateSite_whenSearchingBySiteName() {
         createPath.createBrandNewProjectPath("Path Detail Site look up search" + randomNumber, "This is the Default");
-        createPath.fillOutCompanyFilter("VZW111", "", "", 0);
+        createPath.fillOutCompanyFilter("VZW222", "", "", 0);
         pathSummary.changeToUs();
         pathSummary.openPathDetailForAddingPath();
 
@@ -102,11 +102,12 @@ public class PathDetailTest extends BaseTest {
     @Test
     public void pathDetailSiteSearch_searchResultsShouldContainAppropriateSite_whenSearchingBySiteNameAndCallSign() {
         createPath.createBrandNewProjectPath("Path Detail Site look up search" + randomNumber, "This is the Default");
-        createPath.fillOutCompanyFilter("VZW111", "", "", 0);
+        createPath.fillOutCompanyFilter("VZW222", "", "", 0);
         pathSummary.changeToUs();
         pathSummary.openPathDetailForAddingPath();
 
         pathDetail.siteSearch1("New York", "KA20003", "", "", "", "");
+
         pathDetail.siteSearchResults(0, "New York", "KA20003", "", "9 26 42.7 N", "8 7 9 W", "-");
 
         pathDetail.closeSiteLookup();
@@ -119,7 +120,7 @@ public class PathDetailTest extends BaseTest {
     public void pathDetailValidateExistingFieldValues() {
         boolean siteExist;
         createPath.createBrandNewProjectPath("Validate Path from Path details" + randomNumber, "This is the Default");
-        createPath.fillOutCompanyFilter("VZW111", "", "", 0);
+        createPath.fillOutCompanyFilter("VZW222", "", "", 0);
         pathSummary.valSiteLocationToggleOn();
         quickAdd.quickAddPathSimple("Ton", "5.8 GHz", "Best Path", "34 37 42.1 N", "112 39 26.2 W", "1542.29", "KBY45");
         pathSummary.viewSiteCallSignLatLongGeColumns1(0, "Tonto Mtn", "KBY45", "34 37 42.1 N", "112 39 26.2 W", "1542.29");
@@ -190,7 +191,7 @@ public class PathDetailTest extends BaseTest {
     @Test
     public void pathDetailSiteSearch_searchResultsShouldContainAppropriateSite_whenSearchingForSiteUsingMultipleParameters() {
         createPath.createBrandNewProjectPath("Search Site multi parameters" + randomNumber, "This is the Default");
-        createPath.fillOutCompanyFilter("VZW111", "", "", 0);
+        createPath.fillOutCompanyFilter("VZW222", "", "", 0);
         pathSummary.changeToUs();
         pathSummary.openPathDetailForAddingPath();
         pathDetail.addPathPathDetailWithAsrAndCall1("ASRandCALL1", "KBY45", "1000037", "34 37 42.1 N", "112 39 26.2 W", "66", "1");
@@ -243,7 +244,7 @@ public class PathDetailTest extends BaseTest {
     public void pathDetailElevation_shouldError_whenOutsideNeg304dot495And30479dot695Meters() {
         boolean siteExist;
         createPath.createBrandNewProjectPath("Path Detail elev SI range test" + randomNumber, "This is the Default");
-        createPath.fillOutCompanyFilter("VZW111", "", "", 0);
+        createPath.fillOutCompanyFilter("VZW222", "", "", 0);
         pathSummary.changeToSi();
         pathSummary.openPathDetailForAddingPath();
         pathDetail.addPathViaPathDetailBasicSetup1("SYNRAMS STATION", "KBY45", "34 37 42.1 N", "112 39 26.2 W", "-305.001", "1");
@@ -272,7 +273,7 @@ public class PathDetailTest extends BaseTest {
     public void pathDetailLicBasis_shouldDisplayLicOptions_whenSelectingLicDropdown() {
         boolean siteExist;
         createPath.createBrandNewProjectPath("Path Detail Lic Basis" + randomNumber, "This is the Default");
-        createPath.fillOutCompanyFilter("VZW111", "", "", 0);
+        createPath.fillOutCompanyFilter("VZW222", "", "", 0);
         pathSummary.changeToSi();
         pathSummary.openPathDetailForAddingPath();
         pathDetail.addPathViaPathDetailBasicSetup1("SYNRAMS STATION", "KBY45", "34 37 42.1 N", "112 39 26.2 W", "-200.012", "1");
@@ -286,7 +287,7 @@ public class PathDetailTest extends BaseTest {
     public void pathDetailRadioService_shouldSaveRecord_whenSelectingRadioEntries() {
         boolean siteExist;
         createPath.createBrandNewProjectPath("Path Detail Radio Service" + randomNumber, "This is the Default");
-        createPath.fillOutCompanyFilter("VZW111", "", "", 0);
+        createPath.fillOutCompanyFilter("VZW222", "", "", 0);
         pathSummary.changeToSi();
         pathSummary.openPathDetailForAddingPath();
         pathDetail.addPathViaPathDetailBasicSetup1("SYNRAMS STATION", "KBY45", "34 37 42.1 N", "112 39 26.2 W", "-200.012", "1");
@@ -366,7 +367,7 @@ public class PathDetailTest extends BaseTest {
                 "TT—TV Translator Relay"};
 
         createPath.createBrandNewProjectPath("Path Detail Radio Service" + randomNumber, "This is the Default");
-        createPath.fillOutCompanyFilter("VZW111", "", "", 0);
+        createPath.fillOutCompanyFilter("VZW222", "", "", 0);
         pathSummary.valSiteLocationToggleOn();
 
         pathSummary.changeToSi();
@@ -394,7 +395,7 @@ public class PathDetailTest extends BaseTest {
     public void pathDetailElevation_shouldError_whenOutsideNeg999And99999Feet() {
         boolean siteExist;
         createPath.createBrandNewProjectPath("Path Detail elev US range test" + randomNumber, "This is the Default");
-        createPath.fillOutCompanyFilter("VZW111", "", "", 0);
+        createPath.fillOutCompanyFilter("VZW222", "", "", 0);
         pathSummary.changeToUs();
         pathSummary.openPathDetailForAddingPath();
         pathDetail.addPathViaPathDetailBasicSetup1("SYNRAMS STATION", "KBY45", "34 37 42.1 N", "112 39 26.2 W", "-1000", "1");
@@ -425,30 +426,30 @@ public class PathDetailTest extends BaseTest {
     public void addArsPathViaPathDetail() {
         boolean siteExist;
         createPath.createBrandNewProjectPath("Best Project Ever" + randomNumber, "This is the Default");
-        createPath.fillOutCompanyFilter("VZW111", "", "", 0);
+        createPath.fillOutCompanyFilter("VZW222", "", "", 0);
         pathSummary.valSiteLocationToggleOn();
         pathSummary.openPathDetailForAddingPath();
 
         pathDetail.addAsrPathViaPathDetail1("CAMSLANT STATION", "1241006", "35 12 26.7 N", "78 3 21.2 W", "48.7", "1");
-        createPath.fillOutCompanyFilterFromDetails("VZW111", "", "", 0);
+        createPath.fillOutCompanyFilterFromDetails("VZW222", "", "", 0);
 
         pathDetail.addAsrPathViaPathDetail2("SYNRAMS STATION", "1208837", "40 34 10 N", "122 26 14 W", "250");
-        createPath.fillOutCompanyFilterFromDetails("VZW111", "", "", 1);
+        createPath.fillOutCompanyFilterFromDetails("VZW222", "", "", 1);
     }
 
     @Test
     public void addCallSignPathViaPathDetail() {
         boolean siteExist;
         createPath.createBrandNewProjectPath("Best Project Ever" + randomNumber, "This is the Default");
-        createPath.fillOutCompanyFilter("VZW111", "", "", 0);
+        createPath.fillOutCompanyFilter("VZW222", "", "", 0);
         pathSummary.valSiteLocationToggleOn();
         pathSummary.openPathDetailForAddingPath();
 
         pathDetail.addCallSignPathViaPathDetail1("SITE1", "KA20003", "40 44 54 N", "73 59 9 W", "98", "1");
-        createPath.fillOutCompanyFilterFromDetails("VZW111", "", "", 0);
+        createPath.fillOutCompanyFilterFromDetails("VZW222", "", "", 0);
 
         pathDetail.addCallSignPathViaPathDetail2("Tonto Mtn", "KBY45", "34 37 42.1 N", "112 39 26.2 W", "1542.3");
-        createPath.fillOutCompanyFilterFromDetails("VZW111", "", "", 1);
+        createPath.fillOutCompanyFilterFromDetails("VZW222", "", "", 1);
     }
 
     /**
@@ -495,7 +496,7 @@ public class PathDetailTest extends BaseTest {
     public void addCallSignPathViaPathDetailWithDefaultCompany() {
         boolean siteExist;
         createPath.createBrandNewProjectPath("PathDetailWithDefaultCompany" + randomNumber, "This is the Default");
-        createPath.fillOutCompanyFilter("VZW111", "", "", 0);
+        createPath.fillOutCompanyFilter("VZW222", "", "", 0);
         pathSummary.valSiteLocationToggleOn();
         pathSummary.openPathDetailForAddingPath();
         pathDetail.checkSiteSuggestionTrue("SITE1", "Tonto Mtn");
@@ -513,7 +514,7 @@ public class PathDetailTest extends BaseTest {
     public void siteWith21characters() {
         boolean siteExist;
         createPath.createBrandNewProjectPath("PathDetailWithDefaultCompany" + randomNumber, "This is the Default");
-        createPath.fillOutCompanyFilter("VZW111", "", "", 0);
+        createPath.fillOutCompanyFilter("VZW222", "", "", 0);
         pathSummary.valSiteLocationToggleOn();
         pathSummary.openPathDetailForAddingPath();
         pathDetail.checkSiteSuggestion("The Site has more than 21 char", "The Site has more than 21 char");
@@ -531,7 +532,7 @@ public class PathDetailTest extends BaseTest {
     public void CallSignWith9characters() {
         boolean siteExist;
         createPath.createBrandNewProjectPath("PathDetailWithDefaultCompany" + randomNumber, "This is the Default");
-        createPath.fillOutCompanyFilter("VZW111", "", "", 0);
+        createPath.fillOutCompanyFilter("VZW222", "", "", 0);
         pathSummary.valSiteLocationToggleOn();
         pathSummary.openPathDetailForAddingPath();
         pathDetail.checkCallSignEntry("455654655", "546546546546");
@@ -555,15 +556,15 @@ public class PathDetailTest extends BaseTest {
     public void pathDetail_whenOpening_ShouldSeeAntennaFields() {
         boolean siteExist;
         createPath.createBrandNewProjectPath("Best Project Ever" + randomNumber, "This is the Default");
-        createPath.fillOutCompanyFilter("VZW111", "", "", 0);
+        createPath.fillOutCompanyFilter("VZW222", "", "", 0);
         pathSummary.valSiteLocationToggleOn();
         pathSummary.openPathDetailForAddingPath();
 
         pathDetail.addAsrPathViaPathDetail1("CAMSLANT STATION", "1241006", "35 12 26.7 N", "78 3 21.2 W", "48.7", "1");
-        createPath.fillOutCompanyFilterFromDetails("VZW111", "", "", 0);
+        createPath.fillOutCompanyFilterFromDetails("VZW222", "", "", 0);
 
         pathDetail.addAsrPathViaPathDetail2("SYNRAMS STATION", "1208837", "40 34 10 N", "122 26 14 W", "250");
-        createPath.fillOutCompanyFilterFromDetails("VZW111", "", "", 1);
+        createPath.fillOutCompanyFilterFromDetails("VZW222", "", "", 1);
 
         pathDetail.antennaFieldValidation();
     }
@@ -599,7 +600,7 @@ public class PathDetailTest extends BaseTest {
         pathDetail.antennaFieldValidation();
     }
 
-    @Test//COM-360 UI AUTO TEST: Add Authentication Token to all API Calls
+    @Ignore//This was a POC that caused lots of confusion feature was removed
     public void authenticationToken_whenAuthIsCurrent_AutenticationWillPass() {
         boolean siteExist;
         createPath.createProjectPathAuth("Autentication POC" + randomNumber, "This is the Default");
@@ -622,7 +623,7 @@ public class PathDetailTest extends BaseTest {
     @Test
     public void pathDetailMessage_SuccessMessage_WhenPathIsSaved() {
         createPath.createBrandNewProjectPath("Path Detail Success Message" + randomNumber, "This is the Default");
-        createPath.fillOutCompanyFilter("VZW111", "", "", 0);
+        createPath.fillOutCompanyFilter("VZW222", "", "", 0);
         pathSummary.changeToSi();
         pathSummary.openPathDetailForAddingPath();
         pathDetail.addPathViaPathDetailBasicSetup1("SYNRAMS STATION", "KBY45", "34 37 42.1 N", "112 39 26.2 W", "250", "1");
@@ -642,7 +643,7 @@ public class PathDetailTest extends BaseTest {
     @Test
     public void pathDetailMessage_RequiredError_WhenNoRequiredFieldsHaveEntries() {
         createPath.createBrandNewProjectPath("Path Detail Required Error" + randomNumber, "This is the Default");
-        createPath.fillOutCompanyFilter("VZW111", "", "", 0);
+        createPath.fillOutCompanyFilter("VZW222", "", "", 0);
         pathSummary.changeToSi();
         pathSummary.openPathDetailForAddingPath();
         pathDetail.saveAndValidateRequiredMessage("Required");
@@ -661,7 +662,7 @@ public class PathDetailTest extends BaseTest {
     @Test
     public void pathDetailCopy_NewPathIsCreatedAndUserRemainsOnOriginalPath_WhenPathIsCopied() {
         createPath.createBrandNewProjectPath("Path Detail Copy Path" + randomNumber, "This is the Default");
-        createPath.fillOutCompanyFilter("VZW111", "", "", 0);
+        createPath.fillOutCompanyFilter("VZW222", "", "", 0);
         pathSummary.changeToSi();
         pathSummary.openPathDetailForAddingPath();
         pathDetail.addPathViaPathDetailBasicSetup1("SYNRAMS STATION", "KBY45", "34 37 42.1 N", "112 39 26.2 W", "250", "1");
@@ -681,11 +682,13 @@ public class PathDetailTest extends BaseTest {
        Then all data in Site 1 will swap to Site 2
        AND the Passive Repeater order will be inverted
        AND Back to Back locations will be inverted.
+
+
      */
     @Test
     public void pathDetailFlip_PathDetailWillFlip_WhenPathFlipButtonIsClicked() {
         createPath.createBrandNewProjectPath("Path Detail Flip Path" + randomNumber, "This is the Default");
-        createPath.fillOutCompanyFilter("VZW111", "", "", 0);
+        createPath.fillOutCompanyFilter("VZW222", "", "", 0);
         pathSummary.changeToSi();
         pathSummary.openPathDetailForAddingPath();
         pathDetail.addPathViaPathDetailBasicSetup1("SYNRAMS STATION", "KBY45", "34 37 42.1 N", "112 39 26.2 W", "250", "1");
@@ -711,7 +714,7 @@ public class PathDetailTest extends BaseTest {
     @Test
     public void pathDetailCopy_NextButtonShouldBeActive_WhenPathIsCopied() {
         createPath.createBrandNewProjectPath("Copy Next Button Active" + randomNumber, "This is the Default");
-        createPath.fillOutCompanyFilter("VZW111", "", "", 0);
+        createPath.fillOutCompanyFilter("VZW222", "", "", 0);
         pathSummary.changeToSi();
         pathSummary.openPathDetailForAddingPath();
         pathDetail.addPathViaPathDetailBasicSetup1("SYNRAMS STATION", "KBY45", "34 37 42.1 N", "112 39 26.2 W", "250", "1");
@@ -723,6 +726,97 @@ public class PathDetailTest extends BaseTest {
         pathDetail.nextArrow();
         pathDetail.savedPathInfoPersists1("SYNRAMS STATION","KBY45", "34 37 42.1 N", "112 39 26.2 W", "250", "1");
         pathDetail.savedPathInfoPersists2("New York", "KA20003", "40 44 54 N", "73 59 9 W", "0.98");
+
+    }
+    /**
+     *COM-487
+     Sync repeater tooltip to current state
+     Given two paths are created/saved in path details, one with passive repeater and one without,
+     When user is in the path w/passive repeater
+     AND clicks the previous/next button in the Path Details footer
+     AND clicks the previous/next button again to return to the path w/repeater,
+     Then the passive repeater tooltip will persist
+     AND it will display the correct repeater information.*/
+
+    @Test
+    public void passiveRepeaterPathDetail_SelectNextButton_WillDisplayCorrectRepeaterInformation() {
+        createPath.createBrandNewProjectPath("NextPreviousPassive" + randomNumber, "This is the Default");
+        createPath.fillOutCompanyFilter("VZW222", "", "", 0);
+        pathSummary.changeToUs();
+        pathSummary.openPathDetailForAddingPath();
+        pathDetail.addPathPathDetailWithAsrAndCall1("PassRepeater1", "KBY45", "1000037", "34 37 42.1 N", "112 39 26.2 W", "66", "1");
+        pathDetail.addPathPathDetailWithAsrAndCall2("PassRepeater2", "KA20003", "1000038", "40 44 54 N", "73 59 9 W", "55");
+        pathSummary.openPathDetailForAddingPath();
+        pathDetail.addPathPathDetailWithAsrAndCall1("NoPassRepeater1", "KBY45", "1000037", "34 37 42.1 N", "112 39 26.2 W", "66", "1");
+        pathDetail.addPathPathDetailWithAsrAndCall2("NoPassRepeater2", "KA20003", "1000038", "40 44 54 N", "73 59 9 W", "55");
+        pathDetail.openPathDetailViaDetails();
+        pathDetail.addBackToBackPassiveRepeater();
+        pathDetailAnt.antennaLookUpFromPassiveRepeater("02306A");
+        pathDetail.returnFromAntennaLookUp("P8F-9","02306A");
+        pathDetail.setAntennaOnPassiveRepeater(1,"02306A");
+        pathDetail.savePassiveRepeater();
+        pathDetail.nextArrow();
+        pathDetail.previousArrow();
+    }
+
+
+    /**COM-487
+    Clear repeaters when band is changed
+    Given a path with a passive repeater has been saved,
+    When the Frequency Band is changed in the Path,
+    Then the passive repeater Antenna Model, Antenna Code and Common Loss (Back to Back repeaters) fields will be cleared.
+            */
+    @Test
+    public void passiveRepeaterPathDetail_WhenFrequencyBandChangedPath_ThenPassiveRepeaterFieldsWillBeCleared() {
+        createPath.createBrandNewProjectPath("WhenFrequencyBandChangedPath" + randomNumber, "This is the Default");
+        createPath.fillOutCompanyFilter("VZW222", "", "", 0);
+        pathSummary.changeToUs();
+        pathSummary.openPathDetailForAddingPath();
+        pathDetail.addPathPathDetailWithAsrAndCall1("FreqBandChanged1", "KBY45", "1000037", "34 37 42.1 N", "112 39 26.2 W", "66", "1");
+        pathDetail.addPathPathDetailWithAsrAndCall2("FreqBandChanged2", "KA20003", "1000038", "40 44 54 N", "73 59 9 W", "55");
+        pathSummary.openPathDetailForAddingPath();
+        pathDetail.addPathPathDetailWithAsrAndCall1("FreqBandChanged3", "KBY45", "1000037", "34 37 42.1 N", "112 39 26.2 W", "66", "1");
+        pathDetail.addPathPathDetailWithAsrAndCall2("FreqBandChanged4", "KA20003", "1000038", "40 44 54 N", "73 59 9 W", "55");
+        pathDetail.openPathDetailViaDetails();
+        pathDetail.addBackToBackPassiveRepeater();
+        pathDetailAnt.antennaLookUpFromPassiveRepeater("02306A");
+        pathDetail.returnFromAntennaLookUp("P8F-9","02306A");
+        pathDetail.setAntennaOnPassiveRepeater(1,"02306A");
+        pathDetail.savePassiveRepeater();
+        pathDetail.changeFrequency("960 MHz");
+        pathDetail.checkForBlankPassiveRepeaterFields();
+    }
+
+    /**COM-495
+     *   One remaining bug from Farhana's List.
+         Defined steps to reproduce: (In IE11, not happening all the time.)
+         Go to a project with a path.
+         Copy that path twice.
+         Select the first path.
+         Split the project and go to the new project when prompted.
+         Click 'Back' in the browser's controls.
+         Original Project has missing path(s).
+     */
+
+    @Test
+    public void pathDetailCopy_CopySamePathTwiceBrowserBack_OriginalShouldBeInPlace() {
+        createPath.createBrandNewProjectPath("Path Detail Copy Path" + randomNumber, "This is the Default");
+        createPath.fillOutCompanyFilter("VZW222", "", "", 0);
+        pathSummary.changeToSi();
+        pathSummary.openPathDetailForAddingPath();
+        pathDetail.addPathViaPathDetailBasicSetup1("SYNRAMS STATION", "KBY45", "34 37 42.1 N", "112 39 26.2 W", "250", "1");
+        pathDetail.addPathViaPathDetailBasicSetup2("New York", "KA20003", "40 44 54 N", "73 59 9 W", "0.98");
+        pathDetail.saveAndValidateSuccessMessage("PATH SAVED SUCCESSFULLY\n" +
+                "You have successfully saved SYNRAMS STATION - New York");
+        pathDetail.openPathDetailViaDetails();
+        pathDetail.copyPathViaPathDetails();
+        pathDetail.copyPathViaPathDetails();
+        pathDetail.savedPathInfoPersists1("SYNRAMS STATION","KBY45", "34 37 42.1 N", "112 39 26.2 W", "250", "1");
+        pathDetail.savedPathInfoPersists2("New York", "KA20003", "40 44 54 N", "73 59 9 W", "0.98");
+        pathDetail.navBack();
+        quickAdd.validateCopiedPaths(0,"SYNRAMS STATION - New York");
+        quickAdd.validateCopiedPaths(1,"SYNRAMS STATION - New York");
+        quickAdd.validateCopiedPaths(2,"SYNRAMS STATION - New York");
 
     }
 }

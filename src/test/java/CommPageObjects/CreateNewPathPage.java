@@ -32,6 +32,8 @@ public class CreateNewPathPage extends BasePage {
     //react-grid-Cell
     By searchResultArray = By.xpath("//*[contains(@id, 'company-lookup-modal-table-data-companyCode-')]");
 
+    By searchResultArrayPlural = By.xpath("//*[contains(@id, 'company-lookup-modal-table-data-companyCode-') and contains(@id, '-companyName')]");
+
     //By searchResultArray = By.cssSelector(".react-grid-Cell");
 
     By companyContactNameField = By.id("company-lookup-contact-name");
@@ -47,6 +49,7 @@ public class CreateNewPathPage extends BasePage {
     By errorMessage = By.className("error-message");
     By returnHome = By.id("header-homeLink");
     By pathDetailDefaultCompanyField = By.id("path-details-site-0-company-name");
+
 
 
     //Project Landing
@@ -138,7 +141,7 @@ public class CreateNewPathPage extends BasePage {
         slowDown(3);
         click(searchResultArray);
         a = getFieldText(defaultCompanyField);
-        assertEquals(a, "Verizon");
+        assertEquals(a, "Verizon AZ");
         click(createButton);
         isDisplayed(filterField, 30);
     }
@@ -167,9 +170,34 @@ public class CreateNewPathPage extends BasePage {
         assertTrue("Can't find Results",isDisplayed(searchResultArray,10));
         slowDown(2);
 
-        click(searchResultArray);
-        a = getFieldText(pathDetailDefaultCompanyField);//path-details-site-0-company-name
-        assertEquals(a, "Verizon");
+
+        //so you get the max number of rows
+        int rows = getRows(searchResultArrayPlural);
+        //Then loop through and do your check
+        for (int i = 0; i < rows; i++) {
+            //try and catch would be inside the for loop
+            try
+            {
+                a = getTextPlural(searchResultArrayPlural,i);//path-details-site-0-company-name
+                assertEquals(a, "Verizon AZ");
+                click(searchResultArrayPlural,i);
+                break;
+            }
+            catch (java.lang.AssertionError failure)
+            {
+                //in the catch you would check to see if there are any more rows left.
+                if (i >= rows) {
+                    throw failure;
+                }
+            }
+
+        }
+
+
+
+
+
+
     }
 
     public void fillOutCompanyFilterErrorChecking(String coCodeText,String coNameText, String coContactText, Integer company) {
@@ -212,7 +240,7 @@ public class CreateNewPathPage extends BasePage {
     public void attemptToCreateDupProject(String projectName, String defaultLicensee){
         String dupMessageText;
         click(commHome);
-        assertTrue("can't find the Create button", isDisplayed(createButton));
+        assertTrue("can't find the Create button", isDisplayed(createButton,10));
         type(projectName, newProjectField);
         click(pathRadioButton);
         assertTrue("can't find the defaultCompany ",isDisplayed(defaultCompany,20));

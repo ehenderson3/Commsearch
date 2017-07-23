@@ -22,7 +22,6 @@ public class QuickAddPage extends BasePage {
     //project-summary-quick-add-submit
     By addPathDetails = By.cssSelector(".btn.bg-blue.hover-inverse");
     By cancelButton = By.cssSelector(".btn.text-red.inverse-default");
-    //By cancelButton = By.xpath("//span[@class='btn text-red inverse-default' and contains(text(), 'Cancel')]");
 
     By addButton2 = By.xpath("//span[@class='btn bg-green hover-inverse' and contains(text(), 'Add Path')]");
     By quickAddButton = By.xpath("//span[@class='btn bg-green hover-inverse' and contains(text(), 'Quick Add')]");
@@ -59,6 +58,8 @@ public class QuickAddPage extends BasePage {
     By leaveWithoutSavingText = By.cssSelector(".padding-half.center-text");
     By quickAddMatchingOnLatAndLongiWarning = By.id("quick-add-error");
     By quickAddSavedSiteName = By.xpath("//*[contains(@id, 'path-') and contains(@id, '-site-1-siteName')]");
+    By copiedPaths = By.cssSelector(".path-name-value.margin-right-auto");
+
 
 
     //Index List -- Can you used an array to select item
@@ -75,6 +76,12 @@ public class QuickAddPage extends BasePage {
         super(driver);
         visit("");
     }
+
+    public void validateCopiedPaths(int i, String pathNameText){
+        String copiedPath = getText(copiedPaths);
+        assertEquals(copiedPath, pathNameText);
+    }
+
 
     public void compareText(String isNot, String is, int i){
         String trimmed = getTextPlural(quickAddSavedSiteName, i);

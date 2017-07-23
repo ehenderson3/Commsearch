@@ -38,8 +38,9 @@ public class PathDetailPage extends BasePage {
     By passiveRepeaterRemoveButton = By.id("path-details-passive-repeaters-0-remove");
     By passiveRepeaterSaveButton = By.id("path-details-passive-repeater-save");
     By passiveRepeaterAddPassiveRepeaterTrigger = By.id("path-details-passive-repeater-add-repeater");
-    By passiveRepeaterAntennaModelSearchButton = By.id("path-details-antenna-0-0-lookup-trigger");
-    By passiveRepeaterAntennaModelSearchButtonPlural = By.xpath("//*[contains(@id, 'path-details-antenna-0-') and contains(@id, '-lookup-trigger')]");
+    By passiveRepeaterAntennaModelSearchButton = By.id("path-details-passive-repeaters-0-antennas-0-antenna-lookup-trigger");
+    By passiveRepeaterAntennaModelSearchButtonPlural = By.xpath("//*[contains(@id, 'path-details-passive-repeaters-0-antennas-') and contains(@id, '-antenna-lookup-trigger')]");
+    By activePathDetailPreviousArrowButton = By.id("path-details-footer-previous-path-button");
 
 
     //DropDown Fields -- Does it contain a list that has options that can be selected
@@ -89,16 +90,16 @@ public class PathDetailPage extends BasePage {
     By pathDetailSiteLookUpLongitude = By.id("site-lookup-longitude");
     By pathDetailSiteLookUpRadius = By.id("site-lookup-radius");
 
-    By antennaModel_1  = By.xpath("//*[contains(@id, 'path-details-site-0-') and contains(@id, '-antenna-model')]");
-    By antennaCenterline_1  = By.xpath("//*[contains(@id, 'path-details-site-0-') and contains(@id, '-centerline')]");
-    By antennaMode_1  = By.xpath("//*[contains(@id, 'path-details-site-0-') and contains(@id, '-mode')]");
-    By antennaCode_1  = By.xpath("//*[contains(@id, 'path-details-site-0-') and contains(@id, '-antenna-code')]");
-    By antennaGain_1  = By.xpath("//*[contains(@id, 'path-details-site-0-') and contains(@id, '-gain')]");
-    By antennaModel_2  = By.xpath("//*[contains(@id, 'path-details-site-1-') and contains(@id, '-antenna-model')]");
-    By antennaCenterline_2  = By.xpath("//*[contains(@id, 'path-details-site-1-') and contains(@id, '-centerline')]");
-    By antennaMode_2  = By.xpath("//*[contains(@id, 'path-details-site-1-') and contains(@id, '-mode')]");
-    By antennaCode_2  = By.xpath("//*[contains(@id, 'path-details-site-1-') and contains(@id, '-antenna-code')]");
-    By antennaGain_2  = By.xpath("//*[contains(@id, 'path-details-site-1-') and contains(@id, '-gain')]");
+    By antennaModel_1  = By.xpath("//*[contains(@id, 'path-details-antennas-0-') and contains(@id, '-antenna-model')]");
+    By antennaCenterline_1  = By.xpath("//*[contains(@id, 'path-details-antennas-0-') and contains(@id, '-centerline')]");
+    By antennaMode_1  = By.xpath("//*[contains(@id, 'path-details-antennas-0-') and contains(@id, '-mode')]");
+    By antennaCode_1  = By.xpath("//*[contains(@id, 'path-details-antennas-0-') and contains(@id, '-antenna-code')]");
+    By antennaGain_1  = By.xpath("//*[contains(@id, 'path-details-antennas-0-') and contains(@id, '-gain')]");
+    By antennaModel_2  = By.xpath("//*[contains(@id, 'path-details-antennas-1-') and contains(@id, '-antenna-model')]");
+    By antennaCenterline_2  = By.xpath("//*[contains(@id, 'path-details-antennas-1-') and contains(@id, '-centerline')]");
+    By antennaMode_2  = By.xpath("//*[contains(@id, 'path-details-antennas-1-') and contains(@id, '-mode')]");
+    By antennaCode_2  = By.xpath("//*[contains(@id, 'path-details-antennas-1-') and contains(@id, '-antenna-code')]");
+    By antennaGain_2  = By.xpath("//*[contains(@id, 'path-details-antennas-1-') and contains(@id, '-gain')]");
 
     By asrLookUpAsrNumberField = By.id("asr-lookup-asr");
     By passiveRepeaterSiteNameField = By.id("asr-lookup-asr");
@@ -119,7 +120,7 @@ public class PathDetailPage extends BasePage {
 
     By passiveRepeaterCommonLossField = By.id("path-details-passive-repeaters-0-back-to-back-0-commonLoss");
     By lookUpAntennaCode = By.id("antenna-lookup-antenna-code");
-    By lookUpSearchButton = By.id("site-lookup-submit");
+    By lookUpSearchButton = By.id("antenna-lookup-submit");
 
 
 
@@ -158,11 +159,44 @@ public class PathDetailPage extends BasePage {
         return rows;
     }
 
+
+
+    public void checkForBlankPassiveRepeaterFields(){
+        click(passiveRepeaterTrigger);
+        String blankAntCode = getFieldText(passiveRepeaterAntennaCodeField);
+        String blankCommonLoss = getFieldText(passiveRepeaterCommonLossField);
+        String blankAntennaModel = getFieldText(passiveRepeaterAntennaModelField);
+        String blankAntennaModel2 = getFieldTextPlural(passiveRepeaterAntennaModelFieldPlural,1);
+        String blankAntCode2 = getFieldTextPlural(passiveRepeaterAntennaCodeFieldPlural,1);
+        String centerLine1 = getFieldTextPlural(passiveRepeaterCenterlineFieldPlural,1);
+        String centerLine2 = getFieldTextPlural(passiveRepeaterCenterlineFieldPlural,1);
+        assertEquals(blankAntCode,"");
+        //assertEquals(blankCommonLoss,"");
+        assertEquals(blankAntennaModel,"");
+        assertEquals(blankAntennaModel2,"");
+        assertEquals(blankAntCode2,"");
+        //assertEquals(centerLine1,"");
+        //assertEquals(centerLine2,"");
+
+
+    }
+
     public void savePassiveRepeater(){
         isDisplayed(passiveRepeaterSaveButton,10);
         click(passiveRepeaterSaveButton);
         isDisplayed(pIcon,7);
     }
+
+    public void changeFrequency(String freq){
+        assertTrue("No Drop down field",isDisplayed(pathDetailFrequencyBandDropDownField1,12));
+        selectFromDropdown(pathDetailFrequencyBandDropDownField1,freq);
+    }
+
+
+    /**COM-494
+     * When passive repeater is Billboard type, Antenna lookup in Passive Repeater modal should only show Billboard antenna options.
+     When passive repeater is Back to Back type, Antenna lookup should NOT show Billboard antenna options.
+     */
 
     public void addBillboardPassiveRepeater(){
         //Is the Passive Repeater trigger pressent and active
@@ -212,11 +246,12 @@ public class PathDetailPage extends BasePage {
         click(passiveRepeaterAntennaModelSearchButtonPlural, i);
         isDisplayed(lookUpAntennaCode,10);
         type(antCode, lookUpAntennaCode);
-        click(siteLookUpSearchButtonModal);
+        isDisplayed(lookUpSearchButton,8);
+        click(lookUpSearchButton);
         isDisplayed(antResultListItem,8);
         click(antResultListItem);
-        String antCodeTextPlural = getFieldTextPlural(passiveRepeaterAntennaCodeFieldPlural,i);
-        assertEquals(antCode,antCodeTextPlural);
+/*        String antCodeTextPlural = getFieldTextPlural(passiveRepeaterAntennaCodeFieldPlural,i);
+        assertEquals(antCode,antCodeTextPlural);*/
         type("12",passiveRepeaterCenterlineField2);
     }
 
@@ -236,6 +271,7 @@ public class PathDetailPage extends BasePage {
         isDisplayed(pathDetailSiteLookUpSiteName,10);
         //Enter Site Name
         type("New York",pathDetailSiteLookUpSiteName);
+        isDisplayed(siteLookUpSearchButtonModal,10);
         click(siteLookUpSearchButtonModal);
         //Validate that at least one row
         isDisplayed(pathDetailSiteLookUpRadiusResults,10);
@@ -245,6 +281,34 @@ public class PathDetailPage extends BasePage {
         //Click Antenna Model search button
         click(passiveRepeaterAntennaModelSearchButton);
     }
+
+    public void addBackToBackPassiveRepeater(String passiveType, String siteName ){
+        //Is the Passive Repeater trigger pressent and active
+        assertTrue(isDisplayed(passiveRepeaterTrigger,10));
+        assertTrue(isDisplayedAndClickable(passiveRepeaterTrigger,10));
+        //Click Passive Repeater trigger
+        click(passiveRepeaterTrigger);
+        //Change to Back to Back
+        isDisplayed(passiveRepeaterTypeField,20);
+        selectFromDropdown(passiveRepeaterTypeField,passiveType );//"Back to Back"
+        //Click the Site search button
+        isDisplayed(passiveRepeaterSiteSearchButton,10);
+        click(passiveRepeaterSiteSearchButton);
+        //Wait for the Site Look Up popup
+        isDisplayed(pathDetailSiteLookUpSiteName,10);
+        //Enter Site Name
+        type(siteName,pathDetailSiteLookUpSiteName);//"New York"
+        isDisplayed(siteLookUpSearchButtonModal,10);
+        click(siteLookUpSearchButtonModal);
+        //Validate that at least one row
+        isDisplayed(pathDetailSiteLookUpRadiusResults,10);
+        click(pathDetailSiteLookUpRadiusResults);
+        //Enter common loss
+        type("12",passiveRepeaterCommonLossField);
+        //Click Antenna Model search button
+        click(passiveRepeaterAntennaModelSearchButton);
+    }
+
 
     public void openPassiveRepeaterAndValidateFieldsAndButtons(){
         //Is the Passive Repeater trigger pressent and active
@@ -267,6 +331,11 @@ public class PathDetailPage extends BasePage {
         isDisplayed(passiveRepeaterSaveButton,3);
         isDisplayed(passiveRepeaterAddPassiveRepeaterTrigger,3);
         isDisplayed(passiveRepeaterAntennaModelSearchButton,3);
+    }
+
+
+    public void navBack() {
+        goBack();
     }
 
     public void clickInactivePassiveRepeaterTrigger(){
@@ -314,6 +383,13 @@ public class PathDetailPage extends BasePage {
     public void nextArrow(){
         isDisplayed(activePathDetailNextArrowButton,8);//path-details-footer-next-path-button
         click(activePathDetailNextArrowButton);
+        closeConfirmation();
+    }
+
+    public void previousArrow(){
+        isDisplayed(activePathDetailPreviousArrowButton,8);//path-details-footer-next-path-button
+        slowDown(3);
+        click(activePathDetailPreviousArrowButton);
         closeConfirmation();
     }
 
