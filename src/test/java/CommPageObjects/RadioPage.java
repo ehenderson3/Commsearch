@@ -119,7 +119,7 @@ public class RadioPage extends BasePage {
             type(nominal, atpcModalNominalPowerLevelField);
             click(atpcModalCoordinatedPowerField);
             type(coordinatedPower, atpcModalCoordinatedPowerField);
-            click(atpcModalNominalPowerLevelField);
+            click(atpcModalTriggerLevelField);
         }
 
     }

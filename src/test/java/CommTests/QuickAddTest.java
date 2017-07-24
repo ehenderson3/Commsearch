@@ -776,10 +776,10 @@ public class QuickAddTest extends BaseTest {
             quickAdd.quickAddPathDataSetup("BTM SUPPORT DATA", "940 MHz", "BLACKTAIL MTN", "48 0 47.8 N", "114 21 58.4 W", "2035.79", "KBM76");
         }
         pathSummary.valSiteLocationToggleOn();
-            quickAdd.quickAddPathGeneralNoSave("Elevation Autofill User Can Overwrite", "4.0 GHz", "new", "45 26 47.70 N", "4 7 12.00 W", "98", "Td5G43s");
+            quickAdd.quickAddPathGeneralNoSave("Elevation Autofill User Can Overwrite", "4.0 GHz", "new york", "45 26 47.70 N", "4 7 12.00 W", "98", "Td5G43s");
             quickAdd.changeLatLong("9 26 42.70 N", "8 7 9.00 W");
             quickAdd.savePath();
-            pathSummary.viewSiteCallSignLatLongGeColumns2(0, "New York", "KA20003", "40 44 54 N", "73 59 9 W", "0.98");
+            pathSummary.viewSiteCallSignLatLongGeColumns2(0, "New York", "", "40 34 10 N", "122 26 14 W", "0.98");
 
     }
     /*COM-148
@@ -1081,7 +1081,7 @@ public class QuickAddTest extends BaseTest {
 
     }
     @Test//COM-493
-    public void passiveRepeater_SelectRemoveButtond_PassiveRepeaterRecordWillBeRemoved() {
+    public void antennacode_Willautofillblocks_WhenSavingnewpath() {
         createPath.createBrandNewProjectPath("Inactive Passive Repeater"+ randomNumber, "This is the Default");
         createPath.fillOutCompanyFilter("VZW222","", "",0);
 
