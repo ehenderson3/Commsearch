@@ -125,6 +125,7 @@ public class PathDetailAntennaPage extends BasePage {
 
         //type P8F-9 in the Antenna Model field
         type(luAntMod,lookUpAntennaModel);
+        assertTrue(isDisplayed(lookUpSearchButton,12));
 
         //Click the search button
         click(lookUpSearchButton);

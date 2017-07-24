@@ -914,14 +914,25 @@ public class PathSummaryTest extends BaseTest {
         quickAdd.quickAddPathGeneral2("Test Path 2", "4.0 GHz", "ASR-Call","37 47 59.7 N", "122 23 58.8 W","55", "KA2049");
     }
 
-    /**COM-455
+    /**COM-455 and COM 500
      * Enter information that causes error (e.g. lat/long the same for both sites in a path).
      ACTUAL RESULTS:
      See screenshot "Validation error not graceful.png" - Error message isn't meaningful for user.
      EXPECTED RESULTS:
      Validation error message explains the error in a way that provides relevant information to the user about the cause of the issue.
+
+
+     Original ticket (COM-375) Description says:
+     "If ... long1 === long2 && difference between lat1 and lat2 < 0.000003 {   // api returns coordinates error"
+     ACTUAL RESULTS:
+     Currently, if Long1===Long2, and the difference between Lat1 and Lat2 is greater than the minimum an error is displayed.
+     This is not occurring when Lat1 & Lat2 are equal.
+     EXPECTED RESULTS:
+     Long1 can be equal to Long2, as long as difference between Lat1 & Lat 2 is >.000003
+     Please see attached screenshot.
+
      */
-    @Test
+    @Test//COM-500
     public void quickAdd_shouldGiveWarning_whenLatAndLongAreTheSame() {
         createPath.createBrandNewProjectPath("QuickAddElevationBoundary" + randomNumber, "This is the Default");
         createPath.fillOutCompanyFilter("VZW222" ,"", "",0);
@@ -930,7 +941,5 @@ public class PathSummaryTest extends BaseTest {
         quickAdd.quickAddPathGeneral1("SameLatLong", "23.0 GHz", "New York", "40 44 54 N", "73 59 9 W", "0.98", "KA20003");
 
     }
-
-
 
 }

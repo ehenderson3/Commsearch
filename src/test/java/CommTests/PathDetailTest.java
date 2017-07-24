@@ -1,6 +1,14 @@
 package CommTests;
 
-import CommPageObjects.*;
+import CommPageObjects.QuickAddPage;
+import CommPageObjects.PathSummaryPage;
+import CommPageObjects.CreateNewPathPage;
+import CommPageObjects.PathDetailPage;
+import CommPageObjects.PathDetailAntennaPage;
+
+
+
+
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Rule;
@@ -787,7 +795,7 @@ public class PathDetailTest extends BaseTest {
         pathDetail.checkForBlankPassiveRepeaterFields();
     }
 
-    /**COM-495
+    /**COM-495 and COM-496
      *   One remaining bug from Farhana's List.
          Defined steps to reproduce: (In IE11, not happening all the time.)
          Go to a project with a path.

@@ -810,7 +810,7 @@ public class QuickAddPage extends BasePage {
         type(Asr,callSign);
         type(ElevationText,elevation);
         isDisplayed(addPathButton,6);
-        type("new",siteField2);
+        type("new york",siteField2);
         isDisplayed(option,6);
         if(isDisplayed(option,10)== false){
             click(siteField2);

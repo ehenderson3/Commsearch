@@ -1,6 +1,13 @@
 package CommTests;
 
-import CommPageObjects.*;
+
+import CommPageObjects.QuickAddPage;
+import CommPageObjects.PathSummaryPage;
+import CommPageObjects.CreateNewPathPage;
+import CommPageObjects.PathDetailPage;
+import CommPageObjects.PathDetailAntennaPage;
+import CommPageObjects.RadioPage;
+
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
