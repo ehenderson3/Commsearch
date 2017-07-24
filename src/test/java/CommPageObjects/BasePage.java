@@ -47,6 +47,10 @@ public class BasePage implements Config {
         }
     }
 
+    public void goBack(){
+        driver.navigate().back();
+    }
+
     /**
      * finds a single element using the Selenium's findElement
      *
@@ -116,13 +120,23 @@ public class BasePage implements Config {
         driver.findElement(locator).clear();
     }
 
-    /**
+    public boolean checked(By locator) {
+        boolean checked = find(locator).isSelected();
+        return checked;
+    }
+
+    /**COM-426 Fix Site search locator and add COM 393
      * Clicks on elements that are difficult to locate
      * @param locator
      */
     public void clickJS(By locator){
         WebElement invisible = driver.findElement(locator);
         ((JavascriptExecutor)driver).executeScript("arguments[0].click();", invisible );}
+
+    public void clickJS(By locator,int i){
+        WebElement invisible = driver.findElements(locator).get(i);
+        ((JavascriptExecutor)driver).executeScript("arguments[0].click();", invisible );}
+
 
     /**
      * produces a list of elements and prints the attribute list
@@ -165,6 +179,12 @@ public class BasePage implements Config {
         return textValue;
     }
 
+    public String getTextInner(By locator) {
+        WebElement txtBoxContent = driver.findElement(locator);
+        String textValue = new String();
+        textValue = txtBoxContent.getAttribute("innerText");
+        return textValue;
+    }
     /**
      * finds multiple element's text using the Selenium's findElements and getText
      * user may select using an array
@@ -307,6 +327,7 @@ public class BasePage implements Config {
         return true;
     }
 
+
     /**
      * Waits for element to be located and clickable will timeout if element is not clickable
      *
@@ -384,6 +405,17 @@ public class BasePage implements Config {
 
         }
     }
+
+    /**
+     * pass a list of objects to the method so that a for loop can iterate the list to find the correct row
+     * @param locators
+     * @return
+     */
+    public int getRows(By locators){
+        int rows =  finds(locators).size();
+        return rows;
+    }
+
 
 
     public Boolean waitForIsDisplayed(By locator, Integer... timeout) {

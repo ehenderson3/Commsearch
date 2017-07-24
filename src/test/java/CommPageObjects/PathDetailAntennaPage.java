@@ -16,7 +16,7 @@ public class PathDetailAntennaPage extends BasePage {
     //Buttons
     By antennaModelSearch1 = By.id("path-details-antenna-0-0-lookup-trigger");
     By antennaModelSearch2 = By.id("path-details-antenna-1-0-lookup-trigger");
-    By lookUpSearchButton = By.id("site-lookup-submit");
+    By lookUpSearchButton = By.id("antenna-lookup-submit");
     By saveDetailsButton = By.id("path-details-footer-save-path-button");
     By antennaClearX = By.cssSelector(".fa.fa-spinner.fa-pulse.fa-fw");
     By antennaClearX2 = By.className("clear-input-button");
@@ -28,21 +28,27 @@ public class PathDetailAntennaPage extends BasePage {
 
     //Path Entry Fields - Able to use the type method
     By antennaModel1 = By.id("path-details-site-0-0-antenna-model");
+    By antennaModel1B = By.id("path-details-antennas-0-0-antenna-model");
+
+
+
     By lookUpAntennaModel = By.id("antenna-lookup-antenna-model");
     By pathDetail = By.id("antenna-lookup-antenna-model");
-    By centerlineField = By.id("path-details-site-0-0-centerline");
-    By antennaModel2 = By.id("path-details-site-1-0-antenna-model");
-    By centerlineField2 = By.id("path-details-site-1-0-centerline");
-    By antennaModelField = By.id("path-details-site-0-0-antenna-model");
-    By modeField = By.id("path-details-site-0-0-mode");
-    By antennaCodeField = By.id("path-details-site-0-0-antenna-code");
-    By beamwithField = By.id("path-details-site-0-0-beamwidth");
-    By gainField = By.id("path-details-site-0-0-gain");
-    By antennaModelField2 = By.id("path-details-site-1-0-antenna-model");
-    By modeField2 = By.id("path-details-site-1-0-mode");
-    By antennaCodeField2 = By.id("path-details-site-1-0-antenna-code");
-    By beamwithField2 = By.id("path-details-site-1-0-beamwidth");
-    By gainField2 = By.id("path-details-site-1-0-gain");
+    By centerlineField = By.id("path-details-antennas-0-0-centerline");
+    By antennaModelField = By.id("path-details-antennas-0-0-antenna-model");
+    By modeField = By.id("path-details-antennas-0-0-mode");
+    By antennaCodeField = By.id("path-details-antennas-0-0-antenna-code");
+    By beamwithField = By.id("path-details-antennas-0-0-beamwidth");
+    By gainField = By.id("path-details-antennas-0-0-gain");
+
+    By antennaModel2 = By.id("path-details-antennas-1-0-antenna-model");
+    By centerlineField2 = By.id("path-details-antennas-1-0-centerline");
+    By antennaModelField2 = By.id("path-details-antennas-1-0-antenna-model");
+    By modeField2 = By.id("path-details-antennas-1-0-mode");
+    By antennaCodeField2 = By.id("path-details-antennas-1-0-antenna-code");
+    By beamwithField2 = By.id("path-details-antennas-1-0-beamwidth");
+    By gainField2 = By.id("path-details-antennas-1-0-gain");
+
     By antennaModelForTextField = By.name("antennas[0][0]modelNumber");
     By includeRevisionsCheckBox = By.id("antenna-lookup-include-revisions-include");
     By lookUpAntennaCode = By.id("antenna-lookup-antenna-code");
@@ -55,8 +61,8 @@ public class PathDetailAntennaPage extends BasePage {
     By antResultListEven = By.cssSelector(".react-grid-Row.react-grid-Row--even");
     By antResultListOdd = By.cssSelector(".react-grid-Row.react-grid-Row--even");
     By antResultListItem = By.xpath("//*[contains(@id, 'antenna-lookup-modal-table-data-antennaCode-') and contains(@id, 'antenna-lookup-modal-table-data-antennaCode-')]");
-    By antCodeErrorText = By.id("path-details-site-0-0-antenna-code-error-message");
-    By antCodeErrorText2 = By.id("path-details-site-1-0-antenna-code-error-message");
+    By antCodeErrorText = By.id("path-details-antennas-0-0-antenna-code-error-message");
+    By antCodeErrorText2 = By.id("path-details-antennas-1-0-antenna-code-error-message");
     By tempAntennaCodeArray = By.xpath("//*[@id=\"antenna-lookup-modal\"]/div[2]/div/div/div/div[2]/div/div/div/div[1]/div/div[1]/div/div/span/div");
 
 //
@@ -71,6 +77,30 @@ public class PathDetailAntennaPage extends BasePage {
         visit("/");
     }
 
+    public void enterAntennaCodeAndBlur(String antCode, String antCenterLine){
+        //enter antenna code
+        assertTrue(isDisplayed(antennaCodeField,8));
+        type(antCode, antennaCodeField);
+        //click a field other than antenna
+        assertTrue(isDisplayed(gainField,8));
+        click(gainField);
+        //validate that the autopopulate fields
+        waitForFieldToBeNotNull(gainField);
+        //enter the centerline
+        type(antCenterLine, centerlineField);
+        //enter antenna code
+        assertTrue(isDisplayed(antennaCodeField,8));
+        type(antCode, antennaCodeField2);
+        //click a field other than antenna
+        assertTrue(isDisplayed(gainField2,8));
+        click(gainField2);
+        //validate that the autopopulate fields
+        isDisplayed(gainField2,10);
+        //enter the centerline
+        type(antCenterLine, centerlineField2);
+    }
+
+
     public void antennaLookUpFromPassiveRepeater(String codeText){
         isDisplayed(lookUpAntennaCode,10);
         type(codeText,lookUpAntennaCode);
@@ -83,7 +113,7 @@ public class PathDetailAntennaPage extends BasePage {
 
     public void addAntennaToPath(String luAntMod, String mode, String antCode, String beamwith, String gain,String luAntMod2,String mode2, String antCode2, String beamwith2, String gain2){
         //Verify that the Antenna Model field is present (that tells us that we are on the Antenna module)
-        isDisplayed(antennaModel1);
+        isDisplayed(antennaModel1,30);
 
         //******************LEFT ANTENNA*************************************************
 
@@ -91,7 +121,7 @@ public class PathDetailAntennaPage extends BasePage {
         clickJS(antennaModelSearch1);
 
         //Verify that the Antenna Lookup pop up appears (We will use the Antenna Model field)
-        assertTrue(isDisplayed(lookUpAntennaModel,6));
+      assertTrue(isDisplayed(lookUpAntennaModel,6));
 
         //type P8F-9 in the Antenna Model field
         type(luAntMod,lookUpAntennaModel);
@@ -313,5 +343,6 @@ public class PathDetailAntennaPage extends BasePage {
         click(saveDetailsButton);
 
     }
+
 
 }

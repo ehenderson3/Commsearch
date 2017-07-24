@@ -35,7 +35,7 @@ public class PathDetailAntennaTest extends BaseTest {
     @Ignore//TODO Waiting on COM-464 Antenna Lookup for Passive Repeater, should filter antennas by passive type
     public void pathDetailAntennaSearch_shouldReturnRows_whenValidSearchCriteriaIsEntered() {
         createPath.createBrandNewProjectPath("Add Antenna" + randomNumber, "This is the Default");
-        createPath.fillOutCompanyFilter("VZW111","", "",0);
+        createPath.fillOutCompanyFilter("VZW222","", "",0);
         pathSummary.changeToSi();
         pathSummary.openPathDetailForAddingPath();
         pathDetail.addPathViaPathDetailBasicSetup1("SrchRetRows1", "KBY45", "34 37 42.1 N", "112 39 26.2 W", "66","1");
@@ -58,7 +58,7 @@ public class PathDetailAntennaTest extends BaseTest {
     @Test
     public void pathDetailAntenna_willAutoFill_whenThereIsAMatchOnAntennaCode() {
         createPath.createBrandNewProjectPath("Antenna Code onBlur" + randomNumber, "This is the Default");
-        createPath.fillOutCompanyFilter("VZW111", "", "", 0);
+        createPath.fillOutCompanyFilter("VZW222", "", "", 0);
         pathSummary.changeToSi();
         pathSummary.openPathDetailForAddingPath();
         pathDetail.addPathViaPathDetailBasicSetup1("MatchOnAntCode1", "KBY45", "34 37 42.1 N", "112 39 26.2 W", "66", "1");
@@ -98,7 +98,7 @@ public class PathDetailAntennaTest extends BaseTest {
     @Test
     public void pathDetailAntenna_willAutoFill_whenThereIsAMatchOnASR() {
         createPath.createBrandNewProjectPath("ASR onBlur" + randomNumber, "This is the Default");
-        createPath.fillOutCompanyFilter("VZW111", "", "", 0);
+        createPath.fillOutCompanyFilter("VZW222", "", "", 0);
         pathSummary.changeToSi();
         pathSummary.openPathDetailForAddingPath();
         pathDetail.addPathViaPathDetailASR1("1300000", "35 57 12 N", "85 2 6.7 W", "170.658", "ASR Created2");
@@ -109,7 +109,7 @@ public class PathDetailAntennaTest extends BaseTest {
     @Test
     public void pathDetailAntenna_willError_whenThereIsNotAMatchOnASR() {
         createPath.createBrandNewProjectPath("ASR onBlur" + randomNumber, "This is the Default");
-        createPath.fillOutCompanyFilter("VZW111", "", "", 0);
+        createPath.fillOutCompanyFilter("VZW222", "", "", 0);
         pathSummary.changeToSi();
         pathSummary.openPathDetailForAddingPath();
         pathDetail.addPathViaPathDetailASR1Error("6fg6hg64");
@@ -134,7 +134,7 @@ public class PathDetailAntennaTest extends BaseTest {
     @Ignore //TODO can't get the intra field clear to work
     public void pathDetailAntenna_allAntennaFieldCleared_WhenClickingTheDeleteX() {
         createPath.createBrandNewProjectPath("Antenna Code onBlur" + randomNumber, "This is the Default");
-        createPath.fillOutCompanyFilter("VZW111", "", "", 0);
+        createPath.fillOutCompanyFilter("VZW222", "", "", 0);
         pathSummary.changeToSi();
         pathSummary.openPathDetailForAddingPath();
         pathDetail.addPathViaPathDetailBasicSetup1("MatchOnAntCode1", "KBY45", "34 37 42.1 N", "112 39 26.2 W", "66", "1");
@@ -151,15 +151,15 @@ public class PathDetailAntennaTest extends BaseTest {
          Then the selected antenna's info will auto fill in path details sheet
          AND the antenna lookup modal will close after an antenna is selected
      */
-    @Ignore//TODO Waiting on COM-464 Antenna Lookup for Passive Repeater, should filter antennas by passive type
+    @Test//TODO 7/9 The site search yields nothing sent the following to Nemo https://www.screencast.com/t/wH38xHWRh
     public void pathDetailAntModle_shouldAutoFill_whenExistingAntennaIsFoundOnSearch() {
         createPath.createBrandNewProjectPath("Add Antenna" + randomNumber, "This is the Default");
-        createPath.fillOutCompanyFilter("VZW111", "", "", 0);
+        createPath.fillOutCompanyFilter("VZW222", "", "", 0);
         pathSummary.changeToSi();
         pathSummary.openPathDetailForAddingPath();
         pathDetail.addPathViaPathDetailBasicSetup1("MatchOnExistAnt1", "KBY45", "34 37 42.1 N", "112 39 26.2 W", "66", "1");
         pathDetail.addPathViaPathDetailBasicSetup2("MatchOnExistAnt2", "KA20003", "40 44 54 N", "73 59 9 W", "55");
-        pathDetailAnt.addAntennaToPath("P8F-9", "txrx", "02306A", "3.2°", "20.3", "P8F-9", "txrx", "02306A", "3.2°", "20.3");
+        pathDetailAnt.addAntennaToPath("P8F-9", "Tx/Rx", "02306A", "3.2°", "20.3", "P8F-9", "Tx/Rx", "02306A", "3.2°", "20.3");
         pathDetailAnt.clickSaveDetails();
     }
 
@@ -175,7 +175,7 @@ public class PathDetailAntennaTest extends BaseTest {
     @Ignore// TODO COM-400 takes this functionality out for the time being
     public void pathDetailAntModal_includeRevisionsShouldAppear_when3charsAreEnteredInAntennaCode() {
         createPath.createBrandNewProjectPath("3Char" + randomNumber, "This is the Default");
-        createPath.fillOutCompanyFilter("VZW111", "", "", 0);
+        createPath.fillOutCompanyFilter("VZW222", "", "", 0);
         pathSummary.changeToSi();
         pathSummary.openPathDetailForAddingPath();
         pathDetail.addPathViaPathDetailBasicSetup1("3Char1", "KBY45", "34 37 42.1 N", "112 39 26.2 W", "66", "1");
@@ -202,7 +202,7 @@ public class PathDetailAntennaTest extends BaseTest {
     @Ignore// TODO this feature is being removed COM-400
     public void pathDetailAntModal_allRevisionsShouldAppear_whenAntennaModelContainsRevisions() {
         createPath.createBrandNewProjectPath("Revision results" + randomNumber, "This is the Default");
-        createPath.fillOutCompanyFilter("VZW111", "", "", 0);
+        createPath.fillOutCompanyFilter("VZW222", "", "", 0);
         pathSummary.changeToSi();
         pathSummary.openPathDetailForAddingPath();
         pathDetail.addPathViaPathDetailBasicSetup1("Revisions1", "KBY45", "34 37 42.1 N", "112 39 26.2 W", "66", "1");
@@ -219,7 +219,7 @@ public class PathDetailAntennaTest extends BaseTest {
      @Test
      public void pathDetailAntenna_willError_whenThereIsNoAMatchOnAntennaCode() {
      createPath.createBrandNewProjectPath("ErrorNoAnt Match" + randomNumber, "This is the Default");
-     createPath.fillOutCompanyFilter("VZW111","", "",0);
+     createPath.fillOutCompanyFilter("VZW222","", "",0);
      pathSummary.changeToSi();
      pathSummary.openPathDetailForAddingPath();
      pathDetail.addPathViaPathDetailBasicSetup1("ErrNoMatch1", "KBY45", "34 37 42.1 N", "112 39 26.2 W", "66","1");

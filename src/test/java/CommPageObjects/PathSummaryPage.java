@@ -668,7 +668,7 @@ public class PathSummaryPage extends BasePage {
         assertTrue("Default Company is not present", isDisplayed(defaultLicenseeField, 10));
         defaultCompany = getFieldText(defaultLicenseeField);
         defaultFresnelZoneRadius = getFieldText(fresnelZoneRadiusPercentField);
-        assertEquals("The defaultLic default val is not correct", defaultCompany, "Verizon");
+        assertEquals("The defaultLic default val is not correct", defaultCompany, "Verizon AZ");
         assertEquals("The defaultFresnelZoneRadius default val is not correct", defaultFresnelZoneRadius, "60");
 
         clear(fresnelZoneRadiusPercentField);
@@ -885,7 +885,7 @@ public class PathSummaryPage extends BasePage {
         defaultKFactor = getFieldText(kFactorField);
         defaultMinimumClearance = getFieldText(minClearence);
         defaultTargetAvailability = getFieldText(targetAvailability);
-        assertEquals("The defaultLic default val is not correct", defaultLic, "Verizon");
+        assertEquals("The defaultLic default val is not correct", defaultLic, "Verizon AZ");
         assertEquals("The defaultFresnelZoneRadius default val is not correct", defaultFresnelZoneRadius, "60");
         assertEquals("The defaultKFactor default val is not correct", defaultKFactor, "1");
         assertEquals("The defaultMinimumClearance default val is not correct", defaultMinimumClearance, "0");

@@ -56,7 +56,7 @@ public class PathSummaryTest extends BaseTest {
     @Test
     public void copyPath() {
         createPath.createBrandNewProjectPath("Best Project Ever"+ randomNumber, "This is the Default");
-        createPath.fillOutCompanyFilter("VZW111" ,"", "",0);
+        createPath.fillOutCompanyFilter("VZW222" ,"", "",0);
         pathSummary.valSiteLocationToggleOn();
         quickAdd.quickAddPathGeneral2("Test Path 1", "23.0 GHz", "ASR-Call","32 47 16.4 N", "96 47 59 W","55", "KA3982");
         pathSummary.viewSiteCallSignLatLongGeColumns1(0,"KDFW Studio","KA3982","32 47 16.4 N","96 47 59 W","55");
@@ -78,7 +78,7 @@ public class PathSummaryTest extends BaseTest {
     @Test
     public void hoverPassiveRepeaterValSiteInfo() {
         createPath.createBrandNewProjectPath("Best Project Ever"+ randomNumber, "This is the Default");
-        createPath.fillOutCompanyFilter("VZW111" ,"", "",0);
+        createPath.fillOutCompanyFilter("VZW222" ,"", "",0);
 
         quickAdd.quickAddPathGeneral2("Test Path 1", "4.0 GHz", "ASR-Call","", "","55", "KA3982");
         quickAdd.quickAddPathGeneral2("Test Path 2", "4.0 GHz", "ASR-Call","", "","55", "KA2049");
@@ -90,7 +90,7 @@ public class PathSummaryTest extends BaseTest {
     @Test
     public void hoverSiteLocationValSiteInfo() {
         createPath.createBrandNewProjectPath("Best Project Ever"+ randomNumber, "This is the Default");
-        createPath.fillOutCompanyFilter("VZW111" ,"", "",0);
+        createPath.fillOutCompanyFilter("VZW222" ,"", "",0);
         quickAdd.quickAddPathGeneral2("Test Path 1", "4.0 GHz", "ASR-Call","", "","55", "KA3982");
         quickAdd.quickAddPathGeneral2("Test Path 2", "4.0 GHz", "ASR-Call","", "","55", "KA2049");
         pathSummary.hoverSiteLocationValSiteInfo(0);
@@ -103,7 +103,7 @@ public class PathSummaryTest extends BaseTest {
     @Test
     public void valDefaultFilterValue() {
         createPath.createBrandNewProjectPath("Best Project Ever"+ randomNumber, "This is the Default");
-        createPath.fillOutCompanyFilter("VZW111" ,"", "",0);
+        createPath.fillOutCompanyFilter("VZW222" ,"", "",0);
 
         quickAdd.quickAddPathGeneral2("Test Path 1", "4.0 GHz", "ASR-Call","", "","55", "KA3982");
         assertEquals("Band is not the default dropdown input", "band", pathSummary.defaultFilterValue());
@@ -136,7 +136,7 @@ public class PathSummaryTest extends BaseTest {
     @Test
     public void valFilterResultSet() {
         createPath.enterProjectForCompany("valFilterResultSet" +randomNumber+ "f", "This is the Default");
-        createPath.fillOutCompanyFilter("VZW111" ,"", "",0);
+        createPath.fillOutCompanyFilter("VZW222" ,"", "",0);
         quickAdd.quickAddPathGeneral2("Test Path 1", "23.0 GHz", "ASR-Call","", "","55", "KA3982");
         pathSummary.hoverSiteLocationValSiteInfo(0);
         quickAdd.quickAddPathGeneral2("Test Path 2", "4.0 GHz", "ASR-Call","", "","55", "KA2049");
@@ -156,7 +156,7 @@ public class PathSummaryTest extends BaseTest {
         pathSummary.validatePathNameFilteredResult("Test Path 3");
 
         //TODO update for company filter is
-        pathSummary.filter("Company","Verizon");
+        pathSummary.filter("Company","Verizon AZ");
         pathSummary.showAllPathsWithNoAssignedFrequencyBandsPresent();
         assertEquals(pathSummary.showAllCheckBoxText(),"Show all Paths with No Assigned Company");
        //pathSummary.validateLicenseeFilteredResult("Second Path adding extra for testing length", "Third Path", "Fourth Path", "Fifth Path");
@@ -218,7 +218,7 @@ public class PathSummaryTest extends BaseTest {
         public void valBlankFilterResultSet() {
 
             createPath.createBrandNewProjectPath("Best Project Ever"+ randomNumber, "This is the Default");
-            createPath.fillOutCompanyFilter("VZW111" ,"", "",0);
+            createPath.fillOutCompanyFilter("VZW222" ,"", "",0);
 
             quickAdd.quickAddPathGeneral2("Test Path 1", "23.0 GHz", "ASR-Call","", "","55", "KA3982");
             pathSummary.hoverSiteLocationValSiteInfo(0);
@@ -258,7 +258,7 @@ public class PathSummaryTest extends BaseTest {
     @Test
     public void valSelectAllPaths() {
         createPath.createBrandNewProjectPath("Best Project Ever"+ randomNumber, "This is the Default");
-        createPath.fillOutCompanyFilter("VZW111" ,"", "",0);
+        createPath.fillOutCompanyFilter("VZW222" ,"", "",0);
 
         quickAdd.quickAddPathGeneral2("Test Path 1", "23.0 GHz", "ASR-Call","", "","55", "KA3982");
         pathSummary.hoverSiteLocationValSiteInfo(0);
@@ -302,7 +302,7 @@ public class PathSummaryTest extends BaseTest {
     @Test
     public void valDeletePaths() {
         createPath.createBrandNewProjectPath("Best Project Ever"+ randomNumber, "This is the Default");
-        createPath.fillOutCompanyFilter("VZW111" ,"", "",0);
+        createPath.fillOutCompanyFilter("VZW222" ,"", "",0);
 
         quickAdd.quickAddPathGeneral2("Test Path 1", "23.0 GHz", "ASR-Call","", "","55", "KA3982");
         pathSummary.hoverSiteLocationValSiteInfo(0);
@@ -341,7 +341,7 @@ public class PathSummaryTest extends BaseTest {
     @Test
     public void viewLOSAvailVal() {
         createPath.createBrandNewProjectPath("Best Project Ever"+ randomNumber, "This is the Default");
-        createPath.fillOutCompanyFilter("VZW111" ,"", "",0);
+        createPath.fillOutCompanyFilter("VZW222" ,"", "",0);
 
         quickAdd.quickAddPathGeneral2("Test Path 1", "23.0 GHz", "ASR-Call","", "","55", "KA3982");
         pathSummary.hoverSiteLocationValSiteInfo(0);
@@ -357,7 +357,7 @@ public class PathSummaryTest extends BaseTest {
     @Test
     public void valSortingNumPathBand() {
         createPath.createBrandNewProjectPath("Best Project Ever"+ randomNumber, "This is the Default");
-        createPath.fillOutCompanyFilter("VZW111" ,"", "",0);
+        createPath.fillOutCompanyFilter("VZW222" ,"", "",0);
 
         quickAdd.quickAddPathGeneral2("Test Path 1", "23.0 GHz", "ASR-Call","", "","55", "KA3982");
         pathSummary.hoverSiteLocationValSiteInfo(0);
@@ -384,7 +384,7 @@ public class PathSummaryTest extends BaseTest {
     @Test
     public void sortLOSAvailVal() {
         createPath.createBrandNewProjectPath("Best Project Ever"+ randomNumber, "This is the Default");
-        createPath.fillOutCompanyFilter("VZW111" ,"", "",0);
+        createPath.fillOutCompanyFilter("VZW222" ,"", "",0);
 
         quickAdd.quickAddPathGeneral2("Test Path 1", "23.0 GHz", "ASR-Call","32 47 16.4 N", "96 47 59 W","55", "KA3982");
         pathSummary.hoverSiteLocationValSiteInfo(0);
@@ -415,7 +415,7 @@ public class PathSummaryTest extends BaseTest {
      @Test
      public void deletePathFromHamburgerMenu() {
          createPath.createBrandNewProjectPath("Best Project Ever"+ randomNumber, "This is the Default");
-         createPath.fillOutCompanyFilter("VZW111" ,"", "",0);
+         createPath.fillOutCompanyFilter("VZW222" ,"", "",0);
 
          quickAdd.quickAddPathGeneral2("Test Path 1", "23.0 GHz", "ASR-Call","32 47 16.4 N", "96 47 59 W","55", "KA3982");
          pathSummary.hoverSiteLocationValSiteInfo(0);
@@ -457,7 +457,7 @@ public class PathSummaryTest extends BaseTest {
     @Test
     public void viewSettingsFromHamburgerMenu() {
         createPath.createBrandNewProjectPath("Best Project Ever"+ randomNumber, "This is the Default");
-        createPath.fillOutCompanyFilter("VZW111" ,"", "",0);
+        createPath.fillOutCompanyFilter("VZW222" ,"", "",0);
 
         quickAdd.quickAddPathGeneral2("Test Path 1", "23.0 GHz", "ASR-Call","32 47 16.4 N", "96 47 59 W","55", "KA3982");
         pathSummary.selectAndViewSettingsFromHamburgerMenu();
@@ -518,7 +518,7 @@ public class PathSummaryTest extends BaseTest {
     @Test
     public void changeUnitsSettingsAndVal() {
         createPath.createBrandNewProjectPath("Best Project Ever"+ randomNumber, "This is the Default");
-        createPath.fillOutCompanyFilter("VZW111" ,"", "",0);
+        createPath.fillOutCompanyFilter("VZW222" ,"", "",0);
 
         quickAdd.quickAddPathGeneral2("Test Path 1", "23.0 GHz", "ASR-Call","32 47 16.4 N", "96 47 59 W","55", "KA3982");
         pathSummary.changeUnitsFromSiToUs("02","6.56");
@@ -582,7 +582,7 @@ public class PathSummaryTest extends BaseTest {
     @Test
     public void quickAdd_shouldGiveWarning_whenElevationIsOutSideOfNeg304dot495And30479dot695Si() {
         createPath.createBrandNewProjectPath("QuickAddElevationBoundary" + randomNumber, "This is the Default");
-        createPath.fillOutCompanyFilter("VZW111" ,"", "",0);
+        createPath.fillOutCompanyFilter("VZW222" ,"", "",0);
         pathSummary.valSiteLocationToggleOn();
         pathSummary.changeToSi();
 
@@ -627,7 +627,7 @@ public class PathSummaryTest extends BaseTest {
     @Test
     public void quickAdd_shouldGiveWarning_whenElevationIsOutSideOfNeg999And99999US() {
         createPath.createBrandNewProjectPath("QuickAddElevationBoundary" + randomNumber, "This is the Default");
-        createPath.fillOutCompanyFilter("VZW111" ,"", "",0);
+        createPath.fillOutCompanyFilter("VZW222" ,"", "",0);
         pathSummary.valSiteLocationToggleOn();
 
         quickAdd.quickAddPathGeneral1("ElevLOWBoundarySuccess1", "23.0 GHz", "ASR-Call", "32 47 16.4 N", "96 47 59 W", "-999", "KA3982");
@@ -664,7 +664,7 @@ public class PathSummaryTest extends BaseTest {
     @Test
     public void quickAdd_GEshouldPersistAndNotRecalculate_whenGEUsIsSetStored() {
         createPath.createBrandNewProjectPath("GEshouldPersistAndNotRecalculate" + randomNumber, "This is the Default");
-        createPath.fillOutCompanyFilter("VZW111" ,"", "",0);
+        createPath.fillOutCompanyFilter("VZW222" ,"", "",0);
         pathSummary.valSiteLocationToggleOn();
 
         pathSummary.changeToSi();
@@ -692,7 +692,7 @@ public class PathSummaryTest extends BaseTest {
     @Test
     public void viewDefaultSettingsFromProjectSetting() {
         createPath.enterProjectForCompany("Best Project Ever" +randomNumber+ "f", "This is the Default");
-        createPath.fillOutCompanyFilter("VZW111" ,"", "",0);
+        createPath.fillOutCompanyFilter("VZW222" ,"", "",0);
         pathSummary.valSiteLocationToggleOn();
         quickAdd.quickAddPathGeneral2("Test Path 1", "23.0 GHz", "ASR-Call","32 47 16.4 N", "96 47 59 W","55", "KA3982");
         pathSummary.viewDefaultSettings();
@@ -739,7 +739,7 @@ public class PathSummaryTest extends BaseTest {
     @Test
     public void valEffectsOfSiteSettingsCheckbox() {
         createPath.createBrandNewProjectPath("Best Project Ever"+ randomNumber, "This is the Default");
-        createPath.fillOutCompanyFilter("VZW111" ,"", "",0);
+        createPath.fillOutCompanyFilter("VZW222" ,"", "",0);
         quickAdd.quickAddPathGeneral2("Test Path 1", "23.0 GHz", "ASR-Call","32 47 16.4 N", "96 47 59 W","55", "KA3982");
         pathSummary.valSiteLocationToggle();
     }
@@ -758,7 +758,7 @@ public class PathSummaryTest extends BaseTest {
     @Test
     public void valFresnelZoneRadiusField() {
         createPath.createBrandNewProjectPath("Best Project Ever"+ randomNumber, "This is the Default");
-        createPath.fillOutCompanyFilter("VZW111" ,"", "",0);
+        createPath.fillOutCompanyFilter("VZW222" ,"", "",0);
 
         quickAdd.quickAddPathGeneral2("Test Path 1", "23.0 GHz", "ASR-Call","32 47 16.4 N", "96 47 59 W","55", "KA3982");
         pathSummary.valFresnelZoneRadius();
@@ -775,7 +775,7 @@ public class PathSummaryTest extends BaseTest {
     @Test
     public void valKFactorField() {
         createPath.createBrandNewProjectPath("Best Project Ever"+ randomNumber, "This is the Default");
-        createPath.fillOutCompanyFilter("VZW111" ,"", "",0);
+        createPath.fillOutCompanyFilter("VZW222" ,"", "",0);
 
         quickAdd.quickAddPathGeneral2("Test Path 1", "23.0 GHz", "ASR-Call","32 47 16.4 N", "96 47 59 W","55", "KA3982");
         pathSummary.valKFactorSetting();
@@ -793,7 +793,7 @@ public class PathSummaryTest extends BaseTest {
     @Test
     public void valKMinClearanceField() {
         createPath.createBrandNewProjectPath("Best Project Ever"+ randomNumber, "This is the Default");
-        createPath.fillOutCompanyFilter("VZW111" ,"", "",0);
+        createPath.fillOutCompanyFilter("VZW222" ,"", "",0);
 
         quickAdd.quickAddPathGeneral2("Test Path 1", "23.0 GHz", "ASR-Call","32 47 16.4 N", "96 47 59 W","55", "KA3982");
         pathSummary.valKMinClearanceSetting();
@@ -812,7 +812,7 @@ public class PathSummaryTest extends BaseTest {
     @Test
     public void valDefaultAvailabilityTarget() {
         createPath.createBrandNewProjectPath("Best Project Ever"+ randomNumber, "This is the Default");
-        createPath.fillOutCompanyFilter("VZW111" ,"", "",0);
+        createPath.fillOutCompanyFilter("VZW222" ,"", "",0);
 
         quickAdd.quickAddPathGeneral2("Test Path 1", "23.0 GHz", "ASR-Call","32 47 16.4 N", "96 47 59 W","55", "KA3982");
         pathSummary.valKDefaultAvailabilityTargetSetting();
@@ -865,7 +865,7 @@ public class PathSummaryTest extends BaseTest {
     @Test
     public void viewPathBlueSection() {
         createPath.createBrandNewProjectPath("viewPathBlueSection"+ randomNumber, "This is the Default");
-        createPath.fillOutCompanyFilter("VZW111" ,"", "",0);
+        createPath.fillOutCompanyFilter("VZW222" ,"", "",0);
 
         pathSummary.valSiteLocationToggleOn();
         quickAdd.quickAddPathGeneral2("Test Path 1", "23.0 GHz", "KDFW Studio","32 47 16.4 N", "96 47 59 W","55", "KA3982");
@@ -906,7 +906,7 @@ public class PathSummaryTest extends BaseTest {
     @Test
     public void valQuickAddSuggestedText() {
         createPath.createBrandNewProjectPath("Best Project Ever"+ randomNumber, "This is the Default");
-        createPath.fillOutCompanyFilter("VZW111" ,"", "",0);
+        createPath.fillOutCompanyFilter("VZW222" ,"", "",0);
         quickAdd.quickAddPathGeneral2("Test Path 1", "23.0 GHz", "ASR-Call","32 47 16.4 N", "96 47 59 W","55", "KA3982");
         pathSummary.hoverSiteLocationValSiteInfo(0);
         quickAdd.quickAddPathGeneral2("Test Path 2", "4.0 GHz", "ASR-Call","37 47 59.7 N", "122 23 58.8 W","55", "KA2049");
@@ -924,7 +924,7 @@ public class PathSummaryTest extends BaseTest {
     @Test
     public void quickAdd_shouldGiveWarning_whenLatAndLongAreTheSame() {
         createPath.createBrandNewProjectPath("QuickAddElevationBoundary" + randomNumber, "This is the Default");
-        createPath.fillOutCompanyFilter("VZW111" ,"", "",0);
+        createPath.fillOutCompanyFilter("VZW222" ,"", "",0);
         pathSummary.valSiteLocationToggleOn();
         pathSummary.changeToSi();
         quickAdd.quickAddPathGeneral1("SameLatLong", "23.0 GHz", "New York", "40 44 54 N", "73 59 9 W", "0.98", "KA20003");
