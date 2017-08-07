@@ -61,9 +61,9 @@ public class PathDetailAntennaTest extends BaseTest {
         createPath.fillOutCompanyFilter("VZW222", "", "", 0);
         pathSummary.changeToSi();
         pathSummary.openPathDetailForAddingPath();
-        pathDetail.addPathViaPathDetailBasicSetup1("MatchOnAntCode1", "KBY45", "34 37 42.1 N", "112 39 26.2 W", "66", "1");
+        pathDetail.addPathViaPathDetailBasicSetup1("MatchOnAntCode1", "KBY45", "34 37 42.1 N", "112 39 26.2 W", "66", "11.0 GHz");
         pathDetail.addPathViaPathDetailBasicSetup2("MatchOnAntCode2", "KA20003", "40 44 54 N", "73 59 9 W", "55");
-        pathDetailAnt.enterAntennaDataAndonBlurRelatedFieldsPopulate("P8F-9", "Tx/Rx", "02306A", "3.2°", "20.3", "P8F-9", "Tx/Rx", "02306A", "3.2°", "20.3");
+        pathDetailAnt.enterAntennaDataAndonBlurRelatedFieldsPopulate("VHLPX2-11", "Tx/Rx", "77100A", "3.4°", "34.4", "VHLPX2-11", "Tx/Rx", "77100A", "3.4°", "34.4");
         pathDetailAnt.clickSaveDetails();
     }
 
@@ -139,7 +139,7 @@ public class PathDetailAntennaTest extends BaseTest {
         pathSummary.openPathDetailForAddingPath();
         pathDetail.addPathViaPathDetailBasicSetup1("MatchOnAntCode1", "KBY45", "34 37 42.1 N", "112 39 26.2 W", "66", "1");
         pathDetail.addPathViaPathDetailBasicSetup2("MatchOnAntCode2", "KA20003", "40 44 54 N", "73 59 9 W", "55");
-        pathDetailAnt.enterAntennaDataAndonBlurRelatedFieldsPopulate("P8F-9", "txrx", "02306A", "3.2°", "20.3", "P8F-9", "txrx", "02306A", "3.2°", "20.3");
+        pathDetailAnt.enterAntennaDataAndonBlurRelatedFieldsPopulate("VHLPX2-11", "Tx/Rx", "77100A", "3.4°", "34.4", "VHLPX2-11", "Tx/Rx", "77100A", "3.4°", "34.4");
         pathDetailAnt.clearAntennaField();
         pathDetailAnt.clickSaveDetails();
     }
@@ -157,9 +157,9 @@ public class PathDetailAntennaTest extends BaseTest {
         createPath.fillOutCompanyFilter("VZW222", "", "", 0);
         pathSummary.changeToSi();
         pathSummary.openPathDetailForAddingPath();
-        pathDetail.addPathViaPathDetailBasicSetup1("MatchOnExistAnt1", "KBY45", "34 37 42.1 N", "112 39 26.2 W", "66", "1");
+        pathDetail.addPathViaPathDetailBasicSetup1("MatchOnExistAnt1", "KBY45", "34 37 42.1 N", "112 39 26.2 W", "66", "11.0 GHz");
         pathDetail.addPathViaPathDetailBasicSetup2("MatchOnExistAnt2", "KA20003", "40 44 54 N", "73 59 9 W", "55");
-        pathDetailAnt.addAntennaToPath("P8F-9", "Tx/Rx", "02306A", "3.2°", "20.3", "P8F-9", "Tx/Rx", "02306A", "3.2°", "20.3");
+        pathDetailAnt.addAntennaToPath("77100A", "Tx/Rx","VHLPX2-11" , "3.4°", "34.4","VHLPX2-11", "Tx/Rx","77100A", "3.4°", "34.4");
         pathDetailAnt.clickSaveDetails();
     }
 
@@ -207,7 +207,7 @@ public class PathDetailAntennaTest extends BaseTest {
         pathSummary.openPathDetailForAddingPath();
         pathDetail.addPathViaPathDetailBasicSetup1("Revisions1", "KBY45", "34 37 42.1 N", "112 39 26.2 W", "66", "1");
         pathDetail.addPathViaPathDetailBasicSetup2("Revisions2", "KA20003", "40 44 54 N", "73 59 9 W", "55");
-        pathDetailAnt.antennaCodeListsRevisions("02306AX");
+        pathDetailAnt.antennaCodeListsRevisions("02306A");
     }
 
     /**COM-340 UX/UI: Antenna Section of Path Details
@@ -222,7 +222,7 @@ public class PathDetailAntennaTest extends BaseTest {
      createPath.fillOutCompanyFilter("VZW222","", "",0);
      pathSummary.changeToSi();
      pathSummary.openPathDetailForAddingPath();
-     pathDetail.addPathViaPathDetailBasicSetup1("ErrNoMatch1", "KBY45", "34 37 42.1 N", "112 39 26.2 W", "66","1");
+     pathDetail.addPathViaPathDetailBasicSetup1("ErrNoMatch1", "KBY45", "34 37 42.1 N", "112 39 26.2 W", "66","11.0 GHz");
      pathDetail.addPathViaPathDetailBasicSetup2("ErrNoMatch1", "KA20003", "40 44 54 N", "73 59 9 W", "55");
      pathDetailAnt.enterBadAntennaDataAndonBlurError("2145", "No match found for Antenna Code.","5854", "No match found for Antenna Code.");
 

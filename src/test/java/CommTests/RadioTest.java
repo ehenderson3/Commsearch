@@ -9,6 +9,7 @@ import CommPageObjects.PathDetailAntennaPage;
 import CommPageObjects.RadioPage;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 
@@ -95,9 +96,9 @@ public class RadioTest extends BaseTest{
         createPath.fillOutCompanyFilter("VZW222", "", "", 0);
         pathSummary.changeToSi();
         pathSummary.openPathDetailForAddingPath();
-        pathDetail.addPathViaPathDetailBasicSetup1("Add Radio1", "KBY45", "34 37 42.1 N", "112 39 26.2 W", "66", "1");
+        pathDetail.addPathViaPathDetailBasicSetup1("Add Radio1", "KBY45", "34 37 42.1 N", "112 39 26.2 W", "66",  "11.0 GHz");
         pathDetail.addPathViaPathDetailBasicSetup2("Add Radio2", "KA20003", "40 44 54 N", "73 59 9 W", "55");
-        pathDetailAnt.enterAntennaCodeAndBlur("02306AX", "12");
+        pathDetailAnt.enterAntennaCodeAndBlur("77100A", "12");
         pathDetailRadio.setupLeftRadio("X11A22");
         pathDetailRadio.setupRightRadio("X11A22");
 
@@ -142,9 +143,9 @@ public class RadioTest extends BaseTest{
         createPath.fillOutCompanyFilter("VZW222", "", "", 0);
         pathSummary.changeToSi();
         pathSummary.openPathDetailForAddingPath();
-        pathDetail.addPathViaPathDetailBasicSetup1("Add Radio1", "KBY45", "34 37 42.1 N", "112 39 26.2 W", "66", "1");
+        pathDetail.addPathViaPathDetailBasicSetup1("Add Radio1", "KBY45", "34 37 42.1 N", "112 39 26.2 W", "66",  "11.0 GHz");
         pathDetail.addPathViaPathDetailBasicSetup2("Add Radio2", "KA20003", "40 44 54 N", "73 59 9 W", "55");
-        pathDetailAnt.enterAntennaCodeAndBlur("02306AX", "12");
+        pathDetailAnt.enterAntennaCodeAndBlur("77100A", "12");
         pathDetailRadio.setupLeftRadio("X11A2");
         pathDetailRadio.errorCorrectionLeft("Radio Code is 6 characters minimum.");
     }
@@ -155,9 +156,9 @@ public class RadioTest extends BaseTest{
         createPath.fillOutCompanyFilter("VZW222", "", "", 0);
         pathSummary.changeToSi();
         pathSummary.openPathDetailForAddingPath();
-        pathDetail.addPathViaPathDetailBasicSetup1("Add Radio1", "KBY45", "34 37 42.1 N", "112 39 26.2 W", "66", "1");
+        pathDetail.addPathViaPathDetailBasicSetup1("Add Radio1", "KBY45", "34 37 42.1 N", "112 39 26.2 W", "66",  "11.0 GHz");
         pathDetail.addPathViaPathDetailBasicSetup2("Add Radio2", "KA20003", "40 44 54 N", "73 59 9 W", "55");
-        pathDetailAnt.enterAntennaCodeAndBlur("02306AX", "12");
+        pathDetailAnt.enterAntennaCodeAndBlur("77100A", "12");
         pathDetailRadio.setupRightRadio("X11A2");
         pathDetailRadio.errorCorrectionRight("Radio Code is 6 characters minimum.");
     }
@@ -186,9 +187,9 @@ public class RadioTest extends BaseTest{
         createPath.fillOutCompanyFilter("VZW222", "", "", 0);
         pathSummary.changeToSi();
         pathSummary.openPathDetailForAddingPath();
-        pathDetail.addPathViaPathDetailBasicSetup1("Add Radio1", "KBY45", "34 37 42.1 N", "112 39 26.2 W", "66", "1");
+        pathDetail.addPathViaPathDetailBasicSetup1("Add Radio1", "KBY45", "34 37 42.1 N", "112 39 26.2 W", "66", "11.0 GHz");
         pathDetail.addPathViaPathDetailBasicSetup2("Add Radio2", "KA20003", "40 44 54 N", "73 59 9 W", "55");
-        pathDetailAnt.enterAntennaCodeAndBlur("02306AX", "12");
+        pathDetailAnt.enterAntennaCodeAndBlur("77100A", "12");
         pathDetailRadio.setupLeftRadio("X11A22");
         pathDetailRadio.setupRightRadio("X11A22");
         pathDetailRadio.maxPowerDefault("26");
@@ -249,9 +250,9 @@ public class RadioTest extends BaseTest{
         createPath.fillOutCompanyFilter("VZW222", "", "", 0);
         pathSummary.changeToSi();
         pathSummary.openPathDetailForAddingPath();
-        pathDetail.addPathViaPathDetailBasicSetup1("Add Radio1", "KBY45", "34 37 42.1 N", "112 39 26.2 W", "66", "1");
+        pathDetail.addPathViaPathDetailBasicSetup1("Add Radio1", "KBY45", "34 37 42.1 N", "112 39 26.2 W", "66", "11.0 GHz");
         pathDetail.addPathViaPathDetailBasicSetup2("Add Radio2", "KA20003", "40 44 54 N", "73 59 9 W", "55");
-        pathDetailAnt.enterAntennaCodeAndBlur("02306AX", "12");
+        pathDetailAnt.enterAntennaCodeAndBlur("77100A", "12");
         pathDetailRadio.setupLeftRadio("X11A22");
         pathDetailRadio.setupRightRadio("X11A22");
         for (int i = 0; i < 10; i++) {
@@ -285,9 +286,9 @@ public void pathDetailRadio_DisabledModEnabledNewMaxWillBeTheNewllyEnabled_whenD
     createPath.fillOutCompanyFilter("VZW222", "", "", 0);
     pathSummary.changeToSi();
     pathSummary.openPathDetailForAddingPath();
-    pathDetail.addPathViaPathDetailBasicSetup1("Add Radio1", "KBY45", "34 37 42.1 N", "112 39 26.2 W", "66", "1");
+    pathDetail.addPathViaPathDetailBasicSetup1("Add Radio1", "KBY45", "34 37 42.1 N", "112 39 26.2 W", "66", "11.0 GHz");
     pathDetail.addPathViaPathDetailBasicSetup2("Add Radio2", "KA20003", "40 44 54 N", "73 59 9 W", "55");
-    pathDetailAnt.enterAntennaCodeAndBlur("02306AX", "12");
+    pathDetailAnt.enterAntennaCodeAndBlur("77100A", "12");
     pathDetailRadio.setupLeftRadio("X11A22");
     pathDetailRadio.setupRightRadio("X11A22");
     pathDetailRadio.deactivateModulation(10);
@@ -309,9 +310,9 @@ public void pathDetailRadio_DisabledModEnabledNewMaxWillBeTheNewllyEnabled_whenD
         createPath.fillOutCompanyFilter("VZW222", "", "", 0);
         pathSummary.changeToSi();
         pathSummary.openPathDetailForAddingPath();
-        pathDetail.addPathViaPathDetailBasicSetup1("Add Radio1", "KBY45", "34 37 42.1 N", "112 39 26.2 W", "66", "1");
+        pathDetail.addPathViaPathDetailBasicSetup1("Add Radio1", "KBY45", "34 37 42.1 N", "112 39 26.2 W", "66", "11.0 GHz");
         pathDetail.addPathViaPathDetailBasicSetup2("Add Radio2", "KA20003", "40 44 54 N", "73 59 9 W", "55");
-        pathDetailAnt.enterAntennaCodeAndBlur("02306AX", "12");
+        pathDetailAnt.enterAntennaCodeAndBlur("77100A", "12");
         pathDetailRadio.setupLeftRadio("X11A22");
         pathDetailRadio.setupRightRadio("X11A22");
         pathDetailRadio.changeGreatestPower("-21");
@@ -332,9 +333,9 @@ public void pathDetailRadio_DisabledModEnabledNewMaxWillBeTheNewllyEnabled_whenD
         createPath.fillOutCompanyFilter("VZW222", "", "", 0);
         pathSummary.changeToSi();
         pathSummary.openPathDetailForAddingPath();
-        pathDetail.addPathViaPathDetailBasicSetup1("Add Radio1", "KBY45", "34 37 42.1 N", "112 39 26.2 W", "66", "1");
+        pathDetail.addPathViaPathDetailBasicSetup1("Add Radio1", "KBY45", "34 37 42.1 N", "112 39 26.2 W", "66", "11.0 GHz");
         pathDetail.addPathViaPathDetailBasicSetup2("Add Radio2", "KA20003", "40 44 54 N", "73 59 9 W", "55");
-        pathDetailAnt.enterAntennaCodeAndBlur("02306AX", "12");
+        pathDetailAnt.enterAntennaCodeAndBlur("77100A", "12");
         pathDetailRadio.setupLeftRadio("X11A22");
         pathDetailRadio.copyRadio();
         pathDetailRadio.rightModulationValidation(0, "256 QAM", "40","20");
@@ -375,9 +376,9 @@ public void pathDetailRadio_DisabledModEnabledNewMaxWillBeTheNewllyEnabled_whenD
         createPath.fillOutCompanyFilter("VZW222", "", "", 0);
         pathSummary.changeToSi();
         pathSummary.openPathDetailForAddingPath();
-        pathDetail.addPathViaPathDetailBasicSetup1("Add Radio1", "KBY45", "34 37 42.1 N", "112 39 26.2 W", "66", "1");
+        pathDetail.addPathViaPathDetailBasicSetup1("Add Radio1", "KBY45", "34 37 42.1 N", "112 39 26.2 W", "66", "11.0 GHz");
         pathDetail.addPathViaPathDetailBasicSetup2("Add Radio2", "KA20003", "40 44 54 N", "73 59 9 W", "55");
-        pathDetailAnt.enterAntennaCodeAndBlur("02306AX", "12");
+        pathDetailAnt.enterAntennaCodeAndBlur("77100A", "12");
         pathDetailRadio.setupLeftRadio("X11A22");
         pathDetailRadio.copyRadio();
         pathDetailRadio.openATPC();
@@ -400,7 +401,7 @@ public void pathDetailRadio_DisabledModEnabledNewMaxWillBeTheNewllyEnabled_whenD
         createPath.fillOutCompanyFilter("VZW222", "", "", 0);
         pathSummary.changeToSi();
         pathSummary.openPathDetailForAddingPath();
-        pathDetail.addPathViaPathDetailBasicSetup1("Add Radio1", "KBY45", "34 37 42.1 N", "112 39 26.2 W", "66", "1");
+        pathDetail.addPathViaPathDetailBasicSetup1("Add Radio1", "KBY45", "34 37 42.1 N", "112 39 26.2 W", "66", "11.0 GHz");
         pathDetail.addPathViaPathDetailBasicSetup2("Add Radio2", "KA20003", "40 44 54 N", "73 59 9 W", "55");
         pathDetail.openPassiveRepeaterAndValidateFieldsAndButtons();
         pathDetailRadio.isRadioSectionAvailable();
@@ -421,9 +422,9 @@ public void pathDetailRadio_DisabledModEnabledNewMaxWillBeTheNewllyEnabled_whenD
         createPath.fillOutCompanyFilter("VZW222", "", "", 0);
         pathSummary.changeToSi();
         pathSummary.openPathDetailForAddingPath();
-        pathDetail.addPathViaPathDetailBasicSetup1("Add Radio1", "KBY45", "34 37 42.1 N", "112 39 26.2 W", "66", "1");
+        pathDetail.addPathViaPathDetailBasicSetup1("Add Radio1", "KBY45", "34 37 42.1 N", "112 39 26.2 W", "66", "11.0 GHz");
         pathDetail.addPathViaPathDetailBasicSetup2("Add Radio2", "KA20003", "40 44 54 N", "73 59 9 W", "55");
-        pathDetailAnt.enterAntennaCodeAndBlur("02306AX", "12");
+        pathDetailAnt.enterAntennaCodeAndBlur("77100A", "12");
         pathDetailRadio.setupLeftRadio("X11A22");
         pathDetailRadio.copyRadio();
         pathDetailRadio.openATPC();
@@ -459,16 +460,16 @@ public void pathDetailRadio_DisabledModEnabledNewMaxWillBeTheNewllyEnabled_whenD
          (Power Increase (radio button); Trigger Level (input); Nominal Power (input); Coordinated Power (input); and 5 Minute Alarm (radio button).)
          AND a "Remove" button is also displayed.
      */
-    @Test
+    @Ignore //NEED A RADIO RECORD WHERE RAMP IS DEFAULT ON AND 5 MIN SET BY DEFAULT
     public void pathDetailRadio_whenRadioHas5MinAlarmSetToON_ATPCRadioHasFiveMinuteAlarmSetToTrue(){
         createPath.createBrandNewProjectPath("5MinuteAndRampON" + randomNumber, "This is the Default");
         createPath.fillOutCompanyFilter("VZW222", "", "", 0);
         pathSummary.changeToSi();
         pathSummary.openPathDetailForAddingPath();
-        pathDetail.addPathViaPathDetailBasicSetup1("5 Min ON", "KBY45", "34 37 42.1 N", "112 39 26.2 W", "66", "1");
+        pathDetail.addPathViaPathDetailBasicSetup1("5 Min ON", "KBY45", "34 37 42.1 N", "112 39 26.2 W", "66", "11.0 GHz");
         pathDetail.addPathViaPathDetailBasicSetup2("Ramp ON", "KA20003", "40 44 54 N", "73 59 9 W", "55");
-        pathDetailAnt.enterAntennaCodeAndBlur("02306AX", "12");
-        pathDetailRadio.setupLeftRadio("X06356 ");
+        pathDetailAnt.enterAntennaCodeAndBlur("77100A", "12");
+        pathDetailRadio.setupLeftRadio("X11A22");
         pathDetailRadio.copyRadio();
         pathDetailRadio.openATPC();
         assertTrue(pathDetailRadio.isRampCheckedDefault());
@@ -482,9 +483,9 @@ public void pathDetailRadio_DisabledModEnabledNewMaxWillBeTheNewllyEnabled_whenD
         createPath.fillOutCompanyFilter("VZW222", "", "", 0);
         pathSummary.changeToSi();
         pathSummary.openPathDetailForAddingPath();
-        pathDetail.addPathViaPathDetailBasicSetup1("5 Min OFF", "KBY45", "34 37 42.1 N", "112 39 26.2 W", "66", "1");
+        pathDetail.addPathViaPathDetailBasicSetup1("5 Min OFF", "KBY45", "34 37 42.1 N", "112 39 26.2 W", "66", "11.0 GHz");
         pathDetail.addPathViaPathDetailBasicSetup2("Ramp ON", "KA20003", "40 44 54 N", "73 59 9 W", "55");
-        pathDetailAnt.enterAntennaCodeAndBlur("02306AX", "12");
+        pathDetailAnt.enterAntennaCodeAndBlur("77100A", "12");
         pathDetailRadio.setupLeftRadio("X11A22");
         pathDetailRadio.copyRadio();
         pathDetailRadio.openATPC();
@@ -492,16 +493,16 @@ public void pathDetailRadio_DisabledModEnabledNewMaxWillBeTheNewllyEnabled_whenD
         assertFalse(pathDetailRadio.is5MinAlarmCheckedDefault());
     }
 
-    @Test
+    @Ignore //NEED A RADIO RECORD WHERE RAMP IS DEFAULT OFF AND 5 MIN SET BY DEFAULT
     public void pathDetailRadio_whenRadioHas5MinAlarmSetToOFF1_ATPCRadioHasFiveMinuteAlarmSetToFalse1(){
         createPath.createBrandNewProjectPath("5MinONAndRampOFF" + randomNumber, "This is the Default");
         createPath.fillOutCompanyFilter("VZW222", "", "", 0);
         pathSummary.changeToSi();
         pathSummary.openPathDetailForAddingPath();
-        pathDetail.addPathViaPathDetailBasicSetup1("5 Min OFF", "KBY45", "34 37 42.1 N", "112 39 26.2 W", "66", "1");
+        pathDetail.addPathViaPathDetailBasicSetup1("5 Min OFF", "KBY45", "34 37 42.1 N", "112 39 26.2 W", "66", "11.0 GHz");
         pathDetail.addPathViaPathDetailBasicSetup2("Ramp ON", "KA20003", "40 44 54 N", "73 59 9 W", "55");
-        pathDetailAnt.enterAntennaCodeAndBlur("02306AX", "12");
-        pathDetailRadio.setupLeftRadio("TEMX95");
+        pathDetailAnt.enterAntennaCodeAndBlur("77100A", "12");
+        pathDetailRadio.setupLeftRadio("X11A22");
         pathDetailRadio.copyRadio();
         pathDetailRadio.openATPC();
         assertFalse(pathDetailRadio.isRampCheckedDefault());
@@ -523,9 +524,9 @@ public void pathDetailRadio_DisabledModEnabledNewMaxWillBeTheNewllyEnabled_whenD
             createPath.fillOutCompanyFilter("VZW222", "", "", 0);
             pathSummary.changeToSi();
             pathSummary.openPathDetailForAddingPath();
-            pathDetail.addPathViaPathDetailBasicSetup1("5 Min OFF", "KBY45", "34 37 42.1 N", "112 39 26.2 W", "66", "1");
+            pathDetail.addPathViaPathDetailBasicSetup1("5 Min OFF", "KBY45", "34 37 42.1 N", "112 39 26.2 W", "66", "11.0 GHz");
             pathDetail.addPathViaPathDetailBasicSetup2("Ramp ON", "KA20003", "40 44 54 N", "73 59 9 W", "55");
-            pathDetailAnt.enterAntennaCodeAndBlur("02306AX", "12");
+            pathDetailAnt.enterAntennaCodeAndBlur("77100A", "12");
             pathDetailRadio.setupLeftRadio("X11A22");
             pathDetailRadio.copyRadio();
             pathDetailRadio.openATPC();
@@ -549,9 +550,9 @@ public void pathDetailRadio_DisabledModEnabledNewMaxWillBeTheNewllyEnabled_whenD
         createPath.fillOutCompanyFilter("VZW222", "", "", 0);
         pathSummary.changeToSi();
         pathSummary.openPathDetailForAddingPath();
-        pathDetail.addPathViaPathDetailBasicSetup1("5 Min OFF", "KBY45", "34 37 42.1 N", "112 39 26.2 W", "66", "1");
+        pathDetail.addPathViaPathDetailBasicSetup1("5 Min OFF", "KBY45", "34 37 42.1 N", "112 39 26.2 W", "66", "11.0 GHz");
         pathDetail.addPathViaPathDetailBasicSetup2("Ramp ON", "KA20003", "40 44 54 N", "73 59 9 W", "55");
-        pathDetailAnt.enterAntennaCodeAndBlur("02306AX", "12");
+        pathDetailAnt.enterAntennaCodeAndBlur("77100A", "12");
         pathDetailRadio.setupLeftRadio("X11A22");
         pathDetailRadio.copyRadio();
         pathDetailRadio.openATPC();
@@ -563,10 +564,10 @@ public void pathDetailRadio_DisabledModEnabledNewMaxWillBeTheNewllyEnabled_whenD
     /**
      *   Given Radio Code X06356 is selected
          AND the first modulation is enabled
-         AND the radio's "minAtpcTrigger" = -58.5
+         AND the radio's "minAtpcTrigger" = -64.5
          AND the ATPC modal is open
-         When a Trigger Level -55.4 is entered,
-         Then a graceful error is displayed indicating that the Trigger Level "Cannot be greater than -55.5".
+         When a Trigger Level -66.4 is entered,
+         Then a graceful error is displayed indicating that the Trigger Level "Cannot be less than -64.5".
      */
     @Test
     public void pathDetailRadio_whenTriggerLevelNegativeFiftyFivePointFour_Error(){
@@ -574,14 +575,14 @@ public void pathDetailRadio_DisabledModEnabledNewMaxWillBeTheNewllyEnabled_whenD
         createPath.fillOutCompanyFilter("VZW222", "", "", 0);
         pathSummary.changeToSi();
         pathSummary.openPathDetailForAddingPath();
-        pathDetail.addPathViaPathDetailBasicSetup1("5 Min OFF", "KBY45", "34 37 42.1 N", "112 39 26.2 W", "66", "1");
+        pathDetail.addPathViaPathDetailBasicSetup1("5 Min OFF", "KBY45", "34 37 42.1 N", "112 39 26.2 W", "66", "11.0 GHz");
         pathDetail.addPathViaPathDetailBasicSetup2("Ramp ON", "KA20003", "40 44 54 N", "73 59 9 W", "55");
-        pathDetailAnt.enterAntennaCodeAndBlur("02306AX", "12");
-        pathDetailRadio.setupLeftRadio("X06356");
+        pathDetailAnt.enterAntennaCodeAndBlur("77100A", "12");
+        pathDetailRadio.setupLeftRadio("X11A22");//X06356
         pathDetailRadio.copyRadio();
         pathDetailRadio.openATPC();
-        pathDetailRadio.enterValuesInATPCForm("-55.4","","");
-        pathDetailRadio.atpcError("Cannot be greater than -55.5");
+        pathDetailRadio.enterValuesInATPCForm("-66.4","","");
+        pathDetailRadio.atpcError("Cannot be less than -64.5");
 
     }
     /*  Nominal Power	Given that maximum Nominal Power cannot be greater than radio's max power,
@@ -597,10 +598,10 @@ public void pathDetailRadio_DisabledModEnabledNewMaxWillBeTheNewllyEnabled_whenD
         createPath.fillOutCompanyFilter("VZW222", "", "", 0);
         pathSummary.changeToSi();
         pathSummary.openPathDetailForAddingPath();
-        pathDetail.addPathViaPathDetailBasicSetup1("5 Min OFF", "KBY45", "34 37 42.1 N", "112 39 26.2 W", "66", "1");
+        pathDetail.addPathViaPathDetailBasicSetup1("5 Min OFF", "KBY45", "34 37 42.1 N", "112 39 26.2 W", "66", "11.0 GHz");
         pathDetail.addPathViaPathDetailBasicSetup2("Ramp ON", "KA20003", "40 44 54 N", "73 59 9 W", "55");
-        pathDetailAnt.enterAntennaCodeAndBlur("02306AX", "12");
-        pathDetailRadio.setupLeftRadio("X06356");
+        pathDetailAnt.enterAntennaCodeAndBlur("77100A", "12");
+        pathDetailRadio.setupLeftRadio("X11A22");
         pathDetailRadio.copyRadio();
         pathDetailRadio.openATPC();
         pathDetailRadio.enterValuesInATPCForm("-55.5","36","");
@@ -618,10 +619,10 @@ public void pathDetailRadio_DisabledModEnabledNewMaxWillBeTheNewllyEnabled_whenD
         createPath.fillOutCompanyFilter("VZW222", "", "", 0);
         pathSummary.changeToSi();
         pathSummary.openPathDetailForAddingPath();
-        pathDetail.addPathViaPathDetailBasicSetup1("5 Min OFF", "KBY45", "34 37 42.1 N", "112 39 26.2 W", "66", "1");
+        pathDetail.addPathViaPathDetailBasicSetup1("5 Min OFF", "KBY45", "34 37 42.1 N", "112 39 26.2 W", "66", "11.0 GHz");
         pathDetail.addPathViaPathDetailBasicSetup2("Ramp ON", "KA20003", "40 44 54 N", "73 59 9 W", "55");
-        pathDetailAnt.enterAntennaCodeAndBlur("02306AX", "12");
-        pathDetailRadio.setupLeftRadio("X06356");
+        pathDetailAnt.enterAntennaCodeAndBlur("77100A", "12");
+        pathDetailRadio.setupLeftRadio("X11A22");
         pathDetailRadio.copyRadio();
         pathDetailRadio.openATPC();
         pathDetailRadio.enterValuesInATPCForm("-55.5", "34", "56");
@@ -642,10 +643,10 @@ public void pathDetailRadio_DisabledModEnabledNewMaxWillBeTheNewllyEnabled_whenD
         createPath.fillOutCompanyFilter("VZW222", "", "", 0);
         pathSummary.changeToSi();
         pathSummary.openPathDetailForAddingPath();
-        pathDetail.addPathViaPathDetailBasicSetup1("5 Min OFF", "KBY45", "34 37 42.1 N", "112 39 26.2 W", "66", "1");
+        pathDetail.addPathViaPathDetailBasicSetup1("5 Min OFF", "KBY45", "34 37 42.1 N", "112 39 26.2 W", "66", "11.0 GHz");
         pathDetail.addPathViaPathDetailBasicSetup2("Ramp ON", "KA20003", "40 44 54 N", "73 59 9 W", "55");
-        pathDetailAnt.enterAntennaCodeAndBlur("02306AX", "12");
-        pathDetailRadio.setupLeftRadio("X06356");
+        pathDetailAnt.enterAntennaCodeAndBlur("77100A", "12");
+        pathDetailRadio.setupLeftRadio("X11A22");
         pathDetailRadio.copyRadio();
         pathDetailRadio.openATPC();
         pathDetailRadio.enterValuesInATPCForm("-55.5", "34", "6");
@@ -653,4 +654,37 @@ public void pathDetailRadio_DisabledModEnabledNewMaxWillBeTheNewllyEnabled_whenD
 
     }
 
+    //COM-545 (UI Tests) Sprint 13 Bugs
+    //COM-437 Copy Path does not copy segment end antennas or radios
+    @Test
+    public void pathDetailRadio_ShouldCopyRadioAndAntenna_whenCopyingPath() {
+        createPath.createBrandNewProjectPath("Open ATPC" + randomNumber, "This is the Default");
+        createPath.fillOutCompanyFilter("VZW222", "", "", 0);
+        pathSummary.changeToSi();
+        pathSummary.openPathDetailForAddingPath();
+        pathDetail.addPathViaPathDetailBasicSetup1("Add Radio1", "KBY45", "34 37 42.1 N", "112 39 26.2 W", "66", "11.0 GHz");
+        pathDetail.addPathViaPathDetailBasicSetup2("Add Radio2", "KA20003", "40 44 54 N", "73 59 9 W", "55");
+        pathDetailAnt.enterAntennaCodeAndBlur("77100A", "12");
+        pathDetailRadio.setupLeftRadio("X11A22");
+        pathDetailRadio.copyRadio();
+        pathDetailAnt.clickSaveDetails();
+        pathDetail.openPathDetailViaDetails();
+        pathDetail.copyPathViaPathDetails("PATH COPIED SUCCESSFULLY\n" +
+                "You have successfully copied Add Radio1 - Add Radio2");
+        pathDetail.nextArrow();
+        pathDetailAnt.addAntennaToPathView("77100A", "Tx/Rx","VHLPX2-11" , "3.4°", "0","VHLPX2-11", "Tx/Rx","77100A", "3.4°", "0");
+        pathDetailRadio.rightModulationValidation(0, "256 QAM", "40","20");
+        pathDetailRadio.rightModulationValidation(1, "256 QAM", "40","20");
+        pathDetailRadio.rightModulationValidation(2, "128 QAM", "40","21");
+        pathDetailRadio.rightModulationValidation(3, "128 QAM", "40","21");
+        pathDetailRadio.rightModulationValidation(4, "64 QAM", "40","21");
+        pathDetailRadio.rightModulationValidation(5, "64 QAM", "40","21");
+        pathDetailRadio.rightModulationValidation(6, "32 QAM", "40","23");
+        pathDetailRadio.rightModulationValidation(7, "32 QAM", "40","23");
+        pathDetailRadio.rightModulationValidation(8, "16 QAM", "40","24");
+        pathDetailRadio.rightModulationValidation(9, "16 QAM", "40","24");
+        pathDetailRadio.rightModulationValidation(10, "QPSK", "40","26");
+        pathDetailRadio.rightModulationValidation(11, "QPSK", "40","26");
+
+    }
 }

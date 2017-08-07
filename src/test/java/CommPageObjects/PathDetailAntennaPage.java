@@ -100,7 +100,23 @@ public class PathDetailAntennaPage extends BasePage {
         type(antCenterLine, centerlineField2);
     }
 
+    public void enterAntennaCodeAndBlurB(String antCode, String antCenterLine){
+        //enter antenna code
+        assertTrue(isDisplayed(antennaCodeField,8));
+        type(antCode, antennaCodeField);
+        //click a field other than antenna
 
+
+        assertTrue(isDisplayed(antennaCodeField,8));
+        type(antCode, antennaCodeField2);
+        //click a field other than antenna
+        assertTrue(isDisplayed(gainField2,8));
+        click(gainField2);
+        //validate that the autopopulate fields
+        isDisplayed(gainField2,10);
+        //enter the centerline
+        type(antCenterLine, centerlineField2);
+    }
     public void antennaLookUpFromPassiveRepeater(String codeText){
         isDisplayed(lookUpAntennaCode,10);
         type(codeText,lookUpAntennaCode);
@@ -111,9 +127,9 @@ public class PathDetailAntennaPage extends BasePage {
     }
 
 
-    public void addAntennaToPath(String luAntMod, String mode, String antCode, String beamwith, String gain,String luAntMod2,String mode2, String antCode2, String beamwith2, String gain2){
+    public void addAntennaToPath(String luAntCode, String mode, String antModel, String beamwith, String gain,String luAntMod2,String mode2, String antCode2, String beamwith2, String gain2){
         //Verify that the Antenna Model field is present (that tells us that we are on the Antenna module)
-        isDisplayed(antennaModel1,30);
+        isDisplayed(antennaModelSearch1,6);
 
         //******************LEFT ANTENNA*************************************************
 
@@ -123,8 +139,8 @@ public class PathDetailAntennaPage extends BasePage {
         //Verify that the Antenna Lookup pop up appears (We will use the Antenna Model field)
       assertTrue(isDisplayed(lookUpAntennaModel,6));
 
-        //type P8F-9 in the Antenna Model field
-        type(luAntMod,lookUpAntennaModel);
+        //type P8F-9 in the Antenna Code field
+        type(luAntCode,lookUpAntennaCode);
         assertTrue(isDisplayed(lookUpSearchButton,12));
 
         //Click the search button
@@ -152,9 +168,9 @@ public class PathDetailAntennaPage extends BasePage {
         beamwithFieldText = getFieldText(beamwithField);
         gainFieldText = getFieldText(gainField);
 
-        assertEquals(antennaModelFieldText,luAntMod);
+        assertEquals(antennaCodeFieldText,luAntCode);
         assertEquals(modeFieldText, mode);
-        assertEquals(antennaCodeFieldText, antCode);
+        assertEquals(antennaModelFieldText, antModel);
         assertEquals(beamwithFieldText, beamwith);
         assertEquals(gainFieldText, gain);
 
@@ -168,8 +184,8 @@ public class PathDetailAntennaPage extends BasePage {
         //Verify that the Antenna Lookup pop up appears (We will use the Antenna Model field)
         assertTrue(isDisplayed(lookUpAntennaModel,6));
 
-        //type P8F-9 in the Antenna Model field
-        type("P8F-9",lookUpAntennaModel);
+        //type P8F-9 in the Antenna Code field
+        type(luAntCode,lookUpAntennaCode);
 
         //Click the search button
         click(lookUpSearchButton);
@@ -206,6 +222,58 @@ public class PathDetailAntennaPage extends BasePage {
         type("10",centerlineField2);
         //Select Save button
         isDisplayed(saveDetailsButton,8);
+
+    }
+
+    public void addAntennaToPathView(String luAntCode, String mode, String antModel, String beamwith, String gain,String luAntMod2,String mode2, String antCode2, String beamwith2, String gain2){
+        //Verify that the Antenna Model field is present (that tells us that we are on the Antenna module)
+        isDisplayed(antennaModelSearch1,6);
+
+        //******************LEFT ANTENNA*************************************************
+
+
+        //Validate that the values are correct for Antenna Model, Mode, Antenna code, Beamwith and Gain
+        String antennaModelFieldText;
+        String modeFieldText;
+        String antennaCodeFieldText;
+        String beamwithFieldText;
+        String gainFieldText;
+
+        antennaModelFieldText = getFieldText(antennaModelField);
+        modeFieldText = getFieldText(modeField,"value");
+        antennaCodeFieldText = getFieldText(antennaCodeField);
+        beamwithFieldText = getFieldText(beamwithField);
+        gainFieldText = getFieldText(gainField);
+
+        assertEquals(antennaCodeFieldText,luAntCode);
+        assertEquals(modeFieldText, mode);
+        assertEquals(antennaModelFieldText, antModel);
+        assertEquals(beamwithFieldText, beamwith);
+        assertEquals(gainFieldText, gain);
+
+
+        // *************RIGHT ANTENNA**********************************************
+        // Click the antenna model 1 search button
+
+
+        //Validate that the values are correct for Antenna Model, Mode, Antenna code, Beamwith and Gain
+        String antennaModelFieldText2;
+        String modeFieldText2;
+        String antennaCodeFieldText2;
+        String beamwithFieldText2;
+        String gainFieldText2;
+
+        antennaModelFieldText2 = getFieldText(antennaModelField2);
+        modeFieldText2 = getFieldText(modeField2);
+        antennaCodeFieldText2 = getFieldText(antennaCodeField2);
+        beamwithFieldText2 = getFieldText(beamwithField2);
+        gainFieldText2 = getFieldText(gainField2);
+
+        assertEquals(antennaModelFieldText2,luAntMod2);
+        assertEquals(modeFieldText2, mode2);
+        assertEquals(antennaCodeFieldText2, antCode2);
+        assertEquals(beamwithFieldText2, beamwith2);
+        assertEquals(gainFieldText2, gain2);
 
     }
 

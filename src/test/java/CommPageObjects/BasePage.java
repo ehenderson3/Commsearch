@@ -85,7 +85,12 @@ public class BasePage implements Config {
         fieldValue = txtBoxContent.getAttribute("value");
         return fieldValue;
     }
-
+    public String getFieldTextTitle(By title) {
+        WebElement txtBoxContent = driver.findElement(title);
+        String fieldValue = new String();
+        fieldValue = txtBoxContent.getAttribute("title");
+        return fieldValue;
+    }
     /**
      * This method allows you to use the i parameter to select the element form an array of elements to get the locator's field text
      * @param locator

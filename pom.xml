@@ -51,7 +51,7 @@
                     <version>2.19.1</version>
                     <configuration>
                         <parallel>classesAndMethods</parallel>
-                        <threadCount>1</threadCount>
+                        <threadCount>2</threadCount>
                         <runOrder>random</runOrder>
                        <!-- <groups>${groups}</groups>-->
                     </configuration>

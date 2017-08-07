@@ -132,16 +132,15 @@ public class PathDetailTest extends BaseTest {
         pathSummary.valSiteLocationToggleOn();
         quickAdd.quickAddPathSimple("Ton", "5.8 GHz", "Best Path", "34 37 42.1 N", "112 39 26.2 W", "1542.29", "KBY45");
         pathSummary.viewSiteCallSignLatLongGeColumns1(0, "Tonto Mtn", "KBY45", "34 37 42.1 N", "112 39 26.2 W", "1542.29");
-        pathSummary.viewSiteCallSignLatLongGeColumns2(0, "Tonto Mtn", "KA20003", "40 44 54 N", "73 59 9 W", "98");
+        pathSummary.viewSiteCallSignLatLongGeColumns2(0, "New York2", "KA20003", "9 26 42.7 N", "8 7 9 W", "0.98");
         pathSummary.openPathDetails(0);
         pathDetail.viewPathDetailValue1("Tonto Mtn", "KBY45", "34 37 42.1 N", "112 39 26.2 W", "1542.29", "940 MHz");
-        pathDetail.viewPathDetailValues2("New York", "KA20003","9 26 42.7 N", "8 7 9 W", "0.98", "940 MHz");
-        //COM-429 0.0.10 Staging when attempting to select the Return button via Selenium can't see the button
+        pathDetail.viewPathDetailValues2("New York2", "KA20003","9 26 42.7 N", "8 7 9 W", "0.98", "940 MHz");
         pathDetail.closePathDetails();
 
         quickAdd.quickAddPathExistingSetup("Existing", "940 MHz", "Best Path", "34 37 42.1 N", "112 39 26.2 W", "250", "KBY45");
         pathSummary.viewSiteCallSignLatLongGeColumns1(1, "Existing", "KBY45", "34 37 42.1 N", "112 39 26.2 W", "250");
-        pathSummary.viewSiteCallSignLatLongGeColumns2(0, "Tonto Mtn", "KA20003", "40 44 54 N", "73 59 9 W", "98");
+        pathSummary.viewSiteCallSignLatLongGeColumns2(1, "New York2", "KA20003", "9 26 42.7 N", "8 7 9 W", "98");
 
         pathSummary.openPathDetails(1);
 
@@ -152,7 +151,7 @@ public class PathDetailTest extends BaseTest {
 
         quickAdd.quickAddPathExistingSetup("CAMSLANT STATION", "940 MHz", "Best Path", "34 37 42.1 N", "78 3 21.2 W", "48.69", "1241006");
         pathSummary.viewSiteCallSignLatLongGeColumns1(2, "CAMSLANT STATION", "", "34 37 42.1 N", "78 3 21.2 W", "48.69");
-        pathSummary.viewSiteCallSignLatLongGeColumns2(0, "Tonto Mtn", "KA20003", "40 44 54 N", "73 59 9 W", "98");
+        pathSummary.viewSiteCallSignLatLongGeColumns2(2, "New York2", "KA20003", "9 26 42.7 N", "8 7 9 W", "98");
         pathSummary.openPathDetails(2);
         pathDetail.viewPathDetailValue1("CAMSLANT STATION", "", "34 37 42.1 N", "78 3 21.2 W", "48.69", "940 MHz");
         pathDetail.viewPathDetailValues2("Tonto Mtn", "KA20003", "40 44 54 N", "73 59 9 W", "48.69", "940 MHz");
@@ -202,7 +201,7 @@ public class PathDetailTest extends BaseTest {
         createPath.fillOutCompanyFilter("VZW222", "", "", 0);
         pathSummary.changeToUs();
         pathSummary.openPathDetailForAddingPath();
-        pathDetail.addPathPathDetailWithAsrAndCall1("ASRandCALL1", "KBY45", "1000037", "34 37 42.1 N", "112 39 26.2 W", "66", "1");
+        pathDetail.addPathPathDetailWithAsrAndCall1("ASRandCALL1", "KBY45", "1000037", "34 37 42.1 N", "112 39 26.2 W", "66", "11.0 GHz");
         pathDetail.addPathPathDetailWithAsrAndCall2("ASRandCALL2", "KA20003", "1000038", "40 44 54 N", "73 59 9 W", "55");
         pathSummary.openPathDetailForAddingPath();
 //    Enter an existing Site's name and ASR into the search fields.
@@ -255,11 +254,11 @@ public class PathDetailTest extends BaseTest {
         createPath.fillOutCompanyFilter("VZW222", "", "", 0);
         pathSummary.changeToSi();
         pathSummary.openPathDetailForAddingPath();
-        pathDetail.addPathViaPathDetailBasicSetup1("SYNRAMS STATION", "KBY45", "34 37 42.1 N", "112 39 26.2 W", "-305.001", "1");
+        pathDetail.addPathViaPathDetailBasicSetup1("SYNRAMS STATION", "KBY45", "34 37 42.1 N", "112 39 26.2 W", "-305.001", "11.0 GHz");
         pathDetail.pathDetailErrors("Must be between -304.495 and 30,479.695 meters.");
         pathDetail.addPathViaPathDetailBasicSetup2("New York", "KA20003", "40 44 54 N", "73 59 9 W", "30479.696");
         pathDetail.pathDetailErrors("Must be between -304.495 and 30,479.695 meters.");
-        pathDetail.viewPathDetailValue1("SYNRAMS STATION", "KBY45", "34 37 42.1 N", "112 39 26.2 W", "-305.001", "1");
+        pathDetail.viewPathDetailValue1("SYNRAMS STATION", "KBY45", "34 37 42.1 N", "112 39 26.2 W", "-305.001", "11");
         pathDetail.viewPathDetailValues2("New York", "KA20003", "40 44 54 N", "73 59 9 W", "30479.696", "1");
         pathDetail.closePathDetails();
     }
@@ -284,7 +283,7 @@ public class PathDetailTest extends BaseTest {
         createPath.fillOutCompanyFilter("VZW222", "", "", 0);
         pathSummary.changeToSi();
         pathSummary.openPathDetailForAddingPath();
-        pathDetail.addPathViaPathDetailBasicSetup1("SYNRAMS STATION", "KBY45", "34 37 42.1 N", "112 39 26.2 W", "-200.012", "1");
+        pathDetail.addPathViaPathDetailBasicSetup1("SYNRAMS STATION", "KBY45", "34 37 42.1 N", "112 39 26.2 W", "-200.012", "11.0 GHz");
         pathDetail.licSelection1("1", "Secondary");
         pathDetail.licSelection2("1", "Secondary");
         pathDetail.addPathViaPathDetailBasicSetup2("New York", "KA20003", "40 44 54 N", "73 59 9 W", "21000.124");
@@ -298,7 +297,7 @@ public class PathDetailTest extends BaseTest {
         createPath.fillOutCompanyFilter("VZW222", "", "", 0);
         pathSummary.changeToSi();
         pathSummary.openPathDetailForAddingPath();
-        pathDetail.addPathViaPathDetailBasicSetup1("SYNRAMS STATION", "KBY45", "34 37 42.1 N", "112 39 26.2 W", "-200.012", "1");
+        pathDetail.addPathViaPathDetailBasicSetup1("SYNRAMS STATION", "KBY45", "34 37 42.1 N", "112 39 26.2 W", "-200.012", "11.0 GHz");
         pathDetail.licSelection1("1", "Secondary");
         pathDetail.licSelection2("1", "Secondary");
         pathDetail.radioService1("5", "AB—Aural Microwave Booster");
@@ -381,7 +380,7 @@ public class PathDetailTest extends BaseTest {
         pathSummary.changeToSi();
         for (String value : array) {
             pathSummary.openPathDetailForAddingPath();
-            pathDetail.addPathViaPathDetailBasicSetup1("RadioVal1", "KBY45", "34 37 42.1 N", "112 39 26.2 W", "-200.012", "1");
+            pathDetail.addPathViaPathDetailBasicSetup1("RadioVal1", "KBY45", "34 37 42.1 N", "112 39 26.2 W", "-200.012", "11.0 GHz");
             pathDetail.licSelection1("1", "Secondary");
             pathDetail.licSelection2("1", "Secondary");
             pathDetail.radioServiceLoop1(value);
@@ -406,7 +405,7 @@ public class PathDetailTest extends BaseTest {
         createPath.fillOutCompanyFilter("VZW222", "", "", 0);
         pathSummary.changeToUs();
         pathSummary.openPathDetailForAddingPath();
-        pathDetail.addPathViaPathDetailBasicSetup1("SYNRAMS STATION", "KBY45", "34 37 42.1 N", "112 39 26.2 W", "-1000", "1");
+        pathDetail.addPathViaPathDetailBasicSetup1("SYNRAMS STATION", "KBY45", "34 37 42.1 N", "112 39 26.2 W", "-1000", "11.0 GHz");
         pathDetail.pathDetailErrors("Must be between -999 and 99,999 feet.");
         pathDetail.addPathViaPathDetailBasicSetup2("New York", "KA20003", "40 44 54 N", "73 59 9 W", "100000");
         pathDetail.pathDetailErrors("Must be between -999 and 99,999 feet.");
@@ -634,12 +633,12 @@ public class PathDetailTest extends BaseTest {
         createPath.fillOutCompanyFilter("VZW222", "", "", 0);
         pathSummary.changeToSi();
         pathSummary.openPathDetailForAddingPath();
-        pathDetail.addPathViaPathDetailBasicSetup1("SYNRAMS STATION", "KBY45", "34 37 42.1 N", "112 39 26.2 W", "250", "1");
+        pathDetail.addPathViaPathDetailBasicSetup1("SYNRAMS STATION", "KBY45", "34 37 42.1 N", "112 39 26.2 W", "250", "11.0 GHz");
         pathDetail.addPathViaPathDetailBasicSetup2("New York", "KA20003", "40 44 54 N", "73 59 9 W", "0.98");
         pathDetail.saveAndValidateSuccessMessage("PATH SAVED SUCCESSFULLY\n" +
                 "You have successfully saved SYNRAMS STATION - New York");
         pathDetail.openPathDetailViaDetails();
-        pathDetail.savedPathInfoPersists1("SYNRAMS STATION","KBY45", "34 37 42.1 N", "112 39 26.2 W", "250", "1");
+        pathDetail.savedPathInfoPersists1("SYNRAMS STATION","KBY45", "34 37 42.1 N", "112 39 26.2 W", "250", "11");
         pathDetail.savedPathInfoPersists2("New York", "KA20003", "40 44 54 N", "73 59 9 W", "0.98");
     }
 
@@ -673,13 +672,14 @@ public class PathDetailTest extends BaseTest {
         createPath.fillOutCompanyFilter("VZW222", "", "", 0);
         pathSummary.changeToSi();
         pathSummary.openPathDetailForAddingPath();
-        pathDetail.addPathViaPathDetailBasicSetup1("SYNRAMS STATION", "KBY45", "34 37 42.1 N", "112 39 26.2 W", "250", "1");
+        pathDetail.addPathViaPathDetailBasicSetup1("SYNRAMS STATION", "KBY45", "34 37 42.1 N", "112 39 26.2 W", "250", "11.0 GHz");
         pathDetail.addPathViaPathDetailBasicSetup2("New York", "KA20003", "40 44 54 N", "73 59 9 W", "0.98");
         pathDetail.saveAndValidateSuccessMessage("PATH SAVED SUCCESSFULLY\n" +
                 "You have successfully saved SYNRAMS STATION - New York");
         pathDetail.openPathDetailViaDetails();
-        pathDetail.copyPathViaPathDetails();
-        pathDetail.savedPathInfoPersists1("SYNRAMS STATION","KBY45", "34 37 42.1 N", "112 39 26.2 W", "250", "1");
+        pathDetail.copyPathViaPathDetails("PATH COPIED SUCCESSFULLY\n" +
+                "You have successfully copied SYNRAMS STATION - New York");
+        pathDetail.savedPathInfoPersists1("SYNRAMS STATION","KBY45", "34 37 42.1 N", "112 39 26.2 W", "250", "11");
         pathDetail.savedPathInfoPersists2("New York", "KA20003", "40 44 54 N", "73 59 9 W", "0.98");
 
     }
@@ -699,16 +699,16 @@ public class PathDetailTest extends BaseTest {
         createPath.fillOutCompanyFilter("VZW222", "", "", 0);
         pathSummary.changeToSi();
         pathSummary.openPathDetailForAddingPath();
-        pathDetail.addPathViaPathDetailBasicSetup1("SYNRAMS STATION", "KBY45", "34 37 42.1 N", "112 39 26.2 W", "250", "1");
+        pathDetail.addPathViaPathDetailBasicSetup1("SYNRAMS STATION", "KBY45", "34 37 42.1 N", "112 39 26.2 W", "250", "11.0 GHz");
         pathDetail.addPathViaPathDetailBasicSetup2("New York", "KA20003", "40 44 54 N", "73 59 9 W", "0.98");
         pathDetail.saveAndValidateSuccessMessage("PATH SAVED SUCCESSFULLY\n" +
                 "You have successfully saved SYNRAMS STATION - New York");
         pathDetail.openPathDetailViaDetails();
-        pathDetail.savedPathInfoPersists1("SYNRAMS STATION","KBY45", "34 37 42.1 N", "112 39 26.2 W", "250", "1");
+        pathDetail.savedPathInfoPersists1("SYNRAMS STATION","KBY45", "34 37 42.1 N", "112 39 26.2 W", "250", "11");
         pathDetail.savedPathInfoPersists2("New York", "KA20003", "40 44 54 N", "73 59 9 W", "0.98");
         pathDetail.flipPath();
         pathDetail.savedPathInfoPersists2("SYNRAMS STATION","KBY45", "34 37 42.1 N", "112 39 26.2 W", "250");
-        pathDetail.savedPathInfoPersists1("New York", "KA20003", "40 44 54 N", "73 59 9 W", "0.98", "1");
+        pathDetail.savedPathInfoPersists1("New York", "KA20003", "40 44 54 N", "73 59 9 W", "0.98", "11");
     }
     /**COM-455
      *   Navigate to a saved path in Path Details.
@@ -725,14 +725,15 @@ public class PathDetailTest extends BaseTest {
         createPath.fillOutCompanyFilter("VZW222", "", "", 0);
         pathSummary.changeToSi();
         pathSummary.openPathDetailForAddingPath();
-        pathDetail.addPathViaPathDetailBasicSetup1("SYNRAMS STATION", "KBY45", "34 37 42.1 N", "112 39 26.2 W", "250", "1");
+        pathDetail.addPathViaPathDetailBasicSetup1("SYNRAMS STATION", "KBY45", "34 37 42.1 N", "112 39 26.2 W", "250", "11.0 GHz");
         pathDetail.addPathViaPathDetailBasicSetup2("New York", "KA20003", "40 44 54 N", "73 59 9 W", "0.98");
         pathDetail.saveAndValidateSuccessMessage("PATH SAVED SUCCESSFULLY\n" +
                 "You have successfully saved SYNRAMS STATION - New York");
         pathDetail.openPathDetailViaDetails();
-        pathDetail.copyPathViaPathDetails();
+        pathDetail.copyPathViaPathDetails("PATH COPIED SUCCESSFULLY\n" +
+                "You have successfully copied SYNRAMS STATION - New York");
         pathDetail.nextArrow();
-        pathDetail.savedPathInfoPersists1("SYNRAMS STATION","KBY45", "34 37 42.1 N", "112 39 26.2 W", "250", "1");
+        pathDetail.savedPathInfoPersists1("SYNRAMS STATION","KBY45", "34 37 42.1 N", "112 39 26.2 W", "250", "11");
         pathDetail.savedPathInfoPersists2("New York", "KA20003", "40 44 54 N", "73 59 9 W", "0.98");
 
     }
@@ -752,10 +753,10 @@ public class PathDetailTest extends BaseTest {
         createPath.fillOutCompanyFilter("VZW222", "", "", 0);
         pathSummary.changeToUs();
         pathSummary.openPathDetailForAddingPath();
-        pathDetail.addPathPathDetailWithAsrAndCall1("PassRepeater1", "KBY45", "1000037", "34 37 42.1 N", "112 39 26.2 W", "66", "1");
+        pathDetail.addPathPathDetailWithAsrAndCall1("PassRepeater1", "KBY45", "1000037", "34 37 42.1 N", "112 39 26.2 W", "66", "11.0 GHz");
         pathDetail.addPathPathDetailWithAsrAndCall2("PassRepeater2", "KA20003", "1000038", "40 44 54 N", "73 59 9 W", "55");
         pathSummary.openPathDetailForAddingPath();
-        pathDetail.addPathPathDetailWithAsrAndCall1("NoPassRepeater1", "KBY45", "1000037", "34 37 42.1 N", "112 39 26.2 W", "66", "1");
+        pathDetail.addPathPathDetailWithAsrAndCall1("NoPassRepeater1", "KBY45", "1000037", "34 37 42.1 N", "112 39 26.2 W", "66", "11");
         pathDetail.addPathPathDetailWithAsrAndCall2("NoPassRepeater2", "KA20003", "1000038", "40 44 54 N", "73 59 9 W", "55");
         pathDetail.openPathDetailViaDetails();
         pathDetail.addBackToBackPassiveRepeater();
@@ -780,10 +781,10 @@ public class PathDetailTest extends BaseTest {
         createPath.fillOutCompanyFilter("VZW222", "", "", 0);
         pathSummary.changeToUs();
         pathSummary.openPathDetailForAddingPath();
-        pathDetail.addPathPathDetailWithAsrAndCall1("FreqBandChanged1", "KBY45", "1000037", "34 37 42.1 N", "112 39 26.2 W", "66", "1");
+        pathDetail.addPathPathDetailWithAsrAndCall1("FreqBandChanged1", "KBY45", "1000037", "34 37 42.1 N", "112 39 26.2 W", "66", "11.0 GHz");
         pathDetail.addPathPathDetailWithAsrAndCall2("FreqBandChanged2", "KA20003", "1000038", "40 44 54 N", "73 59 9 W", "55");
         pathSummary.openPathDetailForAddingPath();
-        pathDetail.addPathPathDetailWithAsrAndCall1("FreqBandChanged3", "KBY45", "1000037", "34 37 42.1 N", "112 39 26.2 W", "66", "1");
+        pathDetail.addPathPathDetailWithAsrAndCall1("FreqBandChanged3", "KBY45", "1000037", "34 37 42.1 N", "112 39 26.2 W", "66", "11");
         pathDetail.addPathPathDetailWithAsrAndCall2("FreqBandChanged4", "KA20003", "1000038", "40 44 54 N", "73 59 9 W", "55");
         pathDetail.openPathDetailViaDetails();
         pathDetail.addBackToBackPassiveRepeater();
@@ -812,14 +813,16 @@ public class PathDetailTest extends BaseTest {
         createPath.fillOutCompanyFilter("VZW222", "", "", 0);
         pathSummary.changeToSi();
         pathSummary.openPathDetailForAddingPath();
-        pathDetail.addPathViaPathDetailBasicSetup1("SYNRAMS STATION", "KBY45", "34 37 42.1 N", "112 39 26.2 W", "250", "1");
+        pathDetail.addPathViaPathDetailBasicSetup1("SYNRAMS STATION", "KBY45", "34 37 42.1 N", "112 39 26.2 W", "250", "11.0 GHz");
         pathDetail.addPathViaPathDetailBasicSetup2("New York", "KA20003", "40 44 54 N", "73 59 9 W", "0.98");
         pathDetail.saveAndValidateSuccessMessage("PATH SAVED SUCCESSFULLY\n" +
                 "You have successfully saved SYNRAMS STATION - New York");
         pathDetail.openPathDetailViaDetails();
-        pathDetail.copyPathViaPathDetails();
-        pathDetail.copyPathViaPathDetails();
-        pathDetail.savedPathInfoPersists1("SYNRAMS STATION","KBY45", "34 37 42.1 N", "112 39 26.2 W", "250", "1");
+        pathDetail.copyPathViaPathDetails("PATH COPIED SUCCESSFULLY\n" +
+                "You have successfully copied SYNRAMS STATION - New York");
+        pathDetail.copyPathViaPathDetails("PATH COPIED SUCCESSFULLY\n" +
+                "You have successfully copied SYNRAMS STATION - New York");
+        pathDetail.savedPathInfoPersists1("SYNRAMS STATION","KBY45", "34 37 42.1 N", "112 39 26.2 W", "250", "11");
         pathDetail.savedPathInfoPersists2("New York", "KA20003", "40 44 54 N", "73 59 9 W", "0.98");
         pathDetail.navBack();
         quickAdd.validateCopiedPaths(0,"SYNRAMS STATION - New York");

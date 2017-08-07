@@ -361,7 +361,7 @@ public class PathDetailPage extends BasePage {
     }
 
 
-    public void copyPathViaPathDetails(){
+    public void copyPathViaPathDetails(String copyMessage){
         //Are you on the Path Detail page?
         assertTrue("The Path Detail page did not appear",isDisplayed(pathDetailSiteNameField1,8));
         //Is the copy button present?
@@ -371,8 +371,7 @@ public class PathDetailPage extends BasePage {
         //A Modal will appear success
         isDisplayed(pathDetailSuccessfulCopyMessage,10);
         String copySuccessMessage = getText(pathDetailSuccessfulCopyMessage);
-        assertEquals(copySuccessMessage,"PATH COPIED SUCCESSFULLY\n" +
-                "You have successfully copied SYNRAMS STATION - New York");
+        assertEquals(copySuccessMessage,copyMessage);
         //Click away
         isDisplayed(overLay,30);
         click(overLay);
@@ -875,7 +874,7 @@ public class PathDetailPage extends BasePage {
         type(siteName,pathDetailSiteNameField1);
 
         assertTrue(isDisplayed(pathDetailCallSignField1,10));
-        selectFromDropdown(pathDetailFrequencyBandDropDownField1,"940 MHz");
+        selectFromDropdown(pathDetailFrequencyBandDropDownField1,frequencyBand);//940 MHz
         String siteNameValue = getFieldText(pathDetailSiteNameField1);
         String callSignValue = getFieldText(pathDetailCallSignField1);
         String latitudeValue = getFieldText(pathDetailLatitudeField1);
@@ -888,8 +887,25 @@ public class PathDetailPage extends BasePage {
         assertEquals("call Sign is incorrect",latitudeValue,latitude);
         assertEquals("call Sign is incorrect",longitudeValue,longitude);
         assertEquals("call Sign is incorrect",elevationValue,elevation);
-        assertEquals("call Sign is incorrect",bandValue,frequencyBand);
 
+        try
+        {
+            assertEquals("call Sign is incorrect",bandValue,frequencyBand.substring(0,2));
+        }
+        catch (java.lang.AssertionError failure)
+        {
+            //in the catch you would check to see if there are any more rows left.
+            assertEquals("call Sign is incorrect",bandValue,frequencyBand.substring(0,1));
+
+            }
+        }
+
+
+
+
+
+    public void changeBand(String band){
+        selectFromDropdown(pathDetailFrequencyBandDropDownField1,band);
     }
 
     public void addPathPathDetailWithAsrAndCall1(String siteName, String callSign, String asr, String latitude,String longitude, String elevation, String frequencyBand){
@@ -1012,7 +1028,7 @@ public class PathDetailPage extends BasePage {
         type(siteName2,pathDetailSiteNameField2);
 
         assertTrue(isDisplayed(pathDetailCallSignField2,10));
-        selectFromDropdown(pathDetailFrequencyBandDropDownField1,"940 MHz");
+        //selectFromDropdown(pathDetailFrequencyBandDropDownField1,"11.0 GHz");
         String siteNameValue2 = getFieldText(pathDetailSiteNameField2);
         String callSignValue2 = getFieldText(pathDetailCallSignField2);
         String latitudeValue2 = getFieldText(pathDetailLatitudeField2);

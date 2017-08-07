@@ -62,8 +62,8 @@ public class PathSummaryTest extends BaseTest {
         pathSummary.viewSiteCallSignLatLongGeColumns1(0,"KDFW Studio","KA3982","32 47 16.4 N","96 47 59 W","55");
         pathSummary.selectCopyFromPath();
         pathSummary.viewSiteCallSignLatLongGeColumns1(0,"KDFW Studio","KA3982","32 47 16.4 N","96 47 59 W","55");
-        pathSummary.viewSiteCallSignLatLongGeColumns2(1,"KDFW Studio","KA2124","44 4 7.4 N","103 15 5 W","23");
-        pathSummary.viewSiteCallSignLatLongGeColumns1(0,"KDFW Studio","KA3982","32 47 16.4 N","96 47 59 W","55");
+        pathSummary.viewSiteCallSignLatLongGeColumns2(0,"KOTA TX - Skyline","KA2124","44 4 7.4 N","103 15 5 W","23");
+        pathSummary.viewSiteCallSignLatLongGeColumns2(1,"KOTA TX - Skyline","KA2124","44 4 7.4 N","103 15 5 W","23");
 
     }
 
@@ -932,6 +932,7 @@ public class PathSummaryTest extends BaseTest {
      Please see attached screenshot.
 
      */
+    //COM-545 (UI Tests) Sprint 13 Bugs
     @Test//COM-500
     public void quickAdd_shouldGiveWarning_whenLatAndLongAreTheSame() {
         createPath.createBrandNewProjectPath("QuickAddElevationBoundary" + randomNumber, "This is the Default");
