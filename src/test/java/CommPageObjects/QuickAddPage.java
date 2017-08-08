@@ -62,6 +62,7 @@ public class QuickAddPage extends BasePage {
     By pathRadio = By.xpath("//span[@title=\"Radio Code: undefined\"]");
 
     By pathRadioBand = By.id("path-0-site-1-bandwidth");
+    By companyList = By.xpath("//*[@id=\"project-summary-project-default-company\"]/span/span");
 
 
     //Index List -- Can you used an array to select item
@@ -77,6 +78,13 @@ public class QuickAddPage extends BasePage {
     public QuickAddPage(WebDriver driver) {
         super(driver);
         visit("");
+    }
+
+    public void valCompanies(String pathRadioBandValue){
+       isDisplayed(companyList,10);
+        String currentCompanies = getText(companyList);
+        assertEquals(currentCompanies,pathRadioBandValue);
+
     }
 
     public void validatedRadioValues(String pathRadioText, String pathBandwidthText ){

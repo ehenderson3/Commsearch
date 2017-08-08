@@ -179,7 +179,7 @@ public class CreateNewPathPage extends BasePage {
             try
             {
                 a = getTextPlural(searchResultArrayPlural,i);//path-details-site-0-company-name
-                assertEquals(a, "Verizon AZ");
+                assertEquals(a, coNameText);
                 click(searchResultArrayPlural,i);
                 break;
             }

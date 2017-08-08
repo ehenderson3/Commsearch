@@ -828,6 +828,51 @@ public class PathDetailTest extends BaseTest {
         quickAdd.validateCopiedPaths(0,"SYNRAMS STATION - New York");
         quickAdd.validateCopiedPaths(1,"SYNRAMS STATION - New York");
         quickAdd.validateCopiedPaths(2,"SYNRAMS STATION - New York");
+    }
 
+
+    //COM-535
+
+    /**
+     * Acceptance Criteria
+     Projects can have multiple companies associated
+     allow for multiple companies in project info area
+     Account for overflow, may need tool tip for more than 3 company names
+
+
+     Update list whenever the following actions are performed:
+     Create New Path (from path details)
+     Delete Path(s)
+     Split Project (for old project)
+     Updating project settings
+     */
+
+    @Test
+    public void pathDetail_AddDifferentCompanies_ResultShouldIncludeEachCompany() {
+        boolean siteExist;
+        createPath.createProjectPath("search1StCharOfCompany" + randomNumber, "This is the Default");
+        createPath.simpleClickCreateNewProjectButton();
+        pathSummary.valSiteLocationToggleOn();
+        pathSummary.openPathDetailForAddingPath();
+        pathDetail.addAsrPathViaPathDetail1("CAMSLANT STATION", "1241006", "35 12 26.7 N", "78 3 21.2 W", "48.7", "1");
+        createPath.fillOutCompanyFilterFromDetails("", "Verizon AZ", "", 0);
+        pathDetail.addAsrPathViaPathDetail2("SYNRAMS STATION", "1208837", "40 34 10 N", "122 26 14 W", "250");
+        createPath.fillOutCompanyFilterFromDetails("", "Verizon TX", "", 1);
+        pathDetailAnt.clickSaveDetails();
+        quickAdd.valCompanies("VERIZON AZ , VERIZON TX");
+    }
+    @Test
+    public void pathDetail_AddSameCompanies_ResultShouldCompany() {
+        boolean siteExist;
+        createPath.createProjectPath("search1StCharOfCompany" + randomNumber, "This is the Default");
+        createPath.simpleClickCreateNewProjectButton();
+        pathSummary.valSiteLocationToggleOn();
+        pathSummary.openPathDetailForAddingPath();
+        pathDetail.addAsrPathViaPathDetail1("CAMSLANT STATION", "1241006", "35 12 26.7 N", "78 3 21.2 W", "48.7", "1");
+        createPath.fillOutCompanyFilterFromDetails("", "Verizon AZ", "", 0);
+        pathDetail.addAsrPathViaPathDetail2("SYNRAMS STATION", "1208837", "40 34 10 N", "122 26 14 W", "250");
+        createPath.fillOutCompanyFilterFromDetails("", "Verizon AZ", "", 1);
+        pathDetailAnt.clickSaveDetails();
+        quickAdd.valCompanies("VERIZON AZ");
     }
 }
