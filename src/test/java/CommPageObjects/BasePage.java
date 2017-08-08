@@ -125,6 +125,11 @@ public class BasePage implements Config {
         driver.findElement(locator).clear();
     }
 
+
+
+
+
+
     public boolean checked(By locator) {
         boolean checked = find(locator).isSelected();
         return checked;

@@ -52,6 +52,16 @@ public class RadioPage extends BasePage {
     By atpcModalCoordinatedPowerField = By.id("atpc-settings-coordinated-power");
     By atpcNominalErrorMsg = By.id("atpc-settings-nominal-power-error-message");
 
+
+
+    By commonLossFieldLeft = By.id("path-details-losses-0-common-loss");
+    By transmitLossFieldLeft = By.id("path-details-losses-0-transmit-loss");
+    By recieveLossFieldLeft = By.id("path-details-losses-0-receive-loss");
+    By commonLossFieldRight = By.id("path-details-losses-1-common-loss");
+    By transmitLossFieldRight = By.id("path-details-losses-1-transmit-loss");
+    By recieveLossFieldRight = By.id("path-details-losses-1-receive-loss");
+
+
     //Path hovers -- Able to use the hover method
     By radioCompanyFieldLeft = By.xpath("//*[@id=\"app\"]/div/div/div[2]/div/div/div/form/div[4]/div/ul[1]/li[1]/ul/li[3]/div/p");
     By radioFamilyFieldLeft1 = By.xpath("//*[@id=\"app\"]/div/div/div[2]/div/div/div/form/div[4]/div/ul[1]/li[1]/ul/li[4]/div/p/span[1]");
@@ -98,10 +108,106 @@ public class RadioPage extends BasePage {
 
     By atpcModalTitle = By.cssSelector("padding-left-half margin-left-half");
 
+    By commonLossErrorMsgLeft = By.id("path-details-losses-0-common-loss-error-message");
+    By transmitLossErrorMsgLeft = By.id("path-details-losses-0-transmit-loss-error-message");
+    By recieveLossErrorMsgLeft = By.id("path-details-losses-0-receive-loss-error-message");
+    By commonLossErrorMsgRight = By.id("path-details-losses-1-common-loss-error-message");
+    By transmitLossErrorMsgRight = By.id("path-details-losses-1-transmit-loss-error-message");
+    By recieveLossErrorMsgRight = By.id("path-details-losses-1-receive-loss-error-message");
+
     public RadioPage(WebDriver driver) {
         super(driver);
         visit("/");
     }
+
+    public void clearAllLossFields() {
+        clear(commonLossFieldRight);
+        click(transmitLossFieldRight);
+
+        clear(transmitLossFieldRight);
+        click(recieveLossFieldRight);
+
+        clear(recieveLossFieldRight);
+        click(commonLossFieldLeft);
+
+        clear(commonLossFieldLeft);
+        click(transmitLossFieldRight);
+
+        clear(transmitLossFieldLeft);
+        click(transmitLossFieldRight);
+
+        clear(recieveLossFieldLeft);
+        click(transmitLossFieldRight);
+
+    }
+
+    public void lossErrorLeft(String commonLossErrorLeft,String transmitLossErrorLeft,String recieveLossErrorLeft){
+        isDisplayed(commonLossFieldLeft,6);
+        slowDown(2);
+        String commonLossErrorValue = getText(commonLossErrorMsgLeft);
+        String transmitLossErrorValue = getText(transmitLossErrorMsgLeft);
+        String recieveLossErrorValue = getText(recieveLossErrorMsgLeft);
+        assertEquals(commonLossErrorLeft,commonLossErrorValue);
+        assertEquals(transmitLossErrorLeft,transmitLossErrorValue);
+        assertEquals(recieveLossErrorLeft,recieveLossErrorValue);
+    }
+
+    public void lossErrorRight(String commonLossErrorRight,String transmitLossErrorRight,String recieveLossErrorRight){
+        isDisplayed(commonLossFieldRight,6);
+        slowDown(2);
+        String commonLossErrorValue = getText(commonLossErrorMsgRight);
+        String transmitLossErrorValue = getText(transmitLossErrorMsgRight);
+        String recieveLossErrorValue = getText(recieveLossErrorMsgRight);
+        assertEquals(commonLossErrorRight,commonLossErrorValue);
+        assertEquals(transmitLossErrorRight,transmitLossErrorValue);
+        assertEquals(recieveLossErrorRight,recieveLossErrorValue);
+    }
+
+    public void validateLossLeft(String commonLossLeft,String transmitLossLeft,String recieveLossLeft){
+        assertTrue("Cant find Common Loss field",isDisplayed(commonLossFieldLeft));
+        assertTrue("Cant find Common Loss field",isDisplayed(transmitLossFieldLeft));
+        assertTrue("Cant find Common Loss field",isDisplayed(recieveLossFieldLeft));
+        String commonLossFieldValue = getFieldText(commonLossFieldLeft);
+        String transmitLossFieldValue = getFieldText(transmitLossFieldLeft);
+        String recieveLossFieldValue = getFieldText(recieveLossFieldLeft);
+        assertEquals(commonLossLeft,commonLossFieldValue);
+        assertEquals(transmitLossLeft,transmitLossFieldValue);
+        assertEquals(recieveLossLeft,recieveLossFieldValue);
+    }
+
+    public void validateLossRight(String commonLossRight,String transmitLossRight,String recieveLossRight){
+        assertTrue("Cant find Common Loss field",isDisplayed(commonLossFieldRight));
+        assertTrue("Cant find Common Loss field",isDisplayed(transmitLossFieldRight));
+        assertTrue("Cant find Common Loss field",isDisplayed(recieveLossFieldRight));
+        String commonLossFieldValue = getFieldText(commonLossFieldRight);
+        String transmitLossFieldValue = getFieldText(transmitLossFieldRight);
+        String recieveLossFieldValue = getFieldText(recieveLossFieldRight);
+        assertEquals(commonLossRight,commonLossFieldValue);
+        assertEquals(transmitLossRight,transmitLossFieldValue);
+        assertEquals(recieveLossRight,recieveLossFieldValue);
+    }
+
+    public void addLossLeft(String commonLossLeft,String transmitLossLeft,String recieveLossLeft){
+        assertTrue("Cant find Common Loss field",isDisplayed(commonLossFieldLeft));
+        assertTrue("Cant find transmit Loss field",isDisplayed(transmitLossFieldLeft));
+        assertTrue("Cant find recieve Loss field",isDisplayed(recieveLossFieldLeft));
+        type(commonLossLeft,commonLossFieldLeft);
+        type(transmitLossLeft,transmitLossFieldLeft);
+        type(recieveLossLeft,recieveLossFieldLeft);
+
+    }
+
+    public void addLossRight(String commonLossRight,String transmitLossRight,String recieveLossRight){
+        assertTrue("Cant find Common Loss field",isDisplayed(commonLossFieldRight));
+        assertTrue("Cant find Common Loss field",isDisplayed(transmitLossFieldRight));
+        assertTrue("Cant find Common Loss field",isDisplayed(recieveLossFieldRight));
+        type(commonLossRight,commonLossFieldRight);
+        type(transmitLossRight,transmitLossFieldRight);
+        type(recieveLossRight,recieveLossFieldRight);
+
+    }
+
+
 
     public void isRadioSectionAvailable(){
         assertTrue(!isDisplayedAndClickable(radioCodeFieldLeft,10));
@@ -359,6 +465,7 @@ public class RadioPage extends BasePage {
         String max = getFieldTextPlural(radioModulationMaxPowerArrayRowsRight, i);
         assertEquals(maxPowerVal,max);
     }
+
 
 
 

@@ -658,41 +658,6 @@ public void pathDetailRadio_DisabledModEnabledNewMaxWillBeTheNewllyEnabled_whenD
 
     }
 
-    //COM-545 (UI Tests) Sprint 13 Bugs
-    //COM-437 Copy Path does not copy segment end antennas or radios
-    @Test
-    public void pathDetailRadio_ShouldCopyRadioAndAntenna_whenCopyingPath() {
-        createPath.createBrandNewProjectPath("Open ATPC" + randomNumber, "This is the Default");
-        createPath.fillOutCompanyFilter("VZW222", "", "", 0);
-        pathSummary.changeToSi();
-        pathSummary.openPathDetailForAddingPath();
-        pathDetail.addPathViaPathDetailBasicSetup1("Add Radio1", "KBY45", "34 37 42.1 N", "112 39 26.2 W", "66", "11.0 GHz");
-        pathDetail.addPathViaPathDetailBasicSetup2("Add Radio2", "KA20003", "40 44 54 N", "73 59 9 W", "55");
-        pathDetailAnt.enterAntennaCodeAndBlur("77100A", "12");
-        pathDetailRadio.setupLeftRadio("X11A22");
-        pathDetailRadio.copyRadio();
-        pathDetailAnt.clickSaveDetails();
-        pathDetail.openPathDetailViaDetails();
-        pathDetail.copyPathViaPathDetails("PATH COPIED SUCCESSFULLY\n" +
-                "You have successfully copied Add Radio1 - Add Radio2");
-        pathDetail.nextArrow();
-        pathDetailAnt.addAntennaToPathView("77100A", "Tx/Rx","VHLPX2-11" , "3.4°", "0","VHLPX2-11", "Tx/Rx","77100A", "3.4°", "0");
-        pathDetailRadio.rightModulationValidation(0, "256 QAM", "40","20");
-        pathDetailRadio.rightModulationValidation(1, "256 QAM", "40","20");
-        pathDetailRadio.rightModulationValidation(2, "128 QAM", "40","21");
-        pathDetailRadio.rightModulationValidation(3, "128 QAM", "40","21");
-        pathDetailRadio.rightModulationValidation(4, "64 QAM", "40","21");
-        pathDetailRadio.rightModulationValidation(5, "64 QAM", "40","21");
-        pathDetailRadio.rightModulationValidation(6, "32 QAM", "40","23");
-        pathDetailRadio.rightModulationValidation(7, "32 QAM", "40","23");
-        pathDetailRadio.rightModulationValidation(8, "16 QAM", "40","24");
-        pathDetailRadio.rightModulationValidation(9, "16 QAM", "40","24");
-        pathDetailRadio.rightModulationValidation(10, "QPSK", "40","26");
-        pathDetailRadio.rightModulationValidation(11, "QPSK", "40","26");
-
-    }
-
-
     /*    COM-536
     Testing:
     Open Path Details for a path
@@ -765,11 +730,10 @@ public void pathDetailRadio_DisabledModEnabledNewMaxWillBeTheNewllyEnabled_whenD
 
 
     }
-    //COM-545 (UI Tests) Sprint 13 Bugs
-    //COM-437 Copy Path does not copy segment end antennas or radios
+
     @Test
-    public void pathDetailRadio_ShouldCopyRadioAndAntenna_whenCopyingPath() {
-        createPath.createBrandNewProjectPath("Open ATPC" + randomNumber, "This is the Default");
+    public void pathDetailRadio_LossValuesIncluded_whenLossIsEntered() {
+        createPath.createBrandNewProjectPath("ChangingModulation" + randomNumber, "This is the Default");
         createPath.fillOutCompanyFilter("VZW222", "", "", 0);
         pathSummary.changeToSi();
         pathSummary.openPathDetailForAddingPath();
@@ -777,25 +741,63 @@ public void pathDetailRadio_DisabledModEnabledNewMaxWillBeTheNewllyEnabled_whenD
         pathDetail.addPathViaPathDetailBasicSetup2("Add Radio2", "KA20003", "40 44 54 N", "73 59 9 W", "55");
         pathDetailAnt.enterAntennaCodeAndBlur("77100A", "12");
         pathDetailRadio.setupLeftRadio("X11A22");
-        pathDetailRadio.copyRadio();
+        pathDetailRadio.setupRightRadio("X11A22");
+        pathDetailRadio.addLossLeft("22","33","44");
+        pathDetailRadio.addLossRight("22","33","44");
         pathDetailAnt.clickSaveDetails();
+        //TODO //Sprint 14 add identifiers
+        //quickAdd.validatedRadioValues( "X11A22", "40 MHz");
         pathDetail.openPathDetailViaDetails();
-        pathDetail.copyPathViaPathDetails("PATH COPIED SUCCESSFULLY\n" +
-                "You have successfully copied Add Radio1 - Add Radio2");
-        pathDetail.nextArrow();
-        pathDetailAnt.addAntennaToPathView("77100A", "Tx/Rx","VHLPX2-11" , "3.4°", "0","VHLPX2-11", "Tx/Rx","77100A", "3.4°", "0");
-        pathDetailRadio.rightModulationValidation(0, "256 QAM", "40","20");
-        pathDetailRadio.rightModulationValidation(1, "256 QAM", "40","20");
-        pathDetailRadio.rightModulationValidation(2, "128 QAM", "40","21");
-        pathDetailRadio.rightModulationValidation(3, "128 QAM", "40","21");
-        pathDetailRadio.rightModulationValidation(4, "64 QAM", "40","21");
-        pathDetailRadio.rightModulationValidation(5, "64 QAM", "40","21");
-        pathDetailRadio.rightModulationValidation(6, "32 QAM", "40","23");
-        pathDetailRadio.rightModulationValidation(7, "32 QAM", "40","23");
-        pathDetailRadio.rightModulationValidation(8, "16 QAM", "40","24");
-        pathDetailRadio.rightModulationValidation(9, "16 QAM", "40","24");
-        pathDetailRadio.rightModulationValidation(10, "QPSK", "40","26");
-        pathDetailRadio.rightModulationValidation(11, "QPSK", "40","26");
+        pathDetailRadio.validateLossLeft("22","33","44");
+        pathDetailRadio.validateLossRight("22","33","44");
+
+
+    }
+
+    @Test
+    public void pathDetailRadio_LossValuesFieldValidate_whenIncorrectInputIsEnterered() {
+        createPath.createBrandNewProjectPath("ChangingModulation" + randomNumber, "This is the Default");
+        createPath.fillOutCompanyFilter("VZW222", "", "", 0);
+        pathSummary.changeToSi();
+        pathSummary.openPathDetailForAddingPath();
+        pathDetail.addPathViaPathDetailBasicSetup1("Add Radio1", "KBY45", "34 37 42.1 N", "112 39 26.2 W", "66", "11.0 GHz");
+        pathDetail.addPathViaPathDetailBasicSetup2("Add Radio2", "KA20003", "40 44 54 N", "73 59 9 W", "55");
+        pathDetailAnt.enterAntennaCodeAndBlur("77100A", "12");
+        pathDetailRadio.setupLeftRadio("X11A22");
+        pathDetailRadio.setupRightRadio("X11A22");
+        pathDetailRadio.addLossLeft("wwww","www","www");
+        pathDetailRadio.addLossRight("www","www","www");
+
+        pathDetailAnt.clickSaveDetails();
+
+        pathDetailRadio.lossErrorLeft("Must be numerical value.","Must be numerical value.","Must be numerical value.");
+        pathDetailRadio.lossErrorRight("Must be numerical value.","Must be numerical value.","Must be numerical value.");
+        pathDetailRadio.clearAllLossFields();
+        pathDetailRadio.clearAllLossFields();
+
+        pathDetailRadio.addLossLeft("-77","-88","-99");
+        pathDetailRadio.addLossRight("-44","-11","-55");
+
+        pathDetailAnt.clickSaveDetails();
+
+
+        pathDetailRadio.lossErrorLeft("Cannot be less than 0(dB).","Cannot be less than 0(dB).","Cannot be less than 0(dB).");
+        pathDetailRadio.lossErrorRight("Cannot be less than 0(dB).","Cannot be less than 0(dB).","Cannot be less than 0(dB).");
+
+        pathDetailRadio.clearAllLossFields();
+        pathDetailRadio.clearAllLossFields();
+
+        pathDetailRadio.addLossLeft("4444","4444","4444");
+        pathDetailRadio.addLossRight("4444","4444","4444");
+
+        pathDetailAnt.clickSaveDetails();
+
+
+        pathDetailRadio.lossErrorLeft("Cannot be greater than 999.9(dB).","Cannot be greater than 999.9(dB).","Cannot be greater than 999.9(dB).");
+        pathDetailRadio.lossErrorRight("Cannot be greater than 999.9(dB).","Cannot be greater than 999.9(dB).","Cannot be greater than 999.9(dB).");
+
 
     }
 }
+
+

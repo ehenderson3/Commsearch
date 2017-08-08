@@ -59,7 +59,9 @@ public class QuickAddPage extends BasePage {
     By quickAddMatchingOnLatAndLongiWarning = By.id("quick-add-error");
     By quickAddSavedSiteName = By.xpath("//*[contains(@id, 'path-') and contains(@id, '-site-1-siteName')]");
     By copiedPaths = By.cssSelector(".path-name-value.margin-right-auto");
+    By pathRadio = By.xpath("//span[@title=\"Radio Code: undefined\"]");
 
+    By pathRadioBand = By.id("path-0-site-1-bandwidth");
 
 
     //Index List -- Can you used an array to select item
@@ -75,6 +77,15 @@ public class QuickAddPage extends BasePage {
     public QuickAddPage(WebDriver driver) {
         super(driver);
         visit("");
+    }
+
+    public void validatedRadioValues(String pathRadioText, String pathBandwidthText ){
+        assertTrue(isDisplayed(quickAddButton,5));
+        //String pathRadioValue = getFieldTextTitle(pathRadio);
+        String pathRadioBandValue = getFieldTextTitle(pathRadioBand);
+        //assertEquals(pathRadioText,pathRadioValue);
+        assertEquals(pathBandwidthText,pathRadioBandValue);
+
     }
 
     public void validateCopiedPaths(int i, String pathNameText){
@@ -825,6 +836,8 @@ public class QuickAddPage extends BasePage {
         slowDown(2);
 
     }
+
+
 
 
     public void quickAddPathGeneral2(String PathNameText,String BandDropDown,String sitePartialText,String LatitudeText, String Longitude, String ElevationText,  String Asr) {
