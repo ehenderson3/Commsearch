@@ -266,6 +266,10 @@ public class RadioTest extends BaseTest{
         pathDetailAnt.clickSaveDetails();
     }
 
+
+
+
+
 /*  COM-490
     Given a disabled modulation has default Max Power greater than the current highest modulation,
     When the greater powered disabled Modulation is enabled,
@@ -654,6 +658,113 @@ public void pathDetailRadio_DisabledModEnabledNewMaxWillBeTheNewllyEnabled_whenD
 
     }
 
+    //COM-545 (UI Tests) Sprint 13 Bugs
+    //COM-437 Copy Path does not copy segment end antennas or radios
+    @Test
+    public void pathDetailRadio_ShouldCopyRadioAndAntenna_whenCopyingPath() {
+        createPath.createBrandNewProjectPath("Open ATPC" + randomNumber, "This is the Default");
+        createPath.fillOutCompanyFilter("VZW222", "", "", 0);
+        pathSummary.changeToSi();
+        pathSummary.openPathDetailForAddingPath();
+        pathDetail.addPathViaPathDetailBasicSetup1("Add Radio1", "KBY45", "34 37 42.1 N", "112 39 26.2 W", "66", "11.0 GHz");
+        pathDetail.addPathViaPathDetailBasicSetup2("Add Radio2", "KA20003", "40 44 54 N", "73 59 9 W", "55");
+        pathDetailAnt.enterAntennaCodeAndBlur("77100A", "12");
+        pathDetailRadio.setupLeftRadio("X11A22");
+        pathDetailRadio.copyRadio();
+        pathDetailAnt.clickSaveDetails();
+        pathDetail.openPathDetailViaDetails();
+        pathDetail.copyPathViaPathDetails("PATH COPIED SUCCESSFULLY\n" +
+                "You have successfully copied Add Radio1 - Add Radio2");
+        pathDetail.nextArrow();
+        pathDetailAnt.addAntennaToPathView("77100A", "Tx/Rx","VHLPX2-11" , "3.4°", "0","VHLPX2-11", "Tx/Rx","77100A", "3.4°", "0");
+        pathDetailRadio.rightModulationValidation(0, "256 QAM", "40","20");
+        pathDetailRadio.rightModulationValidation(1, "256 QAM", "40","20");
+        pathDetailRadio.rightModulationValidation(2, "128 QAM", "40","21");
+        pathDetailRadio.rightModulationValidation(3, "128 QAM", "40","21");
+        pathDetailRadio.rightModulationValidation(4, "64 QAM", "40","21");
+        pathDetailRadio.rightModulationValidation(5, "64 QAM", "40","21");
+        pathDetailRadio.rightModulationValidation(6, "32 QAM", "40","23");
+        pathDetailRadio.rightModulationValidation(7, "32 QAM", "40","23");
+        pathDetailRadio.rightModulationValidation(8, "16 QAM", "40","24");
+        pathDetailRadio.rightModulationValidation(9, "16 QAM", "40","24");
+        pathDetailRadio.rightModulationValidation(10, "QPSK", "40","26");
+        pathDetailRadio.rightModulationValidation(11, "QPSK", "40","26");
+
+    }
+
+
+    /*    COM-536
+    Testing:
+    Open Path Details for a path
+    Select an ACM radio for site A
+    Unselect modulations and adjust max power values
+    Click heart icon to make the radio a favorite
+    Blur away from radio code
+    NOTE: At this point the power levels revert to default
+    Enter the new (favorited) radio code in Site B
+    VALIDATED: Modulations are copied
+    Open a different path
+    Select the band
+    Enter the favorite radio code
+    NOTE: Modulations are copied
+    Switch to a non-ACM radio
+    Change max power
+    Favorite the radio
+    NOTE: Max power reverts to default
+    Why can we even favorite a non-ACM radio? This seems pointless
+    The problem here, is that any interaction with the radio code (including using the favorite button) reverts Max Power levels to default.  According to Nemo Burian this is as designed, but it seems strange to me.  Need to consult with Karen Szalay.*/
+    @Test
+    public void pathDetailRadio_ModulationsShouldBeCopied_whenDerivedFromFavorites10() {
+        createPath.createBrandNewProjectPath("ChangingModulation" + randomNumber, "This is the Default");
+        createPath.fillOutCompanyFilter("VZW222", "", "", 0);
+        pathSummary.changeToSi();
+        pathSummary.openPathDetailForAddingPath();
+        pathDetail.addPathViaPathDetailBasicSetup1("Add Radio1", "KBY45", "34 37 42.1 N", "112 39 26.2 W", "66", "11.0 GHz");
+        pathDetail.addPathViaPathDetailBasicSetup2("Add Radio2", "KA20003", "40 44 54 N", "73 59 9 W", "55");
+        pathDetailAnt.enterAntennaCodeAndBlur("77100A", "12");
+        pathDetailRadio.setupLeftRadio("X11A22");
+        pathDetailRadio.setupRightRadio("X11A22");
+        for (int i = 0; i < 10; i++) {
+            {
+                pathDetailRadio.deactivateModulation(2);
+            }
+        }
+        pathDetailRadio.saveFavRadioCodeEnterNewCode();
+        pathDetailRadio.activeModItemsLeft(0);
+        pathDetailRadio.activeModItemsLeft(1);
+
+        pathDetailRadio.activeModItemsRight(0);
+        pathDetailRadio.activeModItemsRight(1);
+
+    }
+
+    @Test
+    public void pathDetailRadio_ModulationsShouldBeCopied_whenDerivedFromFavorites9() {
+        createPath.createBrandNewProjectPath("ChangingModulation" + randomNumber, "This is the Default");
+        createPath.fillOutCompanyFilter("VZW222", "", "", 0);
+        pathSummary.changeToSi();
+        pathSummary.openPathDetailForAddingPath();
+        pathDetail.addPathViaPathDetailBasicSetup1("Add Radio1", "KBY45", "34 37 42.1 N", "112 39 26.2 W", "66", "11.0 GHz");
+        pathDetail.addPathViaPathDetailBasicSetup2("Add Radio2", "KA20003", "40 44 54 N", "73 59 9 W", "55");
+        pathDetailAnt.enterAntennaCodeAndBlur("77100A", "12");
+        pathDetailRadio.setupLeftRadio("X11A22");
+        pathDetailRadio.setupRightRadio("X11A22");
+        for (int i = 0; i < 9; i++) {
+            {
+                pathDetailRadio.deactivateModulation(2);
+            }
+        }
+        pathDetailRadio.saveFavRadioCodeEnterNewCode();
+        pathDetailRadio.activeModItemsLeft(0);
+        pathDetailRadio.activeModItemsLeft(1);
+        pathDetailRadio.activeModItemsLeft(2);
+
+        pathDetailRadio.activeModItemsRight(0);
+        pathDetailRadio.activeModItemsRight(1);
+        pathDetailRadio.activeModItemsRight(2);
+
+
+    }
     //COM-545 (UI Tests) Sprint 13 Bugs
     //COM-437 Copy Path does not copy segment end antennas or radios
     @Test

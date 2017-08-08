@@ -32,6 +32,7 @@ public class RadioPage extends BasePage {
     By atpcLightingBoltButtonLeft = By.id("path-details-radios-0--0-atpc-trigger");
     By atpcModalRampOnButton = By.id("atpc-settings-power-increase-Ramp");
     By atpcModal5MinAlarmOnButton = By.id("atpc-settings-five-minute-alarm-On");
+    By saveFavButton = By.cssSelector(".fa.fa-lg.fa-heart");
 
     //Path DropDown Fields -- Does it contain a list that has options that can be selected
 
@@ -86,6 +87,10 @@ public class RadioPage extends BasePage {
     //Index List -- Can you used an array to select item
     By referrencePosition1 = By.xpath("//*[@id=\"path-details-radios-0-modulations-0-label\"]");
     By referrencePosition2 = By.xpath("//*[@id=\"path-details-radios-0-modulations-1-label\"]");
+    By activeModLeft = By.xpath("//*[contains(@class, 'modulation-row position-relative enabled') and contains(@id, 'path-details-radios-0-modulations-')]");//-modulation-rowclass="modulation-row position-relative"id="path-details-radios-0-modulations-2-modulation-row"
+    By activeModRight = By.xpath("//*[contains(@class, 'modulation-row position-relative enabled') and contains(@id, 'path-details-radios-1-modulations-')]");//-modulation-rowclass="modulation-row position-relative"id="path-details-radios-0-modulations-2-modulation-row"
+
+    By inactiveModLeft = By.xpath("//*[@class='modulation-row position-relative') and contains(@id, 'path-details-radios-0-modulations-')]");//-modulation-rowclass="modulation-row position-relative"id="path-details-radios-0-modulations-2-modulation-row"
 
     //Modal -- Does it pop up over current window
     By atpcErrorMsg = By.id("atpc-settings-trigger-level-error-message");
@@ -262,6 +267,29 @@ public class RadioPage extends BasePage {
         isDisplayed(radioRadioErrorLeft);
         String radioError = getText(radioRadioErrorLeft);
         assertEquals(radioErrorText, radioError);
+    }
+
+    public void saveFavRadioCodeEnterNewCode(){
+        assertTrue("cnanot find fav button",isDisplayed(saveFavButton,5));//fa fa-lg fa-heart
+        click(saveFavButton);
+        click(radioMaxPowerLeft);
+        clear(radioCodeFieldRight);
+        clear(radioCodeFieldRight);
+        click(radioMaxPowerLeft);
+        String getFavCode = getFieldText(radioCodeFieldLeft);
+        type(getFavCode,radioCodeFieldRight);
+        click(radioMaxPowerRight);
+    }
+
+    public void activeModItemsLeft(int lineItem) {
+        assertTrue(isDisplayed(activeModLeft, 3));        //class="modulation-row position-relative"id="path-details-radios-0-modulations-2-modulation-row"
+        int rows =  finds(activeModLeft).size();
+        assertTrue(isDisplayedArray(activeModLeft, lineItem));
+    }
+    public void activeModItemsRight(int lineItem) {
+        assertTrue(isDisplayed(activeModLeft, 3));        //class="modulation-row position-relative"id="path-details-radios-0-modulations-2-modulation-row"
+        int rows =  finds(activeModLeft).size();
+        assertTrue(isDisplayedArray(activeModLeft, lineItem));
     }
 
     public void errorCorrectionLeftModExceededNegTwenty(String radioErrorText) {
