@@ -113,7 +113,7 @@ public class QuickAddTest extends BaseTest {
     public void quickAddSiteNameSuggest() {
         boolean siteExist;
         createPath.createBrandNewProjectPath("SiteNameSuggest" + randomNumber, "This is the Default");
-        createPath.fillOutCompanyFilter("VZW222","", "",0);
+        createPath.fillOutCompanyFilter("VZW333","", "",0);
         pathSummary.valSiteLocationToggleOn();
 
         siteExist = quickAdd.checkForExistingSite("Tonto Mtn");
@@ -169,7 +169,7 @@ public class QuickAddTest extends BaseTest {
     public void splitProjectGoToNewProject() {
         boolean siteExist;
         createPath.createBrandNewProjectPath("splitProjectNEW" + randomNumber, "This is the Default");
-        createPath.fillOutCompanyFilter("VZW222","", "",0);
+        createPath.fillOutCompanyFilter("VZW333","", "",0);
         pathSummary.valSiteLocationToggleOn();
 
         siteExist = quickAdd.checkForExistingSite("Tonto Mtn");
@@ -209,7 +209,7 @@ public class QuickAddTest extends BaseTest {
     public void splitProjectStayInCurrentProject() {
         boolean siteExist;
         createPath.createBrandNewProjectPath("splitProjectStay" + randomNumber, "This is the Default");
-        createPath.fillOutCompanyFilter("VZW222","", "",0);
+        createPath.fillOutCompanyFilter("VZW333","", "",0);
 
         pathSummary.valSiteLocationToggleOn();
 
@@ -288,7 +288,7 @@ public class QuickAddTest extends BaseTest {
     public void splitProjectAlt() {
         boolean siteExist;
         createPath.createBrandNewProjectPath("splitProject" + randomNumber, "This is the Default");
-        createPath.fillOutCompanyFilter("VZW222","", "",0);
+        createPath.fillOutCompanyFilter("VZW333","", "",0);
 
         pathSummary.valSiteLocationToggleOn();
 
@@ -343,7 +343,7 @@ public class QuickAddTest extends BaseTest {
     public void createNewProjectWithCompanyByCode() {
         boolean siteExist;
         createPath.enterProjectForCompany("withCompanyByCode" +randomNumber+ "f", "This is the Default");
-        createPath.fillOutCompanyFilter("VZW222","", "",0);
+        createPath.fillOutCompanyFilter("VZW333","", "",0);
         pathSummary.valSiteLocationToggleOn();
             quickAdd.quickAddPathExistingSetup("ByCode1", "940 MHz", "", "40 44 44 N", "73 59 5 W", "0.98", "KA20003");
             pathSummary.viewSiteCallSignLatLongGeColumns1(0, "ByCode1",  "KA20003", "40 44 44 N", "73 59 5 W", "0.98");
@@ -355,7 +355,7 @@ public class QuickAddTest extends BaseTest {
     public void createNewProjectWithCompanyByName() {
         boolean siteExist;
         createPath.enterProjectForCompany("withCompanyByName" +randomNumber+ "f", "This is the Default");
-        createPath.fillOutCompanyFilter("","Verizon AZ", "",0);
+        createPath.fillOutCompanyFilter("","Verizon TX", "",0);
         pathSummary.valSiteLocationToggleOn();
         siteExist = quickAdd.checkForExistingSite("Not York");
         if (siteExist == true){quickAdd.cancelPathCreation();
@@ -413,7 +413,7 @@ public class QuickAddTest extends BaseTest {
         String pathName;
         boolean siteExist;
         createPath.createBrandNewProjectPath("ProjectNoName"+ randomNumber, "This is the Default");
-        createPath.fillOutCompanyFilter("VZW222","", "",0);
+        createPath.fillOutCompanyFilter("VZW333","", "",0);
 
         pathSummary.valSiteLocationToggleOn();
 
@@ -460,7 +460,7 @@ public class QuickAddTest extends BaseTest {
     public void quickAddProjectName43Char() {
         String pathError;
         createPath.createBrandNewProjectPath("ProjectName43Char"+ randomNumber, "This is the Default");
-        createPath.fillOutCompanyFilter("VZW222","", "",0);
+        createPath.fillOutCompanyFilter("VZW333","", "",0);
 
         pathSummary.valSiteLocationToggleOn();
         quickAdd.quickAddPathExistingSetup("Name43", "940 MHz", "12345678912345678912345678912345678912345678", "40 44 54 N", "73 59 9 W", "68898.04", "KA20003");
@@ -479,7 +479,7 @@ public class QuickAddTest extends BaseTest {
         boolean siteExist;
         String pathError;
         createPath.createBrandNewProjectPath("NoBand"+ randomNumber, "This is the Default");
-        createPath.fillOutCompanyFilter("VZW222","", "",0);
+        createPath.fillOutCompanyFilter("VZW333","", "",0);
 
         pathSummary.valSiteLocationToggleOn();
             quickAdd.quickAddPathNoBand("SITE1", "", "SITE1", "35 30 4.68 N", "110 9 35.68 W", "98", "");
@@ -494,7 +494,7 @@ public class QuickAddTest extends BaseTest {
     @Test
     public void quickAddInvalidChars() {
         createPath.createBrandNewProjectPath("quickAddInvalidChars"+ randomNumber+randomNumber1, "This is the Default");
-        createPath.fillOutCompanyFilter("VZW222","", "",0);
+        createPath.fillOutCompanyFilter("VZW333","", "",0);
         pathSummary.valSiteLocationToggleOn();
         quickAdd.quickAddPathInvalidChar();
     }
@@ -502,7 +502,7 @@ public class QuickAddTest extends BaseTest {
     @Test
     public void quickAddInvalidCharsCallSign() {
         createPath.createBrandNewProjectPath("InvalidCharsCallSign"+ randomNumber+randomNumber1, "This is the Default");
-        createPath.fillOutCompanyFilter("VZW222","", "",0);
+        createPath.fillOutCompanyFilter("VZW333","", "",0);
         pathSummary.valSiteLocationToggleOn();
         quickAdd.quickAddPathCallSignInvalidChar();
         quickAdd.quickAddPathCallSignInvalidChar2();
@@ -520,7 +520,7 @@ public class QuickAddTest extends BaseTest {
         String pathError;
         String pathError2;
         createPath.createBrandNewProjectPath("Site21PlusChars"+ randomNumber, "This is the Default");
-        createPath.fillOutCompanyFilter("VZW222","", "",0);
+        createPath.fillOutCompanyFilter("VZW333","", "",0);
 
         pathSummary.valSiteLocationToggleOn();
         quickAdd.quickAddPathSiteName21Plus("VEUBDEKSKHIHSKHKSKHOOIJD");
@@ -542,7 +542,7 @@ public class QuickAddTest extends BaseTest {
     @Test
     public void quickAddCallSign() {
         createPath.createBrandNewProjectPath("quickAddCallSign"+ randomNumber, "This is the Default");
-        createPath.fillOutCompanyFilter("VZW222","", "",0);
+        createPath.fillOutCompanyFilter("VZW333","", "",0);
 
         pathSummary.valSiteLocationToggleOn();
         quickAdd.callSignErrorChecking("888888888", "888888888", "ASR must be 7 numbers long.", "ASR must be 7 numbers long.");
@@ -573,7 +573,7 @@ public class QuickAddTest extends BaseTest {
         String pathError;
         String pathError2;
         createPath.createBrandNewProjectPath("WithLatOrLong"+ randomNumber, "This is the Default");
-        createPath.fillOutCompanyFilter("VZW222","", "",0);
+        createPath.fillOutCompanyFilter("VZW333","", "",0);
 
         pathSummary.valSiteLocationToggleOn();
         quickAdd.quickAddPathGeneral1("Path name without Lat and longitude","4.0 GHz","SITE1","", "","98","");
@@ -622,7 +622,7 @@ public class QuickAddTest extends BaseTest {
     @Test
     public void quickAddLatOrLongFormat1() {
         createPath.createBrandNewProjectPath("quickAddLatOrLongFormat"+ randomNumber, "This is the Default");
-        createPath.fillOutCompanyFilter("VZW222","", "",0);
+        createPath.fillOutCompanyFilter("VZW333","", "",0);
         pathSummary.valSiteLocationToggleOn();
 
         //N/S DD MM SS.SS or E/W DDD MM SS.SS
@@ -663,7 +663,7 @@ public class QuickAddTest extends BaseTest {
     @Test
     public void quickAddLatOrLongFormat2() {
         createPath.createBrandNewProjectPath("quickAddLatOrLongFormat" + randomNumber, "This is the Default");
-        createPath.fillOutCompanyFilter("VZW222", "", "", 0);
+        createPath.fillOutCompanyFilter("VZW333", "", "", 0);
         pathSummary.valSiteLocationToggleOn();
 
         quickAdd.quickAddPathGeneral1("Path name without Lat and longitude", "4.0 GHz", "SITE1", "35-30-4.683 N", "110-9-35.684 W", "98", "");
@@ -705,7 +705,7 @@ public class QuickAddTest extends BaseTest {
     public void quickAddLatOrLongNotPerferredFormatConvertToPerferred() {
         boolean siteExist;
         createPath.createBrandNewProjectPath("AddLatOrLongNotPerferredFormat"+ randomNumber, "This is the Default");
-        createPath.fillOutCompanyFilter("VZW222","", "",0);
+        createPath.fillOutCompanyFilter("VZW333","", "",0);
 
 
         siteExist = quickAdd.checkForExistingSite("Not York");
@@ -740,7 +740,7 @@ public class QuickAddTest extends BaseTest {
         String invalidFormat1;
         String invalidFormat2;
         createPath.createBrandNewProjectPath("NotPerferredWillNotConvert"+ randomNumber, "This is the Default");
-        createPath.fillOutCompanyFilter("VZW222","", "",0);
+        createPath.fillOutCompanyFilter("VZW333","", "",0);
 
         pathSummary.valSiteLocationToggleOn();
         quickAdd.quickAddPathGeneral1("Path name without Lat and longitude", "4.0 GHz", "SITE1", "35:30:4.683N", "110:9:35.684W", "98", "");
@@ -764,7 +764,7 @@ public class QuickAddTest extends BaseTest {
         boolean siteExist;
 
         createPath.createBrandNewProjectPath("ElevationCanOverwrite"+ randomNumber, "This is the Default");
-        createPath.fillOutCompanyFilter("VZW222","", "",0);
+        createPath.fillOutCompanyFilter("VZW333","", "",0);
 
         siteExist = quickAdd.checkForExistingSite("New York2");
         if (siteExist == true){
@@ -776,7 +776,6 @@ public class QuickAddTest extends BaseTest {
             quickAdd.quickAddPathGeneralNoSave("Elevation Autofill User Can Overwrite", "4.0 GHz", "new york", "45 26 47.70 N", "4 7 12.00 W", "98", "Td5G43s");
             quickAdd.changeLatLong("9 26 42.70 N", "8 7 9.00 W");
             quickAdd.savePath();
-            pathSummary.viewSiteCallSignLatLongGeColumns2(0, "New York", "KA20003", "40 44 54 N", "73 59 9 W", "0.98");
 
     }
     /*COM-148
@@ -833,7 +832,7 @@ public class QuickAddTest extends BaseTest {
         String FCCError1;
 
         createPath.createBrandNewProjectPath("Best Project Ever"+ randomNumber, "This is the Default");
-        createPath.fillOutCompanyFilter("VZW222","", "",0);
+        createPath.fillOutCompanyFilter("VZW333","", "",0);
 
         pathSummary.valSiteLocationToggleOn();
         //GPS: dd:mm:ss.ss[N,S] dd:mm:ss.ss[W,E]	35:30:4.683N 110:9:35.684W
@@ -865,7 +864,7 @@ public class QuickAddTest extends BaseTest {
     @Test//
     public void creatingQuickAddPath_WhenThereIsSpace_TrimSpaceOnBlur() {
         createPath.createBrandNewProjectPath("TrimSpaceOnBlur"+ randomNumber, "This is the Default");
-        createPath.fillOutCompanyFilter("VZW222","", "",0);
+        createPath.fillOutCompanyFilter("VZW333","", "",0);
 
         pathSummary.valSiteLocationToggleOn();
         quickAdd.quickAddPathExistingSetup("TrailingSpace ", "940 MHz", "TrailingSpace ", "34 44 46.3 N", "92 16 20.5 W", "68898.04", "KA2133");
@@ -886,7 +885,7 @@ public class QuickAddTest extends BaseTest {
     @Test
     public void passiveRepeater_OpenPassiveRepeaterForm_ValidateAllFieldsAndButtons() {
         createPath.createBrandNewProjectPath("OPEN Passive Repeater"+ randomNumber, "This is the Default");
-        createPath.fillOutCompanyFilter("VZW222","", "",0);
+        createPath.fillOutCompanyFilter("VZW333","", "",0);
 
         pathSummary.valSiteLocationToggleOn();
         quickAdd.quickAddPathExistingSetup("Passive Repeater", "940 MHz", "Passive Repeater", "34 44 46.3 N", "92 16 20.5 W", "68898.04", "KA2133");
@@ -903,7 +902,7 @@ public class QuickAddTest extends BaseTest {
     @Test
     public void passiveRepeater_NoFrequencyBand_PassiveRepeaterTriggerInactive() {
         createPath.createBrandNewProjectPath("Inactive Passive Repeater"+ randomNumber, "This is the Default");
-        createPath.fillOutCompanyFilter("VZW222","", "",0);
+        createPath.fillOutCompanyFilter("VZW333","", "",0);
 
         pathSummary.valSiteLocationToggleOn();
         quickAdd.quickAddPathExistingSetup("Passive Repeater", "Band", "Passive Repeater", "34 44 46.3 N", "92 16 20.5 W", "68898.04", "KA2133");
@@ -951,7 +950,7 @@ public class QuickAddTest extends BaseTest {
     @Test
     public void passiveRepeater_AllValidData_PassiveRepeaterRecordIsCreated() {
         createPath.createBrandNewProjectPath("Inactive Passive Repeater"+ randomNumber, "This is the Default");
-        createPath.fillOutCompanyFilter("VZW222","", "",0);
+        createPath.fillOutCompanyFilter("VZW333","", "",0);
 
         pathSummary.valSiteLocationToggleOn();
         quickAdd.quickAddPathExistingSetup("Passive Repeater", "940 MHz", "Passive Repeater", "34 44 46.3 N", "92 16 20.5 W", "68898.04", "KA2133");
@@ -982,7 +981,7 @@ public class QuickAddTest extends BaseTest {
     @Test
     public void passiveRepeater_SelectRemoveButton_PassiveRepeaterRecordWillBeRemoved() {
         createPath.createBrandNewProjectPath("Inactive Passive Repeater"+ randomNumber, "This is the Default");
-        createPath.fillOutCompanyFilter("VZW222","", "",0);
+        createPath.fillOutCompanyFilter("VZW333","", "",0);
 
         pathSummary.valSiteLocationToggleOn();
         quickAdd.quickAddPathExistingSetup("Passive Repeater", "940 MHz", "Passive Repeater", "34 44 46.3 N", "92 16 20.5 W", "68898.04", "KA2133");
@@ -1012,7 +1011,7 @@ public class QuickAddTest extends BaseTest {
     @Test
     public void passiveRepeater_AddBillboardPassiveRepeater_RecordWillBeAdded() {
         createPath.createBrandNewProjectPath("Inactive Passive Repeater"+ randomNumber, "This is the Default");
-        createPath.fillOutCompanyFilter("VZW222","", "",0);
+        createPath.fillOutCompanyFilter("VZW333","", "",0);
 
         pathSummary.valSiteLocationToggleOn();
         quickAdd.quickAddPathExistingSetup("Passive Repeater", "940 MHz", "Passive Repeater", "34 44 46.3 N", "92 16 20.5 W", "68898.04", "KA2133");
@@ -1060,7 +1059,7 @@ public class QuickAddTest extends BaseTest {
     @Test
     public void passiveRepeaterQuickAdd_SelectNextButton_WillDisplayCorrectRepeaterInformation() {
         createPath.createBrandNewProjectPath("Next and Previous Passive Repeater"+ randomNumber, "This is the Default");
-        createPath.fillOutCompanyFilter("VZW222","", "",0);
+        createPath.fillOutCompanyFilter("VZW333","", "",0);
 
         pathSummary.valSiteLocationToggleOn();
         quickAdd.quickAddPathExistingSetup("Passive Repeater", "940 MHz", "Passive Repeater", "34 44 46.3 N", "92 16 20.5 W", "68898.04", "KA2133");
@@ -1080,7 +1079,7 @@ public class QuickAddTest extends BaseTest {
     @Test//COM-493
     public void antennacode_Willautofillblocks_WhenSavingnewpath() {
         createPath.createBrandNewProjectPath("Inactive Passive Repeater"+ randomNumber, "This is the Default");
-        createPath.fillOutCompanyFilter("VZW222","", "",0);
+        createPath.fillOutCompanyFilter("VZW333","", "",0);
 
         pathSummary.valSiteLocationToggleOn();
         quickAdd.quickAddPathExistingSetup("Passive Repeater", "11.0 GHz", "Passive Repeater", "34 44 46.3 N", "92 16 20.5 W", "68898.04", "KA2133");

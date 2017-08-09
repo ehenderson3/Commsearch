@@ -141,7 +141,7 @@ public class CreateNewPathPage extends BasePage {
         slowDown(3);
         click(searchResultArray);
         a = getFieldText(defaultCompanyField);
-        assertEquals(a, "Verizon AZ");
+        assertEquals(a, "Verizon TX");
         click(createButton);
         isDisplayed(filterField, 30);
     }

@@ -42,7 +42,7 @@ import java.util.Random;
     public void dataAddTest() {
         boolean siteExist;
         createPath.createBrandNewProjectPath("DATA SETUP" + randomNumber, "This is the Default");
-        createPath.fillOutCompanyFilter("VZW222","", "",0);
+        createPath.fillOutCompanyFilter("VZW333","", "",0);
 
         pathSummary.valSiteLocationToggleOn();
 

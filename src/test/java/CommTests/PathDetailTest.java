@@ -94,7 +94,7 @@ public class PathDetailTest extends BaseTest {
     @Test
     public void pathDetailSiteSearch_searchResultsShouldContainAppropriateSite_whenSearchingBySiteName() {
         createPath.createBrandNewProjectPath("Path Detail Site look up search" + randomNumber, "This is the Default");
-        createPath.fillOutCompanyFilter("VZW222", "", "", 0);
+        createPath.fillOutCompanyFilter("VZW333", "", "", 0);
         pathSummary.changeToUs();
         pathSummary.openPathDetailForAddingPath();
 
@@ -110,7 +110,7 @@ public class PathDetailTest extends BaseTest {
     @Test
     public void pathDetailSiteSearch_searchResultsShouldContainAppropriateSite_whenSearchingBySiteNameAndCallSign() {
         createPath.createBrandNewProjectPath("Path Detail Site look up search" + randomNumber, "This is the Default");
-        createPath.fillOutCompanyFilter("VZW222", "", "", 0);
+        createPath.fillOutCompanyFilter("VZW333", "", "", 0);
         pathSummary.changeToUs();
         pathSummary.openPathDetailForAddingPath();
 
@@ -128,7 +128,7 @@ public class PathDetailTest extends BaseTest {
     public void pathDetailValidateExistingFieldValues() {
         boolean siteExist;
         createPath.createBrandNewProjectPath("Validate Path from Path details" + randomNumber, "This is the Default");
-        createPath.fillOutCompanyFilter("VZW222", "", "", 0);
+        createPath.fillOutCompanyFilter("VZW333", "", "", 0);
         pathSummary.valSiteLocationToggleOn();
         quickAdd.quickAddPathSimple("Ton", "5.8 GHz", "Best Path", "34 37 42.1 N", "112 39 26.2 W", "1542.29", "KBY45");
         pathSummary.viewSiteCallSignLatLongGeColumns1(0, "Tonto Mtn", "KBY45", "34 37 42.1 N", "112 39 26.2 W", "1542.29");
@@ -198,7 +198,7 @@ public class PathDetailTest extends BaseTest {
     @Test
     public void pathDetailSiteSearch_searchResultsShouldContainAppropriateSite_whenSearchingForSiteUsingMultipleParameters() {
         createPath.createBrandNewProjectPath("Search Site multi parameters" + randomNumber, "This is the Default");
-        createPath.fillOutCompanyFilter("VZW222", "", "", 0);
+        createPath.fillOutCompanyFilter("VZW333", "", "", 0);
         pathSummary.changeToUs();
         pathSummary.openPathDetailForAddingPath();
         pathDetail.addPathPathDetailWithAsrAndCall1("ASRandCALL1", "KBY45", "1000037", "34 37 42.1 N", "112 39 26.2 W", "66", "11.0 GHz");
@@ -251,7 +251,7 @@ public class PathDetailTest extends BaseTest {
     public void pathDetailElevation_shouldError_whenOutsideNeg304dot495And30479dot695Meters() {
         boolean siteExist;
         createPath.createBrandNewProjectPath("Path Detail elev SI range test" + randomNumber, "This is the Default");
-        createPath.fillOutCompanyFilter("VZW222", "", "", 0);
+        createPath.fillOutCompanyFilter("VZW333", "", "", 0);
         pathSummary.changeToSi();
         pathSummary.openPathDetailForAddingPath();
         pathDetail.addPathViaPathDetailBasicSetup1("SYNRAMS STATION", "KBY45", "34 37 42.1 N", "112 39 26.2 W", "-305.001", "11.0 GHz");
@@ -280,7 +280,7 @@ public class PathDetailTest extends BaseTest {
     public void pathDetailLicBasis_shouldDisplayLicOptions_whenSelectingLicDropdown() {
         boolean siteExist;
         createPath.createBrandNewProjectPath("Path Detail Lic Basis" + randomNumber, "This is the Default");
-        createPath.fillOutCompanyFilter("VZW222", "", "", 0);
+        createPath.fillOutCompanyFilter("VZW333", "", "", 0);
         pathSummary.changeToSi();
         pathSummary.openPathDetailForAddingPath();
         pathDetail.addPathViaPathDetailBasicSetup1("SYNRAMS STATION", "KBY45", "34 37 42.1 N", "112 39 26.2 W", "-200.012", "11.0 GHz");
@@ -294,7 +294,7 @@ public class PathDetailTest extends BaseTest {
     public void pathDetailRadioService_shouldSaveRecord_whenSelectingRadioEntries() {
         boolean siteExist;
         createPath.createBrandNewProjectPath("Path Detail Radio Service" + randomNumber, "This is the Default");
-        createPath.fillOutCompanyFilter("VZW222", "", "", 0);
+        createPath.fillOutCompanyFilter("VZW333", "", "", 0);
         pathSummary.changeToSi();
         pathSummary.openPathDetailForAddingPath();
         pathDetail.addPathViaPathDetailBasicSetup1("SYNRAMS STATION", "KBY45", "34 37 42.1 N", "112 39 26.2 W", "-200.012", "11.0 GHz");
@@ -374,7 +374,7 @@ public class PathDetailTest extends BaseTest {
                 "TT—TV Translator Relay"};
 
         createPath.createBrandNewProjectPath("Path Detail Radio Service" + randomNumber, "This is the Default");
-        createPath.fillOutCompanyFilter("VZW222", "", "", 0);
+        createPath.fillOutCompanyFilter("VZW333", "", "", 0);
         pathSummary.valSiteLocationToggleOn();
 
         pathSummary.changeToSi();
@@ -402,7 +402,7 @@ public class PathDetailTest extends BaseTest {
     public void pathDetailElevation_shouldError_whenOutsideNeg999And99999Feet() {
         boolean siteExist;
         createPath.createBrandNewProjectPath("Path Detail elev US range test" + randomNumber, "This is the Default");
-        createPath.fillOutCompanyFilter("VZW222", "", "", 0);
+        createPath.fillOutCompanyFilter("VZW333", "", "", 0);
         pathSummary.changeToUs();
         pathSummary.openPathDetailForAddingPath();
         pathDetail.addPathViaPathDetailBasicSetup1("SYNRAMS STATION", "KBY45", "34 37 42.1 N", "112 39 26.2 W", "-1000", "11.0 GHz");
@@ -433,30 +433,30 @@ public class PathDetailTest extends BaseTest {
     public void addArsPathViaPathDetail() {
         boolean siteExist;
         createPath.createBrandNewProjectPath("Best Project Ever" + randomNumber, "This is the Default");
-        createPath.fillOutCompanyFilter("VZW222", "", "", 0);
+        createPath.fillOutCompanyFilter("VZW333", "", "", 0);
         pathSummary.valSiteLocationToggleOn();
         pathSummary.openPathDetailForAddingPath();
 
         pathDetail.addAsrPathViaPathDetail1("CAMSLANT STATION", "1241006", "35 12 26.7 N", "78 3 21.2 W", "48.7", "1");
-        createPath.fillOutCompanyFilterFromDetails("VZW222", "", "", 0);
+        createPath.fillOutCompanyFilterFromDetails("VZW333", "Verizon TX", "", 0);
 
         pathDetail.addAsrPathViaPathDetail2("SYNRAMS STATION", "1208837", "40 34 10 N", "122 26 14 W", "250");
-        createPath.fillOutCompanyFilterFromDetails("VZW222", "", "", 1);
+        createPath.fillOutCompanyFilterFromDetails("VZW333", "Verizon TX", "", 1);
     }
 
     @Test
     public void addCallSignPathViaPathDetail() {
         boolean siteExist;
         createPath.createBrandNewProjectPath("Best Project Ever" + randomNumber, "This is the Default");
-        createPath.fillOutCompanyFilter("VZW222", "", "", 0);
+        createPath.fillOutCompanyFilter("VZW333", "", "", 0);
         pathSummary.valSiteLocationToggleOn();
         pathSummary.openPathDetailForAddingPath();
 
         pathDetail.addCallSignPathViaPathDetail1("SITE1", "KA20003", "40 44 54 N", "73 59 9 W", "98", "1");
-        createPath.fillOutCompanyFilterFromDetails("VZW222", "", "", 0);
+        createPath.fillOutCompanyFilterFromDetails("VZW333", "Verizon TX", "", 0);
 
         pathDetail.addCallSignPathViaPathDetail2("Tonto Mtn", "KBY45", "34 37 42.1 N", "112 39 26.2 W", "1542.3");
-        createPath.fillOutCompanyFilterFromDetails("VZW222", "", "", 1);
+        createPath.fillOutCompanyFilterFromDetails("VZW333", "Verizon TX", "", 1);
     }
 
     /**
@@ -503,7 +503,7 @@ public class PathDetailTest extends BaseTest {
     public void addCallSignPathViaPathDetailWithDefaultCompany() {
         boolean siteExist;
         createPath.createBrandNewProjectPath("PathDetailWithDefaultCompany" + randomNumber, "This is the Default");
-        createPath.fillOutCompanyFilter("VZW222", "", "", 0);
+        createPath.fillOutCompanyFilter("VZW333", "", "", 0);
         pathSummary.valSiteLocationToggleOn();
         pathSummary.openPathDetailForAddingPath();
         pathDetail.checkSiteSuggestionTrue("SITE1", "Tonto Mtn");
@@ -521,7 +521,7 @@ public class PathDetailTest extends BaseTest {
     public void siteWith21characters() {
         boolean siteExist;
         createPath.createBrandNewProjectPath("PathDetailWithDefaultCompany" + randomNumber, "This is the Default");
-        createPath.fillOutCompanyFilter("VZW222", "", "", 0);
+        createPath.fillOutCompanyFilter("VZW333", "", "", 0);
         pathSummary.valSiteLocationToggleOn();
         pathSummary.openPathDetailForAddingPath();
         pathDetail.checkSiteSuggestion("The Site has more than 21 char", "The Site has more than 21 char");
@@ -539,7 +539,7 @@ public class PathDetailTest extends BaseTest {
     public void CallSignWith9characters() {
         boolean siteExist;
         createPath.createBrandNewProjectPath("PathDetailWithDefaultCompany" + randomNumber, "This is the Default");
-        createPath.fillOutCompanyFilter("VZW222", "", "", 0);
+        createPath.fillOutCompanyFilter("VZW333", "", "", 0);
         pathSummary.valSiteLocationToggleOn();
         pathSummary.openPathDetailForAddingPath();
         pathDetail.checkCallSignEntry("455654655", "546546546546");
@@ -563,15 +563,15 @@ public class PathDetailTest extends BaseTest {
     public void pathDetail_whenOpening_ShouldSeeAntennaFields() {
         boolean siteExist;
         createPath.createBrandNewProjectPath("Best Project Ever" + randomNumber, "This is the Default");
-        createPath.fillOutCompanyFilter("VZW222", "", "", 0);
+        createPath.fillOutCompanyFilter("VZW333", "", "", 0);
         pathSummary.valSiteLocationToggleOn();
         pathSummary.openPathDetailForAddingPath();
 
         pathDetail.addAsrPathViaPathDetail1("CAMSLANT STATION", "1241006", "35 12 26.7 N", "78 3 21.2 W", "48.7", "1");
-        createPath.fillOutCompanyFilterFromDetails("VZW222", "", "", 0);
+        createPath.fillOutCompanyFilterFromDetails("VZW333", "Verizon TX", "", 0);
 
         pathDetail.addAsrPathViaPathDetail2("SYNRAMS STATION", "1208837", "40 34 10 N", "122 26 14 W", "250");
-        createPath.fillOutCompanyFilterFromDetails("VZW222", "", "", 1);
+        createPath.fillOutCompanyFilterFromDetails("VZW333", "Verizon TX", "", 1);
 
         pathDetail.antennaFieldValidation();
     }
@@ -601,9 +601,9 @@ public class PathDetailTest extends BaseTest {
         pathSummary.valSiteLocationToggleOn();
         pathSummary.openPathDetailForAddingPath();
         pathDetail.addAsrPathViaPathDetail1("CAMSLANT STATION", "1241006", "35 12 26.7 N", "78 3 21.2 W", "48.7", "1");
-        createPath.fillOutCompanyFilterFromDetails("", "V", "", 0);
+        createPath.fillOutCompanyFilterFromDetails("", "Verizon TX", "", 0);
         pathDetail.addAsrPathViaPathDetail2("SYNRAMS STATION", "1208837", "40 34 10 N", "122 26 14 W", "250");
-        createPath.fillOutCompanyFilterFromDetails("", "V", "", 1);
+        createPath.fillOutCompanyFilterFromDetails("", "Verizon TX", "", 1);
         pathDetail.antennaFieldValidation();
     }
 
@@ -630,7 +630,7 @@ public class PathDetailTest extends BaseTest {
     @Test
     public void pathDetailMessage_SuccessMessage_WhenPathIsSaved() {
         createPath.createBrandNewProjectPath("Path Detail Success Message" + randomNumber, "This is the Default");
-        createPath.fillOutCompanyFilter("VZW222", "", "", 0);
+        createPath.fillOutCompanyFilter("VZW333", "", "", 0);
         pathSummary.changeToSi();
         pathSummary.openPathDetailForAddingPath();
         pathDetail.addPathViaPathDetailBasicSetup1("SYNRAMS STATION", "KBY45", "34 37 42.1 N", "112 39 26.2 W", "250", "11.0 GHz");
@@ -650,7 +650,7 @@ public class PathDetailTest extends BaseTest {
     @Test
     public void pathDetailMessage_RequiredError_WhenNoRequiredFieldsHaveEntries() {
         createPath.createBrandNewProjectPath("Path Detail Required Error" + randomNumber, "This is the Default");
-        createPath.fillOutCompanyFilter("VZW222", "", "", 0);
+        createPath.fillOutCompanyFilter("VZW333", "", "", 0);
         pathSummary.changeToSi();
         pathSummary.openPathDetailForAddingPath();
         pathDetail.saveAndValidateRequiredMessage("Required");
@@ -669,7 +669,7 @@ public class PathDetailTest extends BaseTest {
     @Test
     public void pathDetailCopy_NewPathIsCreatedAndUserRemainsOnOriginalPath_WhenPathIsCopied() {
         createPath.createBrandNewProjectPath("Path Detail Copy Path" + randomNumber, "This is the Default");
-        createPath.fillOutCompanyFilter("VZW222", "", "", 0);
+        createPath.fillOutCompanyFilter("VZW333", "", "", 0);
         pathSummary.changeToSi();
         pathSummary.openPathDetailForAddingPath();
         pathDetail.addPathViaPathDetailBasicSetup1("SYNRAMS STATION", "KBY45", "34 37 42.1 N", "112 39 26.2 W", "250", "11.0 GHz");
@@ -696,7 +696,7 @@ public class PathDetailTest extends BaseTest {
     @Test
     public void pathDetailFlip_PathDetailWillFlip_WhenPathFlipButtonIsClicked() {
         createPath.createBrandNewProjectPath("Path Detail Flip Path" + randomNumber, "This is the Default");
-        createPath.fillOutCompanyFilter("VZW222", "", "", 0);
+        createPath.fillOutCompanyFilter("VZW333", "", "", 0);
         pathSummary.changeToSi();
         pathSummary.openPathDetailForAddingPath();
         pathDetail.addPathViaPathDetailBasicSetup1("SYNRAMS STATION", "KBY45", "34 37 42.1 N", "112 39 26.2 W", "250", "11.0 GHz");
@@ -722,7 +722,7 @@ public class PathDetailTest extends BaseTest {
     @Test
     public void pathDetailCopy_NextButtonShouldBeActive_WhenPathIsCopied() {
         createPath.createBrandNewProjectPath("Copy Next Button Active" + randomNumber, "This is the Default");
-        createPath.fillOutCompanyFilter("VZW222", "", "", 0);
+        createPath.fillOutCompanyFilter("VZW333", "", "", 0);
         pathSummary.changeToSi();
         pathSummary.openPathDetailForAddingPath();
         pathDetail.addPathViaPathDetailBasicSetup1("SYNRAMS STATION", "KBY45", "34 37 42.1 N", "112 39 26.2 W", "250", "11.0 GHz");
@@ -750,7 +750,7 @@ public class PathDetailTest extends BaseTest {
     @Test
     public void passiveRepeaterPathDetail_SelectNextButton_WillDisplayCorrectRepeaterInformation() {
         createPath.createBrandNewProjectPath("NextPreviousPassive" + randomNumber, "This is the Default");
-        createPath.fillOutCompanyFilter("VZW222", "", "", 0);
+        createPath.fillOutCompanyFilter("VZW333", "", "", 0);
         pathSummary.changeToUs();
         pathSummary.openPathDetailForAddingPath();
         pathDetail.addPathPathDetailWithAsrAndCall1("PassRepeater1", "KBY45", "1000037", "34 37 42.1 N", "112 39 26.2 W", "66", "11.0 GHz");
@@ -778,7 +778,7 @@ public class PathDetailTest extends BaseTest {
     @Test
     public void passiveRepeaterPathDetail_WhenFrequencyBandChangedPath_ThenPassiveRepeaterFieldsWillBeCleared() {
         createPath.createBrandNewProjectPath("WhenFrequencyBandChangedPath" + randomNumber, "This is the Default");
-        createPath.fillOutCompanyFilter("VZW222", "", "", 0);
+        createPath.fillOutCompanyFilter("VZW333", "", "", 0);
         pathSummary.changeToUs();
         pathSummary.openPathDetailForAddingPath();
         pathDetail.addPathPathDetailWithAsrAndCall1("FreqBandChanged1", "KBY45", "1000037", "34 37 42.1 N", "112 39 26.2 W", "66", "11.0 GHz");
@@ -810,7 +810,7 @@ public class PathDetailTest extends BaseTest {
     @Test
     public void pathDetailCopy_CopySamePathTwiceBrowserBack_OriginalShouldBeInPlace() {
         createPath.createBrandNewProjectPath("Path Detail Copy Path" + randomNumber, "This is the Default");
-        createPath.fillOutCompanyFilter("VZW222", "", "", 0);
+        createPath.fillOutCompanyFilter("VZW333", "", "", 0);
         pathSummary.changeToSi();
         pathSummary.openPathDetailForAddingPath();
         pathDetail.addPathViaPathDetailBasicSetup1("SYNRAMS STATION", "KBY45", "34 37 42.1 N", "112 39 26.2 W", "250", "11.0 GHz");
@@ -855,11 +855,11 @@ public class PathDetailTest extends BaseTest {
         pathSummary.valSiteLocationToggleOn();
         pathSummary.openPathDetailForAddingPath();
         pathDetail.addAsrPathViaPathDetail1("CAMSLANT STATION", "1241006", "35 12 26.7 N", "78 3 21.2 W", "48.7", "1");
-        createPath.fillOutCompanyFilterFromDetails("", "Verizon AZ", "", 0);
+        createPath.fillOutCompanyFilterFromDetails("", "Verizon TX", "", 0);
         pathDetail.addAsrPathViaPathDetail2("SYNRAMS STATION", "1208837", "40 34 10 N", "122 26 14 W", "250");
-        createPath.fillOutCompanyFilterFromDetails("", "Verizon TX", "", 1);
+        createPath.fillOutCompanyFilterFromDetails("", "Verizon AZ", "", 1);
         pathDetailAnt.clickSaveDetails();
-        quickAdd.valCompanies("VERIZON AZ , VERIZON TX");
+        quickAdd.valCompanies("VERIZON TX , VERIZON AZ");
     }
     @Test
     public void pathDetail_AddSameCompanies_ResultShouldCompany() {
@@ -869,10 +869,10 @@ public class PathDetailTest extends BaseTest {
         pathSummary.valSiteLocationToggleOn();
         pathSummary.openPathDetailForAddingPath();
         pathDetail.addAsrPathViaPathDetail1("CAMSLANT STATION", "1241006", "35 12 26.7 N", "78 3 21.2 W", "48.7", "1");
-        createPath.fillOutCompanyFilterFromDetails("", "Verizon AZ", "", 0);
+        createPath.fillOutCompanyFilterFromDetails("", "Verizon TX", "", 0);
         pathDetail.addAsrPathViaPathDetail2("SYNRAMS STATION", "1208837", "40 34 10 N", "122 26 14 W", "250");
-        createPath.fillOutCompanyFilterFromDetails("", "Verizon AZ", "", 1);
+        createPath.fillOutCompanyFilterFromDetails("", "Verizon TX", "", 1);
         pathDetailAnt.clickSaveDetails();
-        quickAdd.valCompanies("VERIZON AZ");
+        quickAdd.valCompanies("VERIZON TX");
     }
 }

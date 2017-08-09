@@ -381,7 +381,7 @@ public class PathDetailPage extends BasePage {
 
     public void nextArrow(){
         isDisplayed(activePathDetailNextArrowButton,8);//path-details-footer-next-path-button
-        click(activePathDetailNextArrowButton);
+        clickJS(activePathDetailNextArrowButton);
         closeConfirmation();
     }
 

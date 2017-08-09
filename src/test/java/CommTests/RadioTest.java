@@ -93,7 +93,7 @@ public class RadioTest extends BaseTest{
     @Test
     public void pathDetailRadio_shouldCreateRadio_whenEnteringValidRadioData() {
         createPath.createBrandNewProjectPath("Add Radio" + randomNumber, "This is the Default");
-        createPath.fillOutCompanyFilter("VZW222", "", "", 0);
+        createPath.fillOutCompanyFilter("VZW333", "", "", 0);
         pathSummary.changeToSi();
         pathSummary.openPathDetailForAddingPath();
         pathDetail.addPathViaPathDetailBasicSetup1("Add Radio1", "KBY45", "34 37 42.1 N", "112 39 26.2 W", "66",  "11.0 GHz");
@@ -140,7 +140,7 @@ public class RadioTest extends BaseTest{
     @Test
     public void pathDetailRadio_shouldError_whenEnteringLessThanSixCharsLeft() {
         createPath.createBrandNewProjectPath("6 characters" + randomNumber, "This is the Default");
-        createPath.fillOutCompanyFilter("VZW222", "", "", 0);
+        createPath.fillOutCompanyFilter("VZW333", "", "", 0);
         pathSummary.changeToSi();
         pathSummary.openPathDetailForAddingPath();
         pathDetail.addPathViaPathDetailBasicSetup1("Add Radio1", "KBY45", "34 37 42.1 N", "112 39 26.2 W", "66",  "11.0 GHz");
@@ -153,7 +153,7 @@ public class RadioTest extends BaseTest{
     @Test
     public void pathDetailRadio_shouldError_whenEnteringLessThanSixCharsRight() {
         createPath.createBrandNewProjectPath("6 characters" + randomNumber, "This is the Default");
-        createPath.fillOutCompanyFilter("VZW222", "", "", 0);
+        createPath.fillOutCompanyFilter("VZW333", "", "", 0);
         pathSummary.changeToSi();
         pathSummary.openPathDetailForAddingPath();
         pathDetail.addPathViaPathDetailBasicSetup1("Add Radio1", "KBY45", "34 37 42.1 N", "112 39 26.2 W", "66",  "11.0 GHz");
@@ -184,7 +184,7 @@ public class RadioTest extends BaseTest{
     @Test
     public void pathDetailRadio_GreatestPowerOfActiveModulationsWillUpdateToMaxPower_whenChangingModulation() {
         createPath.createBrandNewProjectPath("ChangingModulation" + randomNumber, "This is the Default");
-        createPath.fillOutCompanyFilter("VZW222", "", "", 0);
+        createPath.fillOutCompanyFilter("VZW333", "", "", 0);
         pathSummary.changeToSi();
         pathSummary.openPathDetailForAddingPath();
         pathDetail.addPathViaPathDetailBasicSetup1("Add Radio1", "KBY45", "34 37 42.1 N", "112 39 26.2 W", "66", "11.0 GHz");
@@ -247,7 +247,7 @@ public class RadioTest extends BaseTest{
     @Test
     public void pathDetailRadio_EngineeringReferencePlacedOnModulation1_whenEngRefJumpToModulation2() {
         createPath.createBrandNewProjectPath("ChangingModulation" + randomNumber, "This is the Default");
-        createPath.fillOutCompanyFilter("VZW222", "", "", 0);
+        createPath.fillOutCompanyFilter("VZW333", "", "", 0);
         pathSummary.changeToSi();
         pathSummary.openPathDetailForAddingPath();
         pathDetail.addPathViaPathDetailBasicSetup1("Add Radio1", "KBY45", "34 37 42.1 N", "112 39 26.2 W", "66", "11.0 GHz");
@@ -287,7 +287,7 @@ public class RadioTest extends BaseTest{
 @Test
 public void pathDetailRadio_DisabledModEnabledNewMaxWillBeTheNewllyEnabled_whenDisabledModWithHigherMaxPowerThanCurrMax() {
     createPath.createBrandNewProjectPath("ChangingModulation" + randomNumber, "This is the Default");
-    createPath.fillOutCompanyFilter("VZW222", "", "", 0);
+    createPath.fillOutCompanyFilter("VZW333", "", "", 0);
     pathSummary.changeToSi();
     pathSummary.openPathDetailForAddingPath();
     pathDetail.addPathViaPathDetailBasicSetup1("Add Radio1", "KBY45", "34 37 42.1 N", "112 39 26.2 W", "66", "11.0 GHz");
@@ -311,7 +311,7 @@ public void pathDetailRadio_DisabledModEnabledNewMaxWillBeTheNewllyEnabled_whenD
     @Test
     public void pathDetailRadio_UserWillRecieveErrorMessageMaxPowerCannotBeLessThanNegTwenty_whenMaxPowerNegTwenty() {
         createPath.createBrandNewProjectPath("ChangingModulation" + randomNumber, "This is the Default");
-        createPath.fillOutCompanyFilter("VZW222", "", "", 0);
+        createPath.fillOutCompanyFilter("VZW333", "", "", 0);
         pathSummary.changeToSi();
         pathSummary.openPathDetailForAddingPath();
         pathDetail.addPathViaPathDetailBasicSetup1("Add Radio1", "KBY45", "34 37 42.1 N", "112 39 26.2 W", "66", "11.0 GHz");
@@ -334,7 +334,7 @@ public void pathDetailRadio_DisabledModEnabledNewMaxWillBeTheNewllyEnabled_whenD
     @Test
     public void pathDetailRadio_LeftRadioWillBeCopiedOverRightRadio_whenRightRadioDiffThanLeftAndTheCopyRadioIsTriggered() {
         createPath.createBrandNewProjectPath("Copy Radio" + randomNumber, "This is the Default");
-        createPath.fillOutCompanyFilter("VZW222", "", "", 0);
+        createPath.fillOutCompanyFilter("VZW333", "", "", 0);
         pathSummary.changeToSi();
         pathSummary.openPathDetailForAddingPath();
         pathDetail.addPathViaPathDetailBasicSetup1("Add Radio1", "KBY45", "34 37 42.1 N", "112 39 26.2 W", "66", "11.0 GHz");
@@ -377,7 +377,7 @@ public void pathDetailRadio_DisabledModEnabledNewMaxWillBeTheNewllyEnabled_whenD
     @Test
     public void pathDetailRadio_ATPCModalWillOpen_whenClickingAddATPCButton() {
         createPath.createBrandNewProjectPath("Open ATPC" + randomNumber, "This is the Default");
-        createPath.fillOutCompanyFilter("VZW222", "", "", 0);
+        createPath.fillOutCompanyFilter("VZW333", "", "", 0);
         pathSummary.changeToSi();
         pathSummary.openPathDetailForAddingPath();
         pathDetail.addPathViaPathDetailBasicSetup1("Add Radio1", "KBY45", "34 37 42.1 N", "112 39 26.2 W", "66", "11.0 GHz");
@@ -402,7 +402,7 @@ public void pathDetailRadio_DisabledModEnabledNewMaxWillBeTheNewllyEnabled_whenD
     @Test
     public void pathDetailRadio_RadioSectionWillBeDisabled_whenPassiveRepeaterModalOpen() {
         createPath.createBrandNewProjectPath("Copy Radio" + randomNumber, "This is the Default");
-        createPath.fillOutCompanyFilter("VZW222", "", "", 0);
+        createPath.fillOutCompanyFilter("VZW333", "", "", 0);
         pathSummary.changeToSi();
         pathSummary.openPathDetailForAddingPath();
         pathDetail.addPathViaPathDetailBasicSetup1("Add Radio1", "KBY45", "34 37 42.1 N", "112 39 26.2 W", "66", "11.0 GHz");
@@ -423,7 +423,7 @@ public void pathDetailRadio_DisabledModEnabledNewMaxWillBeTheNewllyEnabled_whenD
     @Test
     public void pathDetailRadio_LightningBoltWillAppear_whenATPCIsEnabled() {
         createPath.createBrandNewProjectPath("Copy Radio" + randomNumber, "This is the Default");
-        createPath.fillOutCompanyFilter("VZW222", "", "", 0);
+        createPath.fillOutCompanyFilter("VZW333", "", "", 0);
         pathSummary.changeToSi();
         pathSummary.openPathDetailForAddingPath();
         pathDetail.addPathViaPathDetailBasicSetup1("Add Radio1", "KBY45", "34 37 42.1 N", "112 39 26.2 W", "66", "11.0 GHz");
@@ -467,7 +467,7 @@ public void pathDetailRadio_DisabledModEnabledNewMaxWillBeTheNewllyEnabled_whenD
     @Ignore //NEED A RADIO RECORD WHERE RAMP IS DEFAULT ON AND 5 MIN SET BY DEFAULT
     public void pathDetailRadio_whenRadioHas5MinAlarmSetToON_ATPCRadioHasFiveMinuteAlarmSetToTrue(){
         createPath.createBrandNewProjectPath("5MinuteAndRampON" + randomNumber, "This is the Default");
-        createPath.fillOutCompanyFilter("VZW222", "", "", 0);
+        createPath.fillOutCompanyFilter("VZW333", "", "", 0);
         pathSummary.changeToSi();
         pathSummary.openPathDetailForAddingPath();
         pathDetail.addPathViaPathDetailBasicSetup1("5 Min ON", "KBY45", "34 37 42.1 N", "112 39 26.2 W", "66", "11.0 GHz");
@@ -484,7 +484,7 @@ public void pathDetailRadio_DisabledModEnabledNewMaxWillBeTheNewllyEnabled_whenD
     @Test
     public void pathDetailRadio_whenRadioHas5MinAlarmSetToOFF_ATPCRadioHasFiveMinuteAlarmSetToFalse(){
         createPath.createBrandNewProjectPath("5MinONAndRampOFF" + randomNumber, "This is the Default");
-        createPath.fillOutCompanyFilter("VZW222", "", "", 0);
+        createPath.fillOutCompanyFilter("VZW333", "", "", 0);
         pathSummary.changeToSi();
         pathSummary.openPathDetailForAddingPath();
         pathDetail.addPathViaPathDetailBasicSetup1("5 Min OFF", "KBY45", "34 37 42.1 N", "112 39 26.2 W", "66", "11.0 GHz");
@@ -500,7 +500,7 @@ public void pathDetailRadio_DisabledModEnabledNewMaxWillBeTheNewllyEnabled_whenD
     @Ignore //NEED A RADIO RECORD WHERE RAMP IS DEFAULT OFF AND 5 MIN SET BY DEFAULT
     public void pathDetailRadio_whenRadioHas5MinAlarmSetToOFF1_ATPCRadioHasFiveMinuteAlarmSetToFalse1(){
         createPath.createBrandNewProjectPath("5MinONAndRampOFF" + randomNumber, "This is the Default");
-        createPath.fillOutCompanyFilter("VZW222", "", "", 0);
+        createPath.fillOutCompanyFilter("VZW333", "", "", 0);
         pathSummary.changeToSi();
         pathSummary.openPathDetailForAddingPath();
         pathDetail.addPathViaPathDetailBasicSetup1("5 Min OFF", "KBY45", "34 37 42.1 N", "112 39 26.2 W", "66", "11.0 GHz");
@@ -525,7 +525,7 @@ public void pathDetailRadio_DisabledModEnabledNewMaxWillBeTheNewllyEnabled_whenD
         @Test
         public void pathDetailRadio_whenTriggerLevelminAtpcTriggernull_ATPCRadioHasFiveMinuteAlarmSetToFalse1(){
             createPath.createBrandNewProjectPath("5MinONAndRampOFF" + randomNumber, "This is the Default");
-            createPath.fillOutCompanyFilter("VZW222", "", "", 0);
+            createPath.fillOutCompanyFilter("VZW333", "", "", 0);
             pathSummary.changeToSi();
             pathSummary.openPathDetailForAddingPath();
             pathDetail.addPathViaPathDetailBasicSetup1("5 Min OFF", "KBY45", "34 37 42.1 N", "112 39 26.2 W", "66", "11.0 GHz");
@@ -551,7 +551,7 @@ public void pathDetailRadio_DisabledModEnabledNewMaxWillBeTheNewllyEnabled_whenD
     @Test
     public void pathDetailRadio_whenTriggerLevelMoreThanZero_Error(){
         createPath.createBrandNewProjectPath("5MinONAndRampOFF" + randomNumber, "This is the Default");
-        createPath.fillOutCompanyFilter("VZW222", "", "", 0);
+        createPath.fillOutCompanyFilter("VZW333", "", "", 0);
         pathSummary.changeToSi();
         pathSummary.openPathDetailForAddingPath();
         pathDetail.addPathViaPathDetailBasicSetup1("5 Min OFF", "KBY45", "34 37 42.1 N", "112 39 26.2 W", "66", "11.0 GHz");
@@ -576,7 +576,7 @@ public void pathDetailRadio_DisabledModEnabledNewMaxWillBeTheNewllyEnabled_whenD
     @Test
     public void pathDetailRadio_whenTriggerLevelNegativeFiftyFivePointFour_Error(){
         createPath.createBrandNewProjectPath("5MinONAndRampOFF" + randomNumber, "This is the Default");
-        createPath.fillOutCompanyFilter("VZW222", "", "", 0);
+        createPath.fillOutCompanyFilter("VZW333", "", "", 0);
         pathSummary.changeToSi();
         pathSummary.openPathDetailForAddingPath();
         pathDetail.addPathViaPathDetailBasicSetup1("5 Min OFF", "KBY45", "34 37 42.1 N", "112 39 26.2 W", "66", "11.0 GHz");
@@ -599,7 +599,7 @@ public void pathDetailRadio_DisabledModEnabledNewMaxWillBeTheNewllyEnabled_whenD
     @Test
     public void pathDetailRadio_whenNominalPowerLevelHigherThanMax_Error(){
         createPath.createBrandNewProjectPath("5MinONAndRampOFF" + randomNumber, "This is the Default");
-        createPath.fillOutCompanyFilter("VZW222", "", "", 0);
+        createPath.fillOutCompanyFilter("VZW333", "", "", 0);
         pathSummary.changeToSi();
         pathSummary.openPathDetailForAddingPath();
         pathDetail.addPathViaPathDetailBasicSetup1("5 Min OFF", "KBY45", "34 37 42.1 N", "112 39 26.2 W", "66", "11.0 GHz");
@@ -620,7 +620,7 @@ public void pathDetailRadio_DisabledModEnabledNewMaxWillBeTheNewllyEnabled_whenD
     @Test
     public void pathDetailRadio_whenCoordinatedPowerLevelHigherThanMax_Error() {
         createPath.createBrandNewProjectPath("5MinONAndRampOFF" + randomNumber, "This is the Default");
-        createPath.fillOutCompanyFilter("VZW222", "", "", 0);
+        createPath.fillOutCompanyFilter("VZW333", "", "", 0);
         pathSummary.changeToSi();
         pathSummary.openPathDetailForAddingPath();
         pathDetail.addPathViaPathDetailBasicSetup1("5 Min OFF", "KBY45", "34 37 42.1 N", "112 39 26.2 W", "66", "11.0 GHz");
@@ -644,7 +644,7 @@ public void pathDetailRadio_DisabledModEnabledNewMaxWillBeTheNewllyEnabled_whenD
     @Test
     public void pathDetailRadio_whenValidInputsForNominalCoordinatedTtigger_ThenEditsAreSaved() {
         createPath.createBrandNewProjectPath("5MinONAndRampOFF" + randomNumber, "This is the Default");
-        createPath.fillOutCompanyFilter("VZW222", "", "", 0);
+        createPath.fillOutCompanyFilter("VZW333", "", "", 0);
         pathSummary.changeToSi();
         pathSummary.openPathDetailForAddingPath();
         pathDetail.addPathViaPathDetailBasicSetup1("5 Min OFF", "KBY45", "34 37 42.1 N", "112 39 26.2 W", "66", "11.0 GHz");
@@ -660,10 +660,10 @@ public void pathDetailRadio_DisabledModEnabledNewMaxWillBeTheNewllyEnabled_whenD
 
     //COM-545 (UI Tests) Sprint 13 Bugs
     //COM-437 Copy Path does not copy segment end antennas or radios
-    @Test
+    @Ignore
     public void pathDetailRadio_ShouldCopyRadioAndAntenna_whenCopyingPath() {
         createPath.createBrandNewProjectPath("Open ATPC" + randomNumber, "This is the Default");
-        createPath.fillOutCompanyFilter("VZW222", "", "", 0);
+        createPath.fillOutCompanyFilter("VZW333", "", "", 0);
         pathSummary.changeToSi();
         pathSummary.openPathDetailForAddingPath();
         pathDetail.addPathViaPathDetailBasicSetup1("Add Radio1", "KBY45", "34 37 42.1 N", "112 39 26.2 W", "66", "11.0 GHz");
@@ -716,7 +716,7 @@ public void pathDetailRadio_DisabledModEnabledNewMaxWillBeTheNewllyEnabled_whenD
     @Ignore
     public void pathDetailRadio_ModulationsShouldBeCopied_whenDerivedFromFavorites10() {
         createPath.createBrandNewProjectPath("ChangingModulation" + randomNumber, "This is the Default");
-        createPath.fillOutCompanyFilter("VZW222", "", "", 0);
+        createPath.fillOutCompanyFilter("VZW333", "", "", 0);
         pathSummary.changeToSi();
         pathSummary.openPathDetailForAddingPath();
         pathDetail.addPathViaPathDetailBasicSetup1("Add Radio1", "KBY45", "34 37 42.1 N", "112 39 26.2 W", "66", "11.0 GHz");
@@ -741,7 +741,7 @@ public void pathDetailRadio_DisabledModEnabledNewMaxWillBeTheNewllyEnabled_whenD
     @Test
     public void pathDetailRadio_ModulationsShouldBeCopied_whenDerivedFromFavorites9() {
         createPath.createBrandNewProjectPath("ChangingModulation" + randomNumber, "This is the Default");
-        createPath.fillOutCompanyFilter("VZW222", "", "", 0);
+        createPath.fillOutCompanyFilter("VZW333", "", "", 0);
         pathSummary.changeToSi();
         pathSummary.openPathDetailForAddingPath();
         pathDetail.addPathViaPathDetailBasicSetup1("Add Radio1", "KBY45", "34 37 42.1 N", "112 39 26.2 W", "66", "11.0 GHz");
@@ -769,7 +769,7 @@ public void pathDetailRadio_DisabledModEnabledNewMaxWillBeTheNewllyEnabled_whenD
     @Test
     public void pathDetailRadio_LossValuesIncluded_whenLossIsEntered() {
         createPath.createBrandNewProjectPath("ChangingModulation" + randomNumber, "This is the Default");
-        createPath.fillOutCompanyFilter("VZW222", "", "", 0);
+        createPath.fillOutCompanyFilter("VZW333", "", "", 0);
         pathSummary.changeToSi();
         pathSummary.openPathDetailForAddingPath();
         pathDetail.addPathViaPathDetailBasicSetup1("Add Radio1", "KBY45", "34 37 42.1 N", "112 39 26.2 W", "66", "11.0 GHz");
@@ -811,7 +811,7 @@ public void pathDetailRadio_DisabledModEnabledNewMaxWillBeTheNewllyEnabled_whenD
     @Test
     public void pathDetailRadio_LossValuesFieldValidate_whenIncorrectInputIsEnterered() {
         createPath.createBrandNewProjectPath("ChangingModulation" + randomNumber, "This is the Default");
-        createPath.fillOutCompanyFilter("VZW222", "", "", 0);
+        createPath.fillOutCompanyFilter("VZW333", "", "", 0);
         pathSummary.changeToSi();
         pathSummary.openPathDetailForAddingPath();
         pathDetail.addPathViaPathDetailBasicSetup1("Add Radio1", "KBY45", "34 37 42.1 N", "112 39 26.2 W", "66", "11.0 GHz");
