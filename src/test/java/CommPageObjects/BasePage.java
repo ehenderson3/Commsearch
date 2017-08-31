@@ -3,6 +3,7 @@ package CommPageObjects;
 
 import CommTests.Config;
 import org.openqa.selenium.*;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
@@ -113,6 +114,8 @@ public class BasePage implements Config {
     }
 
 
+
+
     /**
      * deletes  field text of element(locator) being passed via parameter
      *
@@ -173,7 +176,7 @@ public class BasePage implements Config {
 
 
     public void resizeTest() {
-        ((JavascriptExecutor)driver).executeScript("window.resizeTo(1024, 768);");
+        ((JavascriptExecutor)driver).executeScript("window.resizeTo(1374, 975);");
     }
 
     /**
@@ -219,6 +222,11 @@ public class BasePage implements Config {
         find(locator).click();
     }
 
+//    public void moveElementIntoView(By locator){
+//       WebElement element=find(locator);
+//       element.
+//
+//    }
 
     public void waitForFieldText(String fieldTest, By locator) {
         WebDriverWait wait = new WebDriverWait(driver, 30);
@@ -288,12 +296,14 @@ public class BasePage implements Config {
         WebElement we = driver.findElement(locator);
         ((JavascriptExecutor)driver).executeScript(javaScript, we);
 
-
-
-/*        Actions action = new Actions(driver);
-        WebElement we = driver.findElement(locator);
-        action.moveToElement(we).click().build().perform();*/
     }
+
+    public void hoverElement(By locator){
+        Actions action = new Actions(driver);
+        WebElement we = driver.findElement(locator);
+        action.moveToElement(we).click().build().perform();
+    }
+
 
     /**
      * inputs text(inputText)into field element(locator)
@@ -336,6 +346,10 @@ public class BasePage implements Config {
         }
         return true;
     }
+
+
+
+
 
 
     /**
@@ -389,7 +403,7 @@ public class BasePage implements Config {
         driver.switchTo().defaultContent();
     }
 
-    public void Maximize() {
+    public void maximize() {
         driver.manage().window().maximize();
     }
 

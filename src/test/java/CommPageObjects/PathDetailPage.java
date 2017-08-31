@@ -257,24 +257,24 @@ public class PathDetailPage extends BasePage {
 
     public void addBackToBackPassiveRepeater(){
         //Is the Passive Repeater trigger pressent and active
-        assertTrue(isDisplayed(passiveRepeaterTrigger,10));
-        assertTrue(isDisplayedAndClickable(passiveRepeaterTrigger,10));
+        assertTrue("cant find passiveRepeaterTrigger",isDisplayed(passiveRepeaterTrigger,10));
+        assertTrue("cant find passiveRepeaterTrigger",isDisplayedAndClickable(passiveRepeaterTrigger,10));
         //Click Passive Repeater trigger
         click(passiveRepeaterTrigger);
         //Change to Back to Back
-        isDisplayed(passiveRepeaterTypeField,20);
+        assertTrue("cant find passiveRepeaterTypeField",isDisplayed(passiveRepeaterTypeField,20));
         selectFromDropdown(passiveRepeaterTypeField, "Back to Back");
         //Click the Site search button
-        isDisplayed(passiveRepeaterSiteSearchButton,10);
+        assertTrue("cant find passiveRepeaterSiteSearchButton",isDisplayed(passiveRepeaterSiteSearchButton,10));
         click(passiveRepeaterSiteSearchButton);
         //Wait for the Site Look Up popup
-        isDisplayed(pathDetailSiteLookUpSiteName,10);
+        assertTrue("cant find pathDetailSiteLookUpSiteName",isDisplayed(pathDetailSiteLookUpSiteName,10));
         //Enter Site Name
         type("New York",pathDetailSiteLookUpSiteName);
-        isDisplayed(siteLookUpSearchButtonModal,10);
+        assertTrue("cant find siteLookUpSearchButtonModal",isDisplayed(siteLookUpSearchButtonModal,10));
         click(siteLookUpSearchButtonModal);
         //Validate that at least one row
-        isDisplayed(pathDetailSiteLookUpRadiusResults,10);
+        assertTrue("cant find pathDetailSiteLookUpRadiusResults",isDisplayed(pathDetailSiteLookUpRadiusResults,10));
         click(pathDetailSiteLookUpRadiusResults);
         //Enter common loss
         type("12",passiveRepeaterCommonLossField);
@@ -457,6 +457,7 @@ public class PathDetailPage extends BasePage {
         click(editDetailsLink);
         //Verify that the path detail form opens
         assertTrue("The path details form did not open",isDisplayed(pathDetailAsrField1,5));
+
     }
 
     public void saveAndValidateSuccessMessage(String saveSuccessMessage){
@@ -542,7 +543,7 @@ public class PathDetailPage extends BasePage {
         //Enter 1200000 in the ASR Number field
         type(asr2, asrLookUpAsrNumberField);
         //Click the search button
-        click(asrLookUpSearchButton);//asr-lookup-submit
+        clickJS(asrLookUpSearchButton);
           //Click the result row
           assertTrue("Can't find the asrLookUpAsrNumberField", isDisplayed(asrLookUpResultRow, 20));
           click(asrLookUpResultRow, 0);
@@ -558,7 +559,6 @@ public class PathDetailPage extends BasePage {
         //enter a site name2
         type(siteNameVal2, pathDetailSiteNameField2);
     }
-
 
     public void antennaFieldValidation(){
         assertTrue(isDisplayed(antennaModel_1,8));
@@ -594,11 +594,9 @@ public class PathDetailPage extends BasePage {
 
     public void closeSiteLookup(){
         isDisplayed(closeSiteLookUpMotal,8);
-        click(closeSiteLookUpMotal);
+        clickJS(closeSiteLookUpMotal);
         isDisplayed(pathDetailSiteLookUpLatitude,8);
-
     }
-
 
     public void siteSearchResults(int i,String siteName,String callSign,String asr,String lat,String longi,String radius){
 
@@ -674,7 +672,7 @@ public class PathDetailPage extends BasePage {
         //type(lat,pathDetailSiteLookUpLatitude);
         //type(longi,pathDetailSiteLookUpLongitude);
         //type(radius, pathDetailSiteLookUpRadius);
-        click(siteLookUpSearchButtonModal);
+        clickJS(siteLookUpSearchButtonModal);
         slowDown(3);
 
 

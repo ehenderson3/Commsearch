@@ -63,9 +63,12 @@ public class QuickAddPage extends BasePage {
 
     By pathRadioBand = By.id("path-0-site-1-bandwidth");
     By companyList = By.xpath("//*[@id=\"project-summary-project-default-company\"]/span/span");
-
+    By companyListTX = By.xpath("//*[contains(@id, 'project-summary-companies-list-Verizon TX')]");
+    By companyListAZ = By.xpath("//*[contains(@id, 'project-summary-companies-list-Verizon AZ')]");
+    By companyListV = By.id("project-summary-companies-list-Verizon");
 
     //Index List -- Can you used an array to select item
+
 
     //Modal -- Does it pop up over current window
     By addNewPathSlideOutClosed = By.className("quick-add-container ");
@@ -79,9 +82,23 @@ public class QuickAddPage extends BasePage {
         super(driver);
         visit("");
     }
+    public void valCompaniesThree(String co1,String co2,String co3){
+        isDisplayed(companyList,10);
+        hoverElement(companyList);
+        isDisplayed(companyListTX,5);
+        String currentCompanies = getText(companyListTX);
+        String currentCompanies1 = getText(companyListAZ);
+        String currentCompanies2 = getText(companyListV);
+
+        assertEquals(currentCompanies,co1);
+        assertEquals(currentCompanies1,co2);
+        assertEquals(currentCompanies2,co3);
+
+    }
+
 
     public void valCompanies(String pathRadioBandValue){
-       isDisplayed(companyList,10);
+        isDisplayed(companyList,10);
         String currentCompanies = getText(companyList);
         assertEquals(currentCompanies,pathRadioBandValue);
 

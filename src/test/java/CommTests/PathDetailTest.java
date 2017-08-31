@@ -98,13 +98,13 @@ public class PathDetailTest extends BaseTest {
         pathSummary.changeToUs();
         pathSummary.openPathDetailForAddingPath();
 
-        pathDetail.siteSearch1("New York", "", "", "", "", "");
-        pathDetail.siteSearchResults(0, "New York", "KA20003", "", "9 26 42.7 N", "8 7 9 W", "-");
+        pathDetail.siteSearch1("New York", "", "", "", "", "-");
+        pathDetail.siteSearchResults(0, "New York", "KA20003", "-", "40 44 54 N", "73 59 9 W", "-");
 
         pathDetail.closeSiteLookup();
 
         pathDetail.siteSearch2("New York", "KA20003", "", "40 44 54 N", "", "");
-        pathDetail.siteSearchResults(0, "New York", "KA20003", "", "9 26 42.7 N", "8 7 9 W", "-");
+        pathDetail.siteSearchResults(0, "New York", "KA20003", "-", "40 44 54 N", "73 59 9 W", "-");
     }
 
     @Test
@@ -116,12 +116,12 @@ public class PathDetailTest extends BaseTest {
 
         pathDetail.siteSearch1("New York", "KA20003", "", "", "", "");
 
-        pathDetail.siteSearchResults(0, "New York", "KA20003", "", "9 26 42.7 N", "8 7 9 W", "-");
+        pathDetail.siteSearchResults(0, "New York", "KA20003", "", "40 44 54 N", "73 59 9 W", "-");
 
         pathDetail.closeSiteLookup();
 
         pathDetail.siteSearch2("New York", "KA20003", "", "", "", "");
-        pathDetail.siteSearchResults(0, "New York", "KA20003", "", "9 26 42.7 N", "8 7 9 W", "-");
+        pathDetail.siteSearchResults(0, "New York", "KA20003", "", "40 44 54 N", "73 59 9 W", "-");
     }
 
     @Test
@@ -860,6 +860,32 @@ public class PathDetailTest extends BaseTest {
         createPath.fillOutCompanyFilterFromDetails("", "Verizon AZ", "", 1);
         pathDetailAnt.clickSaveDetails();
         quickAdd.valCompanies("VERIZON TX , VERIZON AZ");
+    }
+    /**
+     *COM-588
+     (UI AUTO) Companies list support in project header COM-503
+     */
+
+    @Test
+    public void pathDetail_AddDifferentCompanies_ResultShouldIncludeEachThreeCompanies() {
+        boolean siteExist;
+        createPath.createProjectPath("search1StCharOfCompany" + randomNumber, "This is the Default");
+        createPath.simpleClickCreateNewProjectButton();
+        pathSummary.valSiteLocationToggleOn();
+        pathSummary.openPathDetailForAddingPath();
+        pathDetail.addAsrPathViaPathDetail1("CAMSLANT STATION", "1241006", "35 12 26.7 N", "78 3 21.2 W", "48.7", "1");
+        createPath.fillOutCompanyFilterFromDetails("", "Verizon TX", "", 0);
+        pathDetail.addAsrPathViaPathDetail2("SYNRAMS STATION", "1208837", "40 34 10 N", "122 26 14 W", "250");
+        createPath.fillOutCompanyFilterFromDetails("", "Verizon AZ", "", 1);
+        pathDetailAnt.clickSaveDetails();
+        pathSummary.openPathDetailForAddingPath();
+        pathDetail.addAsrPathViaPathDetail1("CAMSLANT STATION", "1241006", "35 12 26.7 N", "78 3 21.2 W", "48.7", "1");
+        createPath.fillOutCompanyFilterFromDetails("", "Verizon", "", 0);
+
+        pathDetail.addAsrPathViaPathDetail2("SYNRAMS STATION", "1208837", "40 34 10 N", "122 26 14 W", "250");
+        createPath.fillOutCompanyFilterFromDetails("", "Verizon", "", 1);
+        pathDetailAnt.clickSaveDetails();
+        quickAdd.valCompaniesThree("VERIZON TX","VERIZON AZ","VERIZON");
     }
     @Test
     public void pathDetail_AddSameCompanies_ResultShouldCompany() {

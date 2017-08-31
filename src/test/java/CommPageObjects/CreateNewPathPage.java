@@ -71,7 +71,7 @@ public class CreateNewPathPage extends BasePage {
         assertTrue("can't find the path radio button",isDisplayed(pathRadioButton,30));
         click(pathRadioButton);
         slowDown(2);
-        assertTrue("can't find the Default company button",isDisplayed(defaultCompany,30));
+        assertTrue("can't find the Default company button",isDisplayed(defaultCompany,50));
         assertTrue("can't find the company lookup button",isDisplayed(companyLookUp, 30));
         click(companyLookUp);
     }
@@ -164,7 +164,7 @@ public class CreateNewPathPage extends BasePage {
         type(coCodeText, companyCodeField);
         type(coNameText, companyNameField);
         type(coContactText, companyContactNameField);
-        assertTrue("Can't find Search Button",isDisplayed(companySearchButton));
+        assertTrue("Can't find Search Button",isDisplayed(companySearchButton,10));
         click(companySearchButton );
         slowDown(2);
         assertTrue("Can't find Results",isDisplayed(searchResultArray,10));

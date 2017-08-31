@@ -766,7 +766,7 @@ public void pathDetailRadio_DisabledModEnabledNewMaxWillBeTheNewllyEnabled_whenD
 
     }
 
-    @Test
+    @Ignore
     public void pathDetailRadio_LossValuesIncluded_whenLossIsEntered() {
         createPath.createBrandNewProjectPath("ChangingModulation" + randomNumber, "This is the Default");
         createPath.fillOutCompanyFilter("VZW333", "", "", 0);
@@ -849,6 +849,31 @@ public void pathDetailRadio_DisabledModEnabledNewMaxWillBeTheNewllyEnabled_whenD
 
         pathDetailRadio.lossErrorLeft("Cannot be greater than 999.9(dB).","Cannot be greater than 999.9(dB).","Cannot be greater than 999.9(dB).");
         pathDetailRadio.lossErrorRight("Cannot be greater than 999.9(dB).","Cannot be greater than 999.9(dB).","Cannot be greater than 999.9(dB).");
+
+    }
+
+
+    /**
+     * COM-534
+     (UI AUTO) UI/UX: Radio Look up
+     */
+    @Ignore
+    public void pathDetailRadio_RadioLookUp_hoverAdaptiveModulation() {
+        createPath.createBrandNewProjectPath("ChangingModulation" + randomNumber, "This is the Default");
+        createPath.fillOutCompanyFilter("VZW333", "", "", 0);
+        pathSummary.changeToSi();
+        pathSummary.openPathDetailForAddingPath();
+        pathDetail.addPathViaPathDetailBasicSetup1("Add Radio1", "KBY45", "34 37 42.1 N", "112 39 26.2 W", "66", "11.0 GHz");
+        pathDetail.addPathViaPathDetailBasicSetup2("Add Radio2", "KA20003", "40 44 54 N", "73 59 9 W", "55");
+        pathDetailAnt.enterAntennaCodeAndBlur("77100A", "12");
+        pathDetailRadio.setupLeftRadio("X11A22");
+        pathDetailRadio.setupRightRadio("X11A22");
+        pathDetailRadio.addLossLeft("22", "33", "44");
+        pathDetailRadio.addLossRight("22", "33", "44");
+        pathDetailAnt.clickSaveDetails();
+        pathDetail.openPathDetailViaDetails();
+        pathDetailRadio.hoverAndValidate();
+        //TODO work with Nemo to get better controlls for tooltips
 
 
     }

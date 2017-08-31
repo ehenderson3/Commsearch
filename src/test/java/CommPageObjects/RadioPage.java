@@ -32,7 +32,10 @@ public class RadioPage extends BasePage {
     By atpcLightingBoltButtonLeft = By.id("path-details-radios-0--0-atpc-trigger");
     By atpcModalRampOnButton = By.id("atpc-settings-power-increase-Ramp");
     By atpcModal5MinAlarmOnButton = By.id("atpc-settings-five-minute-alarm-On");
-    By saveFavButton = By.cssSelector(".fa.fa-lg.fa-heart");
+    By saveFavButton = By.cssSelector(".fa.fa-lg.fa-heart ");
+    By radioModelSearchButton = By.id("path-details-radio-0-lookup-trigger");
+    By radioLookupSearchButton = By.id("site-lookup-submit");
+
 
     //Path DropDown Fields -- Does it contain a list that has options that can be selected
 
@@ -94,6 +97,27 @@ public class RadioPage extends BasePage {
 
     By xClearPoint = By.cssSelector(".clear-input-button.pointer");
 
+    By radioLookupRadioCode = By.id("radio-lookup-radio-code");
+    By radioLookupRadioCompany = By.id("radio-lookup-radio-company");
+    By radioLookupRadioFamily = By.id("radio-lookup-radio-family");
+    By radioLookupRadioModel = By.id("radio-lookup-model-number");
+    By radioLookupEmissionBandwidth = By.id("radio-lookup-model-number");
+    By radioLookupModulationType = By.id("radio-lookup-modulation-type");
+    By radioLookupModulation = By.id("radio-lookup-throughput");
+    By radioLookupThroughput = By.id("radio-lookup-throughput");
+    By radioLookupPower = By.id("radio-lookup-power");
+    By radioLookupArchitecture = By.id("radio-lookup-architecture-type");
+    By radioLookupRows = By.id("radio-lookup-modal-table");
+    By aCMToolTip = By.cssSelector(".__react_component_tooltip.place-bottom.type-light.project-summary-tooltip.tooltip-wrapper");//.place-bottom.type-light.project-summary-tooltip.tooltip-wrapper
+    By aCMToolTip1 = By.cssSelector(".tooltip-trigger-decoration.show-decoration.acm-tooltip-decoration");//.place-bottom.type-light.project-summary-tooltip.tooltip-wrapper
+
+
+    By aCMToolTip5 = By.cssSelector(".__react_component_tooltip.place-bottom.type-light.project-summary-tooltip.tooltip-wrapper");
+    By aCMToolTip6 = By.xpath("//*[contains(@data-class, 'project-summary-tooltip tooltip-wrapper')]");//-modulation-rowclass="modulation-row position-relative"id="path-details-radios-0-modulations-2-modulation-row"
+
+    //radio-lookup-modal-table
+
+
     //Index List -- Can you used an array to select item
     By referrencePosition1 = By.xpath("//*[@id=\"path-details-radios-0-modulations-0-label\"]");
     By referrencePosition2 = By.xpath("//*[@id=\"path-details-radios-0-modulations-1-label\"]");
@@ -115,10 +139,36 @@ public class RadioPage extends BasePage {
     By transmitLossErrorMsgRight = By.id("path-details-losses-1-transmit-loss-error-message");
     By recieveLossErrorMsgRight = By.id("path-details-losses-1-receive-loss-error-message");
 
+    By toolTipValidation = By.id("//*[@id='radio-lookup-modal-table-data-radioCode-X11A22-modulationName']/span");
+
     public RadioPage(WebDriver driver) {
         super(driver);
         visit("/");
     }
+
+
+
+    public void hoverAndValidate(){
+        //select the radio search button
+        assertTrue("cant find radioModelSearchButton",isDisplayed(radioModelSearchButton,10));
+        //scroll(radioModelSearchButton);
+        clickJS(radioModelSearchButton);
+        //validate the radio search opened
+        assertTrue("cant find radioLookupRadioCode",isDisplayed(radioLookupRadioCode,10));
+        //select the search button
+        assertTrue("cant find radioLookupRadioCode",isDisplayed(radioLookupSearchButton,5));
+        clickJS(radioLookupSearchButton);
+        //find the row
+        isDisplayed(radioLookupRows,10);
+        String radioRow = getText(radioLookupRows);
+        //hover acm
+        assertTrue("cant find aCMToolTip",isDisplayed(aCMToolTip1,30));
+        hoverElement(aCMToolTip6);
+
+    }
+
+
+
 
     public void clearAllLossFields() {
         clear(commonLossFieldRight);
@@ -308,10 +358,12 @@ public class RadioPage extends BasePage {
     }
 
     public void resetModulation(){
+        type("1",commonLossFieldLeft);
         click(radioCodeFieldLeft);
-        slowDown(1);
+        slowDown(2);
         click(radioMaxPowerLeft);
-        slowDown(1);
+
+        slowDown(2);
     }
 
     public void deactivateModulation(int i) {
@@ -376,6 +428,7 @@ public class RadioPage extends BasePage {
     }
 
     public void saveFavRadioCodeEnterNewCode(){
+        type("1",commonLossFieldLeft);
         assertTrue("cnanot find fav button",isDisplayed(saveFavButton,5));//fa fa-lg fa-heart
         click(saveFavButton);
         click(radioMaxPowerLeft);

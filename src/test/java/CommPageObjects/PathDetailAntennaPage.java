@@ -33,7 +33,7 @@ public class PathDetailAntennaPage extends BasePage {
 
 
     By lookUpAntennaModel = By.id("antenna-lookup-antenna-model");
-    By pathDetail = By.id("antenna-lookup-antenna-model");
+    By pathDetail = By.id("path-details-site-0-lookup-trigger");
     By centerlineField = By.id("path-details-antennas-0-0-centerline");
     By antennaModelField = By.id("path-details-antennas-0-0-antenna-model");
     By modeField = By.id("path-details-antennas-0-0-mode");
@@ -147,13 +147,14 @@ public class PathDetailAntennaPage extends BasePage {
         click(lookUpSearchButton);
 
         //Verify that there is at least one search result
-        isDisplayed(antResultListItem,8);
+        assertTrue(isDisplayed(antResultListItem,12));
+
 
         //Click on the first row
         clickJS(antResultListItem);
 
         //Verify that we have returned to the Path Detail page
-        isDisplayed(pathDetail,8);
+        assertTrue(isDisplayed(pathDetail,12));
 
         //Validate that the values are correct for Antenna Model, Mode, Antenna code, Beamwith and Gain
         String antennaModelFieldText;
@@ -197,7 +198,7 @@ public class PathDetailAntennaPage extends BasePage {
         click(antResultListItem);
 
         //Verify that we have returned to the Path Detail page
-        isDisplayed(centerlineField2);
+        isDisplayed(centerlineField2,3);
 
         //Validate that the values are correct for Antenna Model, Mode, Antenna code, Beamwith and Gain
         String antennaModelFieldText2;
@@ -292,6 +293,7 @@ public class PathDetailAntennaPage extends BasePage {
         String antennaCodeFieldText;
         String beamwidthFieldText;
         String gainFieldText;
+        isDisplayed(antennaModelForTextField,20);
 
         antennaModelFieldText = getFieldText(antennaModelForTextField);
         modeFieldText = getFieldText(modeField);
@@ -305,6 +307,7 @@ public class PathDetailAntennaPage extends BasePage {
         assertEquals(beamwidthFieldText, beamwith);
         assertEquals(gainFieldText, gain);
         //enter valid or invalid Antenna Code
+        isDisplayed(antennaCodeField2,20);
         type(antCode,antennaCodeField2);
         //re-focus to field other than Antenna Code
         click(gainField2);
@@ -315,6 +318,8 @@ public class PathDetailAntennaPage extends BasePage {
         String antennaCodeFieldText2;
         String beamwithFieldText2;
         String gainFieldText2;
+
+        isDisplayed(antennaModelField2,20);
 
         antennaModelFieldText2 = getFieldText(antennaModelField2);
         modeFieldText2 = getFieldText(modeField2);
