@@ -72,7 +72,7 @@ public class QuickAddPage extends BasePage {
 
     //Modal -- Does it pop up over current window
     By addNewPathSlideOutClosed = By.className("quick-add-container ");
-    By addNewPathSlideOutClosedFox = By.className(".quick-add-start.heading-font");
+    By addNewPathSlideOutClosedFox = By.cssSelector(".quick-add-start.heading-font");
 
     By addNewPathSlideOutOpen = By.cssSelector(".quick-add-container.active");
     By doYouWantToLeaveModal = By.className("path-details-footer-modal");
@@ -630,8 +630,13 @@ public class QuickAddPage extends BasePage {
     private void quickAddErrorChecking(String invalidEntry1, String invalidEntry2, By element1, By element2, String Error1, String Error2 ){
 
         String pathError;
-        assertTrue(waitForIsDisplayed(addNewPathSlideOutClosed,10));
-        assertTrue(isDisplayedAndClickable(quickAddButton,10));
+        if(browser.equals("firefox")){
+            assertTrue(isDisplayed(addNewPathSlideOutClosedFox,10));
+        }else{
+            assertTrue(isDisplayed(addNewPathSlideOutClosed,10));
+            assertTrue(isDisplayedAndClickable(quickAddButton,10));
+        }
+
         slowDown(8);
         click(quickAddButton,0);
         waitForIsDisplayed(pathName, 6);

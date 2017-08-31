@@ -99,12 +99,12 @@ public class PathDetailTest extends BaseTest {
         pathSummary.openPathDetailForAddingPath();
 
         pathDetail.siteSearch1("New York", "", "", "", "", "-");
-        pathDetail.siteSearchResults(0, "New York", "KA20003", "-", "40 44 54 N", "73 59 9 W", "-");
+        pathDetail.siteSearchResults(0, "New York", "KA20003", "-", "9 26 42.7 N", "8 7 9 W", "-");
 
         pathDetail.closeSiteLookup();
 
         pathDetail.siteSearch2("New York", "KA20003", "", "40 44 54 N", "", "");
-        pathDetail.siteSearchResults(0, "New York", "KA20003", "-", "40 44 54 N", "73 59 9 W", "-");
+        pathDetail.siteSearchResults(0, "New York", "KA20003", "-", "9 26 42.7 N", "8 7 9 W", "-");
     }
 
     @Test
@@ -116,12 +116,12 @@ public class PathDetailTest extends BaseTest {
 
         pathDetail.siteSearch1("New York", "KA20003", "", "", "", "");
 
-        pathDetail.siteSearchResults(0, "New York", "KA20003", "", "40 44 54 N", "73 59 9 W", "-");
+        pathDetail.siteSearchResults(0, "New York", "KA20003", "", "9 26 42.7 N", "8 7 9 W", "-");
 
         pathDetail.closeSiteLookup();
 
         pathDetail.siteSearch2("New York", "KA20003", "", "", "", "");
-        pathDetail.siteSearchResults(0, "New York", "KA20003", "", "40 44 54 N", "73 59 9 W", "-");
+        pathDetail.siteSearchResults(0, "New York", "KA20003", "", "9 26 42.7 N", "8 7 9 W", "-");
     }
 
     @Test
@@ -132,7 +132,7 @@ public class PathDetailTest extends BaseTest {
         pathSummary.valSiteLocationToggleOn();
         quickAdd.quickAddPathSimple("Ton", "5.8 GHz", "Best Path", "34 37 42.1 N", "112 39 26.2 W", "1542.29", "KBY45");
         pathSummary.viewSiteCallSignLatLongGeColumns1(0, "Tonto Mtn", "KBY45", "34 37 42.1 N", "112 39 26.2 W", "1542.29");
-        pathSummary.viewSiteCallSignLatLongGeColumns2(0, "New York2", "KA20003", "9 26 42.7 N", "8 7 9 W", "0.98");
+        pathSummary.viewSiteCallSignLatLongGeColumns2(0, "New York2", "KA20003", "40 44 54 N", "73 59 9 W", "0.98");
         pathSummary.openPathDetails(0);
         pathDetail.viewPathDetailValue1("Tonto Mtn", "KBY45", "34 37 42.1 N", "112 39 26.2 W", "1542.29", "940 MHz");
         pathDetail.viewPathDetailValues2("New York2", "KA20003","9 26 42.7 N", "8 7 9 W", "0.98", "940 MHz");
@@ -140,7 +140,7 @@ public class PathDetailTest extends BaseTest {
 
         quickAdd.quickAddPathExistingSetup("Existing", "940 MHz", "Best Path", "34 37 42.1 N", "112 39 26.2 W", "250", "KBY45");
         pathSummary.viewSiteCallSignLatLongGeColumns1(1, "Existing", "KBY45", "34 37 42.1 N", "112 39 26.2 W", "250");
-        pathSummary.viewSiteCallSignLatLongGeColumns2(1, "New York2", "KA20003", "9 26 42.7 N", "8 7 9 W", "98");
+        pathSummary.viewSiteCallSignLatLongGeColumns2(1, "New York2", "KA20003", "40 44 54 N", "73 59 9 W", "98");
 
         pathSummary.openPathDetails(1);
 
@@ -151,7 +151,7 @@ public class PathDetailTest extends BaseTest {
 
         quickAdd.quickAddPathExistingSetup("CAMSLANT STATION", "940 MHz", "Best Path", "34 37 42.1 N", "78 3 21.2 W", "48.69", "1241006");
         pathSummary.viewSiteCallSignLatLongGeColumns1(2, "CAMSLANT STATION", "", "34 37 42.1 N", "78 3 21.2 W", "48.69");
-        pathSummary.viewSiteCallSignLatLongGeColumns2(2, "New York2", "KA20003", "9 26 42.7 N", "8 7 9 W", "98");
+        pathSummary.viewSiteCallSignLatLongGeColumns2(2, "New York2", "KA20003", "40 44 54 N", "73 59 9 W", "98");
         pathSummary.openPathDetails(2);
         pathDetail.viewPathDetailValue1("CAMSLANT STATION", "", "34 37 42.1 N", "78 3 21.2 W", "48.69", "940 MHz");
         pathDetail.viewPathDetailValues2("Tonto Mtn", "KA20003", "40 44 54 N", "73 59 9 W", "48.69", "940 MHz");
@@ -300,8 +300,8 @@ public class PathDetailTest extends BaseTest {
         pathDetail.addPathViaPathDetailBasicSetup1("SYNRAMS STATION", "KBY45", "34 37 42.1 N", "112 39 26.2 W", "-200.012", "11.0 GHz");
         pathDetail.licSelection1("1", "Secondary");
         pathDetail.licSelection2("1", "Secondary");
-        pathDetail.radioService1("5", "AB—Aural Microwave Booster");
-        pathDetail.radioService2("5", "MW—Microwave Public Safety Pool");
+        pathDetail.radioService1("5", "AB-Aural Microwave Booster");
+        pathDetail.radioService2("5", "MW-Microwave Public Safety Pool");
         pathDetail.addPathViaPathDetailBasicSetup2("New York", "KA20003", "40 44 54 N", "73 59 9 W", "21000.124");
         pathDetail.saveDetails();
     }

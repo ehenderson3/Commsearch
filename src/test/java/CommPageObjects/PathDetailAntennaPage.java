@@ -356,6 +356,11 @@ public class PathDetailAntennaPage extends BasePage {
 
     }
 
+    public void clickBlurAntennaCode(){
+        isDisplayed(antennaCodeField,3);
+        click(antennaCodeField);
+    }
+
     public void clearAntennaField(){
         assertTrue("Can't see the antenna X",isDisplayed(antennaClearX2,30));
         slowDown(2);

@@ -24,6 +24,9 @@ public class RadioPage extends BasePage {
     By radioCopyArrowButton = By.id("path-details-section-header-radio-copy-button");
     By radioModelLeftButton1 = By.cssSelector(".lookup-trigger-icon.margin-left-half.pointer.pull-right.flex-child-1-0-auto.cursor-not-allowed");
     By radioAutoTransmitPowerControlLeftAddButton1 = By.id("path-details-radios-0--0-atpc-trigger");
+    By radioAutoTransmitPowerControlLeftAddButton1Fox = By.cssSelector(".atpc-settings-trigger.uppercase.pointer");
+    By radioAutoTransmitPowerControlLeftAddButton1Xpath = By.xpath("//*[contains(@id, 'path-details-radios-0--0-atpc-trigger') and contains(@class, 'atpc-settings-trigger uppercase pointer')]");
+
     By atpcModalRampButton = By.id("atpc-settings-power-increase-Ramp-label-bottom");
     By atpcModalStepButton = By.id("atpc-settings-power-increase-Step-label-bottom");
     By atpcModalFiveMinAlarmOnButton = By.id("atpc-settings-five-minute-alarm-On-label-bottom");
@@ -329,8 +332,8 @@ public class RadioPage extends BasePage {
     }
 
     public void openATPC(){
-        assertTrue("the ATPC add button is not present",isDisplayed(radioAutoTransmitPowerControlLeftAddButton1,10));
-        click(radioAutoTransmitPowerControlLeftAddButton1);
+        assertTrue("the ATPC add button is not present",isDisplayed(radioAutoTransmitPowerControlLeftAddButton1Xpath,10));
+        click(radioAutoTransmitPowerControlLeftAddButton1Xpath);
         assertTrue("the ATPC modal is not present",isDisplayed(atpcModalCoordinatedPowerField,10));
         assertTrue("the ATPC modal is not present",isDisplayed(atpcModalRampButton,10));
         assertTrue("the ATPC modal is not present",isDisplayed(atpcModalStepButton,10));
@@ -354,6 +357,7 @@ public class RadioPage extends BasePage {
     public void copyRadio(){
         assertTrue(isDisplayed(radioCopyArrowButton,30));
         clickJS(radioCopyArrowButton);
+        slowDown(2);
         waitForFieldToBeNotNull(radioCodeFieldRight);
     }
 
@@ -409,6 +413,7 @@ public class RadioPage extends BasePage {
     }
 
     public void validateCurrentMaxPowerAndCoordinatedPower(String maxPower, String coordinatedPower){
+        slowDown(2);
         assertTrue(isDisplayed(radioMaxPowerLeft));
         String currMaxPower = getFieldText(radioMaxPowerLeft);
         String currCoordinatedPower = getFieldText(radioCoordinatedPowerFieldLeft);
@@ -422,6 +427,8 @@ public class RadioPage extends BasePage {
     }
 
     public void errorCorrectionLeft(String radioErrorText) {
+        isDisplayed(radioCodeFieldRight,10);
+        click(radioCodeFieldRight);
         isDisplayed(radioRadioErrorLeft);
         String radioError = getText(radioRadioErrorLeft);
         assertEquals(radioErrorText, radioError);
@@ -434,36 +441,60 @@ public class RadioPage extends BasePage {
         click(radioMaxPowerLeft);
         clear(radioCodeFieldRight);
         clear(radioCodeFieldRight);
+        slowDown(2);
         click(radioMaxPowerLeft);
         String getFavCode = getFieldText(radioCodeFieldLeft);
         type(getFavCode,radioCodeFieldRight);
-        click(radioMaxPowerRight);
+        click(radioMaxPowerLeft);
     }
 
+    /**
+     * pass an integer to the lineItem and it will validate if the radio mod in that position is active or not
+     * @param lineItem
+     */
     public void activeModItemsLeft(int lineItem) {
         assertTrue(isDisplayed(activeModLeft, 3));        //class="modulation-row position-relative"id="path-details-radios-0-modulations-2-modulation-row"
         int rows =  finds(activeModLeft).size();
         assertTrue(isDisplayedArray(activeModLeft, lineItem));
     }
+
+    /**
+     * pass an integer to the lineItem and it will validate if the radio mod in that position is active or not
+     * @param lineItem
+     */
     public void activeModItemsRight(int lineItem) {
         assertTrue(isDisplayed(activeModLeft, 3));        //class="modulation-row position-relative"id="path-details-radios-0-modulations-2-modulation-row"
         int rows =  finds(activeModLeft).size();
         assertTrue(isDisplayedArray(activeModLeft, lineItem));
     }
 
+    /**
+     * Pass the error text to this method and if there is a radio mod error it will compare the error text and fail if i is not a match.
+     * @param radioErrorText
+     */
     public void errorCorrectionLeftModExceededNegTwenty(String radioErrorText) {
         isDisplayed(radioRadioErrorExceedsNegTwentyModLeft);
         String radioError = getText(radioRadioErrorExceedsNegTwentyModLeft);
         assertEquals(radioErrorText, radioError);
     }
 
+    /**
+     *
+     * @param radioErrorText
+     */
     public void errorCorrectionLeftModExceeded(String radioErrorText) {
         isDisplayed(radioRadioErrorExceedsModLeft);
         String radioError = getText(radioRadioErrorExceedsModLeft);
         assertEquals(radioErrorText, radioError);
     }
 
+    /**
+     * pass the text for the expected error and this method will compare to the actual.  If it matches the will be no error if it does not match it will error.
+     * @param radioErrorText
+     */
     public void errorCorrectionRight(String radioErrorText) {
+        isDisplayed(radioCodeFieldLeft,10);
+        click(radioCodeFieldLeft);
         isDisplayed(radioRadioErrorRight);
         String radioError = getText(radioRadioErrorRight);
         assertEquals(radioErrorText, radioError);
@@ -477,45 +508,54 @@ public class RadioPage extends BasePage {
         click(radioAutoTransmitPowerControlLeftAddButton1);
     }
 
+    /**
+     * this method will pass radio code text to the radio code field and click away from the field to burr
+     * @param radioCodeText
+     */
+
+
     public void setupLeftRadio(String radioCodeText){
         assertTrue(isDisplayed(radioCodeFieldLeft,6));
-        type(radioCodeText, radioCodeFieldLeft);
-        click(radioMaxPowerLeft);
-        if (isDisplayed(radioRadioErrorLeft,5) == true) {}
-        else{waitForFieldToBeNotNull(radioMaxPowerLeft);}
+        type(radioCodeText.trim(), radioCodeFieldLeft);
+        clickJS(radioMaxPowerLeft);
+        slowDown(6);
     }
 
-
-
+    /**
+     * this method will pass radio code text to the radio code field and click away from the field to burr
+     * @param radioCodeText
+     */
     public void setupRightRadio(String radioCodeText){
         assertTrue(isDisplayed(radioCodeFieldRight,6));
         type(radioCodeText, radioCodeFieldRight);
-        click(radioMaxPowerRight);
-        if (isDisplayed(radioRadioErrorRight,5) == true) {}
-        else{waitForFieldToBeNotNull(radioMaxPowerRight);}
+        clickJS(radioMaxPowerLeft);
+        slowDown(6);
     }
 
-    public void leftModulationValidation(int i, String modVal, String mbpsVal,String maxPowerVal){
+    public void leftModulationValidation(int arrayPosition, String modVal, String mbpsVal,String maxPowerVal){
+
         isDisplayed(radioModulationArrayRowsLeft,5);
-        String mod = getFieldTextPlural(radioModulationArrayRowsLeft, i);
+        String mod = getFieldTextPlural(radioModulationArrayRowsLeft, arrayPosition);
         assertEquals(modVal,mod);
 
-        String mbps = getFieldTextPlural(radioMbpsArrayRowsLeft, i);
+        String mbps = getFieldTextPlural(radioMbpsArrayRowsLeft, arrayPosition);
         assertEquals(mbpsVal,mbps);
 
-        String max = getFieldTextPlural(radioModulationMaxPowerArrayRowsLeft, i);
+        click(radioMaxPowerLeft);
+        String max = getFieldTextPlural(radioModulationMaxPowerArrayRowsLeft, arrayPosition);
         assertEquals(maxPowerVal,max);
     }
 
-    public void rightModulationValidation(int i, String modVal, String mbpsVal,String maxPowerVal){
+    public void rightModulationValidation(int arrayPosition, String modVal, String mbpsVal,String maxPowerVal){
+
         isDisplayed(radioModulationArrayRowsRight,5);
-        String mod = getFieldTextPlural(radioModulationArrayRowsRight, i);
+        String mod = getFieldTextPlural(radioModulationArrayRowsRight, arrayPosition);
         assertEquals(modVal,mod);
 
-        String mbps = getFieldTextPlural(radioMbpsArrayRowsRight, i);
+        String mbps = getFieldTextPlural(radioMbpsArrayRowsRight, arrayPosition);
         assertEquals(mbpsVal,mbps);
 
-        String max = getFieldTextPlural(radioModulationMaxPowerArrayRowsRight, i);
+        String max = getFieldTextPlural(radioModulationMaxPowerArrayRowsRight, arrayPosition);
         assertEquals(maxPowerVal,max);
     }
 

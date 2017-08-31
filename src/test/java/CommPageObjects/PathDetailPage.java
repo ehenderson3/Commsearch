@@ -841,6 +841,7 @@ public class PathDetailPage extends BasePage {
         type(callSign,pathDetailCallSignField1);
         click(pathDetailAsrField1);
 
+        slowDown(2);
 
         waitForFieldToBeNotNull(pathDetailLatitudeField1);
         clear(pathDetailSiteNameField1);

@@ -110,8 +110,6 @@ public class CreateNewPathPage extends BasePage {
         click(createButton);
         assertTrue("No FILTER FIELD",isDisplayed(filterField,20));
 
-
-
     }
     public void enterProjectForCompany(String projectName, String defaultLicensee){
         click(commHome);
@@ -193,11 +191,6 @@ public class CreateNewPathPage extends BasePage {
 
         }
 
-
-
-
-
-
     }
 
     public void fillOutCompanyFilterErrorChecking(String coCodeText,String coNameText, String coContactText, Integer company) {
@@ -228,6 +221,7 @@ public class CreateNewPathPage extends BasePage {
         assertTrue("can't find the defaultCompany ",isDisplayed(defaultCompany,20));
         click(createButton);
     }
+
     public void attemptToCreateProjectNameTooLong(String projectName, String defaultLicensee){
 
         assertTrue("can't find the commHome ", isDisplayed(commHome,30));
@@ -237,6 +231,7 @@ public class CreateNewPathPage extends BasePage {
         click(pathRadioButton);
 
     }
+
     public void attemptToCreateDupProject(String projectName, String defaultLicensee){
         String dupMessageText;
         click(commHome);

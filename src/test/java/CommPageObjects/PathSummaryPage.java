@@ -299,17 +299,24 @@ public class PathSummaryPage extends BasePage {
         click(hamburgerDropDownInactive);
         assertTrue("Split Paths option is not present", isDisplayed(hamburgerSplitPathsEnabled,10));
         click(hamburgerSplitPathsEnabled);
+        if(browser.equals("firefox")){
+            assertTrue(isDisplayedArray(deselectSplitPath,0));
+            assertTrue(isDisplayedArray(deselectSplitPath,1));
+            assertTrue(isDisplayedArray(deselectSplitPath,2));
+        }else{
+            assertTrue(isDisplayed(splitProjectModalTitle,30));
+            assertTrue(isDisplayed(splitProjectModalSubTitle,30));
+            assertTrue(isDisplayed(splitProjectModalNewProjectNameField,30));
+            assertTrue(isDisplayedArray(remainingSlipPaths,0));
+            assertTrue(isDisplayedArray(remainingSlipPaths,1));
+            assertTrue(isDisplayedArray(remainingSlipPaths,2));
+            assertTrue(isDisplayedArray(deselectSplitPath,0));
+            assertTrue(isDisplayedArray(deselectSplitPath,1));
+            assertTrue(isDisplayedArray(deselectSplitPath,2));
+            assertTrue(isDisplayed(splitProjectButton,10));
+        }
 
-        assertTrue(isDisplayed(splitProjectModalTitle,30));
-        assertTrue(isDisplayed(splitProjectModalSubTitle,30));
-        assertTrue(isDisplayed(splitProjectModalNewProjectNameField,30));
-        assertTrue(isDisplayedArray(remainingSlipPaths,0));
-        assertTrue(isDisplayedArray(remainingSlipPaths,1));
-        assertTrue(isDisplayedArray(remainingSlipPaths,2));
-        assertTrue(isDisplayedArray(deselectSplitPath,0));
-        assertTrue(isDisplayedArray(deselectSplitPath,1));
-        assertTrue(isDisplayedArray(deselectSplitPath,2));
-        assertTrue(isDisplayed(splitProjectButton,10));
+
 
         type(projectName, splitProjectModalNewProjectNameField);
         click(splitProjectButton);

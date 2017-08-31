@@ -5,7 +5,7 @@ import org.junit.rules.ExternalResource;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.firefox.MarionetteDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
@@ -42,8 +42,8 @@ public class BaseTest implements Config {
                     //System.setProperty("webdriver.gecko.driver", System.getProperty("user.dir") + "/vendor/geckodriver.exe");
                     System.setProperty("webdriver.gecko.driver", System.getProperty("user.dir") + "/vendor/Mac/geckodriver");
                     DesiredCapabilities cap = DesiredCapabilities.firefox();
-                    cap.setCapability("marionette", true);
-                    driver = new MarionetteDriver(cap);
+                    cap.setCapability("firefox", true);
+                    driver = new FirefoxDriver(cap);
 
                 } else if (browser.equals("chrome")) {
                     DesiredCapabilities capabilities = DesiredCapabilities.chrome();
