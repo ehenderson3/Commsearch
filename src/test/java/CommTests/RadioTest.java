@@ -879,7 +879,46 @@ public void pathDetailRadio_DisabledModEnabledNewMaxWillBeTheNewllyEnabled_whenD
         pathDetail.openPathDetailViaDetails();
         pathDetailRadio.hoverAndValidate();
         //TODO work with Nemo to get better controlls for tooltips
+    }
+    /**
+     * COM-656
+     * Test Steps:
+       Open Path Details for a path
+       Select an ACM radio for site A
+       Unselect modulations and adjust max power values (made both max power 20)
+       Click heart icon to make the radio a favorite
+       Blur away from radio code
+       Enter the new (favorited) radio code in Site B
+       Issue: Error message appears for Radio code for site 1 and site 2 and cannot save path
+       VERIFIED - error message no longer appears.  Save still does not work for edits but works for a new path.
+       Followed documentation in Comsearch Confluence: http://acvadjira:8090/display/QAC/Sprint+13+-+Bugs+to+report+to+Surge
 
+     */
+    @Test
+    public void pathDetailRadio_NoErrorShouldAppear_whenDerivedFromFavorites() {
+        createPath.createBrandNewProjectPath("FAVCreatedMods" + randomNumber, "This is the Default");
+        createPath.fillOutCompanyFilter("VZW333", "", "", 0);
+        pathSummary.changeToSi();
+        pathSummary.openPathDetailForAddingPath();
+        pathDetail.addPathViaPathDetailBasicSetup1("Add Radio1", "KBY45", "34 37 42.1 N", "112 39 26.2 W", "66", "11.0 GHz");
+        pathDetail.addPathViaPathDetailBasicSetup2("Add Radio2", "KA20003", "40 44 54 N", "73 59 9 W", "55");
+        pathDetailAnt.enterAntennaCodeAndBlur("77100A", "12");
+        pathDetailRadio.setupLeftRadio("X11A22");
+        pathDetailAnt.clickBlurAntennaCode();
+        for (int i = 0; i < 10; i++) {
+            {
+                pathDetailRadio.deactivateModulation(2);
+            }
+        }
+        pathDetailRadio.saveFavRadioCodeEnterSameFavCode();
+
+        pathDetailRadio.activeModItemsLeft(0);
+        pathDetailRadio.activeModItemsLeft(1);
+
+        pathDetailRadio.activeModItemsRight(0);
+        pathDetailRadio.activeModItemsRight(1);
+
+        pathDetailAnt.clickSaveDetails();
 
     }
 }

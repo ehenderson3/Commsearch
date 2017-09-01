@@ -448,6 +448,15 @@ public class RadioPage extends BasePage {
         click(radioMaxPowerLeft);
     }
 
+    public void saveFavRadioCodeEnterSameFavCode() {
+        type("1", commonLossFieldLeft);
+        assertTrue("cnanot find fav button", isDisplayed(saveFavButton, 5));//fa fa-lg fa-heart
+        click(saveFavButton);
+        slowDown(3);
+        String getFavCode = getFieldText(radioCodeFieldLeft);
+        type(getFavCode,radioCodeFieldRight);
+    }
+
     /**
      * pass an integer to the lineItem and it will validate if the radio mod in that position is active or not
      * @param lineItem
