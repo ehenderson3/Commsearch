@@ -79,7 +79,7 @@ public class DataBasePage extends BasePage {
     By error3dBeamwidth = By.id("antenna-details-beamwidth-error-message");
     By errorFrontToBackRadio = By.id("antenna-details-front-to-back-error-message");
 
-//antenna-details-front-to-back-error-message
+    //antenna-details-front-to-back-error-message
     By basicInforStatusGreen = By.cssSelector(".database-search-status-icon.margin-left-1.bg-green");
     By basicInforStatusYellow = By.cssSelector(".database-search-status-icon.margin-left-1.bg-yellow");
     By basicInforStatusRed = By.cssSelector(".database-search-status-icon.margin-left-1.bg-red");
