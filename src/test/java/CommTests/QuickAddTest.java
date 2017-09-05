@@ -1094,6 +1094,30 @@ public class QuickAddTest extends BaseTest {
         pathDetailAnt.clickSaveDetails();
     }
 
+    /**
+     * Open (or create) a project
+     Click "Path Details"
+     Select the 11GHz band
+     Click the hamburger icon next to "Antenna Model"
+     In "Company" enter the letter "C" and search
+     No results
+     Clear "Company" and enter "77100A" in "Antenna Code" and search
+     The antenna comes up, with Company = "Commscope"
+     This antenna should come up in the search.
+     */
+    @Test//COM-654
+    public void defectVal_searchCThenSearchAntCode_WhenAntShouldAppearInSearch() {
+        createPath.createBrandNewProjectPath("Inactive Passive Repeater" + randomNumber, "This is the Default");
+        createPath.fillOutCompanyFilter("VZW333", "", "", 0);
+
+        pathSummary.valSiteLocationToggleOn();
+        quickAdd.quickAddPathExistingSetup("Passive Repeater", "11.0 GHz", "Passive Repeater", "34 44 46.3 N", "92 16 20.5 W", "68898.04", "KA2133");
+
+        pathDetail.openPathDetailViaDetails();
+        pathDetailAnt.companySelect("C");
+        pathDetailAnt.addAntennaToPath("77100A", "Tx/Rx","VHLPX2-11" , "3.4°", "34.4","VHLPX2-11", "Tx/Rx","77100A", "3.4°", "34.4");
+
+    }
 
 }
 

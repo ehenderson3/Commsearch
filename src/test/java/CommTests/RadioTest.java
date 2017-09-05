@@ -325,6 +325,7 @@ public void pathDetailRadio_DisabledModEnabledNewMaxWillBeTheNewllyEnabled_whenD
     }
 
 
+
     /**COM-490
      * 	Given a different Radio Model than the left-side column is displayed in the right-side column of the Path Details>Radio section,
      When user clicks the blue right-pointing arrow next to the 'Radio' section header,
@@ -439,8 +440,9 @@ public void pathDetailRadio_DisabledModEnabledNewMaxWillBeTheNewllyEnabled_whenD
         pathDetailRadio.openATPC();
         pathDetailRadio.createATPC();
         pathDetailRadio.openATPCViaLighteningBolt();
-
     }
+
+
 
 
     /**491
@@ -469,7 +471,7 @@ public void pathDetailRadio_DisabledModEnabledNewMaxWillBeTheNewllyEnabled_whenD
          (Power Increase (radio button); Trigger Level (input); Nominal Power (input); Coordinated Power (input); and 5 Minute Alarm (radio button).)
          AND a "Remove" button is also displayed.
      */
-    @Ignore //NEED A RADIO RECORD WHERE RAMP IS DEFAULT ON AND 5 MIN SET BY DEFAULT
+    @Test//COM-581
     public void pathDetailRadio_whenRadioHas5MinAlarmSetToON_ATPCRadioHasFiveMinuteAlarmSetToTrue(){
         createPath.createBrandNewProjectPath("5MinuteAndRampON" + randomNumber, "This is the Default");
         createPath.fillOutCompanyFilter("VZW333", "", "", 0);
@@ -479,12 +481,16 @@ public void pathDetailRadio_DisabledModEnabledNewMaxWillBeTheNewllyEnabled_whenD
         pathDetail.addPathViaPathDetailBasicSetup2("Ramp ON", "KA20003", "40 44 54 N", "73 59 9 W", "55");
         pathDetailAnt.enterAntennaCodeAndBlur("77100A", "12");
         pathDetailRadio.setupLeftRadio("X11A22");
-        pathDetailRadio.copyRadio();
+        pathDetailRadio.setupRightRadio("X11A22");
+        pathDetailRadio.blurRadio();
         pathDetailRadio.openATPC();
+        pathDetailRadio.setRampChecked();
+        pathDetailRadio.set5MinChecked();
         assertTrue(pathDetailRadio.isRampCheckedDefault());
         assertTrue(pathDetailRadio.is5MinAlarmCheckedDefault());
 
     }
+
 
     @Test
     public void pathDetailRadio_whenRadioHas5MinAlarmSetToOFF_ATPCRadioHasFiveMinuteAlarmSetToFalse(){
@@ -502,7 +508,7 @@ public void pathDetailRadio_DisabledModEnabledNewMaxWillBeTheNewllyEnabled_whenD
         assertFalse(pathDetailRadio.is5MinAlarmCheckedDefault());
     }
 
-    @Ignore //NEED A RADIO RECORD WHERE RAMP IS DEFAULT OFF AND 5 MIN SET BY DEFAULT
+    @Test //COM-580
     public void pathDetailRadio_whenRadioHas5MinAlarmSetToOFF1_ATPCRadioHasFiveMinuteAlarmSetToFalse1(){
         createPath.createBrandNewProjectPath("5MinONAndRampOFF" + randomNumber, "This is the Default");
         createPath.fillOutCompanyFilter("VZW333", "", "", 0);
@@ -512,8 +518,11 @@ public void pathDetailRadio_DisabledModEnabledNewMaxWillBeTheNewllyEnabled_whenD
         pathDetail.addPathViaPathDetailBasicSetup2("Ramp ON", "KA20003", "40 44 54 N", "73 59 9 W", "55");
         pathDetailAnt.enterAntennaCodeAndBlur("77100A", "12");
         pathDetailRadio.setupLeftRadio("X11A22");
-        pathDetailRadio.copyRadio();
+        pathDetailRadio.setupRightRadio("X11A22");
+        pathDetailRadio.blurRadio();
         pathDetailRadio.openATPC();
+        pathDetailRadio.setStepChecked();
+        pathDetailRadio.set5MinChecked();
         assertFalse(pathDetailRadio.isRampCheckedDefault());
         assertTrue(pathDetailRadio.is5MinAlarmCheckedDefault());
     }
@@ -771,7 +780,7 @@ public void pathDetailRadio_DisabledModEnabledNewMaxWillBeTheNewllyEnabled_whenD
 
     }
 
-    @Ignore
+    @Test//COM-646
     public void pathDetailRadio_LossValuesIncluded_whenLossIsEntered() {
         createPath.createBrandNewProjectPath("ChangingModulation" + randomNumber, "This is the Default");
         createPath.fillOutCompanyFilter("VZW333", "", "", 0);
@@ -785,8 +794,6 @@ public void pathDetailRadio_DisabledModEnabledNewMaxWillBeTheNewllyEnabled_whenD
         pathDetailRadio.addLossLeft("22","33","44");
         pathDetailRadio.addLossRight("22","33","44");
         pathDetailAnt.clickSaveDetails();
-        //TODO //Sprint 14 add identifiers
-        //quickAdd.validatedRadioValues( "X11A22", "40 MHz");
         pathDetail.openPathDetailViaDetails();
         pathDetailRadio.validateLossLeft("22","33","44");
         pathDetailRadio.validateLossRight("22","33","44");
@@ -862,7 +869,7 @@ public void pathDetailRadio_DisabledModEnabledNewMaxWillBeTheNewllyEnabled_whenD
      * COM-534
      (UI AUTO) UI/UX: Radio Look up
      */
-    @Ignore
+    @Test//COM-646
     public void pathDetailRadio_RadioLookUp_hoverAdaptiveModulation() {
         createPath.createBrandNewProjectPath("ChangingModulation" + randomNumber, "This is the Default");
         createPath.fillOutCompanyFilter("VZW333", "", "", 0);

@@ -343,6 +343,26 @@ public class RadioPage extends BasePage {
 
     }
 
+    public void setRampChecked() {
+        isDisplayed(atpcModalRampButton,5);//atpc-settings-power-increase-Ramp
+        click(atpcModalRampButton);
+    }
+
+    public void set5MinChecked() {
+        isDisplayed(atpcModalFiveMinAlarmOnButton,5);//atpc-settings-power-increase-Ramp
+        click(atpcModalFiveMinAlarmOnButton);
+    }
+
+    public void setStepChecked() {
+        isDisplayed(atpcModalStepButton,5);//atpc-settings-power-increase-Ramp
+        click(atpcModalStepButton);
+    }
+
+    public void set5MinUnChecked() {
+        isDisplayed(atpcModalFiveMinAlarmOffButton,5);//atpc-settings-power-increase-Ramp
+        click(atpcModalFiveMinAlarmOffButton);
+    }
+
     public boolean isRampCheckedDefault() {
         isDisplayed(atpcModalRampOnButton,5);//atpc-settings-power-increase-Ramp
         boolean selected = checked(atpcModalRampOnButton);
@@ -528,6 +548,11 @@ public class RadioPage extends BasePage {
         type(radioCodeText.trim(), radioCodeFieldLeft);
         clickJS(radioMaxPowerLeft);
         slowDown(6);
+    }
+
+    public void blurRadio(){
+        isDisplayed(radioMaxPowerLeft,8);
+        click(radioMaxPowerLeft);
     }
 
     /**

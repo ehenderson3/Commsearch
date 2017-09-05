@@ -64,7 +64,7 @@ public class PathDetailAntennaPage extends BasePage {
     By antCodeErrorText = By.id("path-details-antennas-0-0-antenna-code-error-message");
     By antCodeErrorText2 = By.id("path-details-antennas-1-0-antenna-code-error-message");
     By tempAntennaCodeArray = By.xpath("//*[@id=\"antenna-lookup-modal\"]/div[2]/div/div/div/div[2]/div/div/div/div[1]/div/div[1]/div/div/span/div");
-
+    By company = By.id("antenna-lookup-antenna-company");
 //
 
     //Index List -- Can you used an array to select item
@@ -125,6 +125,45 @@ public class PathDetailAntennaPage extends BasePage {
         isDisplayed(antResultListItem,8);
         clickJS(antResultListItem);
     }
+    public void companySelect(String compName){
+        //Verify that the Antenna Model field is present (that tells us that we are on the Antenna module)
+        isDisplayed(antennaModelSearch1,6);
+
+        //******************LEFT ANTENNA*************************************************
+
+        // Click the antenna model 1 search button
+        clickJS(antennaModelSearch1);
+
+        //Verify that the Antenna Lookup pop up appears (We will use the Antenna Model field)
+        assertTrue(isDisplayed(lookUpAntennaModel,6));
+
+        //type P8F-9 in the Antenna Code field
+        type(compName,company);
+        assertTrue(isDisplayed(lookUpSearchButton,12));
+
+        //Click the search button
+        click(lookUpSearchButton);
+
+        //Verify that there is at least one search result
+        assertTrue(isDisplayed(antResultListItem,12));
+
+        //Click on the first row
+        clear(company);
+
+        //Verify that there is at least one search result
+        assertTrue(isDisplayed(antResultListItem,12));
+
+
+        //Click on the first row
+        clickJS(antResultListItem);
+    }
+
+
+
+
+
+
+
 
 
     public void addAntennaToPath(String luAntCode, String mode, String antModel, String beamwith, String gain,String luAntMod2,String mode2, String antCode2, String beamwith2, String gain2){
@@ -140,11 +179,13 @@ public class PathDetailAntennaPage extends BasePage {
       assertTrue(isDisplayed(lookUpAntennaModel,6));
 
         //type P8F-9 in the Antenna Code field
+        clear(lookUpAntennaCode);
+        clear(lookUpAntennaModel);
         type(luAntCode,lookUpAntennaCode);
         assertTrue(isDisplayed(lookUpSearchButton,12));
 
         //Click the search button
-        click(lookUpSearchButton);
+        clickJS(lookUpSearchButton);
 
         //Verify that there is at least one search result
         assertTrue(isDisplayed(antResultListItem,12));
