@@ -69,8 +69,8 @@ public class DataBaseTest extends BaseTest{
     @Test
     public void antDataBase_AllAntennasFromThatCompanyAreDisplayed_whenInputValidCompanyNameAndSearch () {
         database.accessAntennaDataBase();
-        database.antennaDataBaseSearch("","Com","","","");
-        database.antennaDataSearchResult1(0,"02306A","Commscope","Commscope Family","P8F-9 LF","Dual","880 - 950");
+        database.antennaDataBaseSearch("","Commscope","","","");
+        database.antennaDataSearchResult1(0,"02306A","Commscope","Commscope Family","P8F-9 LF","","880 - 950");
         database.antennaDataSearchResult2(0,"20.3","3.2","2.44 / 8.01","n/a","n/a","n/a");
         database.companyRowVal("Commscope");
     }
@@ -98,7 +98,7 @@ public class DataBaseTest extends BaseTest{
     public void antDataBase_AllAntennasFromThatCompanyFamilyAreDisplayed_whenInputValidCompanyFamilyAndSearch1 () {
         database.accessAntennaDataBase();
         database.antennaDataBaseSearch("","","Com","","");
-        database.antennaDataSearchResult1(0,"02306A","Commscope","Commscope Family","P8F-9 LF","Dual","880 - 950");
+        database.antennaDataSearchResult1(0,"02306A","Commscope","Commscope Family","P8F-9 LF","","880 - 950");
         database.antennaDataSearchResult2(0,"20.3","3.2","2.44 / 8.01","n/a","n/a","n/a");
         database.companyFamilyRowVal("Commscope Family");
     }
@@ -107,7 +107,7 @@ public class DataBaseTest extends BaseTest{
     public void antDataBase_AllAntennasFromThatCompanyFamilyAreDisplayed_whenInputValidCompanyFamilyAndSearch2 () {
         database.accessAntennaDataBase();
         database.antennaDataBaseSearch("","","Val","","");
-        database.antennaDataSearchResult1(0,"77100A","Commscope","ValuLine High Performance Low Profile","VHLPX2-11 LF","Dual","10500 - 11700");
+        database.antennaDataSearchResult1(0,"77100A","Commscope","ValuLine High Performance Low Profile","VHLPX2-11 LF","","10500 - 11700");
         database.antennaDataSearchResult2(0,"34.4","3.4","0.61 / 2.00","n/a","n/a","n/a");
         database.companyFamilyRowVal("ValuLine High Performance Low Profile");
     }
@@ -136,7 +136,7 @@ public class DataBaseTest extends BaseTest{
     public void antDataBase_AllAntModelOfTypeAreDisplayed_whenInputValidAntModelAnyAndSearch () {
         database.accessAntennaDataBase();
         database.antennaDataBaseSearch("","","","P8F","");
-        database.antennaDataSearchResult1(0,"02306A","Commscope","Commscope Family","P8F-9 LF","Dual","880 - 950");
+        database.antennaDataSearchResult1(0,"02306A","Commscope","Commscope Family","P8F-9 LF","","880 - 950");
         database.antennaDataSearchResult2(0,"20.3","3.2","2.44 / 8.01","n/a","n/a","n/a");
         database.companyFamilyRowVal("Commscope Family");
     }
@@ -146,7 +146,7 @@ public class DataBaseTest extends BaseTest{
         database.accessAntennaDataBase();
         database.antennaDataBaseSearch("","","","P8F","");
         database.selectLF();
-        database.antennaDataSearchResult1(0,"02306A","Commscope","Commscope Family","P8F-9 LF","Dual","880 - 950");
+        database.antennaDataSearchResult1(0,"02306A","Commscope","Commscope Family","P8F-9 LF","","880 - 950");
         database.antennaDataSearchResult2(0,"20.3","3.2","2.44 / 8.01","n/a","n/a","n/a");
         database.companyFamilyRowVal("Commscope Family");
     }
@@ -181,9 +181,9 @@ public class DataBaseTest extends BaseTest{
     @Test
     public void antDataBase_AllAntsWithGivenFrequencyAreDisplayed_whenInputValidLowFrequencyAndSearch () {
         database.accessAntennaDataBase();
-        database.antennaDataBaseSearch("","Com","","","950");
+        database.antennaDataBaseSearch("","Commscope","","","950");
         database.selectLF();
-        database.antennaDataSearchResult1(0,"02306A","Commscope","Commscope Family","P8F-9 LF","Dual","880 - 950");
+        database.antennaDataSearchResult1(0,"02306A","Commscope","Commscope Family","P8F-9 LF","","880 - 950");
         database.antennaDataSearchResult2(0,"20.3","3.2","2.44 / 8.01","n/a","n/a","n/a");
         database.companyFamilyRowVal("Commscope Family");
     }
@@ -191,9 +191,9 @@ public class DataBaseTest extends BaseTest{
     @Test
     public void antDataBase_AllAntsWithGivenFrequencyAreDisplayed_whenInputValidHighFrequencyAndSearch () {
         database.accessAntennaDataBase();
-        database.antennaDataBaseSearch("","Com","","","880");
+        database.antennaDataBaseSearch("","Commscope","","","880");
         database.selectLF();
-        database.antennaDataSearchResult1(0,"02306A","Commscope","Commscope Family","P8F-9 LF","Dual","880 - 950");
+        database.antennaDataSearchResult1(0,"02306A","Commscope","Commscope Family","P8F-9 LF","","880 - 950");
         database.antennaDataSearchResult2(0,"20.3","3.2","2.44 / 8.01","n/a","n/a","n/a");
         database.companyFreqRowVal(880,950);
     }
@@ -537,8 +537,6 @@ public class DataBaseTest extends BaseTest{
         database.openAdvancedSearch();
         database.createAnt();
         database.saveCreatedAntenna();
-
-        database.createAntAntCodeError();
         database.createAntCompanyError();
         database.createAntAntModelError();
         database.createAntClassificationError();
@@ -885,6 +883,26 @@ public class DataBaseTest extends BaseTest{
 
         database.antDbRegInfoVal("2","8");
     }
+
+    /**
+     * Manufacturer auto-suggest
+     COM-632
+     Continuing:
+     1. Enter the first three digits of the manufacturer in the "Manufacturer" field
+     2. Pick a manufacturer
+     1. A dropdown appears with all of the manufacturers that start with those three characters
+     2. The field is populated with that maunfacturer
+     */
+    @Test
+    public void antDataBaseCreateAnt_EnterTheFirstThreeDigitsOfTheManufacturer_ADropdownAppearsWithAllOfTheManufacturersThatStart() {
+        database.accessAntennaDataBase();
+        database.openAdvancedSearch();
+        database.createAnt();
+        database.antDbBasicInfoEntry("656541","Com","Commscope Family","P8F-9","Horn Parabolic","YYYYYY","Dual","Active");
+
+    }
+
+
 }
 
 

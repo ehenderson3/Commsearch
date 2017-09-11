@@ -42,9 +42,9 @@ public class QuickAddPage extends BasePage {
     By longitude = By.xpath("//*[contains(@name, 'sites[0]longitude') and contains(@id, 'quick-add-site[0]long')]");
     By callSign = By.id("quick-add-site[0]callSignOrASR");//Had to correct this had wrong
     By elevation = By.xpath("//*[contains(@name, 'elevation') and contains(@id, 'quick-add-site')]");
-    By siteField = By.id("quick-add-site[0]siteName");
+    By siteField = By.id("quick-add-site-siteName");
     ///Path2
-    By siteField2 = By.id("quick-add-site[1]siteName");
+    By siteField2 = By.name("sites[1]siteName");
     By latitude2 = By.id("quick-add-site[1]lat");
     By longitude2 = By.id("quick-add-site[1]long");
     By callSign2 = By.id("quick-add-site[1]callSignOrASR");//Had to correct this had wrong
