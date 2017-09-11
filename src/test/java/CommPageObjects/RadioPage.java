@@ -456,9 +456,9 @@ public class RadioPage extends BasePage {
 
     public void saveFavRadioCodeEnterNewCode(){
         type("1",commonLossFieldLeft);
-        assertTrue("cnanot find fav button",isDisplayed(saveFavButton,5));//fa fa-lg fa-heart
+        assertTrue("cannot find fav button",isDisplayed(saveFavButton,5));
         click(saveFavButton);
-        assertTrue("cnanot find radioMaxPowerLeft",isDisplayed(radioMaxPowerLeft,5));//fa fa-lg fa-heart
+        assertTrue("cannot find radioMaxPowerLeft",isDisplayed(radioMaxPowerLeft,5));
 
         click(radioMaxPowerLeft);
         clear(radioCodeFieldRight);
