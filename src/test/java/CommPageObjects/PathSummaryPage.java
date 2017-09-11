@@ -111,7 +111,7 @@ public class PathSummaryPage extends BasePage {
     By remainingSlipPaths = By.xpath("//*[contains(@id, 'project-summary-modal-path-')]");
     By splitProjectModalTitle = By.xpath("//*[text() = 'Split Project' and @class = 'uppercase']");
     By splitProjectModalSubTitle = By.xpath("//*[text() = 'Move selected Paths to a New Project.' and @class = 'padding-top-1']");
-    By pathDetailSiteNameField1 = By.id("path-details-site[0]siteName");
+    By pathDetailSiteNameField1 = By.name("sites[0]siteName");
 
 
 
@@ -126,8 +126,8 @@ public class PathSummaryPage extends BasePage {
     By pathModValue = By.cssSelector(".tooltip-trigger-decoration.show-decoration.acm-tooltip-decoration.uppercase");
     By pathDetailsIndex = By.cssSelector(".path-details-button.pointer");
     By pathSiteIndex = By.id("path-2-site-1-siteName");
-    By site1 = By.id("quick-add-site[0]siteName");
-    By site2 = By.id("quick-add-site[1]siteName");
+    By site1 = By.name("sites[0]siteName");
+    By site2 = By.name("sites[1]siteName");
     By siteName1 = By.xpath(""+PATH_VAL+" '-site-1-siteName')]");
     By siteName2 = By.xpath(""+PATH_VAL+" '-site-2-siteName')]");
 

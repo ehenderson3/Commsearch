@@ -63,7 +63,7 @@ public class PathDetailPage extends BasePage {
     //Drop down options
 
     //Entry Fields - Able to use the type method
-    By pathDetailSiteNameField1 = By.id("path-details-site[0]siteName");
+    By pathDetailSiteNameField1 = By.name("sites[0]siteName");
     By pathDetailLatitudeField1 = By.id("path-details-site-0-latitude");
     By pathDetailLongitudeField1 = By.id("path-details-site-0-longitude");
     By pathDetailGroundElevationField1 = By.id("path-details-site-0-elevation");
@@ -72,7 +72,7 @@ public class PathDetailPage extends BasePage {
     By pathDetailAsrField1 = By.id("path-details-site-0-asr");
 
 
-    By pathDetailSiteNameField2 = By.id("path-details-site[1]siteName");
+    By pathDetailSiteNameField2 = By.name("sites[1]siteName");
     By pathDetailLatitudeField2 = By.id("path-details-site-1-latitude");
     By pathDetailLongitudeField2 = By.id("path-details-site-1-longitude");
     By pathDetailGroundElevationField2 = By.id("path-details-site-1-elevation");
@@ -226,7 +226,7 @@ public class PathDetailPage extends BasePage {
         assertTrue(isDisplayed(passiveRepeaterTrigger,10));
         click(passiveRepeaterTrigger);
         isDisplayed(passiveRepeaterRemoveButton,10);
-        click(passiveRepeaterRemoveButton);
+        clickJS(passiveRepeaterRemoveButton);
         assertTrue(!isDisplayed(pIcon,7));
 
     }
@@ -243,8 +243,8 @@ public class PathDetailPage extends BasePage {
     public void setAntennaOnPassiveRepeater(int i, String antCode){
         isDisplayed(passiveRepeaterAntennaModelSearchButton,10);
         isDisplayedArray(passiveRepeaterAntennaModelSearchButtonPlural,i);
-        click(passiveRepeaterAntennaModelSearchButtonPlural, i);
-        isDisplayed(lookUpAntennaCode,10);
+        clickJS(passiveRepeaterAntennaModelSearchButtonPlural, i);
+        assertTrue("cant find the antenna lookup",isDisplayed(lookUpAntennaCode,10));
         type(antCode, lookUpAntennaCode);
         isDisplayed(lookUpSearchButton,8);
         click(lookUpSearchButton);

@@ -391,7 +391,7 @@ public class PathDetailAntennaPage extends BasePage {
         //focus on another field
         click(gainField2);
         //validate error2
-        assertTrue("Error did not appear after 3 seconds pleas increase time",isDisplayed(antCodeErrorText2,3));
+        assertTrue("Error did not appear after 3 seconds please increase time",isDisplayed(antCodeErrorText2,6));
         String antCodeError2 = getText(antCodeErrorText2);
         assertEquals(antCodeError2, antError2);
 
