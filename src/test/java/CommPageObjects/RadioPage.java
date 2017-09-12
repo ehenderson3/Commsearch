@@ -472,9 +472,10 @@ public class RadioPage extends BasePage {
 
     public void saveFavRadioCodeEnterSameFavCode() {
         type("1", commonLossFieldLeft);
-        assertTrue("cnanot find fav button", isDisplayed(saveFavButton, 5));//fa fa-lg fa-heart
+        assertTrue("cannot find fav button", isDisplayed(saveFavButton, 5));
         click(saveFavButton);
         slowDown(3);
+        assertTrue("cannot find radioCodeFieldLeft", isDisplayed(radioCodeFieldLeft, 5));
         String getFavCode = getFieldText(radioCodeFieldLeft);
         type(getFavCode,radioCodeFieldRight);
     }

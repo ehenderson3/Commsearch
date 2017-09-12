@@ -49,7 +49,7 @@ public class BaseTest implements Config {
                     DesiredCapabilities capabilities = DesiredCapabilities.chrome();
                     capabilities.setCapability("resolution", resolution);
                     ChromeOptions options = new ChromeOptions();
-                    //options.addArguments("--kiosk");
+                    options.addArguments("--kiosk");
                     options.addArguments("--start-maximized");
                     options.addArguments("--incognito");
                     capabilities.setCapability(ChromeOptions.CAPABILITY, options);
