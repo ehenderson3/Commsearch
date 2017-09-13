@@ -1136,6 +1136,25 @@ public class QuickAddTest extends BaseTest {
         pathDetailAnt.addAntennaToPath("77100A", "Tx/Rx","VHLPX2-11" , "3.4°", "34.4","VHLPX2-11", "Tx/Rx","77100A", "3.4°", "34.4");
 
     }
+    
+    //COM-708 OR COM-463
+    /*
+     * Quick Add: Long1===Long2 causes unexpected error
+     * 
+     */
+    @Test
+    public void addPath_ShouldSucceed_withSameLongitudeButDiffrentLatitude(){
+    	 String randomProjectName;
+         randomProjectName = "project" +randomNumber+"";
+         createPath.createBrandNewProjectPath(randomProjectName, "This is the Default");
+         createPath.fillOutCompanyFilter("VZW333","", "",0);
+         pathSummary.valSiteLocationToggleOn();
+         quickAdd.quickAddPathSite1Site2Save("TestPath", "940 MHz", "Site1Name", "39 26 19 N", "91 4 40 W", "201.2", "Site2Name", "37 26 19 N", "91 4 40 W", "100.1");
+         pathSummary.viewSiteCallSignLatLongGeColumns1(0, "Site1Name", "", "39 26 19 N", "91 4 40 W", "201.2");
+         pathSummary.viewSiteCallSignLatLongGeColumns2(0, "Site2Name", "", "37 26 19 N", "91 4 40 W", "100.1");
+         
+  }
+
 
 }
 

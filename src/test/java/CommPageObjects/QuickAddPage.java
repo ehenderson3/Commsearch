@@ -19,6 +19,8 @@ public class QuickAddPage extends BasePage {
 
     //By addPathButton = By.cssSelector(".btn.bg-green.hover-inverse");
     By addPathButton = By.id("project-summary-quick-add-submit");
+    By quickAddbutton=By.id("project-summary-quick-add-open");
+    
     //project-summary-quick-add-submit
     By addPathDetails = By.cssSelector(".btn.bg-blue.hover-inverse");
     By cancelButton = By.cssSelector(".btn.text-red.inverse-default");
@@ -37,19 +39,23 @@ public class QuickAddPage extends BasePage {
 
     //Path Entry Fields - Able to use the type method
     ///Path 1
+    
     By pathName = By.id("quick-add-path-path-name");
     By latitude = By.id("quick-add-site[0]lat");
     By longitude = By.xpath("//*[contains(@name, 'sites[0]longitude') and contains(@id, 'quick-add-site[0]long')]");
     By callSign = By.id("quick-add-site[0]callSignOrASR");//Had to correct this had wrong
     By elevation = By.xpath("//*[contains(@name, 'elevation') and contains(@id, 'quick-add-site')]");
     By siteField = By.id("quick-add-site[0]siteName");
+    
     ///Path2
     By siteField2 = By.id("quick-add-site[1]siteName");
+
     By latitude2 = By.id("quick-add-site[1]lat");
     By longitude2 = By.id("quick-add-site[1]long");
     By callSign2 = By.id("quick-add-site[1]callSignOrASR");//Had to correct this had wrong
     By elevation2 = By.xpath("//*[contains(@name, 'sites[1]elevation') and contains(@id, 'quick-add-site[1]')]");
 
+    
     //Path hovers -- Able to use the hover method
 
     //Path Data Fields - Element is read only and can use getFieldText method
@@ -1070,4 +1076,31 @@ public class QuickAddPage extends BasePage {
         isDisplayed(errorMessage,10);
         return getTextPlural(errorMessage,i);
     }
+    public void quickAddPathSite1Site2Save(String PathName, String Band, String Site1Name,String Site1Latitude, String Site1Long, String Elevation1, String Site2Name,String Site2Latitude, String Site2Long, String Elevation2){
+        
+        assertTrue("Can't Find quickAddButton",isDisplayed(quickAddButton,40));
+
+        click(quickAddbutton);
+        waitForIsDisplayed(pathName,6);
+        
+        type(PathName,pathName);
+        selectFromDropdown(optionanBandDropDown, Band);
+       
+        slowDown(3);
+        type(Site1Name,siteField);
+
+        type(Site1Latitude,latitude);
+        type(Site1Long,longitude);
+        type(Elevation1,elevation);
+        
+        type(Site2Name,siteField2);
+        type(Site2Latitude,latitude2);
+        type(Site2Long,longitude2);
+        type(Elevation2,elevation2);
+        
+        assertTrue("Can't Find Add Path button",isDisplayed(addPathButton,40));
+
+        click(addPathButton);
+    }
+
 }
