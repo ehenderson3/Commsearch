@@ -3,6 +3,11 @@ package CommPageObjects;
 import org.apache.commons.lang3.math.NumberUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+
+import java.awt.*;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.StringSelection;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -79,12 +84,18 @@ public class DataBasePage extends BasePage {
     By error3dBeamwidth = By.id("antenna-details-beamwidth-error-message");
     By errorFrontToBackRadio = By.id("antenna-details-front-to-back-error-message");
 
+    By manufaturerFieldSuggestion = By.xpath("//*[contains(@id, 'antenna-details-antenna-company-suggestion-')]");//antenna-details-antenna-company-suggestion-Commscope
+    By modelFamilyFieldSuggestion = By.xpath("//*[contains(@id, 'antenna-details-antenna-model-family-suggestion-')]");//antenna-details-antenna-company-suggestion-Commscope
+
+
+
     //antenna-details-front-to-back-error-message
     By basicInforStatusGreen = By.cssSelector(".database-search-status-icon.margin-left-1.bg-green");
     By basicInforStatusYellow = By.cssSelector(".database-search-status-icon.margin-left-1.bg-yellow");
     By basicInforStatusRed = By.cssSelector(".database-search-status-icon.margin-left-1.bg-red");
     By selMeter = By.id("antenna-details-diameter-unit-SI-label-bottom");
     By selFeet = By.id("antenna-details-diameter-unit-US-label-bottom");
+    By modelFamilyFieldError = By.id("antenna-details-antenna-model-error-message");
 
     //Headings
     By radioImage = By.id("path-details-section-header-radio-icon");
@@ -96,6 +107,7 @@ public class DataBasePage extends BasePage {
     By createAntButton = By.cssSelector(".btn.search-button.big-button.bg-blue");
 
     By saveAntenna = By.cssSelector(".heading-font.btn.btn-md.hover-inverse.bg-green");
+    By associatedAntCodeLookUpButton = By.id("antenna-details-lookup-trigger");
 
     By antDbAdvancedDiameterUnitSIButton = By.id("antenna-db-search-create");
     By antDbAdvancedDiameterUnitUSButton = By.id("antenna-db-search-create");
@@ -104,11 +116,17 @@ public class DataBasePage extends BasePage {
     By antDbSearchButton = By.id("antenna-db-search-submit");
     By antDbExportButton = By.cssSelector(".btn.search-button.big-button.bg-grey-dark.false");
 
+
+
     By antDbAntModelLeftRadioDial = By.id("project-summary-settings-unit-LF-label-bottom");
     By antDbAntModelRightRadioDial = By.id("project-summary-settings-unit-RF-label-bottom");
     By antDbAntModelAnyRadioDial = By.id("project-summary-settings-unit-(none)-label-bottom");
 
     By antDbAdvancedSearchLink = By.xpath("//*[@id=\"antenna-db-search\"]/div[1]/div/label/span");
+    By antDbDiscriminationCalcLink = By.cssSelector(".disc-calc-modal-trigger.pointer");
+    By antDbDiscriminationCalcButton = By.cssSelector(".disc-calc-btn.btn.btn-sm.bg-blue");
+    //TODO Need Unique ID
+    By antDbDiscriminationCalcCloseXButton = By.cssSelector("body > div:nth-child(5) > div > div > form > div.database-details-heading.display-flex.justify-content-between.align-items-center.padding-left-1.padding-right-1.width-100 > p");
 
     //Drop down options
     //Path Entry Fields - Able to use the type method
@@ -126,7 +144,218 @@ public class DataBasePage extends BasePage {
     By antDbAdvancedSearchClassificationField = By.id("antenna-db-search-classification");
     By antDbAdvancedSearch3dbBeamwidthField = By.id("antenna-db-search-beam-width");
     By antDbAdvancedSearchFCCComplianceField = By.id("antenna-db-search-antenna-compliance");
+    By antDbDiscriminationCalcField = By.id("discrimination-calculator-discrimination-angle");
+    By lookUpAntennaCode = By.id("antenna-lookup-antenna-code");
+    By lookUpSearchButton = By.id("antenna-lookup-submit");
+    By antResultListItem = By.xpath("//*[contains(@id, 'antenna-lookup-modal-table-data-antennaCode-') and contains(@id, 'antenna-lookup-modal-table-data-antennaCode-')]");
 
+    By copyPatterns = By.cssSelector(".fa.fa-files-o");
+    By commentsIcon = By.className("new-comment-trigger");
+    By commentsField = By.id("db-details-comments-comment");
+    By saveCommentsButton = By.cssSelector(".btn.btn-sm.bg-green.hover-inverse.margin-top-1");
+    By commentsListItem = By.id("antenna-details-comments-table-data-antennaSpecCommentId-1-comment");
+    By firstAntField = By.id ("antenna-details-patterns[VV][0]-angle");
+    By deletePaternButton = By.cssSelector(".btn.btn-sm.hover-inverse.bg-white.btn-border.text-blue-dark");
+    By angleFieldValue = By.xpath("//*[contains(@id, 'antenna-details-patterns[VV][') and contains(@id, ']-angle')]");
+    By discriminationFieldValue = By.xpath("//*[contains(@id, 'antenna-details-patterns[VV][') and contains(@id, ']-discrimination')]");
+    By flipPatternButton = By.cssSelector(".btn.btn-sm.bg-blue.hover-inverse");
+    By flipWarning= By.className("padding-left-half");
+    By flipWarningButton= By.cssSelector(".btn.btn-md.bg-blue.margin-top-1.heading-font.hover-inverse.display-inline-block");
+
+    By commentRow = By.xpath("//*[contains(@id, 'antenna-details-comments-table-data-antennaSpecCommentId-') and contains(@id, '-comment')]");
+
+    /**
+     * This method takes in a string to compare the comment to the actual comment field value
+     * @param CommentTitle
+     */
+    public void valComments(String CommentTitle){
+        assertTrue(isDisplayed(commentRow,1));
+        isDisplayedArray(commentRow,1);
+        String comment = getText(commentRow);
+        assertEquals(CommentTitle, comment);
+    }
+
+    /**
+     * This method will flip the pattern and interact with the warning message
+     */
+    public void flipPattern(){
+        assertTrue(isDisplayed(flipPatternButton,5));
+        clickJS(flipPatternButton);
+        assertTrue(isDisplayed(flipWarning,5));
+        assertTrue(isDisplayed(flipWarningButton,5));
+        clickJS(flipWarningButton);
+    }
+
+    /**
+     * Takes an integer that selects the row, also discrimination and angle string values for comparison to actual field values
+     * @param patRow
+     * @param angle
+     * @param discrimination
+     */
+    public void valPattern(int patRow, String angle, String discrimination){
+        String angleVal = getFieldTextPlural(angleFieldValue, patRow);
+        String discriminationVal = getFieldTextPlural(discriminationFieldValue, patRow);
+
+        assertEquals(angle, angleVal);
+        assertEquals(discrimination,discriminationVal);
+
+    }
+
+
+    /**
+     * Opens the comments tool
+     */
+    public void openComments(){
+        clickJS(commentsIcon);
+        assertTrue(isDisplayed(commentsField,6));
+    }
+
+    /**
+     * Takes the copied pattern (String)and enters it into the given location
+     * @param pattern
+     */
+    public void enterPaternInComments(String pattern){
+        assertTrue(isDisplayed(commentsField,6));
+        type(pattern,commentsField);
+
+    }
+
+    /**
+     * copies a given pattern into systems clipboard
+     */
+    public void copyPatternText(){
+        Toolkit toolkit = Toolkit.getDefaultToolkit();
+        Clipboard clipboard = toolkit.getSystemClipboard();
+        clipboard.setContents(new StringSelection(find(commentsField).getAttribute("value")), null);
+    }
+
+    /**
+     * Save the comment
+     */
+    public void saveComments(){
+        assertTrue(isDisplayed(saveCommentsButton,2));
+        click(saveCommentsButton);
+        assertTrue(isDisplayed(commentsListItem));
+    }
+
+    /**
+     * selects the copy button
+     */
+    public void copyPattern(){
+        assertTrue(isDisplayed(copyPatterns,4));
+        clickJS(copyPatterns);
+        slowDown(2);
+    }
+
+    /**
+     * Highlights the first cell and pastes the pattern
+     */
+    public void pastePattern(){
+        pasteText(firstAntField);
+    }
+
+    /**
+     * Selects the resulting Antenna row
+     * @param row
+     */
+    public void selectAntennaRow(int row){
+        assertTrue(isDisplayed(antCodeListResult,5));
+        clickJS(antCodeListResult,row);
+        assertTrue(isDisplayed(antDbbasicInformationAntennaCode,5));
+        slowDown(2);
+    }
+
+    /**
+     * clears the content of a pattern
+     */
+    public void clearPattern(){
+        slowDown(6);
+        clickJS(deletePaternButton);
+        slowDown(6);
+    }
+
+    public void antDbPolarizedEntry( String antPolarizedText){
+        selectFromDropdown(antDbbasicInformationPolarized,antPolarizedText);
+    }
+
+    /**
+     * validates associated antenna text
+     * @param antCodeTextA
+     * @param antCodeTextB
+     */
+    public void associatedAntennaCode(String antCodeTextA,String antCodeTextB ){
+        isDisplayed(antDbbasicInformationAntennaCode,30);
+        clear(antDbbasicInformationAntennaCode);
+        type(antCodeTextA,antDbbasicInformationAntennaCode);
+        clear(antDbbasicInformationAntennaCode);
+        clear(antDbbasicInformationAssociatedAntennaCode);
+        clickJS(associatedAntCodeLookUpButton);
+        isDisplayed(lookUpAntennaCode,6);
+        clear(lookUpAntennaCode);
+        type(antCodeTextB,lookUpAntennaCode);
+        clickJS(lookUpSearchButton);
+        isDisplayed(antResultListItem,8);
+        clickJS(antResultListItem);
+    }
+
+
+
+    public void validateFieldValue(String field){
+        String fieldValue = getFieldText(antDbbasicInformationClassification);
+        assertEquals(field,fieldValue);
+
+    }
+
+    public void antDbModelFamilyError(String err){
+        type("1",antDbTechnicalInformationLowFrequency);
+        clickJS(antDbTechnicalInformationLowFrequency);
+        assertTrue(isDisplayed(modelFamilyFieldError,5));
+        String getErr = getText(modelFamilyFieldError);
+        assertEquals(err,getErr);
+    }
+
+
+    public void antDbModelFamilyEntry(String antModFamText){
+        isDisplayed(antDbbasicInformationAntennaModel,20);
+        type(antModFamText, antDbbasicInformationAntennaModel);
+
+    }
+
+    public void antDbBasicInfoModelFamilySuggestion(String antModelFamilyText, String isModelFamilySuggestion){
+        isDisplayed(antDbbasicInformationAntennaCode,20);
+        clear(antDbbasicInformationModelFamily);
+        clear(antDbbasicInformationModelFamily);
+        waitForFieldText("",antDbbasicInformationModelFamily);
+        type(antModelFamilyText, antDbbasicInformationModelFamily);
+        slowDown(3);
+        isDisplayed(modelFamilyFieldSuggestion,20);
+        String getSuggestion = getText(modelFamilyFieldSuggestion);
+        assertEquals(getSuggestion, isModelFamilySuggestion);
+    }
+
+    public void antDbBasicInfoManufacturerSuggestion(String antManufacturerText, String isManufacturerSuggestion){
+        isDisplayed(antDbbasicInformationAntennaCode,20);
+        clear(antDbbasicInformationCompany);
+        type(antManufacturerText, antDbbasicInformationCompany);
+        String getSuggestion = getText(manufaturerFieldSuggestion);//antenna-details-antenna-company-suggestion-Commscope
+        assertEquals(getSuggestion, isManufacturerSuggestion);
+    }
+
+    public void enterDiscriminationAngle(String discriminationAngleValue){
+        assertTrue("antDbDiscriminationCalcLink did not appear",isDisplayed(antDbDiscriminationCalcLink,3));
+        click(antDbDiscriminationCalcLink);
+        assertTrue("antDbDiscriminationCalcButton did not appear",isDisplayed(antDbDiscriminationCalcButton,3));
+        type(discriminationAngleValue,antDbDiscriminationCalcField);
+        click(antDbDiscriminationCalcButton);
+        slowDown(3);
+        DealWithTheAlert();
+    }
+    public void closeDiscriminationAngleForm(){
+        assertTrue(isDisplayed(antDbDiscriminationCalcCloseXButton,6));
+    clickJS(antDbDiscriminationCalcCloseXButton,0);
+    waitUntilNotPresent(antDbDiscriminationCalcCloseXButton,10);
+
+    };
     public void changeDiameterMeter(){
         isDisplayed(selMeter,3);//antenna-details-diameter-unit-SI-label-bottom
         click(selMeter);
@@ -136,8 +365,9 @@ public class DataBasePage extends BasePage {
         String informationDiameterTxt = getFieldText(antDbTechnicalInformationDiameter);
         assertEquals(diameter,informationDiameterTxt);
     }
+
     public void changeDiameterFeet(){
-        isDisplayed(selFeet,3);//antenna-details-diameter-unit-US-label-bottom
+        isDisplayed(selFeet,3);
         click(selFeet);
     }
 
@@ -274,8 +504,6 @@ public class DataBasePage extends BasePage {
         clear( antDbbasicInformationCompany);
         clear( antDbbasicInformationModelFamily);
         clear( antDbbasicInformationAntennaModel);
-
-
         type(antCodeText, antDbbasicInformationAntennaCode);
         type(antCompanyText, antDbbasicInformationCompany);
         type(antModFamText, antDbbasicInformationModelFamily);
@@ -284,7 +512,6 @@ public class DataBasePage extends BasePage {
         type(antAssociatedAntennaCodeText, antDbbasicInformationAssociatedAntennaCode);
         selectFromDropdown(antDbbasicInformationPolarized,antPolarizedText);
         selectFromDropdown(antDbbasicInformationStatus,antStatusText);
-
     }
 
     public void saveCreatedAntenna(){

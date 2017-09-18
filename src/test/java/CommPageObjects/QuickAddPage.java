@@ -46,16 +46,14 @@ public class QuickAddPage extends BasePage {
     By callSign = By.id("quick-add-site[0]callSignOrASR");//Had to correct this had wrong
     By elevation = By.xpath("//*[contains(@name, 'elevation') and contains(@id, 'quick-add-site')]");
     By siteField = By.id("quick-add-site[0]siteName");
-    
+
     ///Path2
     By siteField2 = By.id("quick-add-site[1]siteName");
-
     By latitude2 = By.id("quick-add-site[1]lat");
     By longitude2 = By.id("quick-add-site[1]long");
     By callSign2 = By.id("quick-add-site[1]callSignOrASR");//Had to correct this had wrong
     By elevation2 = By.xpath("//*[contains(@name, 'sites[1]elevation') and contains(@id, 'quick-add-site[1]')]");
 
-    
     //Path hovers -- Able to use the hover method
 
     //Path Data Fields - Element is read only and can use getFieldText method

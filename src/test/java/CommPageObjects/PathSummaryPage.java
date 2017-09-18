@@ -752,7 +752,7 @@ public class PathSummaryPage extends BasePage {
         assertTrue("Project US Unit is not present", waitForIsDisplayed(saveButton, 30));
         assertTrue("minClearence",isDisplayed(minClearence,30));
         assertTrue("sIUnit",isDisplayed(sIUnit,10));
-        click(sIUnit);
+        clickJS(sIUnit);
 
         minimumClearanceLable = getText(minimumClearance);
         assertTrue(minimumClearanceLable.contains("Minimum Clearance (m)"));
@@ -774,13 +774,9 @@ public class PathSummaryPage extends BasePage {
         assertTrue("Project US Unit is not present", waitForIsDisplayed(saveButton, 30));
         assertTrue("minClearence",isDisplayed(minClearence,30));
         assertTrue("sIUnit",isDisplayed(uSUnit,10));
-        click(uSUnit);
-
+        clickJS(uSUnit);
         assertTrue(isDisplayed(saveButton, 10));
         postSiSwitchValue = getFieldText(minClearence);
-        assertEquals("Min clearence did not change", postSiSwitchValue,valPostSiSwitch);
-
-        postSiSwitchValue= getFieldText(minClearence);
         assertEquals("Min clearence did not change", postSiSwitchValue,valPostSiSwitch);
         minimumClearanceLable = getText(minimumClearance);
         assertTrue(minimumClearanceLable.contains("(ft)"));
@@ -815,7 +811,7 @@ public class PathSummaryPage extends BasePage {
         assertTrue("Project Panel is not present", isDisplayed(projectSettingsPanel, 20));
         assertTrue("Project US Unit is not present", waitForIsDisplayed(saveButton, 30));
         assertTrue("sIUnit",isDisplayed(sIUnit,10));
-        click(sIUnit);
+        clickJS(sIUnit);
         assertTrue("minClearence",isDisplayed(minClearence,30));
         postSiSwitchValue = getFieldText(minClearence);
         assertEquals("Min clearence did not change", postSiSwitchValue,valPostSiSwitch);

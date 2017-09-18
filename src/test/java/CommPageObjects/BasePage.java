@@ -3,12 +3,16 @@ package CommPageObjects;
 
 import CommTests.Config;
 import org.openqa.selenium.*;
+import org.openqa.selenium.interactions.Action;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.awt.*;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.StringSelection;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -127,8 +131,40 @@ public class BasePage implements Config {
         }
         driver.findElement(locator).clear();
     }
+    public void copyText(By locator) {
+        Toolkit toolkit = Toolkit.getDefaultToolkit();
+        Clipboard clipboard = toolkit.getSystemClipboard();
+        clipboard.setContents(new StringSelection(find(locator).getAttribute("value")), null);
+    }
 
 
+
+    public void pasteText(By locator) {
+        click(locator);
+        slowDown(6);
+
+        Actions builder = new Actions(driver);
+        Action select= builder
+                .keyDown(Keys.COMMAND)
+                .sendKeys("v")
+                .keyUp(Keys.COMMAND)
+                .build();
+        select.perform();
+
+    }
+
+    /**
+     // or any locator strategy that you find suitable
+     WebElement locOfOrder = driver.findElement(By.id("id of the order id"));
+     Actions act = new Actions(driver);
+     act.moveToElement(locOfOrder).doubleClick().build().perform();
+     // catch here is double click on the text will by default select the text
+     // now apply copy command
+
+     driver.findElement(By.id("")).sendKeys(Keys.chord(Keys.CONTROL,"c"));
+     // now apply the command to paste
+     driver.findElement (By.xpath("/html/body/main/div/div/div[2]/div/div/div[2]/div/table/tbody/tr[2]/td[2]")).sendKeys(Keys.chord(Keys.CONTROL, "v"));
+     */
 
 
 
@@ -346,11 +382,6 @@ public class BasePage implements Config {
         }
         return true;
     }
-
-
-
-
-
 
     /**
      * Waits for element to be located and clickable will timeout if element is not clickable

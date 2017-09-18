@@ -183,12 +183,13 @@ public class PathDetailPage extends BasePage {
 
     public void savePassiveRepeater(){
         isDisplayed(passiveRepeaterSaveButton,10);
-        click(passiveRepeaterSaveButton);
+        clickJS(passiveRepeaterSaveButton);
         isDisplayed(pIcon,7);
     }
 
     public void changeFrequency(String freq){
         assertTrue("No Drop down field",isDisplayed(pathDetailFrequencyBandDropDownField1,12));
+        slowDown(2);
         selectFromDropdown(pathDetailFrequencyBandDropDownField1,freq);
     }
 

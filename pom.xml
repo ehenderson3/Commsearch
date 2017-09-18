@@ -6,7 +6,7 @@
 
     <groupId>CommSearchSelenium</groupId>
     <artifactId>CommSearchUITests</artifactId>
-    <version>0.0.15-SNAPSHOT</version>
+    <version>0.0.16-SNAPSHOT</version>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -58,6 +58,16 @@
                 </plugin>
             </plugins>
         </pluginManagement>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+        </plugins>
     </build>
 </project>
 

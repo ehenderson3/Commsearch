@@ -44,7 +44,7 @@ public class BaseTest implements Config {
                     DesiredCapabilities cap = DesiredCapabilities.firefox();
                     cap.setCapability("firefox", true);
                     driver = new FirefoxDriver(cap);
-
+                    driver.manage().window().maximize();
                 } else if (browser.equals("chrome")) {
                     DesiredCapabilities capabilities = DesiredCapabilities.chrome();
                     capabilities.setCapability("resolution", resolution);
