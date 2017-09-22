@@ -134,29 +134,29 @@ public class PathDetailTest extends BaseTest {
         pathSummary.valSiteLocationToggleOn();
         quickAdd.quickAddPathSimple("Ton", "5.8 GHz", "Best Path", "34 37 42.1 N", "112 39 26.2 W", "1542.29", "KBY45");
         pathSummary.viewSiteCallSignLatLongGeColumns1(0, "Tonto Mtn", "KBY45", "34 37 42.1 N", "112 39 26.2 W", "1542.29");
-        pathSummary.viewSiteCallSignLatLongGeColumns2(0, "New York2", "KA20003", "9 26 42.7 N", "8 7 9 W", "0.98");
+        pathSummary.viewSiteCallSignLatLongGeColumns2(0, "New York2", "KA20003", "40 44 54 N", "73 59 9 W", "0.98");
         pathSummary.openPathDetails(0);
         pathDetail.viewPathDetailValue1("Tonto Mtn", "KBY45", "34 37 42.1 N", "112 39 26.2 W", "1542.29", "940 MHz");
-        pathDetail.viewPathDetailValues2("New York2", "KA20003","9 26 42.7 N", "8 7 9 W", "0.98", "940 MHz");
+        pathDetail.viewPathDetailValues2("New York2", "KA20003","40 44 54 N", "73 59 9 W", "0.98", "940 MHz");
         pathDetail.closePathDetails();
 
         quickAdd.quickAddPathExistingSetup("Existing", "940 MHz", "Best Path", "34 37 42.1 N", "112 39 26.2 W", "250", "KBY45");
         pathSummary.viewSiteCallSignLatLongGeColumns1(1, "Existing", "KBY45", "34 37 42.1 N", "112 39 26.2 W", "250");
-        pathSummary.viewSiteCallSignLatLongGeColumns2(1, "New York2", "KA20003", "9 26 42.7 N", "8 7 9 W", "98");
+        pathSummary.viewSiteCallSignLatLongGeColumns2(1, "New York2", "KA20003", "40 44 54 N", "73 59 9 W", "98");
 
         pathSummary.openPathDetails(1);
 
         pathDetail.viewPathDetailValue1("Existing", "KBY45", "34 37 42.1 N", "112 39 26.2 W", "250", "940 MHz");
-        pathDetail.viewPathDetailValues2("Tonto Mtn", "KA20003", "9 26 42.7 N", "8 7 9 W", "0.98", "940 MHz");
+        pathDetail.viewPathDetailValues2("Tonto Mtn", "KA20003", "40 44 54 N", "73 59 9 W", "0.98", "940 MHz");
 
         pathDetail.closePathDetails();
 
         quickAdd.quickAddPathExistingSetup("CAMSLANT STATION", "940 MHz", "Best Path", "34 37 42.1 N", "78 3 21.2 W", "48.69", "1241006");
         pathSummary.viewSiteCallSignLatLongGeColumns1(2, "CAMSLANT STATION", "", "34 37 42.1 N", "78 3 21.2 W", "48.69");
-        pathSummary.viewSiteCallSignLatLongGeColumns2(2, "New York2", "KA20003", "9 26 42.7 N", "8 7 9 W", "98");
+        pathSummary.viewSiteCallSignLatLongGeColumns2(2, "New York2", "KA20003", "40 44 54 N", "73 59 9 W", "98");
         pathSummary.openPathDetails(2);
         pathDetail.viewPathDetailValue1("CAMSLANT STATION", "", "34 37 42.1 N", "78 3 21.2 W", "48.69", "940 MHz");
-        pathDetail.viewPathDetailValues2("Tonto Mtn", "KA20003", "9 26 42.7 N", "8 7 9 W", "48.69", "940 MHz");
+        pathDetail.viewPathDetailValues2("Tonto Mtn", "KA20003", "40 44 54 N", "73 59 9 W", "48.69", "940 MHz");
 
     }
 

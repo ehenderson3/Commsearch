@@ -54,8 +54,8 @@ public class BaseTest implements Config {
                     options.addArguments("--incognito");
                     capabilities.setCapability(ChromeOptions.CAPABILITY, options);
                     System.setProperty("webdriver.chrome.driver",
-                            System.getProperty("user.dir") + "/vendor/chromedriver.exe");
-                            //System.getProperty("user.dir") + "/vendor/Mac/chromedriver");
+                            //System.getProperty("user.dir") + "/vendor/chromedriver.exe");
+                            System.getProperty("user.dir") + "/vendor/Mac/chromedriver");
                    driver = new ChromeDriver(capabilities);
                 } else if (browser.equals("IE")){
                     DesiredCapabilities ieCapabilities = DesiredCapabilities.internetExplorer();

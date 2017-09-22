@@ -14,9 +14,6 @@ public interface Config {
     final String os_version         = System.getProperty("os_version","7");
     final String resolution         = System.getProperty("resolution","1920 x 1080");
 
-
-
-
 //////////////////////////     SUPPORTED BROWSERS      \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 //    ("browser", "chrome");  ("browserVersion","58");  ("browserVersion","57");
 //    ("browser", "firefox");  ("browserVersion","53");  ("browserVersion","54");
@@ -26,8 +23,6 @@ public interface Config {
 //////////////////////////     SUPPORTED OS's           \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 //    ("platform","Windows"); ---> ("os_version","10"); ("os_version","8.1");  ("os_version","8");  ("os_version","7");  ("os_version","XP");
 //    ("platform","OS X"); ---> ("os_version","Sierra"); ("os_version","El Capitan");  ("os_version","Yosemite");
-//
-//
 //
 //      IE11
 //      Edge (latest 2 versions)

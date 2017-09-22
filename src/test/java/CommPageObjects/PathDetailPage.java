@@ -389,7 +389,7 @@ public class PathDetailPage extends BasePage {
     public void previousArrow(){
         isDisplayed(activePathDetailPreviousArrowButton,8);//path-details-footer-next-path-button
         slowDown(3);
-        click(activePathDetailPreviousArrowButton);
+        clickJS(activePathDetailPreviousArrowButton);
         closeConfirmation();
     }
 

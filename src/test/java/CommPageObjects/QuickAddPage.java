@@ -558,7 +558,8 @@ public class QuickAddPage extends BasePage {
         elev = getFieldText(elevation);
         isDisplayed(addPathButton,6);
         type("New",siteField2);
-        isDisplayed(option,6);
+        //LEGO-710
+        isDisplayed(option,10);
         click(option);
         click(pathName);
         click(siteField);
@@ -805,7 +806,7 @@ public class QuickAddPage extends BasePage {
     private void longLatMatchingWarning(){
         isDisplayed(quickAddMatchingOnLatAndLongiWarning,20);//id="quick-add-error"
         String matchingLatLongText = getText(quickAddMatchingOnLatAndLongiWarning);
-        assertEquals(matchingLatLongText,"Fount 1 Error: Segment Ends values for latitude / longitude cannot be the same values.");
+        assertEquals(matchingLatLongText,"Found 1 Error: Segment Ends values for latitude / longitude cannot be the same values.");
     }
 
 
@@ -974,9 +975,12 @@ public class QuickAddPage extends BasePage {
 
             isDisplayed(addPathButton, 6);
             type("new", siteField2);
-            isDisplayed(option, 6);
 
-            click(option);
+            //LEGO-710
+            isDisplayed(option, 10);
+
+            //LEGO-710
+            clickJS(option);
             click(latitude);
             click(longitude);
             click(pathName);

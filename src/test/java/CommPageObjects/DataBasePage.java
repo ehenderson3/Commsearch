@@ -86,9 +86,9 @@ public class DataBasePage extends BasePage {
 
     By manufaturerFieldSuggestion = By.xpath("//*[contains(@id, 'antenna-details-antenna-company-suggestion-')]");//antenna-details-antenna-company-suggestion-Commscope
     By modelFamilyFieldSuggestion = By.xpath("//*[contains(@id, 'antenna-details-antenna-model-family-suggestion-')]");//antenna-details-antenna-company-suggestion-Commscope
+    By modelFamilyFieldSuggestionCommscopeFamily = By.xpath("//*[contains(@id, 'antenna-db-search-antenna-model-family-suggestion-')and contains(text(), 'Commscope Family')]");//antenna-details-antenna-company-suggestion-Commscope
 
-
-
+    //By.xpath( "//li[contains(text(), 'Second')]" )
     //antenna-details-front-to-back-error-message
     By basicInforStatusGreen = By.cssSelector(".database-search-status-icon.margin-left-1.bg-green");
     By basicInforStatusYellow = By.cssSelector(".database-search-status-icon.margin-left-1.bg-yellow");
@@ -125,8 +125,8 @@ public class DataBasePage extends BasePage {
     By antDbAdvancedSearchLink = By.xpath("//*[@id=\"antenna-db-search\"]/div[1]/div/label/span");
     By antDbDiscriminationCalcLink = By.cssSelector(".disc-calc-modal-trigger.pointer");
     By antDbDiscriminationCalcButton = By.cssSelector(".disc-calc-btn.btn.btn-sm.bg-blue");
-    //TODO Need Unique ID
-    By antDbDiscriminationCalcCloseXButton = By.cssSelector("body > div:nth-child(5) > div > div > form > div.database-details-heading.display-flex.justify-content-between.align-items-center.padding-left-1.padding-right-1.width-100 > p");
+    By antDbDiscriminationCalcCloseXButton = By.id("disc-calc-modal-close");
+
 
     //Drop down options
     //Path Entry Fields - Able to use the type method
@@ -168,7 +168,7 @@ public class DataBasePage extends BasePage {
      * This method takes in a string to compare the comment to the actual comment field value
      * @param CommentTitle
      */
-    public void valComments(String CommentTitle){
+    public void evaluateComments(String CommentTitle){
         assertTrue(isDisplayed(commentRow,1));
         isDisplayedArray(commentRow,1);
         String comment = getText(commentRow);
@@ -178,7 +178,7 @@ public class DataBasePage extends BasePage {
     /**
      * This method will flip the pattern and interact with the warning message
      */
-    public void flipPattern(){
+    public void submitFlipPattern(){
         assertTrue(isDisplayed(flipPatternButton,5));
         clickJS(flipPatternButton);
         assertTrue(isDisplayed(flipWarning,5));
@@ -274,7 +274,7 @@ public class DataBasePage extends BasePage {
         slowDown(6);
     }
 
-    public void antDbPolarizedEntry( String antPolarizedText){
+    public void selectPolarizedEntryFromAntennaDatabase(String antPolarizedText){
         selectFromDropdown(antDbbasicInformationPolarized,antPolarizedText);
     }
 
@@ -283,7 +283,7 @@ public class DataBasePage extends BasePage {
      * @param antCodeTextA
      * @param antCodeTextB
      */
-    public void associatedAntennaCode(String antCodeTextA,String antCodeTextB ){
+    public void associateAntennaCode(String antCodeTextA, String antCodeTextB ){
         isDisplayed(antDbbasicInformationAntennaCode,30);
         clear(antDbbasicInformationAntennaCode);
         type(antCodeTextA,antDbbasicInformationAntennaCode);
@@ -300,13 +300,12 @@ public class DataBasePage extends BasePage {
 
 
 
-    public void validateFieldValue(String field){
+    public void evaluateFieldValue(String field){
         String fieldValue = getFieldText(antDbbasicInformationClassification);
         assertEquals(field,fieldValue);
-
     }
 
-    public void antDbModelFamilyError(String err){
+    public void evaluateAntennaDatabaseModelFamilyError(String err){
         type("1",antDbTechnicalInformationLowFrequency);
         clickJS(antDbTechnicalInformationLowFrequency);
         assertTrue(isDisplayed(modelFamilyFieldError,5));
@@ -315,13 +314,13 @@ public class DataBasePage extends BasePage {
     }
 
 
-    public void antDbModelFamilyEntry(String antModFamText){
+    public void submitModelFamilyAntennaDatabaseEntry(String antModFamText){
         isDisplayed(antDbbasicInformationAntennaModel,20);
         type(antModFamText, antDbbasicInformationAntennaModel);
 
     }
 
-    public void antDbBasicInfoModelFamilySuggestion(String antModelFamilyText, String isModelFamilySuggestion){
+    public void evaluateModelFamilySuggestionListDatabaseBasicInformation(String antModelFamilyText, String isModelFamilySuggestion){
         isDisplayed(antDbbasicInformationAntennaCode,20);
         clear(antDbbasicInformationModelFamily);
         clear(antDbbasicInformationModelFamily);
@@ -333,7 +332,7 @@ public class DataBasePage extends BasePage {
         assertEquals(getSuggestion, isModelFamilySuggestion);
     }
 
-    public void antDbBasicInfoManufacturerSuggestion(String antManufacturerText, String isManufacturerSuggestion){
+    public void evaluateAntennaManufacturerSuggestionDatabaseBasicInformation(String antManufacturerText, String isManufacturerSuggestion){
         isDisplayed(antDbbasicInformationAntennaCode,20);
         clear(antDbbasicInformationCompany);
         type(antManufacturerText, antDbbasicInformationCompany);
@@ -392,7 +391,7 @@ public class DataBasePage extends BasePage {
      * @param err3dBeamwidthTxt
      * @param errFrontToBackRadioTxt
      */
-    public void errorTechInfoText(String errLowFrequencyTxt,String errHighFrequencyTxt,String errMainbeamGainTxt,String errDiameterTxt,String err3dBeamwidthTxt,String errFrontToBackRadioTxt){
+    public void evaluateErrorTextOnTechnicalInformation(String errLowFrequencyTxt, String errHighFrequencyTxt, String errMainbeamGainTxt, String errDiameterTxt, String err3dBeamwidthTxt, String errFrontToBackRadioTxt){
         isDisplayed(errorLowFrequency,7);
         String errLowFrequencyTxtMsg = getText(errorLowFrequency);
         String errHighFrequencyTxtMsg = getText(errorHighFrequency);
@@ -414,7 +413,7 @@ public class DataBasePage extends BasePage {
 
      * @param errTxt
      */
-    public void errorText(String errTxt){
+    public void evaluateErrorUniqueness(String errTxt){
         isDisplayed(errorUniqueAntCode);
         String errTxtMsg = getText(errorUniqueAntCode);
         assertEquals(errTxtMsg,errTxt);
@@ -423,7 +422,7 @@ public class DataBasePage extends BasePage {
     /**
     * Method is designed to click away from a field to allow blurring
     */
-    public void antDbBlur(){
+    public void blurAntennaDatabase(){
         isDisplayed(antDbTechnicalInformationLowFrequency,10);
         click(antDbTechnicalInformationLowFrequency);
     }
@@ -431,7 +430,7 @@ public class DataBasePage extends BasePage {
     /**
      * Method is designed to click away from a field to allow blurring
      */
-    public void antDbBlurTech(){
+    public void blurTechAntennaDatabase(){
         isDisplayed(antDbbasicInformationCompany,10);
         click(antDbbasicInformationCompany);
     }
@@ -441,7 +440,7 @@ public class DataBasePage extends BasePage {
      * @param antDbbasicInformationSubreflectorText
      * @param antDbbasicInformationFeedFlangeText
      */
-    public void antDbEarthStationEntry(String antDbbasicInformationSubreflectorText, String antDbbasicInformationFeedFlangeText){
+    public void enterAntennaDatabaseEarthStationFieldValues(String antDbbasicInformationSubreflectorText, String antDbbasicInformationFeedFlangeText){
         isDisplayed(antDbbasicInformationSubreflectorDiameter,20);
         type(antDbbasicInformationSubreflectorText,antDbbasicInformationSubreflectorDiameter);
         type(antDbbasicInformationFeedFlangeText,antDbbasicInformationFeedFlangeDiameter);
@@ -452,7 +451,7 @@ public class DataBasePage extends BasePage {
      * @param regInfoApplicationText
      * @param regInfoFCCComplianceText
      */
-    public void antDbRegInfoEntry(String regInfoApplicationText, String regInfoFCCComplianceText){
+    public void enterAntennaDatabaseRegInformationEntry(String regInfoApplicationText, String regInfoFCCComplianceText){
         isDisplayed(antDbbasicInformationAntennaCode,20);
         type(regInfoApplicationText,antDbbasicInformationApplication);
         type(regInfoFCCComplianceText,antDbbasicInformationFCCCompliance);
@@ -467,7 +466,7 @@ public class DataBasePage extends BasePage {
      * @param techInfo3dBeamwidthText
      * @param techInfoFrontToBackRadioText
      */
-    public void antDbTechInfoEntry(String techInfoLowFreqText,String techInfoHighFreqText, String techInfoMainbeamGainText, String techInfoDiameterText, String techInfo3dBeamwidthText, String techInfoFrontToBackRadioText ){
+    public void enterAntennaDatabTechnicalInformationEntry(String techInfoLowFreqText, String techInfoHighFreqText, String techInfoMainbeamGainText, String techInfoDiameterText, String techInfo3dBeamwidthText, String techInfoFrontToBackRadioText ){
         isDisplayed(antDbbasicInformationAntennaCode,20);
         type(techInfoLowFreqText,antDbTechnicalInformationLowFrequency);
         type(techInfoHighFreqText,antDbTechnicalInformationHighFrequency);
@@ -481,7 +480,7 @@ public class DataBasePage extends BasePage {
      * Method clicks the dropdown form the field and selects the item passed via parameter
      * @param antStatusText
      */
-    public void antDbBasicInfoChangeStatus(String antStatusText){
+    public void selectAntennaDatabaseBasicInformationChangeStatus(String antStatusText){
         isDisplayed(antDbbasicInformationAntennaCode,20);
         selectFromDropdown(antDbbasicInformationStatus,antStatusText);
 
@@ -498,7 +497,7 @@ public class DataBasePage extends BasePage {
      * @param antPolarizedText
      * @param antStatusText
      */
-    public void antDbBasicInfoEntry(String antCodeText, String antCompanyText, String antModFamText, String antModText, String antClassificationText, String antAssociatedAntennaCodeText, String antPolarizedText, String antStatusText){
+    public void enterAntennaDatabaseBasicInformationEntry(String antCodeText, String antCompanyText, String antModFamText, String antModText, String antClassificationText, String antAssociatedAntennaCodeText, String antPolarizedText, String antStatusText){
         isDisplayed(antDbbasicInformationAntennaCode,20);
         clear( antDbbasicInformationAntennaCode);
         clear( antDbbasicInformationCompany);
@@ -522,31 +521,31 @@ public class DataBasePage extends BasePage {
     /**
      * This method verifies if an error is present
      */
-    public void createAntAntCodeError(){
+    public void evaluateAntennaCodeError(){
         assertTrue(isDisplayed(antDbbasicInformationAntCodeError,5));
     }
     /**
      * This method verifies if an error is present
      */
-    public void createAntCompanyError(){
+    public void evaluateAntennaCompanyError(){
         assertTrue(isDisplayed(antDbbasicInformationCompanyError,5));
     }
     /**
      * This method verifies if an error is present
      */
-    public void createAntAntModelError(){
+    public void evaluateAntennaModelError(){
         assertTrue(isDisplayed(antDbbasicInformationAntModelError,5));
     }
     /**
      * This method verifies if an error is present
      */
-    public void createAntClassificationError(){
+    public void evaluateAntennaClassificationError(){
         assertTrue(isDisplayed(antDbbasicInformationClassificationError,5));
     }
     /**
      * This method verifies if an error is present
      */
-    public void createAntStatusError(){
+    public void evaluateAntennaStatusError(){
         assertTrue(isDisplayed(antDbbasicInformationStatusError,5));
     }
     /**
@@ -614,7 +613,7 @@ public class DataBasePage extends BasePage {
      * @param regInfoApplicationText
      * @param regInfoFCCComplianceText
      */
-    public void antDbRegInfoVal(String regInfoApplicationText, String regInfoFCCComplianceText){
+    public void evaluateAntennaDatabaseRegInformation(String regInfoApplicationText, String regInfoFCCComplianceText){
         isDisplayed(antDbbasicInformationAntennaCode,20);
 
         String regInfoApplication = getFieldText(antDbbasicInformationApplication);
@@ -638,7 +637,7 @@ public class DataBasePage extends BasePage {
      * @param techInfo3dBeamwidthText
      * @param techInfoFrontToBackRadioText
      */
-    public void antDbTechInfoVal(String techInfoLowFreqText,String techInfoHighFreqText, String techInfoMainbeamGainText, String techInfoDiameterText, String techInfo3dBeamwidthText, String techInfoFrontToBackRadioText ){
+    public void evaluateAntennaDatabaseTechecnicalInformation(String techInfoLowFreqText, String techInfoHighFreqText, String techInfoMainbeamGainText, String techInfoDiameterText, String techInfo3dBeamwidthText, String techInfoFrontToBackRadioText ){
         isDisplayed(antDbbasicInformationAntennaCode,20);
 
         String techInfoLowFrequency = getFieldText(antDbTechnicalInformationLowFrequency);
@@ -749,7 +748,7 @@ public class DataBasePage extends BasePage {
      * @param search3dbBeamwidthFieldText
      * @param fCCComplianceFieldText
      */
-    public void advanceSearch(String statusText, String gainText, String applicationText, String diameterText,String rPEText, String classificationText, String search3dbBeamwidthFieldText, String fCCComplianceFieldText ){
+    public void submitAdvanceSearch(String statusText, String gainText, String applicationText, String diameterText, String rPEText, String classificationText, String search3dbBeamwidthFieldText, String fCCComplianceFieldText ){
         assertTrue("antDbAdvancedSearchStatusField is not present",isDisplayed(antDbAdvancedSearchStatusField,5));
         assertTrue("antDbAdvancedSearchGainField is not present",isDisplayed(antDbAdvancedSearchGainField,5));
         assertTrue("antDbAdvancedSearchApplicationField is not present",isDisplayed(antDbAdvancedSearchApplicationField,5));
@@ -789,11 +788,31 @@ public class DataBasePage extends BasePage {
      * @param antModelText
      * @param antFreqText
      */
-    public void antennaDataBaseSearch(String antCodeText,String antCompanyText,String antModelFamilyText,String antModelText,String antFreqText){
+    public void searchAntennaDatabase(String antCodeText, String antCompanyText, String antModelFamilyText, String antModelText, String antFreqText){
         assertTrue(isDisplayed(antDbAntCodeField,5));
         type(antCodeText,antDbAntCodeField);
         type(antCompanyText,antDbAntCompanyField);
         type(antModelFamilyText,antDbModelFamilyField);
+        type(antModelText,antDbAntModelField);
+        type(antFreqText,antDbFrequencyField);
+        click(antDbSearchButton);
+    }
+
+    /**
+     * Method takes in search strings and enters in to search field and executes the search then selects suggested by text
+     * @param antCodeText
+     * @param antCompanyText
+     * @param antModelFamilyText
+     * @param antModelText
+     * @param antFreqText
+     */
+    public void submitAntennaDataBaseSearch(String antCodeText, String antCompanyText, String antModelFamilyText, String antModelText, String antFreqText){
+        assertTrue(isDisplayed(antDbAntCodeField,5));
+        type(antCodeText,antDbAntCodeField);
+        type(antCompanyText,antDbAntCompanyField);
+        type(antModelFamilyText,antDbModelFamilyField);
+        assertTrue(isDisplayed(modelFamilyFieldSuggestionCommscopeFamily,10));
+        click(modelFamilyFieldSuggestionCommscopeFamily,0);
         type(antModelText,antDbAntModelField);
         type(antFreqText,antDbFrequencyField);
         click(antDbSearchButton);
@@ -809,7 +828,7 @@ public class DataBasePage extends BasePage {
      * @param antPol
      * @param antFrequency
      */
-    public void antennaDataSearchResult1(int row, String antCode,String antCompany,String antModelFamily,String antModel,String antPol,String antFrequency){
+    public void evaluateAntennaDataSearchResult1(int row, String antCode, String antCompany, String antModelFamily, String antModel, String antPol, String antFrequency){
         assertTrue(isDisplayed(antCodeListResult,5));
         String rawAntCode = getTextPlural(antDbAntCodeResult,row);
         String antCodeValue = rawAntCode.substring(0,6);
@@ -841,7 +860,7 @@ public class DataBasePage extends BasePage {
      * @param antRPE
      * @param antPatternDate
      */
-    public void antennaDataSearchResult2(int row, String antGain,String ant3dBBW,String antDiameter,String antCompliance,String antRPE,String antPatternDate){
+    public void evaluateAntennaDataSearchResult2(int row, String antGain, String ant3dBBW, String antDiameter, String antCompliance, String antRPE, String antPatternDate){
         assertTrue(isDisplayed(antDbAntGainResult,5));
         String antGainValue = getTextPlural(antDbAntGainResult,row);
         assertEquals(antGain,antGainValue);
@@ -866,7 +885,7 @@ public class DataBasePage extends BasePage {
      * Method loops though a list of antennas and validates that the value passed via the parameter is represented for the given column
      * @param antCompany
      */
-    public void companyRowVal(String antCompany) {
+    public void evaluateCompanyRow(String antCompany) {
         int rows = getRows(antDbAntCompanyResult);
         for (int i = 0; i < rows; i++){
              assertTrue(isDisplayed(antDbAntCompanyResult, 5));
@@ -879,7 +898,7 @@ public class DataBasePage extends BasePage {
      * Method loops though a list of antennas and validates that the value passed via the parameter is represented for the given column
      * @param antModelFamily
      */
-    public void companyFamilyRowVal(String antModelFamily) {
+    public void evaluateCompanyFamilyRow(String antModelFamily) {
         int rows = getRows(antDbAntModelFamilyResult);
         for (int i = 0; i < rows; i++) {
              assertTrue(isDisplayed(antDbAntModelFamilyResult,5));
@@ -894,7 +913,7 @@ public class DataBasePage extends BasePage {
      * @param low
      * @param high
      */
-    public void companyFreqRowVal(int low, int high) {
+    public void evaluateCompanyFreqRow(int low, int high) {
         int rows = getRows(antDbAntFreqResult);
         for (int i = 0; i < rows; i++) {
             assertTrue(isDisplayed(antDbAntFreqResult,5));
@@ -909,7 +928,7 @@ public class DataBasePage extends BasePage {
     /**
      * Selects the Left Radio dialon Antenna Database
      */
-    public void selectLF() {
+    public void selectsLeftRadioDialAntennaDatabase() {
         slowDown(3);
         click(antDbAntModelLeftRadioDial);
     }
@@ -917,7 +936,7 @@ public class DataBasePage extends BasePage {
     /**
      * vaildates that the correct status is displayed for all search results
      */
-    public void antennaDataActiveStatusResult(){
+    public void evaluateAntennaDataActiveStatusResults(){
         int rows = getRows(antDbAntStatusResultGreeen);
         for (int i = 0; i < rows; i++) {
             isDisplayed(antDbAntStatusResultGreeen,5);
@@ -928,7 +947,7 @@ public class DataBasePage extends BasePage {
     /**
      * vaildates that the correct status is displayed for all search results
      */
-    public void antennaDataObsoleteStatusResult(){
+    public void evaluateAntennaDataObsoleteStatusResults(){
         int rows = getRows(antDbAntStatusResultOrange);
         for (int i = 0; i < rows; i++) {
             isDisplayed(antDbAntStatusResultOrange,5);
@@ -939,7 +958,7 @@ public class DataBasePage extends BasePage {
     /**
      * vaildates that the correct status is displayed for all search results
      */
-    public void antennaDataInvalidStatusResult(){
+    public void evaluateAntennaDataInvalidStatusResults(){
         int rows = getRows(antDbAntStatusResultRed);
         for (int i = 0; i < rows; i++) {
             isDisplayed(antDbAntStatusResultRed,5);
@@ -952,7 +971,7 @@ public class DataBasePage extends BasePage {
      * @param antCode
      * @param row
      */
-    public void antennaDataSearchResult(String antCode, int row){
+    public void evaluateAntennaDataSearchResults(String antCode, int row){
         assertTrue(isDisplayed(antCodeListResult,5));
         String rawAntCode = getTextPlural(antDbAntCodeResult,row);
         String antCodeValue = rawAntCode.substring(0,6);
@@ -964,7 +983,7 @@ public class DataBasePage extends BasePage {
      * @param antCompany
      * @param row
      */
-    public void antennaDataBaseCompanySearchResult(String antCompany,int row){
+    public void evaluateAntennaDataBaseCompanySearchResults(String antCompany, int row){
         assertTrue(isDisplayed(antDbAntCompanyResult,5));
         String antCompanyValue = getTextPlural(antDbAntCompanyResult,row);
         assertEquals(antCompany,antCompanyValue);
@@ -975,7 +994,7 @@ public class DataBasePage extends BasePage {
      * @param antModelFamily
      * @param row
      */
-    public void antennaDataBaseModelFamilySearchResult(String antModelFamily,int row){
+    public void evaluateAntennaDataBaseModelFamilySearchResults(String antModelFamily, int row){
         assertTrue(isDisplayed(antDbAntModelFamilyResult,5));
         String antModelFamilyValue = getTextPlural(antDbAntModelFamilyResult,row);
         assertEquals(antModelFamily,antModelFamilyValue);
@@ -986,7 +1005,7 @@ public class DataBasePage extends BasePage {
      * @param antModel
      * @param row
      */
-    public void antennaDataBaseModelSearchResult(String antModel,int row){
+    public void compareAntennaDatabaseModelSearchResults(String antModel, int row){
         assertTrue(isDisplayed(antDbAntModelResult,5));
         String antModelValue = getTextPlural(antDbAntModelResult,row);
         assertEquals(antModel,antModelValue);
@@ -997,7 +1016,7 @@ public class DataBasePage extends BasePage {
      * @param antPol
      * @param row
      */
-    public void antennaDataBasePolSearchResult(String antPol,int row){
+    public void evaluateAntennaDatabasePolSearchResults(String antPol, int row){
         assertTrue(isDisplayed(antDbAntPolResult,5));
         String antPolValue = getTextPlural(antDbAntPolResult,row);
         assertEquals(antPol,antPolValue);
@@ -1008,7 +1027,7 @@ public class DataBasePage extends BasePage {
      * @param antFrequency
      * @param row
      */
-    public void antennaDataBaseFrequencySearchResult(String antFrequency,int row){
+    public void evaluateAntennaDatabaseFrequencySearchResults(String antFrequency, int row){
         assertTrue(isDisplayed(antDbAntFreqResult,5));
         String antFrequencyValue = getTextPlural(antDbAntFreqResult,row);
         assertEquals(antFrequency,antFrequencyValue);
@@ -1019,7 +1038,7 @@ public class DataBasePage extends BasePage {
      * @param antGain
      * @param row
      */
-    public void antennaDataBaseGainSearchResult(String antGain,int row){
+    public void evaluateAntennaDatabaseGainSearchResults(String antGain, int row){
         assertTrue(isDisplayed(antDbAntGainResult,5));
         String antGainValue = getTextPlural(antDbAntGainResult,row);
         assertEquals(antGain,antGainValue);
@@ -1030,7 +1049,7 @@ public class DataBasePage extends BasePage {
      * @param ant3dBBW
      * @param row
      */
-    public void antennaDataBase3dBBWSearchResult(String ant3dBBW,int row){
+    public void evaluateAntennaDataBase3dBBWSearchResults(String ant3dBBW, int row){
         assertTrue(isDisplayed(antDbAnt3dBBWResult,5));
         String ant3dBBWValue = getTextPlural(antDbAnt3dBBWResult,row);
         assertEquals(ant3dBBW,ant3dBBWValue);
@@ -1041,7 +1060,7 @@ public class DataBasePage extends BasePage {
      * @param antDiameter
      * @param row
      */
-    public void antennaDataBaseDiameterSearchResult(String antDiameter,int row){
+    public void evaluateAntennaDataBaseDiameterSearchResults(String antDiameter, int row){
         assertTrue(isDisplayed(antDbAntDiameterResult,5));
         String antDiameterValue = getTextPlural(antDbAntDiameterResult,row);
         assertEquals(antDiameter,antDiameterValue);
@@ -1052,7 +1071,7 @@ public class DataBasePage extends BasePage {
      * @param antCompliance
      * @param row
      */
-    public void antennaDataBaseComplianceSearchResult(String antCompliance,int row){
+    public void evaluateAntennaDataBaseComplianceSearchResults(String antCompliance, int row){
         assertTrue(isDisplayed(antDbAntComplianceResult,5));
         String antComplianceValue = getTextPlural(antDbAntComplianceResult,row);
         assertEquals(antCompliance,antComplianceValue);
@@ -1063,7 +1082,7 @@ public class DataBasePage extends BasePage {
      * @param antRPE
      * @param row
      */
-    public void antennaDataBaseRPESearchResult(String antRPE,int row){
+    public void evaluateAntennaDataBaseRPESearchResults(String antRPE, int row){
         assertTrue(isDisplayed(antDbAntRPEResult,5));
         String antRPEValue = getTextPlural(antDbAntRPEResult,row);
         assertEquals(antRPE,antRPEValue);
@@ -1074,7 +1093,7 @@ public class DataBasePage extends BasePage {
      * @param antPatternDate
      * @param row
      */
-    public void antennaDataBasePatternDateSearchResult(String antPatternDate,int row){
+    public void evaluateAntennaDataBasePatternDateSearchResult(String antPatternDate, int row){
         assertTrue(isDisplayed(antDbAntPatternDateResult,5));
         String antPatternDateValue = getTextPlural(antDbAntPatternDateResult,row);
         assertEquals(antPatternDate,antPatternDateValue);

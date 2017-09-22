@@ -6,15 +6,7 @@ import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 
-import java.awt.*;
-import java.awt.datatransfer.Clipboard;
-import java.awt.datatransfer.StringSelection;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Random;
@@ -82,10 +74,10 @@ public class DataBaseTest extends BaseTest{
     @Test
     public void antDataBase_AllAntennasFromThatCompanyAreDisplayed_whenInputValidCompanyNameAndSearch () {
         database.accessAntennaDataBase();
-        database.antennaDataBaseSearch("","Commscope","","","");
-        database.antennaDataSearchResult1(0,"02306A","Commscope","Commscope Family","P8F-9 LF","","880 - 950");
-        database.antennaDataSearchResult2(0,"20.3","3.2","2.44 / 8.01","n/a","n/a","n/a");
-        database.companyRowVal("Commscope");
+        database.searchAntennaDatabase("","Commscope","","","");
+        database.evaluateAntennaDataSearchResult1(0,"02306A","Commscope","Commscope Family","P8F-9 LF","D","880 - 950");
+        database.evaluateAntennaDataSearchResult2(0,"20.3","3.2","2.44 / 8.01","n/a","n/a","n/a");
+        database.evaluateCompanyRow("Commscope");
     }
 
 
@@ -110,19 +102,19 @@ public class DataBaseTest extends BaseTest{
     @Test
     public void antDataBase_AllAntennasFromThatCompanyFamilyAreDisplayed_whenInputValidCompanyFamilyAndSearch1 () {
         database.accessAntennaDataBase();
-        database.antennaDataBaseSearch("","","Com","","");
-        database.antennaDataSearchResult1(0,"02306A","Commscope","Commscope Family","P8F-9 LF","","880 - 950");
-        database.antennaDataSearchResult2(0,"20.3","3.2","2.44 / 8.01","n/a","n/a","n/a");
-        database.companyFamilyRowVal("Commscope Family");
+        database.submitAntennaDataBaseSearch("","","Com","","");
+        database.evaluateAntennaDataSearchResult1(0,"02306A","Commscope","Commscope Family","P8F-9 LF","D","880 - 950");
+        database.evaluateAntennaDataSearchResult2(0,"20.3","3.2","2.44 / 8.01","n/a","n/a","n/a");
+        database.evaluateCompanyFamilyRow("Commscope Family");
     }
 
     @Test
     public void antDataBase_AllAntennasFromThatCompanyFamilyAreDisplayed_whenInputValidCompanyFamilyAndSearch2 () {
         database.accessAntennaDataBase();
-        database.antennaDataBaseSearch("77100A","","Val","","");
-        database.antennaDataSearchResult1(0,"77100A","Commscope","ValuLine High Performance Low Profile","VHLPX2-11 LF","","10500 - 11700");
-        database.antennaDataSearchResult2(0,"34.4","3.4","0.61 / 2.00","n/a","n/a","n/a");
-        database.companyFamilyRowVal("ValuLine High Performance Low Profile");
+        database.searchAntennaDatabase("77100A","","Val","","");
+        database.evaluateAntennaDataSearchResult1(0,"77100A","Commscope","ValuLine High Performance Low Profile","VHLPX2-11 LF","D","10500 - 11700");
+        database.evaluateAntennaDataSearchResult2(0,"34.4","3.4","0.61 / 2.00","n/a","n/a","n/a");
+        database.evaluateCompanyFamilyRow("ValuLine High Performance Low Profile");
     }
 
     /**COM-657 COM-701
@@ -148,20 +140,20 @@ public class DataBaseTest extends BaseTest{
     @Test
     public void antDataBase_AllAntModelOfTypeAreDisplayed_whenInputValidAntModelAnyAndSearch () {
         database.accessAntennaDataBase();
-        database.antennaDataBaseSearch("","","","P8F","");
-        database.antennaDataSearchResult1(0,"02306A","Commscope","Commscope Family","P8F-9 LF","","880 - 950");
-        database.antennaDataSearchResult2(0,"20.3","3.2","2.44 / 8.01","n/a","n/a","n/a");
-        database.companyFamilyRowVal("Commscope Family");
+        database.searchAntennaDatabase("","","Commscope Family","P8F","");
+        database.evaluateAntennaDataSearchResult1(0,"02306A","Commscope","Commscope Family","P8F-9 LF","D","880 - 950");
+        database.evaluateAntennaDataSearchResult2(0,"20.3","3.2","2.44 / 8.01","n/a","n/a","n/a");
+        database.evaluateCompanyFamilyRow("Commscope Family");
     }
 
     @Test
     public void antDataBase_AllAntModelOfTypeAreDisplayed_whenInputValidAntModelLFAndSearch () {
         database.accessAntennaDataBase();
-        database.antennaDataBaseSearch("","","","P8F","");
-        database.selectLF();
-        database.antennaDataSearchResult1(0,"02306A","Commscope","Commscope Family","P8F-9 LF","","880 - 950");
-        database.antennaDataSearchResult2(0,"20.3","3.2","2.44 / 8.01","n/a","n/a","n/a");
-        database.companyFamilyRowVal("Commscope Family");
+        database.searchAntennaDatabase("","","Commscope Family","P8F","");
+        database.selectsLeftRadioDialAntennaDatabase();
+        database.evaluateAntennaDataSearchResult1(0,"02306A","Commscope","Commscope Family","P8F-9 LF","D","880 - 950");
+        database.evaluateAntennaDataSearchResult2(0,"20.3","3.2","2.44 / 8.01","n/a","n/a","n/a");
+        database.evaluateCompanyFamilyRow("Commscope Family");
     }
 
     /**COM-657
@@ -194,21 +186,21 @@ public class DataBaseTest extends BaseTest{
     @Test
     public void antDataBase_AllAntsWithGivenFrequencyAreDisplayed_whenInputValidLowFrequencyAndSearch () {
         database.accessAntennaDataBase();
-        database.antennaDataBaseSearch("","Commscope","","","950");
-        database.selectLF();
-        database.antennaDataSearchResult1(0,"02306A","Commscope","Commscope Family","P8F-9 LF","","880 - 950");
-        database.antennaDataSearchResult2(0,"20.3","3.2","2.44 / 8.01","n/a","n/a","n/a");
-        database.companyFamilyRowVal("Commscope Family");
+        database.searchAntennaDatabase("","Commscope","","","950");
+        database.selectsLeftRadioDialAntennaDatabase();
+        database.evaluateAntennaDataSearchResult1(0,"02306A","Commscope","Commscope Family","P8F-9 LF","D","880 - 950");
+        database.evaluateAntennaDataSearchResult2(0,"20.3","3.2","2.44 / 8.01","n/a","n/a","n/a");
+        database.evaluateCompanyFamilyRow("Commscope Family");
     }
 
     @Test
     public void antDataBase_AllAntsWithGivenFrequencyAreDisplayed_whenInputValidHighFrequencyAndSearch () {
         database.accessAntennaDataBase();
-        database.antennaDataBaseSearch("","Commscope","","","880");
-        database.selectLF();
-        database.antennaDataSearchResult1(0,"02306A","Commscope","Commscope Family","P8F-9 LF","","880 - 950");
-        database.antennaDataSearchResult2(0,"20.3","3.2","2.44 / 8.01","n/a","n/a","n/a");
-        database.companyFreqRowVal(880,950);
+        database.searchAntennaDatabase("","Commscope","","","880");
+        database.selectsLeftRadioDialAntennaDatabase();
+        database.evaluateAntennaDataSearchResult1(0,"02306A","Commscope","Commscope Family","P8F-9 LF","D","880 - 950");
+        database.evaluateAntennaDataSearchResult2(0,"20.3","3.2","2.44 / 8.01","n/a","n/a","n/a");
+        database.evaluateCompanyFreqRow(880,950);
     }
 
     /**COM-657 COM-701
@@ -230,7 +222,7 @@ public class DataBaseTest extends BaseTest{
     public void antDataBaseAdvancedSearch_NewAdvancedSearchFieldsWillDisplay_whenAdvancedSearchIsSelected () {
         database.accessAntennaDataBase();
         database.openAdvancedSearch();
-        database.advanceSearch("Active","","Point-to-Point","","","All","","Compliant (no category)");
+        database.submitAdvanceSearch("Active","","Point-to-Point","","","All","","Compliant (no category)");
 
     }
 
@@ -256,24 +248,24 @@ public class DataBaseTest extends BaseTest{
     public void antDataBaseAdvancedSearch_ActiveStatusWillBeReturnd_whenASearchByActive() {
         database.accessAntennaDataBase();
         database.openAdvancedSearch();
-        database.advanceSearch("Active","","Point-to-Point","","","All","","Select Compliance");
-        database.antennaDataActiveStatusResult();
+        database.submitAdvanceSearch("Active","","Point-to-Point","","","All","","Select Compliance");
+        database.evaluateAntennaDataActiveStatusResults();
     }
 
     @Test
     public void antDataBaseAdvancedSearch_ObsoleteStatusWillBeReturnd_whenASearchByObsolete() {
         database.accessAntennaDataBase();
         database.openAdvancedSearch();
-        database.advanceSearch("Obsolete","","Point-to-Point","","","All","","Select Compliance");
-        database.antennaDataObsoleteStatusResult();
+        database.submitAdvanceSearch("Obsolete","","Point-to-Point","","","All","","Select Compliance");
+        database.evaluateAntennaDataObsoleteStatusResults();
     }
 
     @Test
     public void antDataBaseAdvancedSearch_InvalidStatusWillBeReturnd_whenASearchByInvalid() {
         database.accessAntennaDataBase();
         database.openAdvancedSearch();
-        database.advanceSearch("Invalid","","Point-to-Point","","","All","","Select Compliance");
-        database.antennaDataInvalidStatusResult();
+        database.submitAdvanceSearch("Invalid","","Point-to-Point","","","All","","Select Compliance");
+        database.evaluateAntennaDataInvalidStatusResults();
     }
 
     /**COM-657
@@ -295,7 +287,7 @@ public class DataBaseTest extends BaseTest{
     public void antDataBaseAdvancedSearch_ClassificationWillBeReturnd_whenASearchByBillboard() {
         database.accessAntennaDataBase();
         database.openAdvancedSearch();
-        database.advanceSearch("All","","All","","","Billboard","","Select Compliance");
+        database.submitAdvanceSearch("All","","All","","","Billboard","","Select Compliance");
         database.clickAndVal("1");
     }
 
@@ -303,7 +295,7 @@ public class DataBaseTest extends BaseTest{
     public void antDataBaseAdvancedSearch_ClassificationWillBeReturnd_whenASearchByCylindricalParabola() {
         database.accessAntennaDataBase();
         database.openAdvancedSearch();
-        database.advanceSearch("All","","All","","","Cylindrical Parabola","","Select Compliance");
+        database.submitAdvanceSearch("All","","All","","","Cylindrical Parabola","","Select Compliance");
         database.clickAndVal("4");
     }
 
@@ -311,7 +303,7 @@ public class DataBaseTest extends BaseTest{
     public void antDataBaseAdvancedSearch_ClassificationWillBeReturnd_whenASearchByHornParabolic() {
         database.accessAntennaDataBase();
         database.openAdvancedSearch();
-        database.advanceSearch("All","","All","","","Horn Parabolic","","Select Compliance");
+        database.submitAdvanceSearch("All","","All","","","Horn Parabolic","","Select Compliance");
         database.clickAndVal("8");
     }
 
@@ -332,9 +324,9 @@ public class DataBaseTest extends BaseTest{
     public void antDataBaseAdvancedSearch_RBEWillBeReturnd_whenASearchByRBE() {
         database.accessAntennaDataBase();
         database.openAdvancedSearch();
-        database.advanceSearch("All","","All","","7297","All","","Select Compliance");
+        database.submitAdvanceSearch("All","","All","","7297","All","","Select Compliance");
         database.RPEVal("7297");
-        database.antennaDataBaseRPESearchResult("7297", 0);
+        database.evaluateAntennaDataBaseRPESearchResults("7297", 0);
     }
 
     /**COM-657
@@ -354,24 +346,24 @@ public class DataBaseTest extends BaseTest{
     public void antDataBaseAdvancedSearch_ClassificationWillBeReturnd_whenASearchByGain1() {
         database.accessAntennaDataBase();
         database.openAdvancedSearch();
-        database.advanceSearch("All","24.9","All","","","All","","Select Compliance");
-        database.antennaDataBaseGainSearchResult("24.9", 0);
+        database.submitAdvanceSearch("All","24.9","All","","","All","","Select Compliance");
+        database.evaluateAntennaDatabaseGainSearchResults("24.9", 0);
     }
 
     @Test
     public void antDataBaseAdvancedSearch_ClassificationWillBeReturnd_whenASearchByGain2() {
         database.accessAntennaDataBase();
         database.openAdvancedSearch();
-        database.advanceSearch("All","20","All","","","All","","Select Compliance");
-        database.antennaDataBaseGainSearchResult("20", 0);
+        database.submitAdvanceSearch("All","20","All","","","All","","Select Compliance");
+        database.evaluateAntennaDatabaseGainSearchResults("20", 0);
     }
 
     @Test
     public void antDataBaseAdvancedSearch_ClassificationWillBeReturnd_whenASearchByGain3() {
         database.accessAntennaDataBase();
         database.openAdvancedSearch();
-        database.advanceSearch("All","34.4","All","","","All","","Select Compliance");
-        database.antennaDataBaseGainSearchResult("34.4", 0);
+        database.submitAdvanceSearch("All","34.4","All","","","All","","Select Compliance");
+        database.evaluateAntennaDatabaseGainSearchResults("34.4", 0);
     }
 
 
@@ -404,8 +396,8 @@ public class DataBaseTest extends BaseTest{
     public void antDataBaseAdvancedSearch_AntWillBeReturnd_whenASearchByFCCCompliance1() {
         database.accessAntennaDataBase();
         database.openAdvancedSearch();
-        database.advanceSearch("All","","Point-to-Point","","","All","","Category A");
-        database.antennaDataBaseComplianceSearchResult("Category A", 0);
+        database.submitAdvanceSearch("All","","Point-to-Point","","","All","","Category A");
+        database.evaluateAntennaDataBaseComplianceSearchResults("Category A", 0);
     }
 
     /**COM-657
@@ -423,14 +415,14 @@ public class DataBaseTest extends BaseTest{
     public void antDataBaseAdvancedSearch_AntWillBeReturnd_whenASearchByDiameter() {
         database.accessAntennaDataBase();
         database.openAdvancedSearch();
-        database.advanceSearch("All","","Point-to-Point","8.01","","All","","Select Compliance");
-        database.antennaDataBaseDiameterSearchResult("2.44 / 8.01", 0);
+        database.submitAdvanceSearch("All","","Point-to-Point","8.01","","All","","Select Compliance");
+        database.evaluateAntennaDataBaseDiameterSearchResults("2.44 / 8.01", 0);
         database.clearDiameter();
-        database.advanceSearch("All","","All","8.00","","All","","Select Compliance");
-        database.antennaDataBaseDiameterSearchResult("2.44 / 8.01", 0);
+        database.submitAdvanceSearch("All","","All","8.00","","All","","Select Compliance");
+        database.evaluateAntennaDataBaseDiameterSearchResults("2.44 / 8.01", 0);
         database.clearDiameter();
-        database.advanceSearch("All","","All","2","","All","","Select Compliance");
-        database.antennaDataBaseDiameterSearchResult("0.61 / 2.00", 0);
+        database.submitAdvanceSearch("All","","All","2","","All","","Select Compliance");
+        database.evaluateAntennaDataBaseDiameterSearchResults("0.61 / 2.00", 0);
     }
 
     /**COM-653
@@ -450,7 +442,7 @@ public class DataBaseTest extends BaseTest{
     public void antDataBaseAdvancedSearch_AntWillCreateCSVFile_whenAExportIsSelected() {
         database.accessAntennaDataBase();
         database.openAdvancedSearch();
-        database.advanceSearch("All","","Point-to-Point","8.01","","All","","Select Compliance");
+        database.submitAdvanceSearch("All","","Point-to-Point","8.01","","All","","Select Compliance");
         database.export();
 
         //TODO tool limitation can't validate excel
@@ -482,11 +474,11 @@ public class DataBaseTest extends BaseTest{
     @Test
     public void antDataBaseAdvancedSearch_AppropriateAntennaDataWillAppear_whenViewAntennaInfo() {
         database.accessAntennaDataBase();
-        database.antennaDataBaseSearch("02306A","Commscope","","","950");
+        database.searchAntennaDatabase("02306A","Commscope","","","950");
         database.clickAndVal("8");
         database.antDbBasicInfoVal("02306A","Commscope","Commscope Family","P8F-9","8","","1","1");
-        database.antDbTechInfoVal("880", "950","20.3","8.01","3.2","20");
-        database.antDbRegInfoVal("1", "");
+        database.evaluateAntennaDatabaseTechecnicalInformation("880", "950","20.3","8.01","3.2","20");
+        database.evaluateAntennaDatabaseRegInformation("1", "");
         database.antDbEarthStationVal("", "");
     }
 
@@ -494,11 +486,11 @@ public class DataBaseTest extends BaseTest{
     public void antDataBaseAdvancedSearch_antDetailSameAsOnAntDB_whenAAntCodeIsSelected() {
         database.accessAntennaDataBase();
         database.openAdvancedSearch();
-        database.advanceSearch("All","","All","","","Horn Parabolic","","Select Compliance");
+        database.submitAdvanceSearch("All","","All","","","Horn Parabolic","","Select Compliance");
         database.clickAndVal("8");
         database.antDbBasicInfoVal("02306A","Commscope","Commscope Family","P8F-9","8","","1","1");
-        database.antDbTechInfoVal("880", "950","20.3","8.01","3.2","20");
-        database.antDbRegInfoVal("1", "");
+        database.evaluateAntennaDatabaseTechecnicalInformation("880", "950","20.3","8.01","3.2","20");
+        database.evaluateAntennaDatabaseRegInformation("1", "");
         database.antDbEarthStationVal("", "");
     }
 
@@ -519,13 +511,13 @@ public class DataBaseTest extends BaseTest{
     @Test
     public void antDataBaseAdvancedSearch_ErrorsWillAppear_whenClickCreate() {
         database.accessAntennaDataBase();
-        database.antennaDataBaseSearch("02306A","Commscope","","","950");
+        database.searchAntennaDatabase("02306A","Commscope","","","950");
         database.createAnt();
         database.saveCreatedAntenna();
-        database.createAntCompanyError();
-        database.createAntAntModelError();
-        database.createAntClassificationError();
-        database.createAntStatusError();
+        database.evaluateAntennaCompanyError();
+        database.evaluateAntennaModelError();
+        database.evaluateAntennaClassificationError();
+        database.evaluateAntennaStatusError();
         database.createAntLoFreqError();
         database.createAntHiFreqError();
         database.createAntMainbeamGainError();
@@ -549,17 +541,17 @@ public class DataBaseTest extends BaseTest{
     public void antDataBaseAdvancedSearch_StatusIconChangesWithStatushange_whenStatusIsChanged() {
         database.accessAntennaDataBase();
         database.openAdvancedSearch();
-        database.advanceSearch("All","","All","","","Horn Parabolic","","Select Compliance");
+        database.submitAdvanceSearch("All","","All","","","Horn Parabolic","","Select Compliance");
         database.clickAndVal("8");
         database.antDbBasicInfoVal("02306A","Commscope","Commscope Family","P8F-9","8","","1","1");
-        database.antDbTechInfoVal("880", "950","20.3","8.01","3.2","20");
-        database.antDbRegInfoVal("1", "");
+        database.evaluateAntennaDatabaseTechecnicalInformation("880", "950","20.3","8.01","3.2","20");
+        database.evaluateAntennaDatabaseRegInformation("1", "");
         database.antDbEarthStationVal("", "");
-        database.antDbBasicInfoChangeStatus("Invalid");
+        database.selectAntennaDatabaseBasicInformationChangeStatus("Invalid");
         database.changeStatusred();
-        database.antDbBasicInfoChangeStatus("Obsolete");
+        database.selectAntennaDatabaseBasicInformationChangeStatus("Obsolete");
         database.changeStatusYellow();
-        database.antDbBasicInfoChangeStatus("Active");
+        database.selectAntennaDatabaseBasicInformationChangeStatus("Active");
         database.changeStatusGreen();
         database.changeDiameterMeter();
         database.checkDiameterMeter("2.44");
@@ -592,10 +584,10 @@ public class DataBaseTest extends BaseTest{
         database.openAdvancedSearch();
         database.createAnt();
         database.saveCreatedAntenna();
-        database.createAntCompanyError();
-        database.createAntAntModelError();
-        database.createAntClassificationError();
-        database.createAntStatusError();
+        database.evaluateAntennaCompanyError();
+        database.evaluateAntennaModelError();
+        database.evaluateAntennaClassificationError();
+        database.evaluateAntennaStatusError();
         database.createAntLoFreqError();
         database.createAntHiFreqError();
         database.createAntMainbeamGainError();
@@ -640,10 +632,10 @@ public class DataBaseTest extends BaseTest{
         database.accessAntennaDataBase();
         database.openAdvancedSearch();
         database.createAnt();
-        database.antDbBasicInfoEntry("02306A","","","","Billboard","","Dual","Active");
+        database.enterAntennaDatabaseBasicInformationEntry("02306A","","","","Billboard","","Dual","Active");
 
-        database.antDbBlur();
-        database.errorText("Antenna Code is not unique.");
+        database.blurAntennaDatabase();
+        database.evaluateErrorUniqueness("Antenna Code is not unique.");
     }
 
     /**COM-664
@@ -656,9 +648,9 @@ public class DataBaseTest extends BaseTest{
         database.accessAntennaDataBase();
         database.openAdvancedSearch();
         database.createAnt();
-        database.antDbBasicInfoEntry("02306AWAW","","","","Billboard","","Dual","Active");
-        database.antDbBlur();
-        database.errorText("6 characters max.");
+        database.enterAntennaDatabaseBasicInformationEntry("02306AWAW","","","","Billboard","","Dual","Active");
+        database.blurAntennaDatabase();
+        database.evaluateErrorUniqueness("6 characters max.");
     }
 
     /**
@@ -673,9 +665,9 @@ public class DataBaseTest extends BaseTest{
         database.accessAntennaDataBase();
         database.openAdvancedSearch();
         database.createAnt();
-        database.antDbBasicInfoEntry("456655","","","","Billboard","","Dual","Active");
-        database.antDbBlurTech();
-        database.errorText("At least one letter should be present in Antennacode");
+        database.enterAntennaDatabaseBasicInformationEntry("456655","","","","Billboard","","Dual","Active");
+        database.blurTechAntennaDatabase();
+        database.evaluateErrorUniqueness("At least one letter should be present in Antennacode");
     }
 
     /**
@@ -791,10 +783,10 @@ public class DataBaseTest extends BaseTest{
         database.accessAntennaDataBase();
         database.openAdvancedSearch();
         database.createAnt();
-        database.antDbBasicInfoEntry("656541","Commscope","Commscope Family","P8F-9","Horn Parabolic","YYYYYY","Dual","Active");
-        database.antDbTechInfoEntry("880","950","20.3","8.01","3.2","20");
-        database.antDbEarthStationEntry("","");
-        database.antDbRegInfoEntry("Point-to-Point","Category A");
+        database.enterAntennaDatabaseBasicInformationEntry("656541","Commscope","Commscope Family","P8F-9","Horn Parabolic","YYYYYY","Dual","Active");
+        database.enterAntennaDatabTechnicalInformationEntry("880","950","20.3","8.01","3.2","20");
+        database.enterAntennaDatabaseEarthStationFieldValues("","");
+        database.enterAntennaDatabaseRegInformationEntry("Point-to-Point","Category A");
     }
 
     /**COM-700
@@ -855,9 +847,9 @@ public class DataBaseTest extends BaseTest{
         database.accessAntennaDataBase();
         database.openAdvancedSearch();
         database.createAnt();
-        database.antDbTechInfoEntry("AAA","AAA","AAA","AAA","AAA","AAA");
-        database.antDbBlurTech();
-        database.errorTechInfoText("Must be numerical value.","Must be numerical value.","Must be numerical value.","Must be numerical value.","Must be numerical value.","Must be numerical value.");
+        database.enterAntennaDatabTechnicalInformationEntry("AAA","AAA","AAA","AAA","AAA","AAA");
+        database.blurTechAntennaDatabase();
+        database.evaluateErrorTextOnTechnicalInformation("Must be numerical value.","Must be numerical value.","Must be numerical value.","Must be numerical value.","Must be numerical value.","Must be numerical value.");
 
     }
 
@@ -866,9 +858,9 @@ public class DataBaseTest extends BaseTest{
         database.accessAntennaDataBase();
         database.openAdvancedSearch();
         database.createAnt();
-        database.antDbTechInfoEntry("!@#","!@#","!@#","!@#","!@#","!@#");
-        database.antDbBlurTech();
-        database.errorTechInfoText("Must be numerical value.","Must be numerical value.","Must be numerical value.","Must be numerical value.","Must be numerical value.","Must be numerical value.");
+        database.enterAntennaDatabTechnicalInformationEntry("!@#","!@#","!@#","!@#","!@#","!@#");
+        database.blurTechAntennaDatabase();
+        database.evaluateErrorTextOnTechnicalInformation("Must be numerical value.","Must be numerical value.","Must be numerical value.","Must be numerical value.","Must be numerical value.","Must be numerical value.");
     }
 
     @Test
@@ -876,9 +868,9 @@ public class DataBaseTest extends BaseTest{
         database.accessAntennaDataBase();
         database.openAdvancedSearch();
         database.createAnt();
-        database.antDbTechInfoEntry("-22","-22","-22","-22","-22","-22");
-        database.antDbBlurTech();
-        database.errorTechInfoText("Must be a positive value.","Must be a positive value.","Must be a positive value.","Must be a positive value.","Must be a positive value.","Must be a positive value.");
+        database.enterAntennaDatabTechnicalInformationEntry("-22","-22","-22","-22","-22","-22");
+        database.blurTechAntennaDatabase();
+        database.evaluateErrorTextOnTechnicalInformation("Must be a positive value.","Must be a positive value.","Must be a positive value.","Must be a positive value.","Must be a positive value.","Must be a positive value.");
     }
 
     /**COM-700
@@ -922,21 +914,21 @@ public class DataBaseTest extends BaseTest{
         database.accessAntennaDataBase();
         database.openAdvancedSearch();
         database.createAnt();
-        database.antDbRegInfoEntry("Point-to-Point","Category A");
-        database.antDbBlur();
-        database.antDbRegInfoEntry("Point-to-Point","Category B");
-        database.antDbBlur();
-        database.antDbRegInfoEntry("Point-to-Point","Category B1");
-        database.antDbBlur();
-        database.antDbRegInfoEntry("Point-to-Point","Category B2");
-        database.antDbBlur();
-        database.antDbRegInfoEntry("Earth Station","S, Super Restricted");
-        database.antDbBlur();
-        database.antDbRegInfoEntry("Earth Station","U, Useable but Questionable");
-        database.antDbBlur();
-        database.antDbRegInfoEntry("Earth Station","R, Restricted");
+        database.enterAntennaDatabaseRegInformationEntry("Point-to-Point","Category A");
+        database.blurAntennaDatabase();
+        database.enterAntennaDatabaseRegInformationEntry("Point-to-Point","Category B");
+        database.blurAntennaDatabase();
+        database.enterAntennaDatabaseRegInformationEntry("Point-to-Point","Category B1");
+        database.blurAntennaDatabase();
+        database.enterAntennaDatabaseRegInformationEntry("Point-to-Point","Category B2");
+        database.blurAntennaDatabase();
+        database.enterAntennaDatabaseRegInformationEntry("Earth Station","S, Super Restricted");
+        database.blurAntennaDatabase();
+        database.enterAntennaDatabaseRegInformationEntry("Earth Station","U, Useable but Questionable");
+        database.blurAntennaDatabase();
+        database.enterAntennaDatabaseRegInformationEntry("Earth Station","R, Restricted");
 
-        database.antDbRegInfoVal("2","8");
+        database.evaluateAntennaDatabaseRegInformation("2","8");
     }
 
     /**
@@ -953,7 +945,7 @@ public class DataBaseTest extends BaseTest{
         database.accessAntennaDataBase();
         database.openAdvancedSearch();
         database.createAnt();
-        database.antDbBasicInfoEntry("656541","Com","Commscope Family","P8F-9","Horn Parabolic","YYYYYY","Dual","Active");
+        database.enterAntennaDatabaseBasicInformationEntry("656541","Com","Commscope Family","P8F-9","Horn Parabolic","YYYYYY","Dual","Active");
 
     }
 
@@ -1002,11 +994,10 @@ public class DataBaseTest extends BaseTest{
         database.accessAntennaDataBase();
         database.openAdvancedSearch();
         database.createAnt();
-        database.antDbBasicInfoManufacturerSuggestion("%sco%","Commscope");
-        database.antDbBasicInfoManufacturerSuggestion("%sco%","Commscope");
-        database.antDbBasicInfoManufacturerSuggestion("C","Commscope");
-        database.antDbBasicInfoManufacturerSuggestion("B","Billboard");
-        database.antDbBasicInfoManufacturerSuggestion("%pe","Commscope");
+        database.evaluateAntennaManufacturerSuggestionDatabaseBasicInformation("%sco%","Commscope");
+        database.evaluateAntennaManufacturerSuggestionDatabaseBasicInformation("%sco%","Commscope");
+        database.evaluateAntennaManufacturerSuggestionDatabaseBasicInformation("C","Commscope");
+        database.evaluateAntennaManufacturerSuggestionDatabaseBasicInformation("%pe","Commscope");
 
     }
 
@@ -1026,11 +1017,10 @@ public class DataBaseTest extends BaseTest{
         database.accessAntennaDataBase();
         database.openAdvancedSearch();
         database.createAnt();
-        database.antDbBasicInfoModelFamilySuggestion("Trunk","TrunkLine High Performance");
-        database.antDbBasicInfoModelFamilySuggestion("%sco%","Commscope Family");
-        database.antDbBasicInfoModelFamilySuggestion("%sco%","Commscope Family");
-        database.antDbBasicInfoModelFamilySuggestion("C","Commscope Family");
-        database.antDbBasicInfoModelFamilySuggestion("%pe%","Commscope Family");
+        database.evaluateModelFamilySuggestionListDatabaseBasicInformation("Trunk","TrunkLine High Performance");
+        database.evaluateModelFamilySuggestionListDatabaseBasicInformation("%sco%","Commscope Family");
+        database.evaluateModelFamilySuggestionListDatabaseBasicInformation("%sco%","Commscope Family");
+        database.evaluateModelFamilySuggestionListDatabaseBasicInformation("%pe%","Commscope Family");
 
     }
 
@@ -1047,8 +1037,8 @@ public class DataBaseTest extends BaseTest{
         database.accessAntennaDataBase();
         database.openAdvancedSearch();
         database.createAnt();
-        database.antDbModelFamilyEntry("Thirty Is the Limit  Thirty Is the Limit Thirty Is the Limit");
-        database.antDbModelFamilyError("Cannot exceed 30 characters");
+        database.submitModelFamilyAntennaDatabaseEntry("Thirty Is the Limit  Thirty Is the Limit Thirty Is the Limit");
+        database.evaluateAntennaDatabaseModelFamilyError("Cannot exceed 30 characters");
     }
 
     /**COM-700
@@ -1073,7 +1063,7 @@ public class DataBaseTest extends BaseTest{
         database.openAdvancedSearch();
         database.createAnt();
         for (String value : array) {
-            database.antDbBasicInfoEntry("", "", "", "", value, "", "Dual", "Active");
+            database.enterAntennaDatabaseBasicInformationEntry("", "", "", "", value, "", "Dual", "Active");
         }
 
     }
@@ -1106,9 +1096,9 @@ public class DataBaseTest extends BaseTest{
         database.accessAntennaDataBase();
         database.openAdvancedSearch();
         database.createAnt();
-        database.associatedAntennaCode("02306A", "02306X");
+        database.associateAntennaCode("02306A", "02306X");
         for (String value : polarizedList) {
-            database.antDbPolarizedEntry(value);
+            database.selectPolarizedEntryFromAntennaDatabase(value);
         }
 
     }
@@ -1118,11 +1108,11 @@ public class DataBaseTest extends BaseTest{
         database.accessAntennaDataBase();
         database.openAdvancedSearch();
         database.createAnt();
-        database.associatedAntennaCode("02306A", "02306X");
-        database.antDbBasicInfoEntry("656541","Commscope","Commscope Family","P8F-9","Horn Parabolic","YYYYYY","Dual","Active");
-        database.antDbTechInfoEntry("880","950","20.3","8.01","3.2","20");
-        database.antDbRegInfoEntry("Point-to-Point","Category B");
-        database.antDbEarthStationEntry("","");
+        database.associateAntennaCode("02306A", "02306X");
+        database.enterAntennaDatabaseBasicInformationEntry("656541","Commscope","Commscope Family","P8F-9","Horn Parabolic","YYYYYY","Dual","Active");
+        database.enterAntennaDatabTechnicalInformationEntry("880","950","20.3","8.01","3.2","20");
+        database.enterAntennaDatabaseRegInformationEntry("Point-to-Point","Category B");
+        database.enterAntennaDatabaseEarthStationFieldValues("","");
         database.saveCreatedAntenna();
     }
 
@@ -1139,7 +1129,7 @@ public class DataBaseTest extends BaseTest{
     public void antDataBasePattern_valueShouldGetPopulatedInRespectiveCells_whenCopyAntennaDiscrimination() {
         database.accessAntennaDataBase();
         database.openAdvancedSearch();
-        database.advanceSearch("All", "", "All", "", "7297", "All", "", "Select Compliance");
+        database.submitAdvanceSearch("All", "", "All", "", "7297", "All", "", "Select Compliance");
         database.RPEVal("7297");
         database.selectAntennaRow(0);
         database.copyPattern();
@@ -1175,7 +1165,7 @@ public class DataBaseTest extends BaseTest{
     public void antDataBasePattern_valueShouldGetPopulatedInRespectiveCells_whenCopyAntennaDiscriminationValue() {
         database.accessAntennaDataBase();
         database.openAdvancedSearch();
-        database.advanceSearch("All", "", "All", "", "7297", "All", "", "Select Compliance");
+        database.submitAdvanceSearch("All", "", "All", "", "7297", "All", "", "Select Compliance");
         database.RPEVal("7297");
         database.selectAntennaRow(0);
         database.openComments();
@@ -1224,7 +1214,7 @@ public class DataBaseTest extends BaseTest{
     public void antDataBasePattern_valueShouldGetPopulatedInRespectiveCells_whenCopyAntennaDiscriminationValueWith() {
         database.accessAntennaDataBase();
         database.openAdvancedSearch();
-        database.advanceSearch("All", "", "All", "", "7297", "All", "", "Select Compliance");
+        database.submitAdvanceSearch("All", "", "All", "", "7297", "All", "", "Select Compliance");
         database.RPEVal("7297");
         database.selectAntennaRow(0);
         database.openComments();
@@ -1272,7 +1262,7 @@ public class DataBaseTest extends BaseTest{
     public void antDataBasePattern_valueShouldGetPopulatedInRespectiveCells_whenCopyPasteAntennaCommas() {
             database.accessAntennaDataBase();
             database.openAdvancedSearch();
-            database.advanceSearch("All", "", "All", "", "7297", "All", "", "Select Compliance");
+            database.submitAdvanceSearch("All", "", "All", "", "7297", "All", "", "Select Compliance");
             database.RPEVal("7297");
             database.selectAntennaRow(0);
             database.openComments();
@@ -1326,7 +1316,7 @@ public class DataBaseTest extends BaseTest{
     public void antDataBasePattern_valueShouldGetPopulatedInRespectiveCells_whenCopyPasteAntennaPartialCommas() {
         database.accessAntennaDataBase();
         database.openAdvancedSearch();
-        database.advanceSearch("All", "", "All", "", "7297", "All", "", "Select Compliance");
+        database.submitAdvanceSearch("All", "", "All", "", "7297", "All", "", "Select Compliance");
         database.RPEVal("7297");
         database.selectAntennaRow(0);
         database.openComments();
@@ -1376,7 +1366,7 @@ public class DataBaseTest extends BaseTest{
     public void antDataBasePattern_valueShouldGetPopulatedInRespectiveCells_whenFlipPattern() {
         database.accessAntennaDataBase();
         database.openAdvancedSearch();
-        database.advanceSearch("All", "", "All", "", "7297", "All", "", "Select Compliance");
+        database.submitAdvanceSearch("All", "", "All", "", "7297", "All", "", "Select Compliance");
         database.RPEVal("7297");
         database.selectAntennaRow(0);
         database.openComments();
@@ -1417,7 +1407,7 @@ public class DataBaseTest extends BaseTest{
             database.valPattern(12, "45", "-85");
             database.valPattern(13, "100", "-73");
             database.valPattern(14, "180", "-73");
-            database.flipPattern();
+            database.submitFlipPattern();
             database.valPattern(14, "0", "0");
             database.valPattern(13, "-0.23", "0");
             database.valPattern(12, "-0.65", "-1.7");
@@ -1467,7 +1457,7 @@ public class DataBaseTest extends BaseTest{
     public void antDataBasePattern_CommentsShouldSave_whenEnteringComments() {
         database.accessAntennaDataBase();
         database.openAdvancedSearch();
-        database.advanceSearch("All", "", "All", "", "7297", "All", "", "Select Compliance");
+        database.submitAdvanceSearch("All", "", "All", "", "7297", "All", "", "Select Compliance");
         database.RPEVal("7297");
         database.selectAntennaRow(0);
         database.openComments();
@@ -1475,10 +1465,9 @@ public class DataBaseTest extends BaseTest{
         database.saveComments();
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");
         LocalDate localDate = LocalDate.now();
-        String w = dtf.format(localDate);
-        database.valComments("2017/09/14\n" +
-                "dg Lego Admin");
-
+        String gotDate = dtf.format(localDate);
+        database.evaluateComments("2017/09/21\n" +
+                "Test Comment Lego Admin");
 
     }
 }

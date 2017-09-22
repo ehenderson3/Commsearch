@@ -383,9 +383,11 @@ public class RadioPage extends BasePage {
 
     public void resetModulation(){
         type("1",commonLossFieldLeft);
-        click(radioCodeFieldLeft);
+        //LEGO-710
+        clickJS(radioCodeFieldLeft);
         slowDown(2);
-        click(radioMaxPowerLeft);
+        //LEGO-710
+        clickJS(radioMaxPowerLeft);
 
         slowDown(2);
     }
@@ -459,15 +461,17 @@ public class RadioPage extends BasePage {
         assertTrue("cannot find fav button",isDisplayed(saveFavButton,5));
         click(saveFavButton);
         assertTrue("cannot find radioMaxPowerLeft",isDisplayed(radioMaxPowerLeft,5));
-
-        click(radioMaxPowerLeft);
+        //LEGO-710
+        clickJS(radioMaxPowerLeft);
         clear(radioCodeFieldRight);
         clear(radioCodeFieldRight);
         slowDown(2);
-        click(radioMaxPowerLeft);
+        //LEGO-710
+        clickJS(radioMaxPowerLeft);
         String getFavCode = getFieldText(radioCodeFieldLeft);
         type(getFavCode,radioCodeFieldRight);
-        click(radioMaxPowerLeft);
+        //LEGO-710
+        clickJS(radioMaxPowerLeft);
     }
 
     public void saveFavRadioCodeEnterSameFavCode() {

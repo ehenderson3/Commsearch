@@ -300,7 +300,7 @@ public void pathDetailRadio_DisabledModEnabledNewMaxWillBeTheNewllyEnabled_whenD
     pathDetailRadio.validateCurrentMaxPowerAndCoordinatedPower("24","24");
     pathDetailRadio.resetModulation();
 
-    pathDetailRadio.validateCurrentMaxPowerAndCoordinatedPower("26","26");
+    pathDetailRadio.validateCurrentMaxPowerAndCoordinatedPower("24","24");
   }
     /**COM-490
      * Max Power cannot be less than -20	Given a modulation's Max Power is >= -20,

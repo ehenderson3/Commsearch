@@ -230,7 +230,8 @@ public class PathDetailAntennaPage extends BasePage {
         type(luAntCode,lookUpAntennaCode);
 
         //Click the search button
-        click(lookUpSearchButton);
+        //LEGO-710
+        clickJS(lookUpSearchButton);
 
         //Verify that there is at least one search result
         isDisplayed(antResultListItem,8);
