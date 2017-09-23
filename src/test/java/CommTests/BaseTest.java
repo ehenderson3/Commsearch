@@ -39,8 +39,8 @@ public class BaseTest implements Config {
                 driver = new RemoteWebDriver(new URL(browserStackUrl), capabilities);
             } else if (host.equals("localhost")) {
                 if (browser.equals("firefox")) {
-                    //System.setProperty("webdriver.gecko.driver", System.getProperty("user.dir") + "/vendor/geckodriver.exe");
-                    System.setProperty("webdriver.gecko.driver", System.getProperty("user.dir") + "/vendor/Mac/geckodriver");
+                    System.setProperty("webdriver.gecko.driver", System.getProperty("user.dir") + "/vendor/geckodriver.exe");
+                    //System.setProperty("webdriver.gecko.driver", System.getProperty("user.dir") + "/vendor/Mac/geckodriver");
                     DesiredCapabilities cap = DesiredCapabilities.firefox();
                     cap.setCapability("firefox", true);
                     driver = new FirefoxDriver(cap);
@@ -54,8 +54,8 @@ public class BaseTest implements Config {
                     options.addArguments("--incognito");
                     capabilities.setCapability(ChromeOptions.CAPABILITY, options);
                     System.setProperty("webdriver.chrome.driver",
-                            //System.getProperty("user.dir") + "/vendor/chromedriver.exe");
-                            System.getProperty("user.dir") + "/vendor/Mac/chromedriver");
+                            System.getProperty("user.dir") + "/vendor/chromedriver.exe");
+                            //System.getProperty("user.dir") + "/vendor/Mac/chromedriver");
                    driver = new ChromeDriver(capabilities);
                 } else if (browser.equals("IE")){
                     DesiredCapabilities ieCapabilities = DesiredCapabilities.internetExplorer();
