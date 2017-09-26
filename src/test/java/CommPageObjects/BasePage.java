@@ -641,6 +641,13 @@ public class BasePage implements Config {
             }
         }
     }
+    public String getAttributeValue(By id) {
+    	WebElement disabled = driver.findElement(id);
+    	String fieldValue = new String();
+    	fieldValue = disabled.getAttribute("value");
+    	return fieldValue;
+    }
+
 
     public static final String INACTIVE_POINTER = "inactive pointer";
     public static final String DOWN_POINTER = "active direction-down pointer";

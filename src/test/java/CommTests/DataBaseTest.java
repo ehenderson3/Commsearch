@@ -1470,6 +1470,23 @@ public class DataBaseTest extends BaseTest{
                 "Test Comment Lego Admin");
 
     }
+    
+    /*
+     * LEGO-707 or COM-648: UI/UX Add Reference Code to Antenna DB advanced search
+     */
+    @Test
+    public void antReferenceCode_ShouldReturnAntennas_WhenSearchByReferenceCode(){
+      database.accessAntennaDataBase();
+            database.openAdvancedSearch(); 
+            //get the required data to validate reference code search by using the manufacturer field
+            String manufacturerValue = database.getManufacturer();
+            String antennaCode=database.searchManufacturer_getAntennaCodeFromResults(manufacturerValue);
+            String referenceCode=database.getReferenceCodeFromAntennaCode(antennaCode);
+            System.out.println("referenceCode "+referenceCode);
+            database.advancedSearchReferenceCode(referenceCode,antennaCode);
+
+    }
+
 }
 
 

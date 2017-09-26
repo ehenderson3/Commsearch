@@ -88,6 +88,13 @@ public class DataBasePage extends BasePage {
 	By modelFamilyFieldSuggestion = By.xpath("//*[contains(@id, 'antenna-details-antenna-model-family-suggestion-')]");//antenna-details-antenna-company-suggestion-Commscope
 	By modelFamilyFieldSuggestionCommscopeFamily = By.xpath("//*[contains(@id, 'antenna-db-search-antenna-model-family-suggestion-')and contains(text(), 'Commscope Family')]");//antenna-details-antenna-company-suggestion-Commscope
 
+	//Manufacturer autosuggest
+    By manufacturerAutoSuggest = By.cssSelector(".react-autosuggest__suggestions-list");
+    By manufacturerAutoSuggestList = By.xpath("//*[contains(@id, 'antenna-db-search-antenna-company-suggestion-')]");
+    By antennaReferenceCodeInAntennaDetails=By.id("antenna-details-rpe-code");
+    By summaryButtonOnAntennaDetails=By.cssSelector(".heading-font.btn.btn-md.hover-inverse.bg-white.btn-border.text-blue-dark");
+    By antDbAdvancedSearchRefCode = By.id("antenna-db-search-reference-code");
+
 	//By.xpath( "//li[contains(text(), 'Second')]" )
 	//antenna-details-front-to-back-error-message
 	By basicInforStatusGreen = By.cssSelector(".database-search-status-icon.margin-left-1.bg-green");
@@ -630,7 +637,7 @@ public class DataBasePage extends BasePage {
 		type(ExitingFamilyRow1, newModelFamilyNameField);
 		click(saveNewModelFamily);
 
-		String partialExistingModelFamilyText=ExitingFamilyRow1.substring(0,2);
+		String partialExistingModelFamilyText=ExitingFamilyRow1.substring(0,1);
 		assertTrue("Error message missing",isDisplayed(modelFamilyErrorMessage,5));
 
 		String ModelFamilyErrorMessageValue = getText(modelFamilyErrorMessage);
@@ -648,7 +655,7 @@ public class DataBasePage extends BasePage {
 			try
 			{
 				LineItemInList = getTextPlural(savedAntennaModelFamilies,i);
-				partialLineItemList=LineItemInList.substring(0,2);
+				partialLineItemList=LineItemInList.substring(0,1);
 				assertEquals(partialLineItemList,partialExistingModelFamilyText);
 
 			}
@@ -1203,5 +1210,82 @@ public class DataBasePage extends BasePage {
 		assertEquals(antPatternDate,antPatternDateValue);
 	}
 
+	/**
+	 * This method picks the available manufacturer name from the Manufacturer field auto suggest
+	 * from Antenna Database search
+	 */
+	public String getManufacturer(){
+		assertTrue("Manufactuyrer field is not displayed in Antenna search screen",isDisplayed(antDbAntCompanyField));
+		click(antDbAntCompanyField);
+		slowDown(2);
+		assertTrue("Manufactuyrer autosuggest List is missing",isDisplayed(manufacturerAutoSuggestList));
+		String manufacturerDataValue=getTextPlural(manufacturerAutoSuggestList, 0);
+		System.out.println("manufacturerDataValue "+manufacturerDataValue);
+		return manufacturerDataValue;
+
+	}
+
+	/**
+	 * This method perform a search by manufacturer field and grabs the first antenna code from the result
+	 * @return 
+	 * 
+	 */
+	public String searchManufacturer_getAntennaCodeFromResults(String Manufacturer){
+		assertTrue("Manufactuyrer field is not displayed in Antenna search screen",isDisplayed(antDbAntCompanyField));
+		clear(antDbAntCompanyField);
+		type(Manufacturer, antDbAntCompanyField);
+		slowDown(6);
+		click(antDbSearchButton);
+		slowDown(2);
+		assertTrue("Antenna Database search Results missing",isDisplayed(antDbAntCodeResult,2));
+		click(antDbAntCodeResult,0);
+		slowDown(2);
+		assertTrue("Antenna Details page did not open" ,isDisplayed(antDbbasicInformationCompany,5));
+		String antenna_code=getAttributeValue(antDbbasicInformationAntennaCode);
+		System.out.println("antenna_code :" +antenna_code);
+		click(summaryButtonOnAntennaDetails);
+		return(antenna_code);
+	}
+	/**
+	 * This method is to grab referenceCode from AntennaCode
+	 */
+	public String getReferenceCodeFromAntennaCode(String antennaCode){
+		assertTrue("Manufactuyrer field is not displayed in Antenna search screen",isDisplayed(antDbAntCompanyField,6));
+		clear(antDbAntCodeField);
+		type(antennaCode, antDbAntCodeField);     
+		click(antDbSearchButton);
+		slowDown(2);
+		assertTrue("Antenna search results are missing" ,isDisplayed(antDbAntCodeResult,5));
+		click(antDbAntCodeResult,0);
+		slowDown(2);
+		String referenceCode=getFieldText(antennaReferenceCodeInAntennaDetails);
+		click(summaryButtonOnAntennaDetails);
+		return referenceCode;
+
+	}
+	/**
+	 * This method is to perform advanced searchWithReferenceCode
+	 */
+	public void advancedSearchReferenceCode(String referenceCode, String antennaCode){
+		assertTrue("Antenna search Link is missing" ,isDisplayed(antDbAdvancedSearchLink,5));
+		slowDown(3);
+		click(antDbAdvancedSearchLink);
+		slowDown(1);
+		assertTrue("Advanced search reference code is not present",isDisplayed(antDbAdvancedSearchRefCode,5));
+		clear(antDbAdvancedSearchRefCode);
+		type(referenceCode, antDbAdvancedSearchRefCode);
+		clear(antDbAntCodeField);
+		type(antennaCode, antDbAntCodeField);     
+		click(antDbSearchButton);
+		slowDown(2);
+		assertTrue("Antenna Database search Results missing",isDisplayed(antCodeListResult,2));
+		click(antDbAntCodeResult,0);
+		slowDown(2);
+		assertTrue("Reference code field missing",isDisplayed(antennaReferenceCodeInAntennaDetails,2));
+
+		String ReferenceFieldValue=getFieldText(antennaReferenceCodeInAntennaDetails);
+		assertEquals(referenceCode,ReferenceFieldValue);
+
+	}
 
 }
