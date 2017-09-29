@@ -179,7 +179,7 @@ public class PathSummaryPage extends BasePage {
 
     public PathSummaryPage(WebDriver driver) {
         super(driver);
-        visit("/");
+        visit("");
     }
 
 

@@ -82,7 +82,7 @@ public class PathSummaryTest extends BaseTest {
 
         quickAdd.quickAddPathGeneral2("Test Path 1", "4.0 GHz", "ASR-Call","", "","55", "KA3982");
         quickAdd.quickAddPathGeneral2("Test Path 2", "4.0 GHz", "ASR-Call","", "","55", "KA2049");
-        //pathSummary.hoverPassiveRepeaterValSiteInfo();TODO feature not ready
+        //pathSummary.hoverPassiveRepeaterValSiteInfo();//TODO feature not ready
     }
     //    Given that user is logged in with appropriate permission,
     //    When a cursor hovers over the Site Location icon icon in the SITE column,
@@ -155,7 +155,6 @@ public class PathSummaryTest extends BaseTest {
         pathSummary.filter("Path Name","Test Path 3");
         pathSummary.validatePathNameFilteredResult("Test Path 3");
 
-        //TODO update for company filter is
         pathSummary.filter("Company","Verizon TX");
         pathSummary.showAllPathsWithNoAssignedFrequencyBandsPresent();
         assertEquals(pathSummary.showAllCheckBoxText(),"Show all Paths with No Assigned Company");
@@ -295,8 +294,6 @@ public class PathSummaryTest extends BaseTest {
         When paths are selected/highlighted,
         Then the following action can be taken:
         Split Project; Delete Paths; Quick Check; Bulk Edits; Interference Analysis
-        //TODO//    Split Project; Delete Paths; Quick Check; Bulk Edits; Interference Analysis
-
         //2/18 Added support for new locators
     */
     @Test
@@ -317,10 +314,6 @@ public class PathSummaryTest extends BaseTest {
         pathSummary.checkForDeleteCandidates("Test Path 1", "Test Path 2", "Test Path 3");
         pathSummary.deleteSinglePath();
         pathSummary.checkForDeletedPath("First Path adding extra to test name length");
-        //pathSummary.valSplitProject("First Path");
-        //pathSummary.valQuickCheck("First Path");
-        //pathSummary.valBulkEdits("First Path");
-        //pathSummary.valInterferenceAnalysis("First Path");
     }
 
     /*
@@ -432,10 +425,8 @@ public class PathSummaryTest extends BaseTest {
     /*
         COM 102
         Project Menu - The project menu will give Users additional tools for managing their Project:
-        -Split Project //TODO
         -Delete Paths
         -Settings
-        -Reporting//TODO
 
        COM 106
         Settings: Settings allows the user to manage basic settings & controls for the Project (Default setting are controlled in the User Settings) - Project Settings will have defaults set up in the Global setting for the application - *Individual User defaults is a potential option
@@ -771,7 +762,6 @@ public class PathSummaryTest extends BaseTest {
         Validation: value must be a number which is greater than 0
         and no greater than 1000. Only two decimal places are allowed.
      */
-//TODO Update this val messages to 100000
     @Test
     public void valKFactorField() {
         createPath.createBrandNewProjectPath("Best Project Ever"+ randomNumber, "This is the Default");
@@ -816,7 +806,6 @@ public class PathSummaryTest extends BaseTest {
 
         quickAdd.quickAddPathGeneral2("Test Path 1", "23.0 GHz", "ASR-Call","32 47 16.4 N", "96 47 59 W","55", "KA3982");
         if(browser.equals("firefox")){
-            //TODO need to fix timing
              }else{
         pathSummary.valKDefaultAvailabilityTargetSetting();}
     }

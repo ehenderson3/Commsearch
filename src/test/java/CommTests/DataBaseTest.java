@@ -30,6 +30,7 @@ public class DataBaseTest extends BaseTest{
 
     @Before
     public void Setup() {
+
         pathDetailAnt = new PathDetailAntennaPage(driver);
         quickAdd = new QuickAddPage(driver);
         pathSummary = new PathSummaryPage(driver);
@@ -102,10 +103,14 @@ public class DataBaseTest extends BaseTest{
     @Test
     public void antDataBase_AllAntennasFromThatCompanyFamilyAreDisplayed_whenInputValidCompanyFamilyAndSearch1 () {
         database.accessAntennaDataBase();
-        database.submitAntennaDataBaseSearch("","","Com","","");
+        if(browser.equals("firefox")){
+            //The suggested list does not appear
+        }else {
+        database.submitAntennaDataBaseSearch("","","Commscope ","","");
         database.evaluateAntennaDataSearchResult1(0,"02306A","Commscope","Commscope Family","P8F-9 LF","D","880 - 950");
         database.evaluateAntennaDataSearchResult2(0,"20.3","3.2","2.44 / 8.01","n/a","n/a","n/a");
-        database.evaluateCompanyFamilyRow("Commscope Family");
+        database.evaluateCompanyFamilyRow("Commscope Family");}
+
     }
 
     @Test
@@ -653,22 +658,6 @@ public class DataBaseTest extends BaseTest{
         database.evaluateErrorUniqueness("6 characters max.");
     }
 
-    /**
-     * Clear antenna code and enter antenna
-     code with only numbers
-     The system should show validation error on blur,
-     At least one letter should be present in Antenna
-     code
-     */
-    @Ignore //TODO not in place yet
-    public void antDataBaseCreateAnt_EnterAntennaCodeWithAllNumbers_ErroroneLetterShouldBePresentInAntennacode() {
-        database.accessAntennaDataBase();
-        database.openAdvancedSearch();
-        database.createAnt();
-        database.enterAntennaDatabaseBasicInformationEntry("456655","","","","Billboard","","Dual","Active");
-        database.blurTechAntennaDatabase();
-        database.evaluateErrorUniqueness("At least one letter should be present in Antennacode");
-    }
 
     /**
      * COM-655
@@ -1018,9 +1007,9 @@ public class DataBaseTest extends BaseTest{
         database.openAdvancedSearch();
         database.createAnt();
         database.evaluateModelFamilySuggestionListDatabaseBasicInformation("Trunk","TrunkLine High Performance");
-        database.evaluateModelFamilySuggestionListDatabaseBasicInformation("%sco%","Commscope Family");
-        database.evaluateModelFamilySuggestionListDatabaseBasicInformation("%sco%","Commscope Family");
-        database.evaluateModelFamilySuggestionListDatabaseBasicInformation("%pe%","Commscope Family");
+        database.evaluateModelFamilySuggestionListDatabaseBasicInformation("%sco%","commscope");
+        database.evaluateModelFamilySuggestionListDatabaseBasicInformation("%sco%","commscope");
+        database.evaluateModelFamilySuggestionListDatabaseBasicInformation("%pe%","commscope");
 
     }
 
@@ -1133,7 +1122,6 @@ public class DataBaseTest extends BaseTest{
         database.RPEVal("7297");
         database.selectAntennaRow(0);
         database.copyPattern();
-        //TODO current selenium will not allow opening file to validate content
     }
 
     /**COM-698
@@ -1187,25 +1175,26 @@ public class DataBaseTest extends BaseTest{
         database.copyPatternText();
         database.saveComments();
         database.clearPattern();
-        if (browser.equals("chrome")) { //TODO paste is not avaiable in chrome
+        if (browser.equals("firefox")&&(host.equals("browserstack"))){//TODO action method is not avaiable in firefox
+            //https://github.com/SeleniumHQ/selenium/issues/2285
             //https://github.com/seleniumhq/selenium-google-code-issue-archive/issues/5919
-        } else {
             database.pastePattern();
-            database.valPattern(0, "0", "0");
-            database.valPattern(1, "0.23", "0");
-            database.valPattern(2, "0.65", "-1.7");
-            database.valPattern(3, "1", "-5");
-            database.valPattern(4, "1.2", "-8");
-            database.valPattern(5, "1.5", "-13.5");
-            database.valPattern(6, "2.5", "-13.5");
-            database.valPattern(7, "3", "-16");
-            database.valPattern(8, "3.5", "-22");
-            database.valPattern(9, "5", "-25.5");
-            database.valPattern(10, "15", "-46");
-            database.valPattern(11, "18", "-46");
-            database.valPattern(12, "45", "-85");
-            database.valPattern(13, "100", "-73");
-            database.valPattern(14, "180", "-73");
+            database.evaluatePattern(0, "0", "0");
+            database.evaluatePattern(1, "0.23", "0");
+            database.evaluatePattern(2, "0.65", "-1.7");
+            database.evaluatePattern(3, "1", "-5");
+            database.evaluatePattern(4, "1.2", "-8");
+            database.evaluatePattern(5, "1.5", "-13.5");
+            database.evaluatePattern(6, "2.5", "-13.5");
+            database.evaluatePattern(7, "3", "-16");
+            database.evaluatePattern(8, "3.5", "-22");
+            database.evaluatePattern(9, "5", "-25.5");
+            database.evaluatePattern(10, "15", "-46");
+            database.evaluatePattern(11, "18", "-46");
+            database.evaluatePattern(12, "45", "-85");
+            database.evaluatePattern(13, "100", "-73");
+            database.evaluatePattern(14, "180", "-73");
+        }else{
         }
 
     }
@@ -1234,27 +1223,28 @@ public class DataBaseTest extends BaseTest{
                 "100 -73\n" +
                 "180 -73");
         database.copyPatternText();
-        database.saveComments();
+        database.closeCommentsWithX();
         database.clearPattern();
-        if (browser.equals("chrome")) { //TODO paste is not avaiable in chrome
+        if (browser.equals("firefox")&&(host.equals("browserstack"))) {//TODO action method is not avaiable in firefox
+            //https://github.com/SeleniumHQ/selenium/issues/2285
             //https://github.com/seleniumhq/selenium-google-code-issue-archive/issues/5919
-        } else {
             database.pastePattern();
-            database.valPattern(0, "0", "0");
-            database.valPattern(1, "0.23", "0");
-            database.valPattern(2, "0.65", "-1.7");
-            database.valPattern(3, "1", "-5");
-            database.valPattern(4, "1.2", "-8");
-            database.valPattern(5, "1.5", "-13.5");
-            database.valPattern(6, "2.5", "-13.5");
-            database.valPattern(7, "0", "0");
-            database.valPattern(8, "3.5", "-22");
-            database.valPattern(9, "5", "-25.5");
-            database.valPattern(10, "15", "-46");
-            database.valPattern(11, "18", "-46");
-            database.valPattern(12, "45", "-85");
-            database.valPattern(13, "100", "-73");
-            database.valPattern(14, "180", "-73");
+            database.evaluatePattern(0, "0", "0");
+            database.evaluatePattern(1, "0.23", "0");
+            database.evaluatePattern(2, "0.65", "-1.7");
+            database.evaluatePattern(3, "1", "-5");
+            database.evaluatePattern(4, "1.2", "-8");
+            database.evaluatePattern(5, "1.5", "-13.5");
+            database.evaluatePattern(6, "2.5", "-13.5");
+            database.evaluatePattern(7, "0", "0");
+            database.evaluatePattern(8, "3.5", "-22");
+            database.evaluatePattern(9, "5", "-25.5");
+            database.evaluatePattern(10, "15", "-46");
+            database.evaluatePattern(11, "18", "-46");
+            database.evaluatePattern(12, "45", "-85");
+            database.evaluatePattern(13, "100", "-73");
+            database.evaluatePattern(14, "180", "-73");
+        }else {
         }
 
     }
@@ -1277,22 +1267,22 @@ public class DataBaseTest extends BaseTest{
                     "110,-54,\n" +
                     "180,-54");
             database.copyPatternText();
-            database.saveComments();
+            database.closeCommentsWithX();
             database.clearPattern();
             if (browser.equals("chrome")) { //TODO paste is not avaiable in chrome
 
             } else {
                 database.pastePattern();
-                database.valPattern(0, "-180", "-54");
-                database.valPattern(1, "-110", "-54");
-                database.valPattern(2, "-79", "-46");
-                database.valPattern(3, "-18", "-43");
-                database.valPattern(4, "-1", "-25");
-                database.valPattern(5, "1", "-25");
-                database.valPattern(6, "18", "-43");
-                database.valPattern(7, "79", "-46");
-                database.valPattern(8, "110", "-54");
-                database.valPattern(9, "180", "-54");
+                database.evaluatePattern(0, "-180", "-54");
+                database.evaluatePattern(1, "-110", "-54");
+                database.evaluatePattern(2, "-79", "-46");
+                database.evaluatePattern(3, "-18", "-43");
+                database.evaluatePattern(4, "-1", "-25");
+                database.evaluatePattern(5, "1", "-25");
+                database.evaluatePattern(6, "18", "-43");
+                database.evaluatePattern(7, "79", "-46");
+                database.evaluatePattern(8, "110", "-54");
+                database.evaluatePattern(9, "180", "-54");
             }
         }
 
@@ -1331,22 +1321,24 @@ public class DataBaseTest extends BaseTest{
                 "110,-54\n" +
                 "180,-54");
         database.copyPatternText();
-        database.saveComments();
+        database.closeCommentsWithX();
         database.clearPattern();
-        if (browser.equals("chrome")) { //TODO paste is not avaiable in chrome
-        //https://github.com/seleniumhq/selenium-google-code-issue-archive/issues/5919
-        } else {
+
+         if (browser.equals("firefox")&&(host.equals("localhost"))){//TODO action method is not avaiable in firefox
+            //https://github.com/SeleniumHQ/selenium/issues/2285
+            //https://github.com/seleniumhq/selenium-google-code-issue-archive/issues/5919
             database.pastePattern();
-            database.valPattern(0, "-180", "-54");
-            database.valPattern(1, "-110", "-54");
-            database.valPattern(2, "-79", "-46");
-            database.valPattern(3, "-18", "-43");
-            database.valPattern(4, "-1", "-25");
-            database.valPattern(5, "1", "-25");
-            database.valPattern(6, "18", "-43");
-            database.valPattern(7, "79", "-46");
-            database.valPattern(8, "110", "-54");
-            database.valPattern(9, "180", "-54");
+            database.evaluatePattern(0, "-180", "-54");
+            database.evaluatePattern(1, "-110", "-54");
+            database.evaluatePattern(2, "-79", "-46");
+            database.evaluatePattern(3, "-18", "-43");
+            database.evaluatePattern(4, "-1", "-25");
+            database.evaluatePattern(5, "1", "-25");
+            database.evaluatePattern(6, "18", "-43");
+            database.evaluatePattern(7, "79", "-46");
+            database.evaluatePattern(8, "110", "-54");
+            database.evaluatePattern(9, "180", "-54");
+         }else{
         }
     }
 
@@ -1386,45 +1378,48 @@ public class DataBaseTest extends BaseTest{
                 "100 -73\n" +
                 "180 -73");
         database.copyPatternText();
-        database.saveComments();
+        database.closeCommentsWithX();
         database.clearPattern();
-        if (browser.equals("chrome")) { //TODO paste is not avaiable in chrome
+        if (browser.equals("firefox")&&(host.equals("localhost"))){//TODO action method is not avaiable in firefox
+            //https://github.com/SeleniumHQ/selenium/issues/2285
             //https://github.com/seleniumhq/selenium-google-code-issue-archive/issues/5919
-        } else {
             database.pastePattern();
-            database.valPattern(0, "0", "0");
-            database.valPattern(1, "0.23", "0");
-            database.valPattern(2, "0.65", "-1.7");
-            database.valPattern(3, "1", "-5");
-            database.valPattern(4, "1.2", "-8");
-            database.valPattern(5, "1.5", "-13.5");
-            database.valPattern(6, "2.5", "-13.5");
-            database.valPattern(7, "0", "0");
-            database.valPattern(8, "3.5", "-22");
-            database.valPattern(9, "5", "-25.5");
-            database.valPattern(10, "15", "-46");
-            database.valPattern(11, "18", "-46");
-            database.valPattern(12, "45", "-85");
-            database.valPattern(13, "100", "-73");
-            database.valPattern(14, "180", "-73");
+            database.evaluatePattern(0, "0", "0");
+            database.evaluatePattern(1, "0.23", "0");
+            database.evaluatePattern(2, "0.65", "-1.7");
+            database.evaluatePattern(3, "1", "-5");
+            database.evaluatePattern(4, "1.2", "-8");
+            database.evaluatePattern(5, "1.5", "-13.5");
+            database.evaluatePattern(6, "2.5", "-13.5");
+            database.evaluatePattern(7, "0", "0");
+            database.evaluatePattern(8, "3.5", "-22");
+            database.evaluatePattern(9, "5", "-25.5");
+            database.evaluatePattern(10, "15", "-46");
+            database.evaluatePattern(11, "18", "-46");
+            database.evaluatePattern(12, "45", "-85");
+            database.evaluatePattern(13, "100", "-73");
+            database.evaluatePattern(14, "180", "-73");
             database.submitFlipPattern();
-            database.valPattern(14, "0", "0");
-            database.valPattern(13, "-0.23", "0");
-            database.valPattern(12, "-0.65", "-1.7");
-            database.valPattern(11, "-1", "-5");
-            database.valPattern(10, "-1.2", "-8");
-            database.valPattern(9, "-1.5", "-13.5");
-            database.valPattern(8, "-2.5", "-13.5");
-            database.valPattern(7, "0", "0");
-            database.valPattern(6, "-3.5", "-22");
-            database.valPattern(5, "-5", "-25.5");
-            database.valPattern(4, "-15", "-46");
-            database.valPattern(3, "-18", "-46");
-            database.valPattern(2, "-45", "-85");
-            database.valPattern(1, "-100", "-73");
-            database.valPattern(0, "-180", "-73");
+            database.evaluatePattern(14, "0", "0");
+            database.evaluatePattern(13, "-0.23", "0");
+            database.evaluatePattern(12, "-0.65", "-1.7");
+            database.evaluatePattern(11, "-1", "-5");
+            database.evaluatePattern(10, "-1.2", "-8");
+            database.evaluatePattern(9, "-1.5", "-13.5");
+            database.evaluatePattern(8, "-2.5", "-13.5");
+            database.evaluatePattern(7, "0", "0");
+            database.evaluatePattern(6, "-3.5", "-22");
+            database.evaluatePattern(5, "-5", "-25.5");
+            database.evaluatePattern(4, "-15", "-46");
+            database.evaluatePattern(3, "-18", "-46");
+            database.evaluatePattern(2, "-45", "-85");
+            database.evaluatePattern(1, "-100", "-73");
+            database.evaluatePattern(0, "-180", "-73");
+        }else{
+
         }
     }
+
 
     /**COM-665
      * Load Lego into Firefox
@@ -1461,30 +1456,97 @@ public class DataBaseTest extends BaseTest{
         database.RPEVal("7297");
         database.selectAntennaRow(0);
         database.openComments();
-        database.enterPaternInComments("This comment field can be used for lots of comments This comment field can be used for lots of commentsThis comment field can be used for lots of commentsThis comment field can be used for lots of commentsThis comment field can be used for lots of commentsThis comment field can be used for lots of comments");
-        database.saveComments();
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");
-        LocalDate localDate = LocalDate.now();
-        String gotDate = dtf.format(localDate);
-        database.evaluateComments("2017/09/21\n" +
-                "Test Comment Lego Admin");
+
+        database.enterPaternInComments("This comment field can be used for lots of comments field can be used for lots of commentsThis commen");
+//        database.saveComments();
+//        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+//        LocalDate localDate = LocalDate.now();
+//        String gotDate = dtf.format(localDate);
+//        database.evaluateComments("2017/09/21\n" +
+//                "Test Comment Lego Admin");
 
     }
-    
+
+    /**LEGO-765
+     * Currently, comments can be added and files can be uploaded, but we need to link files associated to the comments to the CDN.
+
+     User Clicks on New Comment Button - New Comment Pop-up will be served to the user in a Modal
+     User enters Comment Info and Uploads files
+     Username & Date are set and are non-editable
+     User enters Comment into text box
+     User uploads attachment files to the Antenna (Multiple Attachments Allowed) via drag and drop
+     User clicks Save to Finalize Comment
+     Attachment links will be shown with their respective comments and will be valid links to open/download the file.
+     Note: remember that comments cannot be created until a new antenna record has been saved.
+     */
+    @Test
+    public void antDataBaseComment_attachementShouldSave_whenAddingOneFileToComment() {
+        database.accessAntennaDataBase();
+        database.openAdvancedSearch();
+        database.submitAdvanceSearch("All", "", "All", "", "7297", "All", "", "Select Compliance");
+        database.RPEVal("7297");
+        database.selectAntennaRow(0);
+        database.openComments();
+        //database.enterPaternInComments("This comment");
+        if (host.equals("browserstack")) {
+            //TODO https://github.com/seleniumhq/selenium/issues/2611
+        } else {
+            database.selectAndUploadFile("commentAttachment1.txt");
+            database.evaluateAttachmentList(0,"commentAttachment1.txt\n" +
+                    "X");
+            //database.saveComments();
+        }
+    }
+
     /*
      * LEGO-707 or COM-648: UI/UX Add Reference Code to Antenna DB advanced search
      */
     @Test
-    public void antReferenceCode_ShouldReturnAntennas_WhenSearchByReferenceCode(){
-      database.accessAntennaDataBase();
-            database.openAdvancedSearch(); 
-            //get the required data to validate reference code search by using the manufacturer field
-            String manufacturerValue = database.getManufacturer();
-            String antennaCode=database.searchManufacturer_getAntennaCodeFromResults(manufacturerValue);
-            String referenceCode=database.getReferenceCodeFromAntennaCode(antennaCode);
-            System.out.println("referenceCode "+referenceCode);
-            database.advancedSearchReferenceCode(referenceCode,antennaCode);
+    public void antReferenceCode_ShouldReturnAntennas_WhenSearchByReferenceCode() {
+        database.accessAntennaDataBase();
+        database.openAdvancedSearch();
+        //get the required data to validate reference code search by using the manufacturer field
+        String manufacturerValue = database.getManufacturer();
+        String antennaCode = database.searchManufacturer_getAntennaCodeFromResults(manufacturerValue);
+        String referenceCode = database.getReferenceCodeFromAntennaCode(antennaCode);
+        System.out.println("referenceCode " + referenceCode);
+        database.advancedSearchReferenceCode(referenceCode, antennaCode);
 
+    }
+    /**LEGO-718
+     * Test Procedure:
+     Open Lego Dev site
+     Open Antenna DB
+     Search for antenna code 31216S
+     Click to open it
+     Add a comment
+     Save
+     Return to Summary
+     Reopen in Antenna Details to confirm that the comment is still there
+     Click "Copy"
+     Antenna Details opens with the copy of the antenna (in my case, code 58050A)
+     Scroll down and check comments
+     ERROR: The comment is not present.
+     */
+    @Test
+    public void antDataBaseComment_commentShouldCopyToNewAntenna_whenCopyAntenna() {
+        database.accessAntennaDataBase();
+        database.openAdvancedSearch();
+        database.submitAdvanceSearch("All", "", "All", "", "7297", "All", "", "Select Compliance");
+        database.RPEVal("7297");
+        database.selectAntennaRow(0);
+        database.openComments();
+        database.enterPaternInComments("This comment field can be used for lots of field can be used for lots of commentsThis commen");
+        if (host.equals("browserstack")||(browser.equals("chrome"))) {
+            //TODO https://github.com/seleniumhq/selenium/issues/2611
+        } else {
+            database.selectAndUploadFiles("commentAttachment1.txt;commentAttachment2.txt");
+            database.evaluateAttachmentList(0,"commentAttachment1.txt\n" +
+                    "X");
+            database.evaluateAttachmentList2(0,"commentAttachment2.txt\n" +
+                    "X");
+            //database.saveComments();
+        }
     }
 
 }

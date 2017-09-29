@@ -97,17 +97,40 @@ public class PathDetailTest extends BaseTest {
         createPath.fillOutCompanyFilter("VZW333", "", "", 0);
         pathSummary.changeToUs();
         pathSummary.openPathDetailForAddingPath();
-
         pathDetail.siteSearch1("New York", "", "", "", "", "-");
-        pathDetail.siteSearchResults(0, "New York", "KA20003", "-", "9 26 42.7 N", "8 7 9 W", "-");
-
-
-
+        //so you get the max number of rows
+        int rows = pathDetail.getRows();
+        //Then loop through and do your check
+        for (int i = 0; i < rows; i++) {
+            //try and catch would be inside the for loop
+            try {
+                pathDetail.siteSearchResults(0, "New York", "KA20003", "-", "9 26 42.7 N", "8 7 9 W", "-");
+                break;
+            } catch (org.junit.ComparisonFailure failure) {
+                //in the catch you would check to see if there are any more rows left.
+                if (i >= rows) {
+                    throw failure;
+                }
+            }
+        }
         pathDetail.closeSiteLookup();
-
         pathDetail.siteSearch2("New York", "KA20003", "", "40 44 54 N", "", "");
-        pathDetail.siteSearchResults(0, "New York", "KA20003", "-", "9 26 42.7 N", "8 7 9 W", "-");}
-
+        //so you get the max number of rows
+        rows = pathDetail.getRows();
+        //Then loop through and do your check
+        for (int i = 0; i < rows; i++) {
+            //try and catch would be inside the for loop
+            try {
+                pathDetail.siteSearchResults(0, "New York", "KA20003", "-", "9 26 42.7 N", "8 7 9 W", "-");
+                break;
+            } catch (org.junit.ComparisonFailure failure) {
+                //in the catch you would check to see if there are any more rows left.
+                if (i >= rows) {
+                    throw failure;
+                }
+            }
+        }
+    }
 
     @Test
     public void pathDetailSiteSearch_searchResultsShouldContainAppropriateSite_whenSearchingBySiteNameAndCallSign() {
@@ -117,13 +140,37 @@ public class PathDetailTest extends BaseTest {
         pathSummary.openPathDetailForAddingPath();
 
         pathDetail.siteSearch1("New York", "KA20003", "", "", "", "");
-
-        pathDetail.siteSearchResults(0, "New York", "KA20003", "", "9 26 42.7 N", "8 7 9 W", "-");
-
+        int rows = pathDetail.getRows();
+        //Then loop through and do your check
+        for (int i = 0; i < rows; i++) {
+            //try and catch would be inside the for loop
+            try {
+                pathDetail.siteSearchResults(0, "New York", "KA20003", "-", "9 26 42.7 N", "8 7 9 W", "-");
+                break;
+            } catch (org.junit.ComparisonFailure failure) {
+                //in the catch you would check to see if there are any more rows left.
+                if (i >= rows) {
+                    throw failure;
+                }
+            }
+        }
         pathDetail.closeSiteLookup();
-
-        pathDetail.siteSearch2("New York", "KA20003", "", "", "", "");
-        pathDetail.siteSearchResults(0, "New York", "KA20003", "", "9 26 42.7 N", "8 7 9 W", "-");
+        pathDetail.siteSearch2("New York", "KA20003", "", "40 44 54 N", "", "");
+        //so you get the max number of rows
+        rows = pathDetail.getRows();
+        //Then loop through and do your check
+        for (int i = 0; i < rows; i++) {
+            //try and catch would be inside the for loop
+            try {
+                pathDetail.siteSearchResults(0, "New York", "KA20003", "-", "9 26 42.7 N", "8 7 9 W", "-");
+                break;
+            } catch (org.junit.ComparisonFailure failure) {
+                //in the catch you would check to see if there are any more rows left.
+                if (i >= rows) {
+                    throw failure;
+                }
+            }
+        }
     }
 
     @Test
@@ -887,8 +934,11 @@ public class PathDetailTest extends BaseTest {
         pathDetail.addAsrPathViaPathDetail2("SYNRAMS STATION", "1208837", "40 34 10 N", "122 26 14 W", "250");
         createPath.fillOutCompanyFilterFromDetails("", "Verizon", "", 1);
         pathDetailAnt.clickSaveDetails();
+
         quickAdd.valCompaniesThree("VERIZON TX","VERIZON AZ","VERIZON");
     }
+
+
     @Test
     public void pathDetail_AddSameCompanies_ResultShouldCompany() {
         boolean siteExist;

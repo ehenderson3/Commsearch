@@ -116,8 +116,6 @@ public class PathDetailAntennaTest extends BaseTest {
         pathDetailAnt.clickSaveDetails();
     }
 
-
-
     /**
      When the entry has <6 or >8 characters,
      Then a graceful error will be displayed.
@@ -151,7 +149,7 @@ public class PathDetailAntennaTest extends BaseTest {
          Then the selected antenna's info will auto fill in path details sheet
          AND the antenna lookup modal will close after an antenna is selected
      */
-    @Test//TODO 7/9 The site search yields nothing sent the following to Nemo https://www.screencast.com/t/wH38xHWRh
+    @Test//
     public void pathDetailAntModle_shouldAutoFill_whenExistingAntennaIsFoundOnSearch() {
         createPath.createBrandNewProjectPath("Add Antenna" + randomNumber, "This is the Default");
         createPath.fillOutCompanyFilter("VZW333", "", "", 0);
@@ -227,9 +225,6 @@ public class PathDetailAntennaTest extends BaseTest {
      pathDetailAnt.enterBadAntennaDataAndonBlurError("2145", "No match found for Antenna Code.","5854", "No match found for Antenna Code.");
 
     }
-
-
-
 
 }
 

@@ -74,7 +74,7 @@ public class PathDetailAntennaPage extends BasePage {
 
     public PathDetailAntennaPage(WebDriver driver) {
         super(driver);
-        visit("/");
+        visit("");
     }
 
     public void enterAntennaCodeAndBlur(String antCode, String antCenterLine){

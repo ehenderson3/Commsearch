@@ -151,7 +151,7 @@ public class PathDetailPage extends BasePage {
 
     public PathDetailPage(WebDriver driver) {
         super(driver);
-        visit("/");
+        visit("");
     }
 
     public int getRows(){

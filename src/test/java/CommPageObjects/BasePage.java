@@ -5,6 +5,7 @@ import CommTests.Config;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Action;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.remote.RemoteWebElement;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
@@ -13,6 +14,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.awt.*;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -37,6 +39,89 @@ public class BasePage implements Config {
         } else {
             driver.get(baseUrl + url);
         }
+    }
+
+
+    /**
+     * Method designed to drag and drop files from file system (filePath)to specified element in application (target)
+     * @param filePath
+     * @param target
+     * @param offsetX
+     * @param offsetY
+     */
+    public static void DropFile(File filePath, WebElement target, int offsetX, int offsetY) {
+        if(!filePath.exists())
+            throw new WebDriverException("File not found: " + filePath.toString());
+
+        WebDriver driver = ((RemoteWebElement)target).getWrappedDriver();
+        JavascriptExecutor jse = (JavascriptExecutor)driver;
+        WebDriverWait wait = new WebDriverWait(driver, 30);
+
+        String JS_DROP_FILE =
+                "var target = arguments[0]," +
+                        "    offsetX = arguments[1]," +
+                        "    offsetY = arguments[2]," +
+                        "    document = target.ownerDocument || document," +
+                        "    window = document.defaultView || window;" +
+                        "" +
+                        "var input = document.createElement('INPUT');" +
+                        "input.type = 'file';" +
+                        "input.style.display = 'none';" +
+                        "input.onchange = function () {" +
+                        "  var rect = target.getBoundingClientRect()," +
+                        "      x = rect.left + (offsetX || (rect.width >> 1))," +
+                        "      y = rect.top + (offsetY || (rect.height >> 1))," +
+                        "      dataTransfer = { files: this.files };" +
+                        "" +
+                        "  ['dragenter', 'dragover', 'drop'].forEach(function (name) {" +
+                        "    var evt = document.createEvent('MouseEvent');" +
+                        "    evt.initMouseEvent(name, !0, !0, window, 0, 0, 0, x, y, !1, !1, !1, !1, 0, null);" +
+                        "    evt.dataTransfer = dataTransfer;" +
+                        "    target.dispatchEvent(evt);" +
+                        "  });" +
+                        "" +
+                        "  setTimeout(function () { document.body.removeChild(input); }, 25);" +
+                        "};" +
+                        "document.body.appendChild(input);" +
+                        "return input;";
+
+        WebElement input =  (WebElement)jse.executeScript(JS_DROP_FILE, target, offsetX, offsetY);
+        input.sendKeys(filePath.getAbsoluteFile().toString());
+        wait.until(ExpectedConditions.stalenessOf(input));
+    }
+
+    /**
+     * Method designed to upload specified file(fileName) by location (location)
+     * @param fileName
+     * @param location
+     * @param fileSubmit
+     */
+    public void uploadFile(String fileName, By location, By fileSubmit){
+        String filename = fileName;
+        File file = new File(filename);
+        String path = file.getAbsolutePath();
+        type(path,location);
+        click(fileSubmit);
+    }
+
+    /**
+     * Method designed to upload multiple specified files(fileName) by location (location)
+     * @param fileName
+     * @param location
+     * @param fileSubmit
+     */
+    public void uploadFileMulti(String fileName, By location, By fileSubmit){
+        String string = fileName;
+        String[] filename = string.split(";");
+        String part1 = filename[0];
+        String part2 = filename[1];
+        File file2 = new File(part2);
+        File file1 = new File(part1);
+        String path1 = file1.getAbsolutePath();
+        String path2 = file2.getAbsolutePath();
+        slowDown(2);
+        types(path1,path2,location);
+        click(fileSubmit);
     }
 
     /**
@@ -90,6 +175,7 @@ public class BasePage implements Config {
         fieldValue = txtBoxContent.getAttribute("value");
         return fieldValue;
     }
+
     public String getFieldTextTitle(By title) {
         WebElement txtBoxContent = driver.findElement(title);
         String fieldValue = new String();
@@ -137,19 +223,33 @@ public class BasePage implements Config {
         clipboard.setContents(new StringSelection(find(locator).getAttribute("value")), null);
     }
 
-
-
+    /**
+     * Method takes the data from clip board and pastes in specified field
+     * @param locator
+     */
     public void pasteText(By locator) {
         click(locator);
         slowDown(6);
 
-        Actions builder = new Actions(driver);
-        Action select= builder
-                .keyDown(Keys.COMMAND)
-                .sendKeys("v")
-                .keyUp(Keys.COMMAND)
-                .build();
-        select.perform();
+        if(os_version.equals("windows")){
+            Actions builder = new Actions(driver);
+            Action select= builder
+                    .keyDown(Keys.CONTROL)
+                    .sendKeys("v")
+                    .keyUp(Keys.CONTROL)
+                    .build();
+            select.perform();
+        }else {
+            Actions builder = new Actions(driver);
+            Action select= builder
+                    .keyDown(Keys.COMMAND)
+                    .sendKeys("v")
+                    .keyUp(Keys.COMMAND)
+                    .build();
+            select.perform();
+        }
+
+
 
     }
 
@@ -340,19 +440,70 @@ public class BasePage implements Config {
         action.moveToElement(we).click().build().perform();
     }
 
+    /**
+     * A variation of the hover method that hovers specified element
+     * @param locator
+     * @param subMenu
+     */
+    public void hoverElement(By locator,By subMenu) {
 
+        Actions actions = new Actions(driver);
+        WebElement menuHoverLink = find(locator);
+        actions.moveToElement(menuHoverLink);
+
+        WebElement subLink = find(subMenu);
+        actions.moveToElement(subLink);
+        actions.click();
+        actions.perform();
+    }
     /**
      * inputs text(inputText)into field element(locator)
      *
      * @param inputText
      * @param locator
      */
-        public void type(String inputText, By locator) {
+     public void type(String inputText, By locator) {
             find(locator).sendKeys(inputText);
-        }
+     }
+
+    /**
+     * supports the adding of multiple files to the comments module attachment feature
+     * @param inputText
+     * @param inputText2
+     * @param locator
+     */
+     public void types(String inputText, String inputText2,By locator) {
+        find(locator).sendKeys(inputText);
+        find(locator).sendKeys(inputText2);
+     }
+
+    /**
+     * supports the adding of multiple files to the comments module attachment feature
+     * @param inputText
+     * @param inputText2
+     * @param locator
+     */
+     public void types(String inputText, String inputText2,String inputText3,By locator) {
+        find(locator).sendKeys(inputText);
+        find(locator).sendKeys(inputText2);
+        find(locator).sendKeys(inputText3);
+    }
 
 
-        public void typePlural(String inputText, By locator,int i) {
+    /**
+     * supports the adding of multiple files to the comments module attachment feature
+     * @param inputText
+     * @param inputText2
+     * @param locator
+     */
+    public void types(String inputText, String inputText2,String inputText3,String inputText4, By locator) {
+        find(locator).sendKeys(inputText);
+        find(locator).sendKeys(inputText2);
+        find(locator).sendKeys(inputText3);
+        find(locator).sendKeys(inputText4);
+    }
+
+    public void typePlural(String inputText, By locator,int i) {
         WebElement we = driver.findElements(locator).get(i);
         we.sendKeys(inputText);
     }
@@ -653,5 +804,8 @@ public class BasePage implements Config {
     public static final String DOWN_POINTER = "active direction-down pointer";
     public static final String PROJECT_ROW = "project-summary-path-row-";
     public static final String PATH_VAL = "//*[contains(@id, 'path-') and contains(@id,";
+    public static final String ANTENNA_DB_MODAL = "antennaDb-modal-table-data-antennaCode-";
+
+
 }
 

@@ -66,6 +66,7 @@ public class QuickAddPage extends BasePage {
     By pathRadio = By.xpath("//span[@title=\"Radio Code: undefined\"]");
 
     By pathRadioBand = By.id("path-0-site-1-bandwidth");
+    By fireFoxHoverCompanyList = By.id("project-summary-project-default-company");
     By companyList = By.xpath("//*[@id=\"project-summary-project-default-company\"]/span/span");
     By companyListTX = By.xpath("//*[contains(@id, 'project-summary-companies-list-Verizon TX')]");
     By companyListAZ = By.xpath("//*[contains(@id, 'project-summary-companies-list-Verizon AZ')]");
@@ -86,18 +87,31 @@ public class QuickAddPage extends BasePage {
         super(driver);
         visit("");
     }
+    public void quickNavigationToProjectForDebugging(String projectUrl){
+        visit(projectUrl);
+    }
+
     public void valCompaniesThree(String co1,String co2,String co3){
         isDisplayed(companyList,10);
-        hoverElement(companyList);
-        isDisplayed(companyListTX,5);
-        String currentCompanies = getText(companyListTX);
-        String currentCompanies1 = getText(companyListAZ);
-        String currentCompanies2 = getText(companyListV);
-
-        assertEquals(currentCompanies,co1);
-        assertEquals(currentCompanies1,co2);
-        assertEquals(currentCompanies2,co3);
-
+        if(browser.equals("chrome")){
+            hoverElement(companyList);
+            isDisplayed(companyListTX,5);
+            String currentCompanies = getText(companyListTX);
+            String currentCompanies1 = getText(companyListAZ);
+            String currentCompanies2 = getText(companyListV);
+            assertEquals(currentCompanies,co1);
+            assertEquals(currentCompanies1,co2);
+            assertEquals(currentCompanies2,co3);
+        } else {
+            hoverElement(fireFoxHoverCompanyList);
+            isDisplayed(companyListTX,5);
+            String currentCompanies = getText(companyListTX);
+            String currentCompanies1 = getText(companyListAZ);
+            String currentCompanies2 = getText(companyListV);
+            assertEquals(currentCompanies,co1);
+            assertEquals(currentCompanies1,co2);
+            assertEquals(currentCompanies2,co3);
+        }
     }
 
 

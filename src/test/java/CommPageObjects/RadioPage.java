@@ -146,7 +146,7 @@ public class RadioPage extends BasePage {
 
     public RadioPage(WebDriver driver) {
         super(driver);
-        visit("/");
+        visit("");
     }
 
 
@@ -166,7 +166,10 @@ public class RadioPage extends BasePage {
         String radioRow = getText(radioLookupRows);
         //hover acm
         assertTrue("cant find aCMToolTip",isDisplayed(aCMToolTip1,30));
-        hoverElement(aCMToolTip6);
+        if(browser.equals("chrome")){
+            hoverElement(aCMToolTip6);
+        }
+        else{clickJS(aCMToolTip6);}
 
     }
 
